@@ -13,6 +13,7 @@
 		2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */; };
 		2608CEC8218D0D9B008A706E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC7218D0D9B008A706E /* Assets.xcassets */; };
 		2608CECB218D0D9B008A706E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */; };
+		2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CED2218D0FD6008A706E /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2608CEC7218D0D9B008A706E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2608CECA218D0D9B008A706E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2608CECC218D0D9B008A706E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2608CED2218D0FD6008A706E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */,
 				2608CECC218D0D9B008A706E /* Info.plist */,
 				2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */,
+				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
 			);
 			path = CookMania;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				2608CEC0218D0D8E008A706E /* ViewController.swift in Sources */,
 				2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
+				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
