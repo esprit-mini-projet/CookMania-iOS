@@ -67,12 +67,12 @@
 			children = (
 				2608CEBD218D0D8E008A706E /* AppDelegate.swift */,
 				2608CEBF218D0D8E008A706E /* ViewController.swift */,
+				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
 				2608CEC1218D0D8E008A706E /* Main.storyboard */,
 				2608CEC7218D0D9B008A706E /* Assets.xcassets */,
 				2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */,
 				2608CECC218D0D9B008A706E /* Info.plist */,
 				2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */,
-				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
 			);
 			path = CookMania;
 			sourceTree = "<group>";
