@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		176CD6BECDC8E14C1459D211 /* Pods_CookMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747431A0824657B3C9112F01 /* Pods_CookMania.framework */; };
 		2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEBD218D0D8E008A706E /* AppDelegate.swift */; };
 		2608CEC0218D0D8E008A706E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEBF218D0D8E008A706E /* ViewController.swift */; };
 		2608CEC3218D0D8E008A706E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC1218D0D8E008A706E /* Main.storyboard */; };
@@ -26,6 +27,9 @@
 		2608CECA218D0D9B008A706E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2608CECC218D0D9B008A706E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2608CED2218D0FD6008A706E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
+		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				176CD6BECDC8E14C1459D211 /* Pods_CookMania.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +49,8 @@
 			children = (
 				2608CEBC218D0D8E008A706E /* CookMania */,
 				2608CEBB218D0D8E008A706E /* Products */,
+				E6563888AFB82B4F0AF68518 /* Pods */,
+				996BFF27D5550BF06B51A18A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +77,23 @@
 			path = CookMania;
 			sourceTree = "<group>";
 		};
+		996BFF27D5550BF06B51A18A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				747431A0824657B3C9112F01 /* Pods_CookMania.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6563888AFB82B4F0AF68518 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */,
+				58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2608CECF218D0D9B008A706E /* Build configuration list for PBXNativeTarget "CookMania" */;
 			buildPhases = (
+				54148AC114E519835513EAE6 /* [CP] Check Pods Manifest.lock */,
 				2608CEB6218D0D8E008A706E /* Sources */,
 				2608CEB7218D0D8E008A706E /* Frameworks */,
 				2608CEB8218D0D8E008A706E /* Resources */,
+				27840002189E66FE2CD00D59 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +161,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27840002189E66FE2CD00D59 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CookMania/Pods-CookMania-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CookMania/Pods-CookMania-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54148AC114E519835513EAE6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CookMania-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2608CEB6218D0D8E008A706E /* Sources */ = {
@@ -288,6 +361,7 @@
 		};
 		2608CED0218D0D9B008A706E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -305,6 +379,7 @@
 		};
 		2608CED1218D0D9B008A706E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
