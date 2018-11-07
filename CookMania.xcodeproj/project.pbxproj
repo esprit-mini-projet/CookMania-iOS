@@ -15,6 +15,7 @@
 		2608CEC8218D0D9B008A706E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC7218D0D9B008A706E /* Assets.xcassets */; };
 		2608CECB218D0D9B008A706E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */; };
 		2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CED2218D0FD6008A706E /* HomeViewController.swift */; };
+		C3C0433521937DED000D8512 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C0433421937DED000D8512 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
 		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
+		C3C0433421937DED000D8512 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				2608CECC218D0D9B008A706E /* Info.plist */,
 				2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */,
 				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
+				C3C0433421937DED000D8512 /* User.swift */,
 			);
 			path = CookMania;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				2608CEC0218D0D8E008A706E /* ViewController.swift in Sources */,
 				2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
+				C3C0433521937DED000D8512 /* User.swift in Sources */,
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

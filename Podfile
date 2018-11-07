@@ -6,5 +6,6 @@ target 'CookMania' do
   use_frameworks!
 
   # Pods for CookMania
-  pod "Alamofire"
+  pod 'Alamofire'
+  pod 'FacebookLogin'
 end
