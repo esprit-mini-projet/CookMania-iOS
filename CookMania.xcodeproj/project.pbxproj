@@ -15,6 +15,7 @@
 		2608CEC8218D0D9B008A706E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC7218D0D9B008A706E /* Assets.xcassets */; };
 		2608CECB218D0D9B008A706E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */; };
 		2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CED2218D0FD6008A706E /* HomeViewController.swift */; };
+		C38B87CA21939DFF002ED136 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38B87C921939DFF002ED136 /* RecipeDetailsViewController.swift */; };
 		C3C0433521937DED000D8512 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C0433421937DED000D8512 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
 		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
+		C38B87C921939DFF002ED136 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		C3C0433421937DED000D8512 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 			children = (
 				2608CEBD218D0D8E008A706E /* AppDelegate.swift */,
 				2608CEBF218D0D8E008A706E /* ViewController.swift */,
+				C38B87C921939DFF002ED136 /* RecipeDetailsViewController.swift */,
 				2608CEC1218D0D8E008A706E /* Main.storyboard */,
 				2608CEC7218D0D9B008A706E /* Assets.xcassets */,
 				2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */,
@@ -109,6 +112,7 @@
 				2608CEB7218D0D8E008A706E /* Frameworks */,
 				2608CEB8218D0D8E008A706E /* Resources */,
 				27840002189E66FE2CD00D59 /* [CP] Embed Pods Frameworks */,
+				E27D7283476CBB9D89534AFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,12 +180,30 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CookMania/Pods-CookMania-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -210,6 +232,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E27D7283476CBB9D89534AFA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CookMania/Pods-CookMania-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CookMania/Pods-CookMania-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -218,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2608CEC0218D0D8E008A706E /* ViewController.swift in Sources */,
+				C38B87CA21939DFF002ED136 /* RecipeDetailsViewController.swift in Sources */,
 				2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
 				C3C0433521937DED000D8512 /* User.swift in Sources */,

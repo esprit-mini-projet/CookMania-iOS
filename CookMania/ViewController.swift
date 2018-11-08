@@ -14,18 +14,19 @@ class ViewController: UIViewController, LoginButtonDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var userProfilePicture: UIImageView!
+    var user:User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if let accessToken = AccessToken.current {
+            statusLabel.text = "Logged"
+            self.performSegue(withIdentifier: "toDetails", sender: nil)
+        }
         let fbBtn = LoginButton(readPermissions: [.publicProfile, .email])
         fbBtn.center = view.center
         fbBtn.delegate = self
         view.addSubview(fbBtn)
-    }
-
-    @IBAction func login(_ sender: Any) {
-        performSegue(withIdentifier: "toHome", sender: nil)
     }
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
@@ -57,11 +58,18 @@ class ViewController: UIViewController, LoginButtonDelegate {
                     imageUrl = url
                 }
                 if let email = dictionary?["email"] as? String, let firstName = dictionary?["first_name"] as? String, let lastName = dictionary?["last_name"] as? String, let id = dictionary?["id"] as? String {
-                    let user = User(id: id, email: email, firstName: firstName, lastName: lastName, imageUrl: imageUrl)
-                    print(user)
+                    self.user = User(id: id, email: email, firstName: firstName, lastName: lastName, imageUrl: imageUrl)
+                    self.performSegue(withIdentifier: "toDetails", sender: nil)
                 }
                 break;
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "toDetails"){
+            let destViewController = segue.destination as? RecipeDetailsViewController
+            destViewController?.user = self.user
         }
     }
     

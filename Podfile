@@ -8,4 +8,6 @@ target 'CookMania' do
   # Pods for CookMania
   pod 'Alamofire'
   pod 'FacebookLogin'
+  pod 'GoogleSignIn'
+  pod 'Cosmos', '~> 17.0'
 end
