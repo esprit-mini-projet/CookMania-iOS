@@ -12,9 +12,11 @@ class Recipe{
     
     var name: String?
     var image: String?
+    var ingredients = [String]()
     
-    init(name: String?, image: String?) {
+    init(name: String?, image: String?, ingredients: [String]) {
         self.name = name
         self.image = image
+        self.ingredients = ingredients
     }
 }

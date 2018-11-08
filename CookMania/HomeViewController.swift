@@ -11,10 +11,10 @@ import UIKit
 class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource {
     
     let popularRecipes = [
-        Recipe(name: "Italian Chicken Cacciatore", image: "cacciatore"),
-        Recipe(name: "Spaghetti Cacio e Pepe", image: "spaghetti"),
-        Recipe(name: "Easy Caponata", image: "caponata"),
-        Recipe(name: "Melanzana alla Parmigiana", image: "melanzana"),
+        Recipe(name: "Italian Chicken Cacciatore", image: "cacciatore", ingredients: ["1 Chicken Breast", "2 Feta Cheese"]),
+        Recipe(name: "Spaghetti Cacio e Pepe", image: "spaghetti", ingredients: ["300g Creme Fraiche", "1kg Spaghetti"]),
+        Recipe(name: "Easy Caponata", image: "caponata", ingredients: ["3 Tomatoes", "4 Garlic", "1 Apple"]),
+        Recipe(name: "Melanzana alla Parmigiana", image: "melanzana", ingredients: ["200g Melting Cheese", "1.25kg Tomato Paste"])
     ]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
