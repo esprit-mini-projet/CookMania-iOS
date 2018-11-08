@@ -9,36 +9,41 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
+import GoogleSignIn
 
-class ViewController: UIViewController, LoginButtonDelegate {
+class ViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDelegate {
     
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var userProfilePicture: UIImageView!
-    var user:User?
+    @IBOutlet weak var loginButtonsStackView: UIStackView!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var facebookButtonView: UIView!
+    
+    
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        if let accessToken = AccessToken.current {
-            statusLabel.text = "Logged"
-            self.performSegue(withIdentifier: "toDetails", sender: nil)
+        (UIApplication.shared.delegate as? AppDelegate)?.callBack = toDetails
+        GIDSignIn.sharedInstance()?.uiDelegate = self
+        GIDSignIn.sharedInstance()?.signInSilently()
+        if AccessToken.current != nil {
+            toDetails()
         }
         let fbBtn = LoginButton(readPermissions: [.publicProfile, .email])
-        fbBtn.center = view.center
         fbBtn.delegate = self
-        view.addSubview(fbBtn)
+        facebookButtonView.addSubview(fbBtn)
+    }
+
+    func toDetails() {
+        self.performSegue(withIdentifier: "toDetails", sender: nil)
     }
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         switch result {
         case .cancelled:
-            statusLabel.text = "User canceled login"
             break
         case .failed(_):
-            statusLabel.text = "Error logging in"
             break
         case .success(_,_,_):
-            statusLabel.text = "User LoggedIn"
             fetchProfileFB()
             break
         }
@@ -58,18 +63,11 @@ class ViewController: UIViewController, LoginButtonDelegate {
                     imageUrl = url
                 }
                 if let email = dictionary?["email"] as? String, let firstName = dictionary?["first_name"] as? String, let lastName = dictionary?["last_name"] as? String, let id = dictionary?["id"] as? String {
-                    self.user = User(id: id, email: email, firstName: firstName, lastName: lastName, imageUrl: imageUrl)
+                    self.appDelegate!.user = User(id: id, email: email, firstName: firstName, lastName: lastName, imageUrl: imageUrl)
                     self.performSegue(withIdentifier: "toDetails", sender: nil)
                 }
                 break;
             }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "toDetails"){
-            let destViewController = segue.destination as? RecipeDetailsViewController
-            destViewController?.user = self.user
         }
     }
     
@@ -100,7 +98,7 @@ class ViewController: UIViewController, LoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        statusLabel.text = "User LoggedOut"
+        //statusLabel.text = "User LoggedOut"
     }
 }
 

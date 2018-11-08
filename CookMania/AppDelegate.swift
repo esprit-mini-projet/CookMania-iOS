@@ -9,22 +9,50 @@
 import UIKit
 import CoreData
 import FBSDKCoreKit
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
+    var user:User?
+    let CLIEND_ID = "323514335162-ut1n697tbepfjk414bsiju9g5fo567h4.apps.googleusercontent.com"
+    var callBack: (() -> ())?
 
 
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("\(error.localizedDescription)")
+        } else {
+            // Perform any operations on signed in user here.
+            self.user = User(id: user.userID, email: user.profile.email, firstName: user.profile.givenName, lastName: user.profile.familyName, imageUrl: (user.profile.imageURL(withDimension: 200)?.absoluteString)!)
+            // For client-side use only!
+            _ = user.authentication.idToken // Safe to send to the server
+            _ = user.profile.givenName
+            callBack!()
+        }
+        
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
+        GIDSignIn.sharedInstance()?.clientID = CLIEND_ID
+        GIDSignIn.sharedInstance()?.delegate = self
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options)
-        return handled!
+        let sourceApplication =  options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+        let annotation = options[UIApplication.OpenURLOptionsKey.annotation]
+        
+        let FHandled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options)
+        let GHandled = GIDSignIn.sharedInstance().handle(url as URL?, sourceApplication: sourceApplication, annotation: annotation)
+
+        return FHandled! || GHandled
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

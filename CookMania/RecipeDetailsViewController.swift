@@ -25,7 +25,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var ingredientsView: UIView!
     @IBOutlet weak var ingredientsTableView: UITableView!
     
-    var user:User?
+    var user = (UIApplication.shared.delegate as? AppDelegate)?.user
     
     let ratingValue = 3.6
     let recipeID = "API_12345"
