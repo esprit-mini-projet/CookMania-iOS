@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func login(_ sender: Any) {
-        performSegue(withIdentifier: "toHomeSegue", sender: nil)
+        performSegue(withIdentifier: "toHome", sender: nil)
     }
     
     

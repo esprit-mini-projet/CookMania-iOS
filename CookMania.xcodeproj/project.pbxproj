@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		176CD6BECDC8E14C1459D211 /* Pods_CookMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747431A0824657B3C9112F01 /* Pods_CookMania.framework */; };
 		2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEBD218D0D8E008A706E /* AppDelegate.swift */; };
-		2608CEC0218D0D8E008A706E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEBF218D0D8E008A706E /* ViewController.swift */; };
+		2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEBF218D0D8E008A706E /* SignInViewController.swift */; };
 		2608CEC3218D0D8E008A706E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC1218D0D8E008A706E /* Main.storyboard */; };
 		2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */; };
 		2608CEC8218D0D9B008A706E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2608CEC7218D0D9B008A706E /* Assets.xcassets */; };
@@ -35,7 +35,7 @@
 /* Begin PBXFileReference section */
 		2608CEBA218D0D8E008A706E /* CookMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2608CEBD218D0D8E008A706E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2608CEBF218D0D8E008A706E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2608CEBF218D0D8E008A706E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		2608CEC2218D0D8E008A706E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2608CEC5218D0D8E008A706E /* CookMania.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CookMania.xcdatamodel; sourceTree = "<group>"; };
 		2608CEC7218D0D9B008A706E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 			children = (
 				262543AC21935E55003601A4 /* SearchViewController.swift */,
 				262543AE21935E6C003601A4 /* ProfileViewController.swift */,
-				2608CEBF218D0D8E008A706E /* ViewController.swift */,
+				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
 				26101083218FAE0B00E8344F /* RecipeListViewController.swift */,
 				26101085218FC37B00E8344F /* FavoritesViewController.swift */,
@@ -336,7 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32B1C832194E21B00153DC9 /* EditProfileViewController.swift in Sources */,
-				2608CEC0218D0D8E008A706E /* ViewController.swift in Sources */,
+				2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */,
 				2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */,
 				C32B1C852194EA0E00153DC9 /* BlitsViewController.swift in Sources */,
 				262543B121937811003601A4 /* GradientView.swift in Sources */,
