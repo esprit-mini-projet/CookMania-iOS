@@ -46,8 +46,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Fb4-VJ-3Uy"/>
                     <connections>
-                        <segue destination="KIY-CA-chJ" kind="show" identifier="toHomeSegue" id="g4q-oo-Mnh"/>
-                        <segue destination="MVD-Hb-sVk" kind="show" identifier="toSignUpSegue" id="hFf-hP-wXg"/>
+                        <segue destination="KIY-CA-chJ" kind="show" identifier="toHome" id="g4q-oo-Mnh"/>
+                        <segue destination="MVD-Hb-sVk" kind="show" identifier="toSignUp" id="hFf-hP-wXg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -113,7 +113,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="shop-cart"/>
                                 <connections>
-                                    <segue destination="TKr-Uu-6v1" kind="show" id="Oh4-At-1nf"/>
+                                    <segue destination="TKr-Uu-6v1" kind="show" identifier="toShoppingList" id="Oh4-At-1nf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -126,8 +126,8 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="DtB-Bu-ib5"/>
-                        <segue destination="oY8-TY-LDq" kind="show" identifier="homeToRecipeDetailsSegue" id="kdF-uh-brg"/>
-                        <segue destination="J5c-1b-iLD" kind="show" identifier="homeToAddRecipeSegue" id="m49-fN-atj"/>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="toRecipeDetails" id="kdF-uh-brg"/>
+                        <segue destination="J5c-1b-iLD" kind="show" identifier="toAddRecipe" id="m49-fN-atj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAh-DS-Bcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -238,8 +238,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="search" id="qZ2-YK-qFa"/>
                     <connections>
-                        <segue destination="Gjk-RB-pLa" kind="show" identifier="searchToRecipeListSegue" id="di5-D0-Hv1"/>
-                        <segue destination="ixf-7k-OTP" kind="show" identifier="searchToSearchResultSegue" id="4mZ-e8-A2h"/>
+                        <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="di5-D0-Hv1"/>
+                        <segue destination="ixf-7k-OTP" kind="show" identifier="toSearchResult" id="4mZ-e8-A2h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NbD-lA-66o" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -272,7 +272,7 @@
                         <viewLayoutGuide key="safeArea" id="J1U-Tf-FZt"/>
                     </view>
                     <connections>
-                        <segue destination="oY8-TY-LDq" kind="show" identifier="blitzToRecipeDetailsSegue" id="cgg-5p-EjF"/>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="toRecipeDetails" id="cgg-5p-EjF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMq-Gx-iy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -291,7 +291,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="profile" id="hBJ-Ro-Dkl"/>
                     <connections>
-                        <segue destination="hSt-TY-XHb" kind="show" identifier="userProfileToEditProfileSegue" id="L7j-ct-sxy"/>
+                        <segue destination="hSt-TY-XHb" kind="show" identifier="toEditProfile" id="L7j-ct-sxy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEM-Bv-cxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -426,7 +426,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Shopping List" image="shop-cart" id="DKd-gN-gyq"/>
                     <connections>
-                        <segue destination="oY8-TY-LDq" kind="show" identifier="shoppingListToRecipeDetailsSegue" id="tsZ-Bu-7I5"/>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="toRecipeDetails" id="tsZ-Bu-7I5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBS-bv-gW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -475,7 +475,7 @@
         <image name="shop-cart" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cgg-5p-EjF"/>
-        <segue reference="di5-D0-Hv1"/>
+        <segue reference="tsZ-Bu-7I5"/>
+        <segue reference="DtB-Bu-ib5"/>
     </inferredMetricsTieBreakers>
 </document>
