@@ -9,6 +9,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Sign Up View Controller-->
+        <scene sceneID="h1m-mP-f6d">
+            <objects>
+                <viewController id="MVD-Hb-sVk" customClass="SignUpViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t9F-j1-Aif">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wgh-1o-ghV"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tqx-Di-cIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2193" y="-690"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -31,7 +46,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Fb4-VJ-3Uy"/>
                     <connections>
-                        <segue destination="KIY-CA-chJ" kind="show" identifier="toHome" id="g4q-oo-Mnh"/>
+                        <segue destination="KIY-CA-chJ" kind="show" identifier="toHomeSegue" id="g4q-oo-Mnh"/>
+                        <segue destination="MVD-Hb-sVk" kind="show" identifier="toSignUpSegue" id="hFf-hP-wXg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -110,11 +126,13 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="DtB-Bu-ib5"/>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="homeToRecipeDetailsSegue" id="kdF-uh-brg"/>
+                        <segue destination="J5c-1b-iLD" kind="show" identifier="homeToAddRecipeSegue" id="m49-fN-atj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAh-DS-Bcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3132" y="129"/>
+            <point key="canvasLocation" x="3132" y="370"/>
         </scene>
         <!--Recipe List View Controller-->
         <scene sceneID="K5N-nZ-bTW">
@@ -175,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qi2-34-0dG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4076" y="127.28635682158921"/>
+            <point key="canvasLocation" x="4094" y="821"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IQH-Lt-ibk">
@@ -219,10 +237,47 @@
                         <viewLayoutGuide key="safeArea" id="WHY-iJ-VEg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="search" id="qZ2-YK-qFa"/>
+                    <connections>
+                        <segue destination="Gjk-RB-pLa" kind="show" identifier="searchToRecipeListSegue" id="di5-D0-Hv1"/>
+                        <segue destination="ixf-7k-OTP" kind="show" identifier="searchToSearchResultSegue" id="4mZ-e8-A2h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NbD-lA-66o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3132" y="896"/>
+            <point key="canvasLocation" x="3132" y="1075"/>
+        </scene>
+        <!--Search Result View Controller-->
+        <scene sceneID="07Q-Nf-EkB">
+            <objects>
+                <viewController id="ixf-7k-OTP" customClass="SearchResultViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IbG-fu-d2G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="D9L-Px-Wfq"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ewE-VL-bdv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4094" y="1628"/>
+        </scene>
+        <!--Blits View Controller-->
+        <scene sceneID="Dtt-bh-hZ1">
+            <objects>
+                <viewController id="cyx-Y9-j2j" customClass="BlitsViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aTT-WW-9i4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="J1U-Tf-FZt"/>
+                    </view>
+                    <connections>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="blitzToRecipeDetailsSegue" id="cgg-5p-EjF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tMq-Gx-iy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4094" y="2388"/>
         </scene>
         <!--Profile-->
         <scene sceneID="HGX-5s-bLS">
@@ -235,10 +290,43 @@
                         <viewLayoutGuide key="safeArea" id="dm1-mF-dSJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="profile" id="hBJ-Ro-Dkl"/>
+                    <connections>
+                        <segue destination="hSt-TY-XHb" kind="show" identifier="userProfileToEditProfileSegue" id="L7j-ct-sxy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEM-Bv-cxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3132" y="1680"/>
+            <point key="canvasLocation" x="108" y="1699"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="ieN-IU-XDP">
+            <objects>
+                <viewController id="hSt-TY-XHb" customClass="EditProfileViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CV8-gd-wga">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yVA-7O-U72"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EBz-Iz-orr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1244" y="1699"/>
+        </scene>
+        <!--Add Recipe View Controller-->
+        <scene sceneID="TQs-Id-VLw">
+            <objects>
+                <viewController id="J5c-1b-iLD" customClass="AddRecipeViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cph-vE-XcU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="RrH-8J-ivt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzO-Xx-UYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4374" y="-754"/>
         </scene>
         <!--Shopping List-->
         <scene sceneID="wgP-uc-vtO">
@@ -264,7 +352,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCs-bn-SPi" customClass="GradientView" customModule="CookMania" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="19" width="375" height="52"/>
+                                                    <rect key="frame" x="0.0" y="19" width="375" height="52.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="gradientColor1">
@@ -337,10 +425,28 @@
                         <viewLayoutGuide key="safeArea" id="ozt-CP-aNM"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Shopping List" image="shop-cart" id="DKd-gN-gyq"/>
+                    <connections>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="shoppingListToRecipeDetailsSegue" id="tsZ-Bu-7I5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBS-bv-gW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4076" y="-668.81559220389806"/>
+            <point key="canvasLocation" x="4375" y="7"/>
+        </scene>
+        <!--Recipe Details View Controller-->
+        <scene sceneID="Jmy-Zu-dX2">
+            <objects>
+                <viewController id="oY8-TY-LDq" customClass="RecipeDetailsViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="goH-xx-hpd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Ocf-ZE-jW6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kAZ-Fj-0uW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5860" y="614"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7eD-xa-b5w">
@@ -368,4 +474,8 @@
         <image name="search" width="72" height="72"/>
         <image name="shop-cart" width="72" height="72"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="cgg-5p-EjF"/>
+        <segue reference="di5-D0-Hv1"/>
+    </inferredMetricsTieBreakers>
 </document>
