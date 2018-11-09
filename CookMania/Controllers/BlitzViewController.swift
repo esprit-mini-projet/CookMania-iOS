@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BlitsViewController: UIViewController {
+class BlitzViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
