@@ -9,17 +9,33 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
+import GoogleSignIn
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+    
     @IBOutlet weak var facebookLoginButton: UIButton!
-    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var loginButton: UIButton!
+    let CLIEND_ID = "323514335162-ut1n697tbepfjk414bsiju9g5fo567h4.apps.googleusercontent.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GIDSignIn.sharedInstance().clientID = CLIEND_ID
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.uiDelegate = self
+        
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            // ...
+        } else {
+            print("\(error.localizedDescription)")
+        }
     }
     
     func initLoginButton() {
@@ -43,6 +59,7 @@ class SignInViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         performSegue(withIdentifier: "toHome", sender: nil)
     }
+    
     @IBAction func facebookLogin(_ sender: Any) {
         let loginManager = LoginManager()
         loginManager.logIn(readPermissions: [.publicProfile], viewController: nil) { loginResult in
@@ -55,6 +72,10 @@ class SignInViewController: UIViewController {
                 print("Logged in!")
             }
         }
+    }
+    
+    @IBAction func googleLogin(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signIn()
     }
 }
 

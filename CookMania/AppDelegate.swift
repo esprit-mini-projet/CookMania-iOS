@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import FBSDKCoreKit
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,12 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return (FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options))!
+        let googleHandler = GIDSignIn.sharedInstance().handle(url as URL?,
+                                                              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                                              annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        let facebookHandler = (FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options))!
+        return facebookHandler || googleHandler
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
