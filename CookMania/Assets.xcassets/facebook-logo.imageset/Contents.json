@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_facebook_white_24dp.png",
+      "filename" : "ic_facebook_white_18dp-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_facebook_white_36dp.png",
+      "filename" : "ic_facebook_white_24dp.png",
       "scale" : "2x"
     },
     {

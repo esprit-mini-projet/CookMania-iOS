@@ -37,7 +37,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GeG-sv-Noq">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39521897007042256" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.57061509683098588" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzR-4d-DVe">
                                 <rect key="frame" x="0.0" y="89.5" width="375" height="508"/>
@@ -52,7 +52,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvM-Uf-uTb" userLabel="LoginFormContainerView">
                                         <rect key="frame" x="32" y="174" width="312" height="160"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-1C-hn4" userLabel="UserNameTextField">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email or username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-1C-hn4" userLabel="UserNameTextField">
                                                 <rect key="frame" x="16" y="26" width="281" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="VQZ-4s-K26"/>
@@ -61,62 +61,71 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IJO-P1-qKa" userLabel="PasswordTextField">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IJO-P1-qKa" userLabel="PasswordTextField">
                                                 <rect key="frame" x="17" y="78" width="280" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="0L8-Xh-HzN"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="la6-02-HoG">
-                                                <rect key="frame" x="137" y="119" width="38" height="30"/>
+                                                <rect key="frame" x="17" y="127" width="280" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Mia-qu-IJA"/>
                                                 </constraints>
-                                                <state key="normal" title="Login"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="3" maxX="20" maxY="3"/>
+                                                <state key="normal" title="Login">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="IJO-P1-qKa" firstAttribute="top" secondItem="gUR-1C-hn4" secondAttribute="bottom" constant="22" id="9ZP-U1-HNG"/>
+                                            <constraint firstAttribute="trailing" secondItem="la6-02-HoG" secondAttribute="trailing" constant="15" id="AwZ-Vf-0Ue"/>
                                             <constraint firstAttribute="height" constant="160" id="B9H-ce-zWn"/>
                                             <constraint firstItem="IJO-P1-qKa" firstAttribute="leading" secondItem="mvM-Uf-uTb" secondAttribute="leading" constant="17" id="GPe-xt-TVg"/>
                                             <constraint firstAttribute="trailing" secondItem="IJO-P1-qKa" secondAttribute="trailing" constant="15" id="Mpn-pF-b25"/>
                                             <constraint firstAttribute="trailing" secondItem="gUR-1C-hn4" secondAttribute="trailing" constant="15" id="PhF-kN-hzI"/>
-                                            <constraint firstItem="la6-02-HoG" firstAttribute="centerX" secondItem="mvM-Uf-uTb" secondAttribute="centerX" id="SRn-Wh-8Hp"/>
                                             <constraint firstItem="gUR-1C-hn4" firstAttribute="top" secondItem="mvM-Uf-uTb" secondAttribute="top" constant="26" id="aLV-Vu-Mv8"/>
+                                            <constraint firstItem="la6-02-HoG" firstAttribute="leading" secondItem="mvM-Uf-uTb" secondAttribute="leading" constant="17" id="hHH-VT-GT2"/>
                                             <constraint firstItem="gUR-1C-hn4" firstAttribute="leading" secondItem="mvM-Uf-uTb" secondAttribute="leading" constant="16" id="l1X-ez-ErQ"/>
-                                            <constraint firstItem="la6-02-HoG" firstAttribute="top" secondItem="IJO-P1-qKa" secondAttribute="bottom" constant="11" id="xia-MU-2uY"/>
+                                            <constraint firstItem="la6-02-HoG" firstAttribute="top" secondItem="IJO-P1-qKa" secondAttribute="bottom" constant="19" id="xia-MU-2uY"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or connect with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Th-Nc-gkO" userLabel="ConnectWithLabel">
-                                        <rect key="frame" x="126.5" y="343" width="122" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or connect with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Th-Nc-gkO" userLabel="ConnectWithLabel">
+                                        <rect key="frame" x="128" y="343" width="119" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="XZm-Bv-GJU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OA8-0z-B3c" userLabel="SocialButtonsContainerView">
                                         <rect key="frame" x="92.5" y="371" width="190" height="68"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uID-fq-fwK" userLabel="Facebook">
-                                                <rect key="frame" x="0.0" y="12" width="80" height="44"/>
+                                                <rect key="frame" x="0.0" y="12" width="80" height="58"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="FM0-Q3-Lbb"/>
                                                     <constraint firstAttribute="width" constant="80" id="o1J-tv-pNe"/>
                                                 </constraints>
+                                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                 <state key="normal" image="facebook-logo"/>
+                                                <connections>
+                                                    <action selector="facebookLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FjW-0B-GZn"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU0-Y0-470" userLabel="Google">
-                                                <rect key="frame" x="110" y="12" width="80" height="44"/>
+                                                <rect key="frame" x="110" y="12" width="80" height="58"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="5OV-1X-jjj"/>
-                                                    <constraint firstAttribute="height" constant="44" id="eRh-kq-AZM"/>
                                                 </constraints>
-                                                <state key="normal" image="google-logo"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                <state key="normal" image="google-logo">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -166,6 +175,9 @@ d2lkdGggPSAxNxAyA
                     </view>
                     <navigationItem key="navigationItem" id="Fb4-VJ-3Uy"/>
                     <connections>
+                        <outlet property="facebookLoginButton" destination="uID-fq-fwK" id="lKS-gr-6W4"/>
+                        <outlet property="googleLoginButton" destination="XU0-Y0-470" id="Pfc-C2-9Jv"/>
+                        <outlet property="loginButton" destination="la6-02-HoG" id="YlT-zl-Zzt"/>
                         <segue destination="KIY-CA-chJ" kind="show" identifier="toHome" id="g4q-oo-Mnh"/>
                         <segue destination="MVD-Hb-sVk" kind="show" identifier="toSignUp" id="hFf-hP-wXg"/>
                     </connections>
@@ -613,8 +625,8 @@ d2lkdGggPSAxNxAyA
         <image name="blitz" width="48" height="48"/>
         <image name="cacciatore" width="420" height="236.25"/>
         <image name="community" width="48" height="48"/>
-        <image name="facebook-logo" width="54" height="54"/>
-        <image name="google-logo" width="54" height="54"/>
+        <image name="facebook-logo" width="48" height="48"/>
+        <image name="google-logo" width="48" height="48"/>
         <image name="home" width="72" height="72"/>
         <image name="login-background" width="533" height="800"/>
         <image name="profile" width="72" height="72"/>

@@ -9,19 +9,33 @@
 import UIKit
 
 class User: NSObject {
-    var id: String
+    var id: String?
     var email: String
-    var imageUrl: String
-    var firstName: String
-    var lastName: String
+    var username: String
+    var imageUrl: String?
+    var date: Date?
+    var following: Int = 0
+    var followers: Int = 0
     
-    override public var description: String { return "User: {id: \(id) , email: \(email) , firtname: \(firstName) , lastname: \(lastName) , imageUrl: \(imageUrl) }"}
+    override var description: String { return "User: {id: \(id!) , email: \(email) , username: \(username) , imageUrl: \(imageUrl!), date: \(date!), following: \(following), followers: \(followers) }" }
+    //override public var description: String { return "User: {id: \(id) , email: \(email) , firtname: \(firstName) , lastname \(lastName) , imageUrl: \(imageUrl) }"}
     
-    init(id: String, email: String, firstName: String, lastName: String, imageUrl: String) {
+    init(id: String, email: String, username: String, imageUrl: String, date: Date, following: Int, followers: Int) {
         self.id = id
         self.email = email
-        self.firstName = firstName
-        self.lastName = lastName
+        self.username = username
         self.imageUrl = imageUrl
+        self.date = date
+        self.following = following
+        self.followers = followers
+    }
+    
+    init(email: String, username: String, imageUrl: String, date: Date, following: Int, followers: Int) {
+        self.email = email
+        self.username = username
+        self.imageUrl = imageUrl
+        self.date = date
+        self.following = following
+        self.followers = followers
     }
 }
