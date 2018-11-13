@@ -12,30 +12,51 @@ class User: NSObject {
     var id: String?
     var email: String
     var username: String
+    var password: String?
     var imageUrl: String?
     var date: Date?
     var following: Int = 0
     var followers: Int = 0
     
-    override var description: String { return "User: {id: \(id!) , email: \(email) , username: \(username) , imageUrl: \(imageUrl!), date: \(date!), following: \(following), followers: \(followers) }" }
+    override var description: String { return "User: {id: \(String(describing: id)) , email: \(email) , username: \(username) , imageUrl: \(String(describing: imageUrl)), date: \(String(describing: date)), following: \(following), followers: \(followers) }" }
     //override public var description: String { return "User: {id: \(id) , email: \(email) , firtname: \(firstName) , lastname \(lastName) , imageUrl: \(imageUrl) }"}
     
-    init(id: String, email: String, username: String, imageUrl: String, date: Date, following: Int, followers: Int) {
+    init(id: String, email: String, username: String, password: String, imageUrl: String, date: Date, following: Int, followers: Int) {
         self.id = id
         self.email = email
         self.username = username
+        self.password = password
         self.imageUrl = imageUrl
         self.date = date
         self.following = following
         self.followers = followers
     }
     
-    init(email: String, username: String, imageUrl: String, date: Date, following: Int, followers: Int) {
+    init(email: String, username: String, password: String, imageUrl: String, date: Date, following: Int, followers: Int) {
         self.email = email
         self.username = username
+        self.password = password
         self.imageUrl = imageUrl
         self.date = date
         self.following = following
         self.followers = followers
+    }
+    
+    init(email: String, username: String, password: String) {
+        self.email = email
+        self.username = username
+        self.password = password
+    }
+    
+    init(email: String, username: String) {
+        self.email = email
+        self.username = username
+    }
+    
+    init(id: String, email: String, username: String, imageUrl: String) {
+        self.id = id
+        self.email = email
+        self.username = username
+        self.imageUrl = imageUrl
     }
 }
