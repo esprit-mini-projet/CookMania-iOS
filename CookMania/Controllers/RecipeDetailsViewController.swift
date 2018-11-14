@@ -14,6 +14,13 @@ class RecipeDetailsViewController: UIViewController {
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var ingredientsStack: UIStackView!
+    @IBOutlet weak var servingsStack: UIStackView!
+    @IBOutlet weak var ingredientsValueLabel: UILabel!
+    @IBOutlet weak var caloriesValueLabel: UILabel!
+    @IBOutlet weak var servingsValueLabel: UILabel!
+    @IBOutlet weak var timeValueLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +29,8 @@ class RecipeDetailsViewController: UIViewController {
         print(margin)
         contentView.addConstraint(NSLayoutConstraint(item: recipeNameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
         contentView.addConstraint(NSLayoutConstraint(item: ratingView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+        contentView.addConstraint(NSLayoutConstraint(item: ingredientsStack, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/1.5))
+        contentView.addConstraint(NSLayoutConstraint(item: servingsStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -margin/1.5))
         // Do any additional setup after loading the view.
     }
     
