@@ -79,6 +79,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTableViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var similarRecipesCollectionView: UICollectionView!
+    @IBOutlet weak var similarRecipiesLabel: UILabel!
     
     var recipe = Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
@@ -146,6 +147,12 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         initView()
     }
     
+    /*override func viewDidAppear(_ animated: Bool) {
+        let collectionViewFlow = similarRecipesCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        collectionViewFlow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        similarRecipesCollectionView.collectionViewLayout.invalidateLayout()
+    }*/
+    
     func initView() {
         ratingView.rating = Double(recipe.rating)
         recipeNameLabel.text = recipe.name
@@ -175,10 +182,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         contentView.addConstraint(NSLayoutConstraint(item: servingsStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -margin/1.5))
         
         //Step Label
-        contentView.addConstraint(NSLayoutConstraint(item: stepsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin * 1.5))
+        contentView.addConstraint(NSLayoutConstraint(item: stepsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
         
         //Ingredients Label
-        contentView.addConstraint(NSLayoutConstraint(item: ingredientsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin * 1.5))
+        contentView.addConstraint(NSLayoutConstraint(item: ingredientsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+        
+        //Similar recipes Label
+        contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
     }
     
     
@@ -198,7 +208,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let contentView = cell?.viewWithTag(0)
             let margin = contentView!.frame.width * 0.15
             let nameLabel = contentView?.viewWithTag(1) as! UILabel
-            contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+            contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/2))
             nameLabel.text = step.name
             return cell!
         }else{
@@ -224,6 +234,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let similarRecipe = similarRecipes[indexPath.row]
         let cell = similarRecipesCollectionView.dequeueReusableCell(withReuseIdentifier: "similarRecipe", for: indexPath)
+        print("******************************* HEIGHT*******************************")
+        print(similarRecipesCollectionView.frame.height)
+        cell.frame.size.height = similarRecipesCollectionView.frame.size.height * 1.1
+        cell.frame.size.width = similarRecipesCollectionView.frame.size.height * 1.1
+        
         let contentView = cell.viewWithTag(0)
         let image = contentView?.viewWithTag(1) as! UIImageView
         let rating = contentView?.viewWithTag(2) as! CosmosView
