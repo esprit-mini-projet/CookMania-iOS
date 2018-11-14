@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Alamofire
+import ObjectMapper
 
 class RecipeListViewController: UIViewController, UITableViewDataSource {
     
+    var urlEndPoint: String? = nil
     var recipeList = [Recipe]()
+    
+    @IBOutlet weak var recipeTableView: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeList.count
@@ -20,13 +25,20 @@ class RecipeListViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Recipe")
         let imageView = cell?.viewWithTag(1) as! UIImageView
         let nameLabel = cell?.viewWithTag(2) as! UILabel
-        imageView.image = UIImage.init(named: recipeList[indexPath.row].image!)
+        imageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipeList[indexPath.row].imageUrl!)!)
         nameLabel.text = recipeList[indexPath.row].name
         return cell!
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
     }
     
+    func fetchData(){
+        Alamofire.request(urlEndPoint!).responseString(completionHandler: { (response: DataResponse<String>) in
+            self.recipeList = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
+            self.recipeTableView.reloadData()
+        })
+    }
 }
