@@ -255,9 +255,9 @@
                                                 <constraint firstItem="YlG-iY-3gp" firstAttribute="leading" secondItem="KIU-d6-9I0" secondAttribute="trailing" constant="3" id="A5R-Wo-84b"/>
                                                 <constraint firstItem="nEp-fo-WFP" firstAttribute="top" secondItem="m29-Nz-9hK" secondAttribute="top" id="BKU-IV-CV3"/>
                                                 <constraint firstItem="nEp-fo-WFP" firstAttribute="leading" secondItem="m29-Nz-9hK" secondAttribute="leading" id="HNP-XN-Ink"/>
-                                                <constraint firstItem="YlG-iY-3gp" firstAttribute="top" secondItem="wvv-B4-SA9" secondAttribute="bottom" constant="6" id="IMf-MH-7t4"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEp-fo-WFP" secondAttribute="trailing" id="KjX-jM-hwJ"/>
                                                 <constraint firstItem="O8T-7a-I9a" firstAttribute="leading" secondItem="YlG-iY-3gp" secondAttribute="trailing" constant="8" id="L1G-kH-wju"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y8l-MU-Jt4" secondAttribute="trailing" constant="20" symbolic="YES" id="S93-6c-nEV"/>
                                                 <constraint firstItem="sdQ-0K-n6Q" firstAttribute="top" secondItem="m29-Nz-9hK" secondAttribute="top" constant="271" id="TFX-rT-dGU"/>
                                                 <constraint firstItem="i2G-2E-2kM" firstAttribute="leading" secondItem="TWP-Yf-zKk" secondAttribute="trailing" constant="8" id="Whb-ru-O17"/>
                                                 <constraint firstAttribute="bottom" secondItem="sdQ-0K-n6Q" secondAttribute="bottom" constant="-0.5" id="b9U-yV-QKK"/>
@@ -269,6 +269,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="sdQ-0K-n6Q" secondAttribute="trailing" id="q0l-LD-Gog"/>
                                                 <constraint firstAttribute="bottom" secondItem="nEp-fo-WFP" secondAttribute="bottom" constant="-0.5" id="qpb-Yg-mav"/>
                                                 <constraint firstItem="y8l-MU-Jt4" firstAttribute="leading" secondItem="i2G-2E-2kM" secondAttribute="trailing" constant="8" id="rlb-Ss-xxs"/>
+                                                <constraint firstItem="YlG-iY-3gp" firstAttribute="top" secondItem="wvv-B4-SA9" secondAttribute="bottom" constant="6" id="xxQ-ks-h8F"/>
                                                 <constraint firstItem="i2G-2E-2kM" firstAttribute="top" secondItem="wvv-B4-SA9" secondAttribute="bottom" constant="1" id="yop-iM-TyQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
