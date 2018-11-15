@@ -38,7 +38,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     }
 
     @IBAction func morePopular(_ sender: Any) {
-        performSegue(withIdentifier: "toRecipeList", sender: popularRecipes)
+        //performSegue(withIdentifier: "toRecipeList", sender: popularRecipes)
+        performSegue(withIdentifier: "toRecipeDetails", sender: popularRecipes)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

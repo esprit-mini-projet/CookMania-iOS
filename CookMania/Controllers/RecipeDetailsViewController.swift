@@ -144,10 +144,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipeRatingInput.settings.fillMode = .half
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
-        ratingView.settings.updateOnTouch = false
         initView()
     }
     
@@ -155,13 +153,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         print(rating)
     }
     
-    /*override func viewDidAppear(_ animated: Bool) {
-        let collectionViewFlow = similarRecipesCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        collectionViewFlow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        similarRecipesCollectionView.collectionViewLayout.invalidateLayout()
-    }*/
-    
     func initView() {
+        ratingView.settings.emptyBorderColor = UIColor.clear
+        recipeRatingInput.settings.fillMode = .half
+        ratingView.settings.updateOnTouch = false
         ratingView.rating = Double(recipe.rating)
         recipeNameLabel.text = recipe.name
         ingredientsValueLabel.text = String(recipe.ingredients.count)
@@ -225,11 +220,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let contentView = cell?.viewWithTag(0)
             let margin = contentView!.frame.width * 0.15
             let button = contentView?.viewWithTag(1) as! UIButton
-            button.restorationIdentifier = String(ingredient.id)
             let nameLabel = contentView?.viewWithTag(2) as! UILabel
+            let quantityLabel = contentView?.viewWithTag(3) as! UILabel
+            
             contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
             contentView!.addConstraint(NSLayoutConstraint(item: button, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin*0.5))
+            
+            button.restorationIdentifier = String(ingredient.id)
             nameLabel.text = ingredient.name
+            quantityLabel.text = String(ingredient.quantity)+" "+ingredient.unit
             return cell!
         }
         
@@ -256,24 +255,39 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let nameLabel = contentView?.viewWithTag(3) as! UILabel
             
             rating.settings.updateOnTouch = false
+            rating.settings.emptyBorderColor = UIColor.clear
             rating.rating = Double(similarRecipe.rating)
             nameLabel.text = similarRecipe.name
             image.image = UIImage(named: similarRecipe.imageUrl)
             return cell
         }else{
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
-            //cell.frame.size.height = experiencesCollectionView.frame.size.height * 1.1
-            //cell.frame.size.width = similarRecipesCollectionView.frame.size.height * 1.1
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
-            let profileImageView = contentView?.viewWithTag(2) as! UIImageView
-            let rating = contentView?.viewWithTag(3) as! CosmosView
-            let nameLabel = contentView?.viewWithTag(4) as! UILabel
-            let commentTV = contentView?.viewWithTag(5) as! UITextView
+            let profileImageShadowView = contentView?.viewWithTag(2) as! UIView
+            let profileImageView = contentView?.viewWithTag(3) as! UIImageView
+            let rating = contentView?.viewWithTag(4) as! CosmosView
+            let nameLabel = contentView?.viewWithTag(5) as! UILabel
+            let commentTV = contentView?.viewWithTag(6) as! UITextView
             
             coverImageView.image = UIImage(named: "caponata")
+            
+            let radius = profileImageView.frame.height / 2
+            
+            //ProfileImage
             profileImageView.image = UIImage(named: "melanzana")
+            profileImageView.layer.borderWidth = 5
+            profileImageView.layer.borderColor = UIColor.white.cgColor
+            profileImageView.layer.cornerRadius = radius
+            
+            //ProfileImage Shadow
+            profileImageShadowView.layer.cornerRadius = radius
+            profileImageShadowView.layer.shadowColor = UIColor.black.cgColor
+            profileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
+            profileImageShadowView.layer.shadowOpacity = 1
+            
             rating.settings.updateOnTouch = false
+            rating.settings.emptyBorderColor = UIColor.clear
             rating.rating = 3.0
             nameLabel.text = "Seif Abdennadher"
             
