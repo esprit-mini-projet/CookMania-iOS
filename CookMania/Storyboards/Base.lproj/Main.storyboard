@@ -164,6 +164,19 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="385" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Pl-or-7cb">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" alpha="0.90000000000000002" contentMode="scaleToFill" id="sdQ-0K-n6Q" customClass="GradientView" customModule="CookMania" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="413" width="375" height="126"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor2">
+                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor1">
+                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Recipe" rowHeight="385" id="0s9-tf-qAi">
                                         <rect key="frame" x="0.0" y="28" width="375" height="385"/>
@@ -175,21 +188,9 @@
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spaghetti" translatesAutoresizingMaskIntoConstraints="NO" id="nEp-fo-WFP">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="385"/>
                                                 </imageView>
-                                                <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdQ-0K-n6Q" customClass="GradientView" customModule="CookMania" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="303" width="375" height="82"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor2">
-                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor1">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cacciatore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvv-B4-SA9">
-                                                    <rect key="frame" x="15" y="342" width="345" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cacciatore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvv-B4-SA9">
+                                                    <rect key="frame" x="15" y="290" width="345" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -197,14 +198,10 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="wvv-B4-SA9" secondAttribute="trailing" constant="15" id="50e-gp-hKP"/>
                                                 <constraint firstItem="wvv-B4-SA9" firstAttribute="leading" secondItem="m29-Nz-9hK" secondAttribute="leading" constant="15" id="9LY-Jl-I98"/>
-                                                <constraint firstAttribute="bottom" secondItem="sdQ-0K-n6Q" secondAttribute="bottom" constant="-0.5" id="AC0-I2-qT2"/>
                                                 <constraint firstItem="nEp-fo-WFP" firstAttribute="top" secondItem="m29-Nz-9hK" secondAttribute="top" id="BKU-IV-CV3"/>
                                                 <constraint firstItem="nEp-fo-WFP" firstAttribute="leading" secondItem="m29-Nz-9hK" secondAttribute="leading" id="HNP-XN-Ink"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEp-fo-WFP" secondAttribute="trailing" id="KjX-jM-hwJ"/>
-                                                <constraint firstItem="sdQ-0K-n6Q" firstAttribute="leading" secondItem="m29-Nz-9hK" secondAttribute="leading" id="TtM-Ik-6J8"/>
                                                 <constraint firstItem="wvv-B4-SA9" firstAttribute="top" secondItem="m29-Nz-9hK" secondAttribute="top" constant="342" id="dHV-DF-zHb"/>
-                                                <constraint firstAttribute="trailing" secondItem="sdQ-0K-n6Q" secondAttribute="trailing" id="f17-VO-0fs"/>
-                                                <constraint firstItem="sdQ-0K-n6Q" firstAttribute="top" secondItem="m29-Nz-9hK" secondAttribute="top" constant="303" id="k9L-kG-mGq"/>
                                                 <constraint firstAttribute="bottom" secondItem="wvv-B4-SA9" secondAttribute="bottom" constant="10.5" id="mXz-KA-Muk"/>
                                                 <constraint firstAttribute="bottom" secondItem="nEp-fo-WFP" secondAttribute="bottom" constant="-0.5" id="qpb-Yg-mav"/>
                                             </constraints>
@@ -536,7 +533,7 @@
         <image name="spaghetti" width="540" height="303.75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kdF-uh-brg"/>
+        <segue reference="gyG-aW-51a"/>
         <segue reference="DtB-Bu-ib5"/>
     </inferredMetricsTieBreakers>
 </document>
