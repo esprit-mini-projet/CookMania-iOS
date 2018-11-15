@@ -11,4 +11,5 @@ target 'CookMania' do
   pod 'FacebookLogin'
   pod 'GoogleSignIn'
   pod 'Cosmos', '~> 17.0'
+  pod 'ObjectMapper'
 end
