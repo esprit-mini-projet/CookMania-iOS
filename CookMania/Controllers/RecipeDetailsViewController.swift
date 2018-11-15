@@ -80,6 +80,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var ingredientsTableViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var similarRecipesCollectionView: UICollectionView!
     @IBOutlet weak var similarRecipiesLabel: UILabel!
+    @IBOutlet weak var experiencesCollectionView: UICollectionView!
+    @IBOutlet weak var recipeRatingInput: CosmosView!
     
     var recipe = Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
@@ -142,9 +144,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        recipeRatingInput.settings.fillMode = .half
+        recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
         ratingView.settings.updateOnTouch = false
         initView()
+    }
+    
+    func toAddExperience(rating: Double) {
+        print(rating)
     }
     
     /*override func viewDidAppear(_ animated: Bool) {
@@ -228,27 +236,53 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return similarRecipes.count
+        if collectionView == similarRecipesCollectionView {
+            return similarRecipes.count
+        }else{
+            return 3
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let similarRecipe = similarRecipes[indexPath.row]
-        let cell = similarRecipesCollectionView.dequeueReusableCell(withReuseIdentifier: "similarRecipe", for: indexPath)
-        print("******************************* HEIGHT*******************************")
-        print(similarRecipesCollectionView.frame.height)
-        cell.frame.size.height = similarRecipesCollectionView.frame.size.height * 1.1
-        cell.frame.size.width = similarRecipesCollectionView.frame.size.height * 1.1
-        
-        let contentView = cell.viewWithTag(0)
-        let image = contentView?.viewWithTag(1) as! UIImageView
-        let rating = contentView?.viewWithTag(2) as! CosmosView
-        let nameLabel = contentView?.viewWithTag(3) as! UILabel
-        
-        rating.settings.updateOnTouch = false
-        rating.rating = Double(similarRecipe.rating)
-        nameLabel.text = similarRecipe.name
-        image.image = UIImage(named: similarRecipe.imageUrl)
-        return cell
+        if collectionView == similarRecipesCollectionView{
+            let similarRecipe = similarRecipes[indexPath.row]
+            let cell = similarRecipesCollectionView.dequeueReusableCell(withReuseIdentifier: "similarRecipe", for: indexPath)
+            cell.frame.size.height = similarRecipesCollectionView.frame.size.height
+            cell.frame.size.width = similarRecipesCollectionView.frame.size.height
+            
+            let contentView = cell.viewWithTag(0)
+            let image = contentView?.viewWithTag(1) as! UIImageView
+            let rating = contentView?.viewWithTag(2) as! CosmosView
+            let nameLabel = contentView?.viewWithTag(3) as! UILabel
+            
+            rating.settings.updateOnTouch = false
+            rating.rating = Double(similarRecipe.rating)
+            nameLabel.text = similarRecipe.name
+            image.image = UIImage(named: similarRecipe.imageUrl)
+            return cell
+        }else{
+            let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
+            //cell.frame.size.height = experiencesCollectionView.frame.size.height * 1.1
+            //cell.frame.size.width = similarRecipesCollectionView.frame.size.height * 1.1
+            let contentView = cell.viewWithTag(0)
+            let coverImageView = contentView?.viewWithTag(1) as! UIImageView
+            let profileImageView = contentView?.viewWithTag(2) as! UIImageView
+            let rating = contentView?.viewWithTag(3) as! CosmosView
+            let nameLabel = contentView?.viewWithTag(4) as! UILabel
+            let commentTV = contentView?.viewWithTag(5) as! UITextView
+            
+            coverImageView.image = UIImage(named: "caponata")
+            profileImageView.image = UIImage(named: "melanzana")
+            rating.settings.updateOnTouch = false
+            rating.rating = 3.0
+            nameLabel.text = "Seif Abdennadher"
+            
+            commentTV.textContainer.lineFragmentPadding = 0
+            commentTV.textContainerInset = .zero
+            commentTV.text = "For iOS 7.0, I've found that the contentInset trick no longer works. This is the code I used to get rid of the margin/padding in iOS 7."
+            
+            return cell
+        }
     }
     
     @IBAction func addIngredientClicked(_ sender: Any) {
