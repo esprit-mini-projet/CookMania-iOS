@@ -25,8 +25,14 @@ class RecipeListViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Recipe")
         let imageView = cell?.viewWithTag(1) as! UIImageView
         let nameLabel = cell?.viewWithTag(2) as! UILabel
+        let ratingLabel = cell?.viewWithTag(3) as! UILabel
+        let caloriesLabel = cell?.viewWithTag(4) as! UILabel
+        let servingsLabel = cell?.viewWithTag(5) as! UILabel
         imageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipeList[indexPath.row].imageUrl!)!)
         nameLabel.text = recipeList[indexPath.row].name
+        ratingLabel.text = String(recipeList[indexPath.row].rating!)
+        caloriesLabel.text = String(recipeList[indexPath.row].calories!)
+        servingsLabel.text = String(recipeList[indexPath.row].servings!)
         return cell!
     }
     
