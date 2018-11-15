@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import Alamofire
 
 class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -142,8 +143,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         )
     ]
     
+    var experiences: NSArray = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Alamofire.request("http://127.0.0.1:3000/experiences/recipe/ar_123456").responseJSON { response in
+            self.experiences = response.result.value as! NSArray
+            self.experiencesCollectionView.reloadData()
+        }
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
         initView()
@@ -261,6 +268,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             image.image = UIImage(named: similarRecipe.imageUrl)
             return cell
         }else{
+            //let experience = experiences[indexPath.item] as! Dictionary<String, Any>
+            
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
