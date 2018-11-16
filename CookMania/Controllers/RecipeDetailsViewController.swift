@@ -174,7 +174,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
         //steps TableView
-        tableViewHeightConstraint.constant = CGFloat(44 * recipe.steps.count)
+        tableViewHeightConstraint.constant = CGFloat(90 * recipe.steps.count)
     }
     
     func initMargin() {
@@ -192,10 +192,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         contentView.addConstraint(NSLayoutConstraint(item: servingsStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -margin/1.5))
         
         //Step Label
-        contentView.addConstraint(NSLayoutConstraint(item: stepsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+        contentView.addConstraint(NSLayoutConstraint(item: stepsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/1.2))
         
         //Ingredients Label
-        contentView.addConstraint(NSLayoutConstraint(item: ingredientsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+        contentView.addConstraint(NSLayoutConstraint(item: ingredientsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/1.2))
         
         //Similar recipes Label
         contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
@@ -218,8 +218,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let contentView = cell?.viewWithTag(0)
             let margin = contentView!.frame.width * 0.15
             let nameLabel = contentView?.viewWithTag(1) as! UILabel
+            let descriptionTV = contentView?.viewWithTag(2) as! UITextView
             contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/2))
             nameLabel.text = step.name
+            descriptionTV.text = step.desc
             return cell!
         }else{
             let ingredient = recipe.ingredients[indexPath.row]
@@ -277,7 +279,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let profileImageView = contentView?.viewWithTag(3) as! UIImageView
             let rating = contentView?.viewWithTag(4) as! CosmosView
             let nameLabel = contentView?.viewWithTag(5) as! UILabel
-            let commentTV = contentView?.viewWithTag(6) as! UITextView
+            let dateLabel = contentView?.viewWithTag(6) as! UILabel
+            let commentTV = contentView?.viewWithTag(7) as! UITextView
             
             print(experience)
             //Setting Data
@@ -285,6 +288,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             profileImageView.image = UIImage(named: (experience.user?.imageUrl!)!)
             rating.rating = Double(experience.rating!)
             nameLabel.text = experience.user?.username!
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM, yyyy"
+            dateLabel.text = dateFormatter.string(from: experience.date!)
             commentTV.text = experience.comment!
             
             let radius = profileImageView.frame.height / 2
