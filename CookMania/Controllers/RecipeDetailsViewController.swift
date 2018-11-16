@@ -143,14 +143,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         )
     ]
     
-    var experiences: NSArray = []
+    var experiences = [Experience]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Alamofire.request("http://127.0.0.1:3000/experiences/recipe/ar_123456").responseJSON { response in
-            self.experiences = response.result.value as! NSArray
+        ExperienceService.getInstance().getRecipeExperience(recipeID: 1, completionHandler: {experiences in
+            self.experiences = experiences
             self.experiencesCollectionView.reloadData()
-        }
+        })
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
         initView()
@@ -174,7 +174,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
         //steps TableView
-        tableViewHeightConstraint.constant = CGFloat(44 * recipe.steps.count)
+        tableViewHeightConstraint.constant = CGFloat(90 * recipe.steps.count)
     }
     
     func initMargin() {
@@ -192,10 +192,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         contentView.addConstraint(NSLayoutConstraint(item: servingsStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -margin/1.5))
         
         //Step Label
-        contentView.addConstraint(NSLayoutConstraint(item: stepsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+        contentView.addConstraint(NSLayoutConstraint(item: stepsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/1.2))
         
         //Ingredients Label
-        contentView.addConstraint(NSLayoutConstraint(item: ingredientsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+        contentView.addConstraint(NSLayoutConstraint(item: ingredientsLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/1.2))
         
         //Similar recipes Label
         contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
@@ -218,8 +218,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let contentView = cell?.viewWithTag(0)
             let margin = contentView!.frame.width * 0.15
             let nameLabel = contentView?.viewWithTag(1) as! UILabel
+            let descriptionTV = contentView?.viewWithTag(2) as! UITextView
             contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/2))
             nameLabel.text = step.name
+            descriptionTV.text = step.desc
             return cell!
         }else{
             let ingredient = recipe.ingredients[indexPath.row]
@@ -245,7 +247,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if collectionView == similarRecipesCollectionView {
             return similarRecipes.count
         }else{
-            return 3
+            return experiences.count
         }
     }
     
@@ -268,8 +270,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             image.image = UIImage(named: similarRecipe.imageUrl)
             return cell
         }else{
-            //let experience = experiences[indexPath.item] as! Dictionary<String, Any>
-            
+            let experience = experiences[indexPath.item]
+            print(experience.description)
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
@@ -277,14 +279,23 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let profileImageView = contentView?.viewWithTag(3) as! UIImageView
             let rating = contentView?.viewWithTag(4) as! CosmosView
             let nameLabel = contentView?.viewWithTag(5) as! UILabel
-            let commentTV = contentView?.viewWithTag(6) as! UITextView
+            let dateLabel = contentView?.viewWithTag(6) as! UILabel
+            let commentTV = contentView?.viewWithTag(7) as! UITextView
             
-            coverImageView.image = UIImage(named: "caponata")
+            print(experience)
+            //Setting Data
+            coverImageView.image = UIImage(named: experience.imageURL!)
+            profileImageView.image = UIImage(named: (experience.user?.imageUrl!)!)
+            rating.rating = Double(experience.rating!)
+            nameLabel.text = experience.user?.username!
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM, yyyy"
+            dateLabel.text = dateFormatter.string(from: experience.date!)
+            commentTV.text = experience.comment!
             
             let radius = profileImageView.frame.height / 2
             
             //ProfileImage
-            profileImageView.image = UIImage(named: "melanzana")
             profileImageView.layer.borderWidth = 5
             profileImageView.layer.borderColor = UIColor.white.cgColor
             profileImageView.layer.cornerRadius = radius
@@ -297,12 +308,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             rating.settings.updateOnTouch = false
             rating.settings.emptyBorderColor = UIColor.clear
-            rating.rating = 3.0
-            nameLabel.text = "Seif Abdennadher"
             
             commentTV.textContainer.lineFragmentPadding = 0
             commentTV.textContainerInset = .zero
-            commentTV.text = "For iOS 7.0, I've found that the contentInset trick no longer works. This is the code I used to get rid of the margin/padding in iOS 7."
             
             return cell
         }
