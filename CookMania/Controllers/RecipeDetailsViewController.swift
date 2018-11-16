@@ -143,14 +143,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         )
     ]
     
-    var experiences: NSArray = []
+    var experiences = [Experience]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Alamofire.request("http://127.0.0.1:3000/experiences/recipe/ar_123456").responseJSON { response in
-            self.experiences = response.result.value as! NSArray
+        ExperienceService.getInstance().getRecipeExperience(recipeID: 1, completionHandler: {experiences in
+            self.experiences = experiences
             self.experiencesCollectionView.reloadData()
-        }
+        })
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
         initView()
@@ -245,7 +245,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if collectionView == similarRecipesCollectionView {
             return similarRecipes.count
         }else{
-            return 3
+            return experiences.count
         }
     }
     
@@ -268,8 +268,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             image.image = UIImage(named: similarRecipe.imageUrl)
             return cell
         }else{
-            //let experience = experiences[indexPath.item] as! Dictionary<String, Any>
-            
+            let experience = experiences[indexPath.item]
+            print(experience.description)
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
@@ -279,12 +279,17 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let nameLabel = contentView?.viewWithTag(5) as! UILabel
             let commentTV = contentView?.viewWithTag(6) as! UITextView
             
-            coverImageView.image = UIImage(named: "caponata")
+            print(experience)
+            //Setting Data
+            coverImageView.image = UIImage(named: experience.imageURL!)
+            profileImageView.image = UIImage(named: (experience.user?.imageUrl!)!)
+            rating.rating = Double(experience.rating!)
+            nameLabel.text = experience.user?.username!
+            commentTV.text = experience.comment!
             
             let radius = profileImageView.frame.height / 2
             
             //ProfileImage
-            profileImageView.image = UIImage(named: "melanzana")
             profileImageView.layer.borderWidth = 5
             profileImageView.layer.borderColor = UIColor.white.cgColor
             profileImageView.layer.cornerRadius = radius
@@ -297,12 +302,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             rating.settings.updateOnTouch = false
             rating.settings.emptyBorderColor = UIColor.clear
-            rating.rating = 3.0
-            nameLabel.text = "Seif Abdennadher"
             
             commentTV.textContainer.lineFragmentPadding = 0
             commentTV.textContainerInset = .zero
-            commentTV.text = "For iOS 7.0, I've found that the contentInset trick no longer works. This is the code I used to get rid of the margin/padding in iOS 7."
             
             return cell
         }

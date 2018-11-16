@@ -34,6 +34,8 @@
 		C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */; };
 		C32B1C892194EEEE00153DC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C882194EEEE00153DC9 /* User.swift */; };
 		C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BBB60219B5058007CA580 /* GradientViewSecond.swift */; };
+		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
+		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		C32B1C882194EEEE00153DC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C35BBB60219B5058007CA580 /* GradientViewSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewSecond.swift; sourceTree = "<group>"; };
+		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
+		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,14 +109,15 @@
 		2608CEBC218D0D8E008A706E /* CookMania */ = {
 			isa = PBXGroup;
 			children = (
-				C32B1C792194D9F400153DC9 /* Storyboards */,
-				C32B1C782194D9DF00153DC9 /* Utils */,
-				C32B1C772194D9CD00153DC9 /* Entities */,
-				C32B1C762194D9C600153DC9 /* Controllers */,
 				2608CEBD218D0D8E008A706E /* AppDelegate.swift */,
 				2608CEC7218D0D9B008A706E /* Assets.xcassets */,
-				2608CECC218D0D9B008A706E /* Info.plist */,
+				C32B1C762194D9C600153DC9 /* Controllers */,
 				2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */,
+				C32B1C772194D9CD00153DC9 /* Entities */,
+				2608CECC218D0D9B008A706E /* Info.plist */,
+				C36AC735219E0CD00070CDE8 /* Services */,
+				C32B1C792194D9F400153DC9 /* Storyboards */,
+				C32B1C782194D9DF00153DC9 /* Utils */,
 			);
 			path = CookMania;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				C32B1C882194EEEE00153DC9 /* User.swift */,
 				260917CC219C70AC00C713C6 /* Step.swift */,
 				260917CE219C716900C713C6 /* Ingredient.swift */,
+				C36AC733219E08D20070CDE8 /* Experience.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -177,6 +183,14 @@
 			name = Storyboards;
 			path = CookMania/Storyboards;
 			sourceTree = SOURCE_ROOT;
+		};
+		C36AC735219E0CD00070CDE8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C36AC736219E0CF30070CDE8 /* ExperienceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
 		};
 		E6563888AFB82B4F0AF68518 /* Pods */ = {
 			isa = PBXGroup;
@@ -365,11 +379,13 @@
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
+				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
 				C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
+				C36AC734219E08D20070CDE8 /* Experience.swift in Sources */,
 				C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */,
 				260917CD219C70AC00C713C6 /* Step.swift in Sources */,
 				C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */,
