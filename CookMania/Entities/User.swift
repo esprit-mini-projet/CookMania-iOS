@@ -7,19 +7,36 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class User: NSObject {
+class User: Mappable {
     var id: String?
-    var email: String
-    var username: String
+    var email: String?
+    var username: String?
     var password: String?
     var imageUrl: String?
     var date: Date?
     var following: Int = 0
     var followers: Int = 0
     
-    override var description: String { return "User: {id: \(String(describing: id)) , email: \(email) , username: \(username) , imageUrl: \(String(describing: imageUrl)), date: \(String(describing: date)), following: \(following), followers: \(followers) }" }
-    //override public var description: String { return "User: {id: \(id) , email: \(email) , firtname: \(firstName) , lastname \(lastName) , imageUrl: \(imageUrl) }"}
+    var description: String {
+        return "<\(type(of: self)): id = \(String(describing: id)), email = \(String(describing: email)), username = \(String(describing: username)), password = \(String(describing: password)), imageUrl = \(String(describing: imageUrl)), date = \(String(describing: date)), following = \(String(describing: following)), followers = \(String(describing: followers))>"
+    }
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        email <- map["email"]
+        username <- map["username"]
+        password <- map["password"]
+        imageUrl <- map["image_url"]
+        date <- map["date"]
+        following <- map["following"]
+        followers <- map["followers"]
+    }
     
     init(id: String, email: String, username: String, password: String, imageUrl: String, date: Date, following: Int, followers: Int) {
         self.id = id
