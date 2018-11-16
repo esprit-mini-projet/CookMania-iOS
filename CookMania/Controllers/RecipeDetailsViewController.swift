@@ -30,12 +30,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         var name: String
         var desc: String
         var time: Int
+        var imageUrl: String
         var ingredients: [Ingredient]
         
-        init(name: String, desc: String, time: Int, ingredients: [Ingredient]) {
+        init(name: String, desc: String, time: Int,imageUrl: String, ingredients: [Ingredient]) {
             self.name = name
             self.desc = desc
             self.time = time
+            self.imageUrl = imageUrl
             self.ingredients = ingredients
         }
     }
@@ -75,7 +77,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var stepsLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stepsTableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stepsTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTableViewConstraint: NSLayoutConstraint!
@@ -85,13 +87,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeRatingInput: CosmosView!
     
     var recipe = Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+        Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                     Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                     Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                     Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
         ], ingredients: [
             Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
             Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -100,13 +102,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     var similarRecipes = [
         Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
             ], ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -114,13 +116,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             ]
         ),
         Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
             ], ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -128,13 +130,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             ]
         ),
         Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
             ], ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -154,6 +156,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
         initView()
+        stepsTableView.rowHeight = UITableView.automaticDimension
+        stepsTableView.estimatedRowHeight = 140
     }
     
     func toAddExperience(rating: Double) {
@@ -174,7 +178,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
         //steps TableView
-        tableViewHeightConstraint.constant = CGFloat(90 * recipe.steps.count)
+        //tableViewHeightConstraint.constant = CGFloat(90 * recipe.steps.count)
     }
     
     func initMargin() {
@@ -215,13 +219,34 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if(tableView == stepsTableView){
             let step = recipe.steps[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "stepCell")
-            let contentView = cell?.viewWithTag(0)
-            let margin = contentView!.frame.width * 0.15
-            let nameLabel = contentView?.viewWithTag(1) as! UILabel
-            let descriptionTV = contentView?.viewWithTag(2) as! UITextView
-            contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/2))
+            let contentView = cell?.viewWithTag(0)?.viewWithTag(1)
+            let shadowView = cell?.viewWithTag(5) as! UIView
+            
+            let nameLabel = contentView?.viewWithTag(2) as! UILabel
+            let descriptionTextView = contentView?.viewWithTag(3) as! UITextView
+            let stepImage = contentView?.viewWithTag(4) as! UIImageView
+            
+            //Set Data
             nameLabel.text = step.name
-            descriptionTV.text = step.desc
+            descriptionTextView.text = step.desc
+            stepImage.image = UIImage(named: step.imageUrl)
+            
+            //Init views
+            contentView?.layer.cornerRadius = 10
+            contentView?.layer.masksToBounds = true
+            
+            shadowView.layer.cornerRadius = 10
+            shadowView.layer.shadowColor = UIColor.black.cgColor
+            shadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            shadowView.layer.shadowOpacity = 0.5
+            
+            stepImage.layer.cornerRadius = 10
+            stepImage.layer.masksToBounds = true
+            stepImage.layer.borderWidth = 1
+            stepImage.layer.borderColor = UIColor.black.cgColor
+            descriptionTextView.sizeToFit()
+            descriptionTextView.isScrollEnabled = false
+            stepsTableViewHeightConstraint.constant = stepsTableViewHeightConstraint.constant + (cell?.frame.height)!
             return cell!
         }else{
             let ingredient = recipe.ingredients[indexPath.row]

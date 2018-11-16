@@ -40,7 +40,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     }
 
     @IBAction func morePopular(_ sender: Any) {
-        performSegue(withIdentifier: "toRecipeList", sender: Constants.URL.topRatedRecipes)
+        //performSegue(withIdentifier: "toRecipeList", sender: Constants.URL.topRatedRecipes)
+        performSegue(withIdentifier: "toRecipeDetails", sender: Constants.URL.topRatedRecipes)
     }
     
     @IBAction func addRecipe(_ sender: Any) {
