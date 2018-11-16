@@ -7,16 +7,39 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Recipe{
+class Recipe: Mappable{
     
+    var id: Int?
     var name: String?
-    var image: String?
-    var ingredients = [String]()
+    var description: String?
+    var calories: Int?
+    var servings: Int?
+    var imageUrl: String?
+    var rating: Float?
+    var views: Int?
+    var time: Int?
+    var userId: String?
+    var steps: [Step]?
+    var labels: [String]?
     
-    init(name: String?, image: String?, ingredients: [String]) {
-        self.name = name
-        self.image = image
-        self.ingredients = ingredients
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        description <- map["description"]
+        calories <- map["calories"]
+        servings <- map["servings"]
+        imageUrl <- map["image_url"]
+        views <- map["views"]
+        rating <- map["rating"]
+        time <- map["time"]
+        userId <- map["userId"]
+        steps <- map["steps"]
+        labels <- map["labels"]
     }
 }
