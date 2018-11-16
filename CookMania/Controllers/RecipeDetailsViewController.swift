@@ -93,7 +93,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                     Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                     Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: [])
         ], ingredients: [
             Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
             Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -177,8 +180,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeCoverIV.image = UIImage(named: recipe.imageUrl)
         
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
-        //steps TableView
-        //tableViewHeightConstraint.constant = CGFloat(90 * recipe.steps.count)
     }
     
     func initMargin() {
@@ -225,6 +226,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let nameLabel = contentView?.viewWithTag(2) as! UILabel
             let descriptionTextView = contentView?.viewWithTag(3) as! UITextView
             let stepImage = contentView?.viewWithTag(4) as! UIImageView
+            let stepImageShadowView = contentView?.viewWithTag(6) as! UIView
             
             //Set Data
             nameLabel.text = step.name
@@ -242,11 +244,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             stepImage.layer.cornerRadius = 10
             stepImage.layer.masksToBounds = true
-            stepImage.layer.borderWidth = 1
-            stepImage.layer.borderColor = UIColor.black.cgColor
+            
+            stepImageShadowView.layer.cornerRadius = 10
+            stepImageShadowView.layer.shadowColor = UIColor.black.cgColor
+            stepImageShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            stepImageShadowView.layer.shadowOpacity = 0.5
+            
             descriptionTextView.sizeToFit()
             descriptionTextView.isScrollEnabled = false
-            stepsTableViewHeightConstraint.constant = stepsTableViewHeightConstraint.constant + (cell?.frame.height)!
+            stepsTableViewHeightConstraint.constant = stepsTableViewHeightConstraint.constant + (cell?.frame.size.height)!
             return cell!
         }else{
             let ingredient = recipe.ingredients[indexPath.row]
@@ -307,7 +313,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let dateLabel = contentView?.viewWithTag(6) as! UILabel
             let commentTV = contentView?.viewWithTag(7) as! UITextView
             
-            print(experience)
             //Setting Data
             coverImageView.image = UIImage(named: experience.imageURL!)
             profileImageView.image = UIImage(named: (experience.user?.imageUrl!)!)
@@ -319,6 +324,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             commentTV.text = experience.comment!
             
             let radius = profileImageView.frame.height / 2
+            
+            //ContentView Corner radius
+            contentView?.layer.cornerRadius = 5
+            contentView?.layer.masksToBounds = true
             
             //ProfileImage
             profileImageView.layer.borderWidth = 5
