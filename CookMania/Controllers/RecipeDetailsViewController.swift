@@ -51,9 +51,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         var servings: Int
         var steps: [Step]
         var ingredients: [Ingredient]
+        var desc: String
         
-        init(name: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [Step], ingredients: [Ingredient]){
+        init(name: String, desc: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [Step], ingredients: [Ingredient]){
             self.name = name
+            self.desc = desc
             self.rating = rating
             self.imageUrl = imageUrl
             self.time = time
@@ -85,8 +87,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var similarRecipiesLabel: UILabel!
     @IBOutlet weak var experiencesCollectionView: UICollectionView!
     @IBOutlet weak var recipeRatingInput: CosmosView!
+    @IBOutlet weak var recipeDescriptionTextView: UITextView!
     
-    var recipe = Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+    var recipe = Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                     Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -102,7 +105,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         ])
     
     var similarRecipes = [
-        Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+        Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -116,7 +119,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
             ]
         ),
-        Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+        Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -130,7 +133,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
             ]
         ),
-        Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+        Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -187,8 +190,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         servingsValueLabel.text = String(recipe.servings)
         timeValueLabel.text = String(recipe.time)
         recipeCoverIV.image = UIImage(named: recipe.imageUrl)
+        recipeDescriptionTextView.text = recipe.desc
         
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
+        recipeDescriptionTextView.sizeToFit()
+        recipeDescriptionTextView.isScrollEnabled = false
     }
     
     func initMargin() {
