@@ -94,8 +94,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                     Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
             Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
-            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
-            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
             Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: [])
         ], ingredients: [
             Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -161,6 +159,17 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         initView()
         stepsTableView.rowHeight = UITableView.automaticDimension
         stepsTableView.estimatedRowHeight = 140
+        
+        stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        stepsTableView.layer.removeAllAnimations()
+        stepsTableViewHeightConstraint.constant = stepsTableView.contentSize.height
+        UIView.animate(withDuration: 0.5) {
+            self.updateViewConstraints()
+            self.loadViewIfNeeded()
+        }
     }
     
     func toAddExperience(rating: Double) {
@@ -252,7 +261,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             descriptionTextView.sizeToFit()
             descriptionTextView.isScrollEnabled = false
-            stepsTableViewHeightConstraint.constant = stepsTableViewHeightConstraint.constant + (cell?.frame.size.height)!
+            
             return cell!
         }else{
             let ingredient = recipe.ingredients[indexPath.row]
