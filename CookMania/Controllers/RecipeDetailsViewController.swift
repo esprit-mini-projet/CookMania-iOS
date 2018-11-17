@@ -89,6 +89,12 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeRatingInput: CosmosView!
     @IBOutlet weak var recipeDescriptionTextView: UITextView!
     
+    @IBOutlet weak var recipeOwnerView: UIView!
+    @IBOutlet weak var recipeOwnerProfileImageView: UIImageView!
+    @IBOutlet weak var recipeOwnerProfileImageShadowView: UIView!
+    @IBOutlet weak var recipeOwnerNameLabel: UILabel!
+    @IBOutlet weak var recipeOwnerDateLabel: UILabel!
+    
     var recipe = Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
@@ -195,6 +201,45 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
         recipeDescriptionTextView.sizeToFit()
         recipeDescriptionTextView.isScrollEnabled = false
+        
+        recipeOwnerView.layer.cornerRadius = 5
+        recipeOwnerView.layer.masksToBounds = true
+        
+        recipeOwnerProfileImageView.layer.borderWidth = 2
+        recipeOwnerProfileImageView.layer.borderColor = UIColor.white.cgColor
+        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.size.height / 2
+        recipeOwnerProfileImageView.layer.masksToBounds = true
+        recipeOwnerProfileImageView.image = UIImage(named: "melanzana")
+        
+        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageView.frame.size.height / 2
+        recipeOwnerProfileImageShadowView.layer.shadowColor = UIColor.black.cgColor
+        recipeOwnerProfileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        recipeOwnerProfileImageShadowView.layer.shadowOpacity = 1
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapDetected"))
+        recipeOwnerProfileImageView.isUserInteractionEnabled = true
+        recipeOwnerProfileImageView.addGestureRecognizer(singleTap)
+        
+        recipeOwnerNameLabel.text = "Seif Abdennadher"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, yyyy"
+        recipeOwnerDateLabel.text = dateFormatter.string(from: dateFormatter.date(from: "21 Nov, 2018")!)
+        initPosition = recipeOwnerView.center.x*1.1
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tapDetected()
+    }
+    
+    var isExpanded = true
+    var initPosition: CGFloat?
+    //Action
+    @objc func tapDetected() {
+        UIView.animate(withDuration: 1, animations: {
+            self.recipeOwnerView.center.x = self.isExpanded ? self.initPosition!+self.recipeOwnerView.frame.size.width/1.6 : self.initPosition!
+            self.isExpanded = !self.isExpanded
+        })
     }
     
     func initMargin() {
@@ -390,6 +435,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     @IBAction func addAllIngredients(_ sender: Any) {
+        print("add all ingredients")
+    }
+    
+    @IBAction func visitProfilClicked(_ sender: Any) {
+        print("Go to users profile")
     }
     /*
     // MARK: - Navigation
