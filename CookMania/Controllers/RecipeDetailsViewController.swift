@@ -87,7 +87,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeRatingInput: CosmosView!
     
     var recipe = Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-        Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                     Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                     Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -215,6 +215,24 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if(tableView == stepsTableView && recipe.steps[indexPath.row].time != 0){
+            let timer = timerAction(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [timer])
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+    
+    func timerAction(at indexPath: IndexPath) -> UIContextualAction {
+        //let step = recipe.steps[indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "Set timer") { (action, view, completion) in
+            print("Set timer")
+            completion(true)
+        }
+        action.image = UIImage(named: "timer")
+        action.backgroundColor = UIColor.lightGray
+        return action
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == stepsTableView {
