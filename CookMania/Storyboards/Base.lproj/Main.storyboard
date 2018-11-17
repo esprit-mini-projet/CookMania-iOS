@@ -1031,7 +1031,7 @@ EDE5OA
                                                                         <constraint firstAttribute="width" secondItem="oVK-pP-RXL" secondAttribute="height" multiplier="1:1" id="Taz-FM-YAI"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfd-Ww-dSg" userLabel="RatingView" customClass="CosmosView" customModule="Cosmos">
+                                                                <view tag="4" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfd-Ww-dSg" userLabel="RatingView" customClass="CosmosView" customModule="Cosmos">
                                                                     <rect key="frame" x="98" y="110.5" width="110" height="19"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
@@ -1043,7 +1043,7 @@ EDE5OA
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seif Abdennadher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjV-4q-TpC" userLabel="UsernameLabel">
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Seif Abdennadher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjV-4q-TpC" userLabel="UsernameLabel">
                                                                     <rect key="frame" x="100" y="128.5" width="122" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1109,7 +1109,7 @@ EDE5OA
                                                             <rect key="frame" x="0.0" y="0.0" width="214" height="202.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pnC-lc-unD">
+                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pnC-lc-unD">
                                                                     <rect key="frame" x="0.0" y="0.0" width="214" height="202.5"/>
                                                                 </imageView>
                                                                 <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRx-bX-ins" customClass="GradientViewSecond" customModule="CookMania" customModuleProvider="target">
@@ -1136,7 +1136,7 @@ EDE5OA
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view tag="2" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-Ub-ylF" customClass="CosmosView" customModule="Cosmos">
+                                                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-Ub-ylF" customClass="CosmosView" customModule="Cosmos">
                                                                     <rect key="frame" x="9" y="154.5" width="95" height="15"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <userDefinedRuntimeAttributes>
@@ -1247,11 +1247,11 @@ EDE5OA
                                                 <rect key="frame" x="169" y="17" width="225" height="45.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIU-dl-jVa">
-                                                        <rect key="frame" x="14.5" y="3.5" width="38.5" height="38.5"/>
+                                                        <rect key="frame" x="8.5" y="3.5" width="38.5" height="38.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0ir-4v-cLP">
-                                                        <rect key="frame" x="14.5" y="3.5" width="38.5" height="38.5"/>
+                                                        <rect key="frame" x="8.5" y="3.5" width="38.5" height="38.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="0ir-4v-cLP" secondAttribute="height" multiplier="1:1" id="7e6-w8-7J1"/>
                                                         </constraints>
@@ -1290,7 +1290,7 @@ EDE5OA
                                                 <constraints>
                                                     <constraint firstItem="gZ8-g8-kqu" firstAttribute="centerX" secondItem="X2S-9e-weD" secondAttribute="centerX" multiplier="1.2" id="1ok-CL-jmg"/>
                                                     <constraint firstItem="0ir-4v-cLP" firstAttribute="centerY" secondItem="X2S-9e-weD" secondAttribute="centerY" id="44a-qE-nna"/>
-                                                    <constraint firstItem="0ir-4v-cLP" firstAttribute="centerX" secondItem="X2S-9e-weD" secondAttribute="centerX" multiplier="0.3" id="4KU-Zv-HyD"/>
+                                                    <constraint firstItem="0ir-4v-cLP" firstAttribute="centerX" secondItem="X2S-9e-weD" secondAttribute="centerX" multiplier="0.25" id="4KU-Zv-HyD"/>
                                                     <constraint firstItem="xIU-dl-jVa" firstAttribute="centerY" secondItem="0ir-4v-cLP" secondAttribute="centerY" id="G9u-ba-9vo"/>
                                                     <constraint firstItem="0ir-4v-cLP" firstAttribute="height" secondItem="X2S-9e-weD" secondAttribute="height" multiplier="0.85" id="Ke6-Gm-Boy"/>
                                                     <constraint firstItem="iXG-rz-kq5" firstAttribute="leading" secondItem="tBR-JS-UEY" secondAttribute="leading" id="Kvl-vU-bCJ"/>
@@ -1342,6 +1342,7 @@ EDE5OA
                                             <constraint firstItem="Boq-Jr-H9O" firstAttribute="top" secondItem="kzZ-FT-gTu" secondAttribute="bottom" constant="30" id="RlB-le-ZZW"/>
                                             <constraint firstItem="Ive-Pw-fhZ" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="1.3" id="Rmb-fZ-T77"/>
                                             <constraint firstItem="DR1-OG-VNm" firstAttribute="leading" secondItem="kzZ-FT-gTu" secondAttribute="leading" id="Rx5-6H-pvh"/>
+                                            <constraint firstItem="X2S-9e-weD" firstAttribute="trailing" secondItem="HuM-5a-GOW" secondAttribute="trailing" multiplier="1.05" identifier="expandedConstraint" id="X1a-ey-zuG"/>
                                             <constraint firstItem="8Ss-8W-i5n" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="1.1" id="Xf7-7O-Ga3"/>
                                             <constraint firstItem="Ftk-zP-oyo" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="0.95" id="Yp3-6C-qKb"/>
                                             <constraint firstItem="e0z-RS-t4U" firstAttribute="top" secondItem="qH8-f5-jCT" secondAttribute="bottom" constant="8" id="bHA-go-4XB"/>
@@ -1364,7 +1365,6 @@ EDE5OA
                                             <constraint firstItem="Boq-Jr-H9O" firstAttribute="centerX" secondItem="xBb-62-YZB" secondAttribute="centerX" id="pLE-wZ-jB4"/>
                                             <constraint firstAttribute="trailing" secondItem="kzZ-FT-gTu" secondAttribute="trailing" id="tQK-2j-yQ6"/>
                                             <constraint firstItem="HuM-5a-GOW" firstAttribute="leading" secondItem="xBb-62-YZB" secondAttribute="leading" id="ueZ-9w-oKQ"/>
-                                            <constraint firstItem="X2S-9e-weD" firstAttribute="trailing" secondItem="HuM-5a-GOW" secondAttribute="trailing" multiplier="1.05" id="uyb-nd-7aD"/>
                                             <constraint firstItem="FrZ-8Y-3vt" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="1.1" id="wA6-cI-xYs"/>
                                             <constraint firstItem="DR1-OG-VNm" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="1.3" id="whd-pI-gjU"/>
                                             <constraint firstItem="X2S-9e-weD" firstAttribute="height" secondItem="HuM-5a-GOW" secondAttribute="height" multiplier="0.2" id="xKf-PZ-zzm"/>
@@ -1412,6 +1412,7 @@ EDE5OA
                         <outlet property="recipeOwnerProfileImageShadowView" destination="xIU-dl-jVa" id="saK-XO-MZ8"/>
                         <outlet property="recipeOwnerProfileImageView" destination="0ir-4v-cLP" id="NhG-nT-0kx"/>
                         <outlet property="recipeOwnerView" destination="X2S-9e-weD" id="ePY-xe-AFH"/>
+                        <outlet property="recipeOwnerViewExpandedConstraint" destination="X1a-ey-zuG" id="3Se-zb-JMI"/>
                         <outlet property="recipeRatingInput" destination="VMK-HO-58M" id="I90-2h-zCA"/>
                         <outlet property="scrollView" destination="xD6-d3-J2D" id="Qj4-cf-5UV"/>
                         <outlet property="servingsStack" destination="Ive-Pw-fhZ" id="V0C-Cv-a3Q"/>

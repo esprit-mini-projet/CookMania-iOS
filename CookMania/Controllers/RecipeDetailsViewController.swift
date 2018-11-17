@@ -94,6 +94,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeOwnerProfileImageShadowView: UIView!
     @IBOutlet weak var recipeOwnerNameLabel: UILabel!
     @IBOutlet weak var recipeOwnerDateLabel: UILabel!
+    @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
     
     var recipe = Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
@@ -232,13 +233,16 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         tapDetected()
     }
     
-    var isExpanded = true
+    var isExpanded: CGFloat = 1
     var initPosition: CGFloat?
     //Action
     @objc func tapDetected() {
         UIView.animate(withDuration: 1, animations: {
-            self.recipeOwnerView.center.x = self.isExpanded ? self.initPosition!+self.recipeOwnerView.frame.size.width/1.6 : self.initPosition!
-            self.isExpanded = !self.isExpanded
+            let viewWidth = self.recipeOwnerView.frame.width
+            let imageViewWidth = self.recipeOwnerProfileImageView.frame.width
+            self.recipeOwnerView.center.x = (self.recipeOwnerView.center.x + (viewWidth * self.isExpanded)) - ((imageViewWidth * 2) * self.isExpanded)
+            //self.recipeOwnerView.center.x = self.isExpanded ? self.initPosition!+self.recipeCoverIV.frame.width * 0.38 : self.initPosition!
+            self.isExpanded *= -1
         })
     }
     
