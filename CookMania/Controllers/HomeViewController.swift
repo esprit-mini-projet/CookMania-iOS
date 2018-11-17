@@ -11,7 +11,7 @@ import AlamofireImage
 import Alamofire
 import ObjectMapper
 
-class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var topRated = [Recipe]()
     
@@ -25,8 +25,17 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Recipe", for: indexPath)
         let imageView = cell.viewWithTag(1) as! UIImageView
+        let nameLabel = cell.viewWithTag(2) as! UILabel
+        imageView.layer.cornerRadius = 15
+        imageView.layer.masksToBounds = true
         imageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + topRated[indexPath.row].imageUrl!)!)
+        nameLabel.text = topRated[indexPath.row].name!
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.size.width * 0.4
+        return CGSize(width: width, height: collectionView.frame.size.height)
     }
     
 
