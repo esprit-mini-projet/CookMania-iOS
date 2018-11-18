@@ -79,6 +79,9 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j5Z-qA-4WD"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -178,9 +181,11 @@ d2lkdGggPSAxNxAyA
                     </view>
                     <navigationItem key="navigationItem" id="Fb4-VJ-3Uy"/>
                     <connections>
+                        <outlet property="emailTextField" destination="gUR-1C-hn4" id="jTg-p3-5Fu"/>
                         <outlet property="facebookLoginButton" destination="uID-fq-fwK" id="lKS-gr-6W4"/>
                         <outlet property="googleLoginButton" destination="XU0-Y0-470" id="Pfc-C2-9Jv"/>
                         <outlet property="loginButton" destination="la6-02-HoG" id="YlT-zl-Zzt"/>
+                        <outlet property="passwordTextField" destination="IJO-P1-qKa" id="bS3-Sq-Uhv"/>
                         <segue destination="KIY-CA-chJ" kind="show" identifier="toHome" id="g4q-oo-Mnh"/>
                         <segue destination="MVD-Hb-sVk" kind="show" identifier="toSignUp" id="hFf-hP-wXg"/>
                     </connections>

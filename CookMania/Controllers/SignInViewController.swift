@@ -16,6 +16,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     let CLIEND_ID = "323514335162-ut1n697tbepfjk414bsiju9g5fo567h4.apps.googleusercontent.com"
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
@@ -41,7 +44,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     override func viewDidAppear(_ animated: Bool) {
         //Temp func call
-        //logoutSocial()
+        logoutSocial()
         
         //Facebook User is already connected
         if AccessToken.current != nil {
@@ -156,6 +159,15 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     @IBAction func googleLogin(_ sender: Any) {
         GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    @IBAction func loginButtonClicked(_ sender: Any) {
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            UserService.getInstance().logUserIn(email: email, password: password, completionHandler: { user in
+                self.appDelegate?.user = user
+                self.continueToHome()
+            })
+        }
     }
 }
 

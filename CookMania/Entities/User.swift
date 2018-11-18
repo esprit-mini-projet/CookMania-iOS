@@ -15,6 +15,7 @@ class User: Mappable {
     var username: String?
     var password: String?
     var imageUrl: String?
+    private var dateString: String?
     var date: Date?
     var following: Int = 0
     var followers: Int = 0
@@ -33,9 +34,16 @@ class User: Mappable {
         username <- map["username"]
         password <- map["password"]
         imageUrl <- map["image_url"]
-        date <- map["date"]
         following <- map["following"]
         followers <- map["followers"]
+        
+        dateString <- map["date"]
+        
+        let dateFroamtter = DateFormatter()
+        dateFroamtter.locale = Locale(identifier: "en_US_POSIX")
+        dateFroamtter.timeZone = TimeZone.autoupdatingCurrent
+        dateFroamtter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        date = dateFroamtter.date(from: dateString!)
     }
     
     init(id: String, email: String, username: String, password: String, imageUrl: String, date: Date, following: Int, followers: Int) {

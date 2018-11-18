@@ -384,7 +384,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             return cell
         }else{
             let experience = experiences[indexPath.item]
-            print(experience.description)
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
