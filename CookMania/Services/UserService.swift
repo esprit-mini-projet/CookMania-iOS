@@ -37,4 +37,23 @@ class UserService: NSObject {
             }
         })
     }
+    
+    func checkUserSocial(user: User, completionHandler: @escaping (_ user: User) -> ()) {
+        let JSONString = user.toJSONString(prettyPrint: true)
+        var request = URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "social/check"))! )
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = JSONString!.data(using: .utf8, allowLossyConversion: false)!
+        Alamofire.request(request).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                let user: User = Mapper<User>().map(JSONString: response.result.value!)!
+                completionHandler(user)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
 }

@@ -45,30 +45,28 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //Temp func call
-        //logoutAll()
         
-        //Facebook User is already connected
-        if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
-            SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
-        }else if AccessToken.current != nil {
-            continueToHome()
-        }else{
-            //Google User is aleady connected
-            GIDSignIn.sharedInstance()?.signInSilently()
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // change 2 to desired number of seconds
+            //Temp func call
+            //self.logoutAll()
+            //Facebook User is already connected
+            if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
+                self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
+            }else if AccessToken.current != nil {
+                print("hhh")
+                self.fetchProfileFB(withAccessToken: AccessToken.current!)
+            }else if((GIDSignIn.sharedInstance()?.hasAuthInKeychain())!){
+                //Google User is aleady connected
+                GIDSignIn.sharedInstance()?.signInSilently()
+            }
+         }
     }
     
+    //Google signin
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if (error == nil) {
-            self.appDelegate?.user = User(id: (self.appDelegate?.GOOGLE_UID_PREFIX)!+user.userID, email: user.profile.email, username: user.profile.name, imageUrl: (user.profile.imageURL(withDimension: 200)?.absoluteString)!)
-            checkSocialUserExistance()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // change 2 to desired number of seconds
-                self.continueToHome()
-            }
+            let user = User(id: (self.appDelegate?.GOOGLE_UID_PREFIX)!+user.userID, email: user.profile.email, username: user.profile.name, imageUrl: (user.profile.imageURL(withDimension: 200)?.absoluteString)!)
+            checkSocialUserExistance(user: user)
         } else {
             print("\(error.localizedDescription)")
         }
@@ -93,11 +91,11 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     }
     
     func continueToHome() {
-        performSegue(withIdentifier: "toHome", sender: nil)
+        performSegue(withIdentifier: "toHome", sender: self)
     }
     
-    func fetchProfileFB() {
-        let request = GraphRequest(graphPath: "me", parameters: ["fields": "id, email, first_name, last_name, picture.type(large)"])
+    func fetchProfileFB(withAccessToken accessToken: AccessToken) {
+        let request = GraphRequest(graphPath: "me", parameters: ["fields": "id, email, first_name, last_name, picture.type(large)"], accessToken: accessToken)
         request.start { respons, result in
             switch result {
             case .failed(_):
@@ -110,16 +108,21 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     imageUrl = url
                 }
                 if let email = dictionary?["email"] as? String, let firstName = dictionary?["first_name"] as? String, let lastName = dictionary?["last_name"] as? String, let id = dictionary?["id"] as? String {
-                    self.appDelegate!.user = User(id: (self.appDelegate?.FACEBOOK_UID_PREFIX)!+id, email: email, username: firstName+" "+lastName, imageUrl: imageUrl)
-                    self.checkSocialUserExistance()
-                    self.continueToHome()
+                    let user = User(id: (self.appDelegate?.FACEBOOK_UID_PREFIX)!+id, email: email, username: firstName+" "+lastName, imageUrl: imageUrl)
+                    self.checkSocialUserExistance(user: user)
                 }
                 break;
             }
         }
     }
     
-    func checkSocialUserExistance() {
+    func checkSocialUserExistance(user: User) {
+        UserService.getInstance().checkUserSocial(user: user, completionHandler: { user in
+            self.appDelegate?.user = user
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // change 2 to desired number of seconds
+                self.continueToHome()
+            }
+        })
     }
     
     @IBAction func facebookLogin(_ sender: Any) {
@@ -132,7 +135,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             case .cancelled:
                 break
             case .success( _, _, _):
-                self.fetchProfileFB()
+                self.fetchProfileFB(withAccessToken: AccessToken.current!)
                 break
             }
         }
