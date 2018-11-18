@@ -694,7 +694,7 @@ d2lkdGggPSAxNxAyA
             </objects>
             <point key="canvasLocation" x="4375" y="7"/>
         </scene>
-        <!--Recipe Details View Controller-->
+        <!--Title-->
         <scene sceneID="Jmy-Zu-dX2">
             <objects>
                 <viewController id="oY8-TY-LDq" customClass="RecipeDetailsViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
@@ -1141,7 +1141,7 @@ EDE5OA
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-Ub-ylF" customClass="CosmosView" customModule="Cosmos">
+                                                                <view tag="2" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-Ub-ylF" customClass="CosmosView" customModule="Cosmos">
                                                                     <rect key="frame" x="9" y="154.5" width="95" height="15"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <userDefinedRuntimeAttributes>
@@ -1399,7 +1399,15 @@ EDE5OA
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ocf-ZE-jW6"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="c9Q-D9-Wua">
+                        <barButtonItem key="rightBarButtonItem" id="Km9-sg-LQa">
+                            <connections>
+                                <action selector="favoriteButtonClicked:" destination="oY8-TY-LDq" id="r7f-LD-O9T"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addToFavoriteBarButton" destination="Km9-sg-LQa" id="zSV-fh-87j"/>
                         <outlet property="caloriesValueLabel" destination="msN-3D-JlP" id="HnQ-Jn-Fiz"/>
                         <outlet property="contentView" destination="xBb-62-YZB" id="i0D-3M-w8O"/>
                         <outlet property="experiencesCollectionView" destination="zpr-IB-e6y" id="6QH-zY-unX"/>
@@ -1408,6 +1416,7 @@ EDE5OA
                         <outlet property="ingredientsTableView" destination="e0z-RS-t4U" id="zsE-4x-E6q"/>
                         <outlet property="ingredientsTableViewConstraint" destination="eZD-NL-7mb" id="08d-Cf-L93"/>
                         <outlet property="ingredientsValueLabel" destination="5jm-Qy-uML" id="QaH-Yy-rKq"/>
+                        <outlet property="navigationBar" destination="c9Q-D9-Wua" id="aAO-H0-laT"/>
                         <outlet property="ratingView" destination="Ftk-zP-oyo" id="xJ7-pS-DfR"/>
                         <outlet property="recipeCoverIV" destination="HuM-5a-GOW" id="wUd-ff-KX7"/>
                         <outlet property="recipeDescriptionTextView" destination="Boq-Jr-H9O" id="mLZ-N9-4bi"/>

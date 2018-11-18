@@ -9,6 +9,7 @@
 import UIKit
 import Cosmos
 import Alamofire
+import CoreData
 
 class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -43,6 +44,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     class Recipe: NSObject {
+        var id: Int
         var name: String
         var rating: Float
         var imageUrl: String
@@ -53,7 +55,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         var ingredients: [Ingredient]
         var desc: String
         
-        init(name: String, desc: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [Step], ingredients: [Ingredient]){
+        init(id: Int, name: String, desc: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [Step], ingredients: [Ingredient]){
+            self.id = id
             self.name = name
             self.desc = desc
             self.rating = rating
@@ -95,8 +98,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeOwnerNameLabel: UILabel!
     @IBOutlet weak var recipeOwnerDateLabel: UILabel!
     @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationItem!
     
-    var recipe = Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+    var recipe = Recipe(id: 1, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                     Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -112,7 +117,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         ])
     
     var similarRecipes = [
-        Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+        Recipe(id: 2, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -126,7 +131,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
             ]
         ),
-        Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+        Recipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -140,7 +145,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
             ]
         ),
-        Recipe(name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+        Recipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
             Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
@@ -157,6 +162,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     ]
     
     var experiences = [Experience]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var favorite: NSManagedObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,6 +178,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         stepsTableView.estimatedRowHeight = 140
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        checkIfFavorite()
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -443,6 +451,64 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBAction func visitProfilClicked(_ sender: Any) {
         print("Go to users profile")
+    }
+    
+    //Favorite
+    
+    @IBAction func favoriteButtonClicked(_ sender: Any) {
+        if favorite != nil {
+            removeFromFavorite()
+        }else{
+            addToFavorite()
+        }
+    }
+    
+    func checkIfFavorite() {
+        let persistance = appDelegate.persistentContainer
+        let context = persistance.viewContext
+        
+        let request = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
+        request.predicate = NSPredicate(format: "recipeId == %d AND userId == %@", self.recipe.id, (appDelegate.user?.id)!)
+        do {
+            let result = try context.fetch(request)
+            if(result.count != 0){
+                addToFavoriteBarButton.image = UIImage(named: "favorite")
+                favorite = result[0]
+            }else{
+                addToFavoriteBarButton.image = UIImage(named: "unfavorite")
+                favorite = nil
+            }
+        } catch  {
+            print("error")
+        }
+    }
+    
+    func addToFavorite() {
+        let persistantContainer = appDelegate.persistentContainer
+        let managedContext = persistantContainer.viewContext
+        let favoriteDesc = NSEntityDescription.entity(forEntityName: "Favorite", in: managedContext)
+        let favorite = NSManagedObject(entity: favoriteDesc!, insertInto: managedContext)
+        favorite.setValue(self.recipe.id, forKey: "recipeId")
+        favorite.setValue((self.appDelegate.user?.id)!, forKey: "userId")
+        favorite.setValue(Date(), forKey: "date")
+        do{
+            try managedContext.save()
+            checkIfFavorite()
+        } catch {
+            UIUtils.showErrorAlert(title: "Error", message: "An error has occured while trying to add this recipe to your favorite list, please try again.", viewController: self)
+        }
+    }
+    
+    func removeFromFavorite() {
+        let persistanceContainer = appDelegate.persistentContainer
+        let managedContext = persistanceContainer.viewContext
+        managedContext.delete(favorite!)
+        do{
+            try managedContext.save()
+            checkIfFavorite()
+        }catch{
+            print("Error")
+        }
     }
     /*
     // MARK: - Navigation

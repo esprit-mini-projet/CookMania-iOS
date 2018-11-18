@@ -39,6 +39,7 @@
 		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
 		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
+		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				26B9E89C2194579F00E326F3 /* VKCheckBox.swift */,
 				26F92254219CB07200E55B09 /* Constants.swift */,
 				C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */,
+				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */,
 				C32B1C832194E21B00153DC9 /* EditProfileViewController.swift in Sources */,
 				2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */,
 				C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */,

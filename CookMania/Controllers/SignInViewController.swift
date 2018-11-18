@@ -99,7 +99,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         request.start { respons, result in
             switch result {
             case .failed(_):
-                self.showErrorAlert(title: "Error", message: "Something went wrong, please try again.")
+                UIUtils.showErrorAlert(viewController: self)
                 break;
             case .success(let response):
                 let dictionary = response.dictionaryValue
@@ -129,8 +129,8 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         let loginManager = LoginManager()
         loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { loginResult in
             switch loginResult {
-            case .failed(let error):
-                self.showErrorAlert(title: "Sorry", message: "En error hase occured while trying to log you in, please try again.")
+            case .failed( _):
+                UIUtils.showErrorAlert(title: "Sorry", message: "An error has occured while trying to log you in, please try again.", viewController: self)
                 break
             case .cancelled:
                 break
@@ -155,14 +155,6 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             }
         }
         return image!
-    }
-    
-    func showErrorAlert(title: String, message: String) -> Void {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func googleLogin(_ sender: Any) {
