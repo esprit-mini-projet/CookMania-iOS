@@ -10,6 +10,7 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 import GoogleSignIn
+import SwiftKeychainWrapper
 
 class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
@@ -23,11 +24,15 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
     //Temp func call
-    func logoutSocial() {AccessToken.current = nil
+    func logoutAll() {AccessToken.current = nil
         UserProfile.current = nil
         let loginManager = LoginManager()
         loginManager.logOut()
         GIDSignIn.sharedInstance()?.signOut()
+        
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
     }
     
     override func viewDidLoad() {
@@ -44,10 +49,12 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     override func viewDidAppear(_ animated: Bool) {
         //Temp func call
-        logoutSocial()
+        //logoutAll()
         
         //Facebook User is already connected
-        if AccessToken.current != nil {
+        if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
+            SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
+        }else if AccessToken.current != nil {
             continueToHome()
         }else{
             //Google User is aleady connected
@@ -120,8 +127,6 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { loginResult in
             switch loginResult {
             case .failed(let error):
-                print("####################### ERROR #######################")
-                print(error)
                 self.showErrorAlert(title: "Sorry", message: "En error hase occured while trying to log you in, please try again.")
                 break
             case .cancelled:
@@ -163,11 +168,22 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     @IBAction func loginButtonClicked(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            UserService.getInstance().logUserIn(email: email, password: password, completionHandler: { user in
-                self.appDelegate?.user = user
-                self.continueToHome()
-            })
+            SignIn(email: email, password: password)
         }
+    }
+    
+    func SignIn(email: String, password: String) {
+        UserService.getInstance().logUserIn(email: email, password: password, completionHandler: { user in
+            self.appDelegate?.user = user
+            if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
+                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+            }
+            if KeychainWrapper.standard.set(user.id!, forKey: "cookmania_user_id") && KeychainWrapper.standard.set(user.email!, forKey: "cookmania_user_email") && KeychainWrapper.standard.set(user.password!, forKey: "cookmania_user_password"){
+                self.continueToHome()
+            }
+        })
     }
 }
 

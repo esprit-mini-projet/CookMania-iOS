@@ -96,9 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				2608CEBC218D0D8E008A706E /* CookMania */,
-				2608CEBB218D0D8E008A706E /* Products */,
-				E6563888AFB82B4F0AF68518 /* Pods */,
 				996BFF27D5550BF06B51A18A /* Frameworks */,
+				E6563888AFB82B4F0AF68518 /* Pods */,
+				2608CEBB218D0D8E008A706E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,6 +298,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -315,6 +316,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
