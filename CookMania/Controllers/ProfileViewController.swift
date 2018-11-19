@@ -57,6 +57,12 @@ class ProfileViewController: UIViewController {
         favoriteViewContainer.alpha = !firstSemgmentIsVisible ? 1 : 0
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "myRecipesContainerSegue" {
+            (segue.destination as! MyRecipesViewController).myRecipeViewContainer = self.myRecipeViewContainer
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -12,11 +12,13 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var myRecipesTableView: UITableView!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let dateFormatter = DateFormatter()
     var recipes: [Recipe] = []
-    
+    var myRecipeViewContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateFormatter.dateFormat = "dd MMM, yyyy"
         UserService.getInstance().getUsersRecipes(user: appDelegate.user!, completionHandler: { recipes in
             self.recipes = recipes
             self.myRecipesTableView.reloadData()
@@ -30,12 +32,30 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myRecipeCell")
         let contentView = cell?.viewWithTag(0)
-        let label = contentView?.viewWithTag(1) as! UILabel
+        let recipeCoverImageView = contentView?.viewWithTag(1) as! UIImageView
+        let recipeNameLabel = contentView?.viewWithTag(2) as! UILabel
+        let recipeDateLabel = contentView?.viewWithTag(3) as! UILabel
+        let recipeFavoriteLabel = contentView?.viewWithTag(4) as! UILabel
+        let recipeViewsLabel = contentView?.viewWithTag(5) as! UILabel
+        let recipeRatingLabel = contentView?.viewWithTag(6) as! UILabel
         
         let recipe = self.recipes[indexPath.item]
         
-        label.text = recipe.name!
+        
+        recipeCoverImageView.af_setImage(withURL: URL(string: recipe.imageUrl!)!)
+        recipeNameLabel.text = recipe.name!
+        recipeDateLabel.text = dateFormatter.string(from: Date())
+        recipeViewsLabel.text = "100"
+        recipeRatingLabel.text = "3.5"
+        recipeFavoriteLabel.text = "20"
+        
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+        }
     }
     /*
     // MARK: - Navigation
