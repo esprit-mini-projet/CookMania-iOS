@@ -32,17 +32,24 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myRecipeCell")
         let contentView = cell?.viewWithTag(0)
-        let recipeCoverImageView = contentView?.viewWithTag(1) as! UIImageView
-        let recipeNameLabel = contentView?.viewWithTag(2) as! UILabel
-        let recipeDateLabel = contentView?.viewWithTag(3) as! UILabel
-        let recipeFavoriteLabel = contentView?.viewWithTag(4) as! UILabel
-        let recipeViewsLabel = contentView?.viewWithTag(5) as! UILabel
-        let recipeRatingLabel = contentView?.viewWithTag(6) as! UILabel
+        let shadowView = contentView?.viewWithTag(1) as! UIView
+        let cardView = contentView?.viewWithTag(2) as! UIView
+        let recipeCoverImageView = cardView.viewWithTag(3) as! UIImageView
+        let recipeNameLabel = cardView.viewWithTag(4) as! UILabel
+        let recipeDateLabel = cardView.viewWithTag(5) as! UILabel
+        let recipeFavoriteLabel = cardView.viewWithTag(6) as! UILabel
+        let recipeViewsLabel = cardView.viewWithTag(7) as! UILabel
+        let recipeRatingLabel = cardView.viewWithTag(8) as! UILabel
         
         let recipe = self.recipes[indexPath.item]
         
+        shadowView.layer.cornerRadius = 10
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        shadowView.layer.shadowOpacity = 0.7
         
-        recipeCoverImageView.af_setImage(withURL: URL(string: recipe.imageUrl!)!)
+        
+        recipeCoverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!)
         recipeNameLabel.text = recipe.name!
         recipeDateLabel.text = dateFormatter.string(from: Date())
         recipeViewsLabel.text = "100"

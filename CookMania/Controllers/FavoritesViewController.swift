@@ -10,23 +10,30 @@ import UIKit
 import CoreData
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var favoriteRecipesTableView: UITableView!
+    @IBOutlet weak var favoriteTableView: UITableView!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var favoriteRecipes: [NSManagedObject] = []
+    var recipes: [Recipe] = []
+    let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        dateFormatter.dateFormat = "dd MMM, yyyy"
         let persistance = appDelegate.persistentContainer
         let context = persistance.viewContext
         
         let request = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
         request.predicate = NSPredicate(format: "userId == %@", (appDelegate.user?.id)!)
         do {
-            let result = try context.fetch(request)
-            favoriteRecipes = result
+            let results = try context.fetch(request)
+            for result in results {
+                let recipeId = result.value(forKey: "recipeId") as! Int
+            }
+            //Need to be recplaced with getting recipe based on returned id
+            UserService.getInstance().getUsersRecipes(user: appDelegate.user!, completionHandler: { recipes in
+                self.recipes = recipes
+                self.favoriteTableView.reloadData()
+            })
         } catch  {
             print("error")
         }
@@ -34,16 +41,43 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteRecipes.count
+        return recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = favoriteRecipesTableView.dequeueReusableCell(withIdentifier: "favoriteRecipeViewCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myRecipeCell")
         let contentView = cell?.viewWithTag(0)
-        let nameLabel = contentView?.viewWithTag(1) as! UILabel
+        let shadowView = contentView?.viewWithTag(1) as! UIView
+        let cardView = contentView?.viewWithTag(2) as! UIView
+        let recipeCoverImageView = cardView.viewWithTag(3) as! UIImageView
+        let recipeNameLabel = cardView.viewWithTag(4) as! UILabel
+        let recipeDateLabel = cardView.viewWithTag(5) as! UILabel
+        let recipeFavoriteLabel = cardView.viewWithTag(6) as! UILabel
+        let recipeViewsLabel = cardView.viewWithTag(7) as! UILabel
+        let recipeRatingLabel = cardView.viewWithTag(8) as! UILabel
         
-        nameLabel.text = String(favoriteRecipes[indexPath.item].value(forKey: "recipeId") as! Int)
+        let recipe = self.recipes[indexPath.item]
+        
+        shadowView.layer.cornerRadius = 10
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        shadowView.layer.shadowOpacity = 0.7
+        
+        
+        recipeCoverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!)
+        recipeNameLabel.text = recipe.name!
+        recipeDateLabel.text = dateFormatter.string(from: Date())
+        recipeViewsLabel.text = "100"
+        recipeRatingLabel.text = "3.5"
+        recipeFavoriteLabel.text = "20"
+        
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            
+        }
     }
     /*
     // MARK: - Navigation
