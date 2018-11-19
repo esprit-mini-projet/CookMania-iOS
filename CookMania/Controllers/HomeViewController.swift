@@ -17,9 +17,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var healthyCV: UICollectionView!
     @IBOutlet weak var cheapCV: UICollectionView!
     
+    @IBOutlet weak var suggestionsTitle: UILabel!
+    @IBOutlet weak var suggestion1: UIImageView!
+    @IBOutlet weak var suggestion2: UIImageView!
+    @IBOutlet weak var suggestion3: UIImageView!
+    @IBOutlet weak var suggestion4: UIImageView!
+    
     var topRated = [Recipe]()
     var cheap = [Recipe]()
     var healthy = [Recipe]()
+    var suggestions = [Recipe]()
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -69,6 +76,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        RecipeService.getInstance().getRecipeSuggestions { (title: String, recipes: [Recipe]) in
+            self.suggestions = recipes
+            self.suggestionsTitle.text = title
+            self.suggestion1.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipes[0].imageUrl!)!)
+            self.suggestion2.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipes[1].imageUrl!)!)
+            self.suggestion3.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipes[2].imageUrl!)!)
+            self.suggestion4.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipes[3].imageUrl!)!)
+        }
         RecipeService.getInstance().getTopRecipes { (recipes: [Recipe]) in
             self.topRated = recipes
             self.topRatedCV.reloadData()

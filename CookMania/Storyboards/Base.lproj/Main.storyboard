@@ -197,7 +197,7 @@ d2lkdGggPSAxNxAyA
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpG-nt-Qxk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpG-nt-Qxk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="1137"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YG-iv-ZYt" userLabel="ContentView">
@@ -206,23 +206,23 @@ d2lkdGggPSAxNxAyA
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWq-Aw-BMI" userLabel="SuggestionView">
                                                 <rect key="frame" x="8" y="8" width="359" height="400"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cacciatore" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-8a-Prh">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-8a-Prh" userLabel="1">
                                                         <rect key="frame" x="0.0" y="0.0" width="176" height="196"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caponata" translatesAutoresizingMaskIntoConstraints="NO" id="9HS-WN-O3Y">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9HS-WN-O3Y" userLabel="2">
                                                         <rect key="frame" x="183" y="0.0" width="176" height="196"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="melanzana" translatesAutoresizingMaskIntoConstraints="NO" id="3a7-MK-vem">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3a7-MK-vem" userLabel="3">
                                                         <rect key="frame" x="0.0" y="204" width="176" height="196"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spaghetti" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-k2-JHW">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-k2-JHW" userLabel="4">
                                                         <rect key="frame" x="183" y="204" width="176" height="196"/>
                                                     </imageView>
-                                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mU7-MX-Q2J" customClass="GradientViewSecond" customModule="CookMania" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="252" width="359" height="148"/>
+                                                    <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mU7-MX-Q2J" customClass="GradientViewSecond" customModule="CookMania" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="287" width="359" height="113"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="148" id="yjD-sc-sOw"/>
+                                                            <constraint firstAttribute="height" constant="113" id="yjD-sc-sOw"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="topColor">
@@ -246,7 +246,7 @@ d2lkdGggPSAxNxAyA
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Four Italian Lunches That Will Make Your Day" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLy-Yf-4Wf">
-                                                        <rect key="frame" x="8" y="289" width="343" height="91"/>
+                                                        <rect key="frame" x="8" y="309" width="343" height="91"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="91" id="g2w-BX-fn9"/>
                                                         </constraints>
@@ -257,7 +257,7 @@ d2lkdGggPSAxNxAyA
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="mU7-MX-Q2J" firstAttribute="leading" secondItem="cWq-Aw-BMI" secondAttribute="leading" id="5XA-88-oGN"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mU7-MX-Q2J" secondAttribute="bottom" id="0nr-ow-Cd7"/>
                                                     <constraint firstItem="BLy-Yf-4Wf" firstAttribute="leading" secondItem="cWq-Aw-BMI" secondAttribute="leading" constant="8" id="5uB-y6-bwx"/>
                                                     <constraint firstItem="OMh-k2-JHW" firstAttribute="height" secondItem="cWq-Aw-BMI" secondAttribute="height" multiplier="0.49" id="6P6-0t-j3T"/>
                                                     <constraint firstItem="9HS-WN-O3Y" firstAttribute="height" secondItem="cWq-Aw-BMI" secondAttribute="height" multiplier="0.49" id="AJi-ZG-9Jg"/>
@@ -266,19 +266,19 @@ d2lkdGggPSAxNxAyA
                                                     <constraint firstAttribute="trailing" secondItem="9HS-WN-O3Y" secondAttribute="trailing" id="Clz-0m-Ozq"/>
                                                     <constraint firstItem="OMh-k2-JHW" firstAttribute="width" secondItem="cWq-Aw-BMI" secondAttribute="width" multiplier="0.49" id="Eej-Vk-ufu"/>
                                                     <constraint firstAttribute="height" constant="400" id="KSF-LS-GSY"/>
-                                                    <constraint firstAttribute="trailing" secondItem="mU7-MX-Q2J" secondAttribute="trailing" id="PKx-DO-gTB"/>
+                                                    <constraint firstItem="mU7-MX-Q2J" firstAttribute="leading" secondItem="cWq-Aw-BMI" secondAttribute="leading" id="L2F-ee-pDC"/>
                                                     <constraint firstItem="dPR-8a-Prh" firstAttribute="width" secondItem="cWq-Aw-BMI" secondAttribute="width" multiplier="0.49" id="SbV-sR-zFk"/>
                                                     <constraint firstAttribute="bottom" secondItem="3a7-MK-vem" secondAttribute="bottom" id="W47-wA-rHq"/>
-                                                    <constraint firstAttribute="bottom" secondItem="BLy-Yf-4Wf" secondAttribute="bottom" constant="20" id="WWY-S3-uKR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="BLy-Yf-4Wf" secondAttribute="bottom" id="WWY-S3-uKR"/>
                                                     <constraint firstItem="dPR-8a-Prh" firstAttribute="leading" secondItem="cWq-Aw-BMI" secondAttribute="leading" id="eGM-R8-t85"/>
                                                     <constraint firstItem="9HS-WN-O3Y" firstAttribute="top" secondItem="cWq-Aw-BMI" secondAttribute="top" id="ibI-Ww-HFP"/>
                                                     <constraint firstItem="3a7-MK-vem" firstAttribute="height" secondItem="cWq-Aw-BMI" secondAttribute="height" multiplier="0.49" id="lgZ-Xh-yLa"/>
                                                     <constraint firstAttribute="trailing" secondItem="OMh-k2-JHW" secondAttribute="trailing" id="nYP-Oc-RHZ"/>
-                                                    <constraint firstAttribute="bottom" secondItem="mU7-MX-Q2J" secondAttribute="bottom" id="nlR-bV-OkD"/>
                                                     <constraint firstAttribute="bottom" secondItem="OMh-k2-JHW" secondAttribute="bottom" id="okQ-tN-uAS"/>
                                                     <constraint firstItem="3a7-MK-vem" firstAttribute="leading" secondItem="cWq-Aw-BMI" secondAttribute="leading" id="otU-bW-ZQV"/>
                                                     <constraint firstItem="dPR-8a-Prh" firstAttribute="height" secondItem="cWq-Aw-BMI" secondAttribute="height" multiplier="0.49" id="ouL-Mb-RzS"/>
                                                     <constraint firstItem="dPR-8a-Prh" firstAttribute="top" secondItem="cWq-Aw-BMI" secondAttribute="top" id="teU-ya-8Sp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mU7-MX-Q2J" secondAttribute="trailing" id="ySh-1F-r2X"/>
                                                     <constraint firstItem="9HS-WN-O3Y" firstAttribute="width" secondItem="cWq-Aw-BMI" secondAttribute="width" multiplier="0.49" id="ykY-e8-LxN"/>
                                                 </constraints>
                                             </view>
@@ -316,7 +316,7 @@ d2lkdGggPSAxNxAyA
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cacciatore" translatesAutoresizingMaskIntoConstraints="NO" id="os0-yZ-VBn">
+                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="os0-yZ-VBn">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="135"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veggie Burger Sliders" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oio-oj-ViQ">
@@ -379,7 +379,7 @@ d2lkdGggPSAxNxAyA
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cacciatore" translatesAutoresizingMaskIntoConstraints="NO" id="1qG-iE-g8a">
+                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1qG-iE-g8a">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="135"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veggie Burger Sliders" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKS-BQ-WkI">
@@ -442,7 +442,7 @@ d2lkdGggPSAxNxAyA
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cacciatore" translatesAutoresizingMaskIntoConstraints="NO" id="CPC-Wn-yCM">
+                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CPC-Wn-yCM">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="135"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veggie Burger Sliders" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0BR-K7-Add">
@@ -535,6 +535,11 @@ d2lkdGggPSAxNxAyA
                     <connections>
                         <outlet property="cheapCV" destination="b3k-hA-b5O" id="83F-YF-yfK"/>
                         <outlet property="healthyCV" destination="zc4-hO-ZG1" id="EeD-9v-n9v"/>
+                        <outlet property="suggestion1" destination="dPR-8a-Prh" id="Y9f-B3-jKa"/>
+                        <outlet property="suggestion2" destination="9HS-WN-O3Y" id="qdh-P6-MbP"/>
+                        <outlet property="suggestion3" destination="3a7-MK-vem" id="tYk-QZ-Usb"/>
+                        <outlet property="suggestion4" destination="OMh-k2-JHW" id="ffi-84-vQ8"/>
+                        <outlet property="suggestionsTitle" destination="BLy-Yf-4Wf" id="2jy-W9-Ysx"/>
                         <outlet property="topRatedCV" destination="xmV-UH-ANC" id="BML-qR-2t1"/>
                         <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="DtB-Bu-ib5"/>
                         <segue destination="oY8-TY-LDq" kind="show" identifier="toRecipeDetails" id="kdF-uh-brg"/>

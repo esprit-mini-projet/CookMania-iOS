@@ -42,6 +42,7 @@ PODS:
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
   - ObjectMapper (3.3.0)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - FacebookLogin
   - GoogleSignIn
   - ObjectMapper
+  - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -66,6 +68,7 @@ SPEC REPOS:
     - GTMOAuth2
     - GTMSessionFetcher
     - ObjectMapper
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -81,7 +84,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: b15ca644b47e547c84e34f9aff67d25182d082b1
+PODFILE CHECKSUM: 7c2ec0f2b99fb769792b95ab8eb15f21a2902a39
 
 COCOAPODS: 1.5.3

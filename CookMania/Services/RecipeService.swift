@@ -9,6 +9,7 @@
 import Foundation
 import ObjectMapper
 import Alamofire
+import SwiftyJSON
 
 public class RecipeService: NSObject{
     private let ROUTE = "/recipes"
@@ -57,6 +58,16 @@ public class RecipeService: NSObject{
             .responseString(completionHandler: { (response: DataResponse<String>) in
                 let recipes = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
                 completionHandler(recipes)
+            })
+    }
+    
+    func getRecipeSuggestions(completionHandler: @escaping (_ title: String, _ recipes: [Recipe]) -> ()){
+        Alamofire.request(buildURL(postfix: "suggestions"))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let json = JSON(parseJSON: response.result.value!)
+                let title = json["title"].stringValue
+                let recipes = Mapper<Recipe>().mapArray(JSONString: json["recipes"].rawString()!)
+                completionHandler(title, recipes!)
             })
     }
 }
