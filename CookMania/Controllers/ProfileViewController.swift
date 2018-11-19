@@ -20,10 +20,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var myRecipeViewContainer: UIView!
     @IBOutlet weak var favoriteViewContainer: UIView!
     @IBOutlet weak var profileSegmentedController: UISegmentedControl!
+    @IBOutlet weak var followerViewContainer: UIView!
+    @IBOutlet weak var segmentedController: UISegmentedControl!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatter = DateFormatter()
-    var firstSemgmentIsVisible = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,8 @@ class ProfileViewController: UIViewController {
         profilePhotoShadowView.layer.shadowOpacity = 0.8
         
         dateFormatter.dateFormat = "dd MMM, yyyy"
+        
+        //segmentedController.removeSegment(at: 1, animated: false)
         
         populateFields()
     }
@@ -52,9 +55,24 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func segmentDidChange(_ sender: Any) {
-        firstSemgmentIsVisible = !firstSemgmentIsVisible
-        myRecipeViewContainer.alpha = firstSemgmentIsVisible ? 1 : 0
-        favoriteViewContainer.alpha = !firstSemgmentIsVisible ? 1 : 0
+        switch segmentedController.selectedSegmentIndex {
+        case 0:
+            myRecipeViewContainer.alpha = 1
+            favoriteViewContainer.alpha = 0
+            followerViewContainer.alpha = 0
+            break
+        case 1:
+            myRecipeViewContainer.alpha = 0
+            favoriteViewContainer.alpha = 1
+            followerViewContainer.alpha = 0
+            break
+        case 2:
+            myRecipeViewContainer.alpha = 0
+            favoriteViewContainer.alpha = 0
+            followerViewContainer.alpha = 1
+            break
+        default: break
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

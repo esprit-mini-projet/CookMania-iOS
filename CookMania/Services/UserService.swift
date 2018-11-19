@@ -70,4 +70,18 @@ class UserService: NSObject {
             }
         })
     }
+    
+    func getUserFollowers(usre: User, completionHandler: @escaping (_ followers: [Following]) -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "followers/"+String(usre.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                let followers: [Following] = Mapper<Following>().mapArray(JSONString: response.result.value!)!
+                completionHandler(followers)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
 }

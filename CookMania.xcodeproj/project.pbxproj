@@ -41,6 +41,8 @@
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
 		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
+		C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */; };
+		C3FE11F021A35298007D5F16 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11EF21A35298007D5F16 /* Following.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
 		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
+		C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
+		C3FE11EF21A35298007D5F16 /* Following.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
 				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
+				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				260917CC219C70AC00C713C6 /* Step.swift */,
 				260917CE219C716900C713C6 /* Ingredient.swift */,
 				C36AC733219E08D20070CDE8 /* Experience.swift */,
+				C3FE11EF21A35298007D5F16 /* Following.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -404,8 +410,10 @@
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
 				C36AC734219E08D20070CDE8 /* Experience.swift in Sources */,
 				C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */,
+				C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */,
 				260917CD219C70AC00C713C6 /* Step.swift in Sources */,
 				C3474AA521A0BE4D005EADBC /* ServiceUtils.swift in Sources */,
+				C3FE11F021A35298007D5F16 /* Following.swift in Sources */,
 				C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */,
 				26101082218FA85900E8344F /* Recipe.swift in Sources */,
 				C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */,

@@ -53,7 +53,6 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
                 self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
             }else if AccessToken.current != nil {
-                print("hhh")
                 self.fetchProfileFB(withAccessToken: AccessToken.current!)
             }else if((GIDSignIn.sharedInstance()?.hasAuthInKeychain())!){
                 //Google User is aleady connected
@@ -68,6 +67,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             let user = User(id: (self.appDelegate?.GOOGLE_UID_PREFIX)!+user.userID, email: user.profile.email, username: user.profile.name, imageUrl: (user.profile.imageURL(withDimension: 200)?.absoluteString)!)
             checkSocialUserExistance(user: user)
         } else {
+            UIUtils.showErrorAlert(viewController: self)
             print("\(error.localizedDescription)")
         }
     }
