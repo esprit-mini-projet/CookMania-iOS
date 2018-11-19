@@ -30,13 +30,15 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        GIDSignIn.sharedInstance().clientID = CLIEND_ID
+        performSegue(withIdentifier: "toHome", sender: nil)
+        
+        /*GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
         
         initLoginButton()
         initFacebookButton()
-        initGoogleButton()
+        initGoogleButton()*/
     }
     
     override func viewDidAppear(_ animated: Bool) {
