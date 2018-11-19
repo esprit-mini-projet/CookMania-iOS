@@ -14,18 +14,25 @@ import ObjectMapper
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var topRatedCV: UICollectionView!
-    @IBOutlet weak var fastCheapCV: UICollectionView!
     @IBOutlet weak var healthyCV: UICollectionView!
-    @IBOutlet weak var kidsCV: UICollectionView!
+    @IBOutlet weak var cheapCV: UICollectionView!
     
     var topRated = [Recipe]()
-    var fastCheap = [Recipe]()
+    var cheap = [Recipe]()
     var healthy = [Recipe]()
-    var kids = [Recipe]()
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return topRated.count
+        switch collectionView {
+        case self.topRatedCV:
+            return topRated.count
+        case self.healthyCV:
+            return healthy.count
+        case self.cheapCV:
+            return cheap.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -33,10 +40,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let imageView = cell.viewWithTag(1) as! UIImageView
         imageView.layer.cornerRadius = 15
         imageView.layer.masksToBounds = true
-        let url = URL(string: Constants.URL.imagesFolder + topRated[indexPath.row].imageUrl!)!
-        imageView.af_setImage(withURL: url)
         let nameLabel = cell.viewWithTag(2) as! UILabel
-        nameLabel.text = topRated[indexPath.row].name!
+        var url: URL
+        var name: String
+        switch collectionView {
+        case self.topRatedCV:
+            url = URL(string: Constants.URL.imagesFolder + topRated[indexPath.row].imageUrl!)!
+            name = topRated[indexPath.row].name!
+        case self.healthyCV:
+            url = URL(string: Constants.URL.imagesFolder + healthy[indexPath.row].imageUrl!)!
+            name = healthy[indexPath.row].name!
+        case self.cheapCV:
+            url = URL(string: Constants.URL.imagesFolder + cheap[indexPath.row].imageUrl!)!
+            name = cheap[indexPath.row].name!
+        default:
+            return cell
+        }
+        imageView.af_setImage(withURL: url)
+        nameLabel.text = name
         return cell
     }
     
@@ -48,7 +69,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTopRated()
+        RecipeService.getInstance().getTopRecipes { (recipes: [Recipe]) in
+            self.topRated = recipes
+            self.topRatedCV.reloadData()
+        }
+        RecipeService.getInstance().getRecipesByLabel(label: "Healthy") { (recipes: [Recipe]) in
+            self.healthy = recipes
+            self.healthyCV.reloadData()
+        }
+        RecipeService.getInstance().getRecipesByLabel(label: "Cheap") { (recipes: [Recipe]) in
+            self.cheap = recipes
+            self.cheapCV.reloadData()
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -73,13 +105,4 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func fetchTopRated(){
-        Alamofire.request(Constants.URL.topRatedRecipes).responseString(completionHandler: { (response: DataResponse<String>) in
-            self.topRated = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
-            self.topRatedCV.reloadData()
-            self.fastCheapCV.reloadData()
-            self.kidsCV.reloadData()
-            self.healthyCV.reloadData()
-        })
-    }
 }

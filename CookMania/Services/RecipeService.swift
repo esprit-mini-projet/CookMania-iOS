@@ -36,11 +36,27 @@ public class RecipeService: NSObject{
         })
     }
     
-    func getRecipes(recipeId: Int, completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
+    func getRecipes(completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
         Alamofire.request(buildURL(postfix: ""))
             .responseString(completionHandler: { (response: DataResponse<String>) in
                 let recipes = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
                 completionHandler(recipes)
         })
+    }
+    
+    func getTopRecipes(completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
+        Alamofire.request(buildURL(postfix: "top"))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let recipes = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
+                completionHandler(recipes)
+            })
+    }
+    
+    func getRecipesByLabel(label: String, completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
+        Alamofire.request(buildURL(postfix: "label/" + label))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let recipes = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
+                completionHandler(recipes)
+            })
     }
 }
