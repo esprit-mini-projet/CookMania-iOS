@@ -56,4 +56,18 @@ class UserService: NSObject {
             }
         })
     }
+    
+    func getUsersRecipes(user: User, completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "recipes/"+String(user.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                let recipes: [Recipe] = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
+                completionHandler(recipes)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
 }
