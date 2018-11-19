@@ -25,13 +25,16 @@ class ExperienceService: NSObject {
     }
     
     func getRecipeExperience(recipeID: Int, completionHandler: @escaping (_ experience: [Experience]) -> ()){
-        Alamofire.request(buildURL(postfix: "recipe/"+String(recipeID))).responseString(completionHandler: { (response: DataResponse<String>) in
-            let experiences: [Experience] = Mapper<Experience>().mapArray(JSONString: response.result.value!)!
-            completionHandler(experiences)
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "recipe/"+String(recipeID))).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                let experiences: [Experience] = Mapper<Experience>().mapArray(JSONString: response.result.value!)!
+                completionHandler(experiences)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
         })
-    }
-    
-    func buildURL(postfix: String) -> String {
-        return AppDelegate.SERVER_DOMAIN+ROUTE+"/"+postfix
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import Cosmos
 import Alamofire
+import CoreData
 
 class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -30,17 +31,20 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         var name: String
         var desc: String
         var time: Int
+        var imageUrl: String
         var ingredients: [Ingredient]
         
-        init(name: String, desc: String, time: Int, ingredients: [Ingredient]) {
+        init(name: String, desc: String, time: Int,imageUrl: String, ingredients: [Ingredient]) {
             self.name = name
             self.desc = desc
             self.time = time
+            self.imageUrl = imageUrl
             self.ingredients = ingredients
         }
     }
     
     class Recipe: NSObject {
+        var id: Int
         var name: String
         var rating: Float
         var imageUrl: String
@@ -49,9 +53,12 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         var servings: Int
         var steps: [Step]
         var ingredients: [Ingredient]
+        var desc: String
         
-        init(name: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [Step], ingredients: [Ingredient]){
+        init(id: Int, name: String, desc: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [Step], ingredients: [Ingredient]){
+            self.id = id
             self.name = name
+            self.desc = desc
             self.rating = rating
             self.imageUrl = imageUrl
             self.time = time
@@ -75,7 +82,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var stepsLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stepsTableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stepsTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTableViewConstraint: NSLayoutConstraint!
@@ -83,15 +90,26 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var similarRecipiesLabel: UILabel!
     @IBOutlet weak var experiencesCollectionView: UICollectionView!
     @IBOutlet weak var recipeRatingInput: CosmosView!
+    @IBOutlet weak var recipeDescriptionTextView: UITextView!
     
-    var recipe = Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+    @IBOutlet weak var recipeOwnerView: UIView!
+    @IBOutlet weak var recipeOwnerProfileImageView: UIImageView!
+    @IBOutlet weak var recipeOwnerProfileImageShadowView: UIView!
+    @IBOutlet weak var recipeOwnerNameLabel: UILabel!
+    @IBOutlet weak var recipeOwnerDateLabel: UILabel!
+    @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    var recipe = Recipe(id: 1, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                     Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                     Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                     Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: [])
         ], ingredients: [
             Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
             Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -99,42 +117,42 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         ])
     
     var similarRecipes = [
-        Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+        Recipe(id: 2, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
             ], ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
             ]
         ),
-        Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+        Recipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
             ], ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
             ]
         ),
-        Recipe(name: "Melanzana", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, ingredients: [
+        Recipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
+            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
+            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
                 Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
                 ]),
-            Step(name: "Let rest for 4 minutes", desc: "", time: 4, ingredients: [])
+            Step(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
             ], ingredients: [
                 Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
                 Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
@@ -144,6 +162,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     ]
     
     var experiences = [Experience]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var favorite: NSManagedObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,6 +174,20 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
         initView()
+        stepsTableView.rowHeight = UITableView.automaticDimension
+        stepsTableView.estimatedRowHeight = 140
+        
+        stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        checkIfFavorite()
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        stepsTableView.layer.removeAllAnimations()
+        stepsTableViewHeightConstraint.constant = stepsTableView.contentSize.height
+        UIView.animate(withDuration: 0.5) {
+            self.updateViewConstraints()
+            self.loadViewIfNeeded()
+        }
     }
     
     func toAddExperience(rating: Double) {
@@ -171,10 +205,53 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         servingsValueLabel.text = String(recipe.servings)
         timeValueLabel.text = String(recipe.time)
         recipeCoverIV.image = UIImage(named: recipe.imageUrl)
+        recipeDescriptionTextView.text = recipe.desc
         
         ingredientsTableViewConstraint.constant = CGFloat(44 * recipe.ingredients.count)
-        //steps TableView
-        tableViewHeightConstraint.constant = CGFloat(90 * recipe.steps.count)
+        recipeDescriptionTextView.sizeToFit()
+        recipeDescriptionTextView.isScrollEnabled = false
+        
+        recipeOwnerView.layer.cornerRadius = 5
+        recipeOwnerView.layer.masksToBounds = true
+        
+        recipeOwnerProfileImageView.layer.borderWidth = 2
+        recipeOwnerProfileImageView.layer.borderColor = UIColor.white.cgColor
+        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.size.height / 2
+        recipeOwnerProfileImageView.layer.masksToBounds = true
+        recipeOwnerProfileImageView.image = UIImage(named: "melanzana")
+        
+        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageView.frame.size.height / 2
+        recipeOwnerProfileImageShadowView.layer.shadowColor = UIColor.black.cgColor
+        recipeOwnerProfileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        recipeOwnerProfileImageShadowView.layer.shadowOpacity = 1
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapDetected"))
+        recipeOwnerProfileImageView.isUserInteractionEnabled = true
+        recipeOwnerProfileImageView.addGestureRecognizer(singleTap)
+        
+        recipeOwnerNameLabel.text = "Seif Abdennadher"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, yyyy"
+        recipeOwnerDateLabel.text = dateFormatter.string(from: dateFormatter.date(from: "21 Nov, 2018")!)
+        initPosition = recipeOwnerView.center.x*1.1
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tapDetected()
+    }
+    
+    var isExpanded: CGFloat = 1
+    var initPosition: CGFloat?
+    //Action
+    @objc func tapDetected() {
+        UIView.animate(withDuration: 1, animations: {
+            let viewWidth = self.recipeOwnerView.frame.width
+            let imageViewWidth = self.recipeOwnerProfileImageView.frame.width
+            self.recipeOwnerView.center.x = (self.recipeOwnerView.center.x + (viewWidth * self.isExpanded)) - ((imageViewWidth * 2) * self.isExpanded)
+            //self.recipeOwnerView.center.x = self.isExpanded ? self.initPosition!+self.recipeCoverIV.frame.width * 0.38 : self.initPosition!
+            self.isExpanded *= -1
+        })
     }
     
     func initMargin() {
@@ -201,6 +278,24 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if(tableView == stepsTableView && recipe.steps[indexPath.row].time != 0){
+            let timer = timerAction(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [timer])
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+    
+    func timerAction(at indexPath: IndexPath) -> UIContextualAction {
+        //let step = recipe.steps[indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "Set timer") { (action, view, completion) in
+            print("Set timer")
+            completion(true)
+        }
+        action.image = UIImage(named: "timer")
+        action.backgroundColor = UIColor.lightGray
+        return action
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == stepsTableView {
@@ -215,13 +310,39 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if(tableView == stepsTableView){
             let step = recipe.steps[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "stepCell")
-            let contentView = cell?.viewWithTag(0)
-            let margin = contentView!.frame.width * 0.15
-            let nameLabel = contentView?.viewWithTag(1) as! UILabel
-            let descriptionTV = contentView?.viewWithTag(2) as! UITextView
-            contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin/2))
+            let contentView = cell?.viewWithTag(0)?.viewWithTag(1)
+            let shadowView = cell?.viewWithTag(5) as! UIView
+            
+            let nameLabel = contentView?.viewWithTag(2) as! UILabel
+            let descriptionTextView = contentView?.viewWithTag(3) as! UITextView
+            let stepImage = contentView?.viewWithTag(4) as! UIImageView
+            let stepImageShadowView = contentView?.viewWithTag(6) as! UIView
+            
+            //Set Data
             nameLabel.text = step.name
-            descriptionTV.text = step.desc
+            descriptionTextView.text = step.desc
+            stepImage.image = UIImage(named: step.imageUrl)
+            
+            //Init views
+            contentView?.layer.cornerRadius = 10
+            contentView?.layer.masksToBounds = true
+            
+            shadowView.layer.cornerRadius = 10
+            shadowView.layer.shadowColor = UIColor.black.cgColor
+            shadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            shadowView.layer.shadowOpacity = 0.5
+            
+            stepImage.layer.cornerRadius = 10
+            stepImage.layer.masksToBounds = true
+            
+            stepImageShadowView.layer.cornerRadius = 10
+            stepImageShadowView.layer.shadowColor = UIColor.black.cgColor
+            stepImageShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            stepImageShadowView.layer.shadowOpacity = 0.5
+            
+            descriptionTextView.sizeToFit()
+            descriptionTextView.isScrollEnabled = false
+            
             return cell!
         }else{
             let ingredient = recipe.ingredients[indexPath.row]
@@ -271,7 +392,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             return cell
         }else{
             let experience = experiences[indexPath.item]
-            print(experience.description)
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
@@ -282,7 +402,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let dateLabel = contentView?.viewWithTag(6) as! UILabel
             let commentTV = contentView?.viewWithTag(7) as! UITextView
             
-            print(experience)
             //Setting Data
             coverImageView.image = UIImage(named: experience.imageURL!)
             profileImageView.image = UIImage(named: (experience.user?.imageUrl!)!)
@@ -294,6 +413,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             commentTV.text = experience.comment!
             
             let radius = profileImageView.frame.height / 2
+            
+            //ContentView Corner radius
+            contentView?.layer.cornerRadius = 5
+            contentView?.layer.masksToBounds = true
             
             //ProfileImage
             profileImageView.layer.borderWidth = 5
@@ -323,6 +446,69 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     @IBAction func addAllIngredients(_ sender: Any) {
+        print("add all ingredients")
+    }
+    
+    @IBAction func visitProfilClicked(_ sender: Any) {
+        print("Go to users profile")
+    }
+    
+    //Favorite
+    
+    @IBAction func favoriteButtonClicked(_ sender: Any) {
+        if favorite != nil {
+            removeFromFavorite()
+        }else{
+            addToFavorite()
+        }
+    }
+    
+    func checkIfFavorite() {
+        let persistance = appDelegate.persistentContainer
+        let context = persistance.viewContext
+        
+        let request = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
+        request.predicate = NSPredicate(format: "recipeId == %d AND userId == %@", self.recipe.id, (appDelegate.user?.id)!)
+        do {
+            let result = try context.fetch(request)
+            if(result.count != 0){
+                addToFavoriteBarButton.image = UIImage(named: "favorite")
+                favorite = result[0]
+            }else{
+                addToFavoriteBarButton.image = UIImage(named: "unfavorite")
+                favorite = nil
+            }
+        } catch  {
+            print("error")
+        }
+    }
+    
+    func addToFavorite() {
+        let persistantContainer = appDelegate.persistentContainer
+        let managedContext = persistantContainer.viewContext
+        let favoriteDesc = NSEntityDescription.entity(forEntityName: "Favorite", in: managedContext)
+        let favorite = NSManagedObject(entity: favoriteDesc!, insertInto: managedContext)
+        favorite.setValue(self.recipe.id, forKey: "recipeId")
+        favorite.setValue((self.appDelegate.user?.id)!, forKey: "userId")
+        favorite.setValue(Date(), forKey: "date")
+        do{
+            try managedContext.save()
+            checkIfFavorite()
+        } catch {
+            UIUtils.showErrorAlert(title: "Error", message: "An error has occured while trying to add this recipe to your favorite list, please try again.", viewController: self)
+        }
+    }
+    
+    func removeFromFavorite() {
+        let persistanceContainer = appDelegate.persistentContainer
+        let managedContext = persistanceContainer.viewContext
+        managedContext.delete(favorite!)
+        do{
+            try managedContext.save()
+            checkIfFavorite()
+        }catch{
+            print("Error")
+        }
     }
     /*
     // MARK: - Navigation
