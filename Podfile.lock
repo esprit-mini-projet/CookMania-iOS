@@ -41,6 +41,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
+  - iOSDropDown (0.2.6)
   - ObjectMapper (3.3.0)
   - SwiftyJSON (4.2.0)
 
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - Cosmos (~> 17.0)
   - FacebookLogin
   - GoogleSignIn
+  - iOSDropDown
   - ObjectMapper
   - SwiftyJSON
 
@@ -67,6 +69,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMOAuth2
     - GTMSessionFetcher
+    - iOSDropDown
     - ObjectMapper
     - SwiftyJSON
 
@@ -83,9 +86,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  iOSDropDown: 90608a7270234c503260ef13314907b6703b39aa
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 7c2ec0f2b99fb769792b95ab8eb15f21a2902a39
+PODFILE CHECKSUM: e264059fe223d6ab4ab1c8deabbe4ef1a3720390
 
 COCOAPODS: 1.5.3

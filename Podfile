@@ -13,4 +13,5 @@ target 'CookMania' do
   pod 'Cosmos', '~> 17.0'
   pod 'ObjectMapper'
   pod 'SwiftyJSON'
+  pod 'iOSDropDown'
 end

@@ -76,6 +76,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchRecipes()
+        addTapActionToSuggestions()
+    }
+    
+    func addTapActionToSuggestions(){
+        let singleTap = UITapGestureRecognizer(target: self, action: Selector("addRecipe"))
+        self.suggestion1.isUserInteractionEnabled = true
+        self.suggestion1.addGestureRecognizer(singleTap)
+    }
+    
+    func fetchRecipes(){
         RecipeService.getInstance().getRecipeSuggestions { (title: String, recipes: [Recipe]) in
             self.suggestions = recipes
             self.suggestionsTitle.text = title
@@ -106,7 +117,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         performSegue(withIdentifier: "toRecipeList", sender: Constants.URL.topRatedRecipes)
     }
     
-    @IBAction func addRecipe(_ sender: Any) {
+    @objc func addRecipe() {
         performSegue(withIdentifier: "toAddRecipe", sender: nil)
     }
     
