@@ -14,4 +14,5 @@ target 'CookMania' do
   pod 'ObjectMapper'
   pod 'SwiftyJSON'
   pod 'iOSDropDown'
+  pod 'SnapKit', '~> 4.0.0'
 end

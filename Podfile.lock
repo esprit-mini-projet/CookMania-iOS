@@ -43,6 +43,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.2.0)
   - iOSDropDown (0.2.6)
   - ObjectMapper (3.3.0)
+  - SnapKit (4.0.1)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - iOSDropDown
   - ObjectMapper
+  - SnapKit (~> 4.0.0)
   - SwiftyJSON
 
 SPEC REPOS:
@@ -71,6 +73,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - iOSDropDown
     - ObjectMapper
+    - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -88,8 +91,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   iOSDropDown: 90608a7270234c503260ef13314907b6703b39aa
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: e264059fe223d6ab4ab1c8deabbe4ef1a3720390
+PODFILE CHECKSUM: ef967fc9ad78fc75a144407a6fb778dba86e637d
 
 COCOAPODS: 1.5.3
