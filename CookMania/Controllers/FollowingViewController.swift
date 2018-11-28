@@ -20,8 +20,6 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "dd MMM, yyyy"
-        updateTableView()
-        // Do any additional setup after loading the view.
     }
     
     func updateTableView() {

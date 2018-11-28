@@ -480,58 +480,27 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBAction func favoriteButtonClicked(_ sender: Any) {
         if favorite != nil {
-            removeFromFavorite()
+            FavoriteHelper.getInstance().removeFavoriteRecipe(favorite: favorite!, successCompletionHandler: {
+                self.checkIfFavorite()
+            }, errorCompletionHandler: {
+                UIUtils.showErrorAlert(title: "Error", message: "An error has occured while trying to remove this recipe from your favorite list, please try again.", viewController: self)
+            })
         }else{
-            addToFavorite()
+            FavoriteHelper.getInstance().addRecipeToFavorite(userId: (appDelegate.user?.id)!, recipeId: (recipe?.id)!, successCompletionHandler: {
+                self.checkIfFavorite()
+            }, errorCompletionHandler: {
+                UIUtils.showErrorAlert(title: "Error", message: "An error has occured while trying to add this recipe to your favorite list, please try again.", viewController: self)
+            })
         }
     }
     
     func checkIfFavorite() {
-        let persistance = appDelegate.persistentContainer
-        let context = persistance.viewContext
-        
-        let request = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-        request.predicate = NSPredicate(format: "recipeId == %d AND userId == %@", self.recipe!.id!, (appDelegate.user?.id)!)
-        do {
-            let result = try context.fetch(request)
-            if(result.count != 0){
-                addToFavoriteBarButton.image = UIImage(named: "favorite")
-                favorite = result[0]
-            }else{
-                addToFavoriteBarButton.image = UIImage(named: "unfavorite")
-                favorite = nil
-            }
-        } catch  {
-            print("error")
-        }
-    }
-    
-    func addToFavorite() {
-        let persistantContainer = appDelegate.persistentContainer
-        let managedContext = persistantContainer.viewContext
-        let favoriteDesc = NSEntityDescription.entity(forEntityName: "Favorite", in: managedContext)
-        let favorite = NSManagedObject(entity: favoriteDesc!, insertInto: managedContext)
-        favorite.setValue(self.recipe!.id, forKey: "recipeId")
-        favorite.setValue((self.appDelegate.user?.id)!, forKey: "userId")
-        favorite.setValue(Date(), forKey: "date")
-        do{
-            try managedContext.save()
-            checkIfFavorite()
-        } catch {
-            UIUtils.showErrorAlert(title: "Error", message: "An error has occured while trying to add this recipe to your favorite list, please try again.", viewController: self)
-        }
-    }
-    
-    func removeFromFavorite() {
-        let persistanceContainer = appDelegate.persistentContainer
-        let managedContext = persistanceContainer.viewContext
-        managedContext.delete(favorite!)
-        do{
-            try managedContext.save()
-            checkIfFavorite()
-        }catch{
-            print("Error")
-        }
+        FavoriteHelper.getInstance().getFavorite(userId: (appDelegate.user?.id)!, recipeId: (recipe?.id)!, successCompletionHandler: { favorite in
+            self.addToFavoriteBarButton.image = UIImage(named: favorite != nil ? "favorite" : "unfavorite")
+            self.favorite = favorite
+        }, errorCompletionHandler: {
+            UIUtils.showErrorAlert(title: "Error", message: "An error has occured while checking this recipe in your favorite list.", viewController: self)
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

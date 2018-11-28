@@ -19,6 +19,9 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "dd MMM, yyyy"
+    }
+    
+    func updateTableView() {
         UserService.getInstance().getUsersRecipes(user: (profileViewController?.user)!, completionHandler: { recipes in
             self.recipes = recipes
             self.myRecipesTableView.reloadData()
@@ -75,12 +78,38 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if(profileViewController?.user?.id == appDelegate.user?.id){
-            if editingStyle == .delete {
-                
-            }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if(profileViewController?.user?.id == appDelegate.user!.id){
+            let rdeleteRecipeAction = deleteRecipe(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [rdeleteRecipeAction])
         }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+    
+    func deleteRecipe(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
+            let recipe = self.recipes[indexPath.item]
+            let alert = UIAlertController(title: "Confirmation", message: "Do you really want to delete this recipe?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                RecipeService.getInstance().deleteRecipe(recipeId: recipe.id!, sucessCompletionHandler: {
+                    self.updateTableView()
+                    let alertDisapperTimeInSeconds = 2.0
+                    let alert = UIAlertController(title: nil, message: "Recipe deleted.", preferredStyle: .actionSheet)
+                    self.present(alert, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + alertDisapperTimeInSeconds) {
+                        alert.dismiss(animated: true)
+                    }
+                }, errorCompletionHandler: {
+                    UIUtils.showErrorAlert(title: "Error", message: "An error has occured while deleting your recipe, please try again.", viewController: self)
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            completion(true)
+        }
+        action.image = UIImage(named: "delete")
+        action.backgroundColor = UIColor.red
+        return action
     }
     /*
     // MARK: - Navigation

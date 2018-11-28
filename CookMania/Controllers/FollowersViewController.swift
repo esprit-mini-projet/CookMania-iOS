@@ -22,7 +22,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "dd MMM, yyyy"
-        updateTableView()
+        //updateTableView()
         // Do any additional setup after loading the view.
     }
     

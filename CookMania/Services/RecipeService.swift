@@ -70,4 +70,19 @@ public class RecipeService: NSObject{
                 completionHandler(title, recipes!)
             })
     }
+    
+    //Added by me (Seif)
+    func deleteRecipe(recipeId: Int, sucessCompletionHandler: @escaping () -> (), errorCompletionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: String(recipeId)), method: .delete)
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                switch response.result {
+                case .success:
+                    sucessCompletionHandler()
+                    break
+                case .failure( _):
+                    errorCompletionHandler()
+                    break
+                }
+            })
+    }
 }

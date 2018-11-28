@@ -29,6 +29,8 @@ class ProfileViewController: UIViewController {
     
     var followersViewController: FollowersViewController?
     var followingViewController: FollowingViewController?
+    var favoritesViewController: FavoritesViewController?
+    var myRecipesViewController: MyRecipesViewController?
     var user: User?
     
     override func loadView() {
@@ -54,6 +56,13 @@ class ProfileViewController: UIViewController {
         //segmentedController.removeSegment(at: 1, animated: false)
         
         populateFields()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        myRecipesViewController?.updateTableView()
+        favoritesViewController?.updateTableView()
+        followersViewController?.updateTableView()
+        followingViewController?.updateTableView()
     }
     
     func populateFields() {
@@ -96,9 +105,11 @@ class ProfileViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "myRecipesContainerSegue" {
-            (segue.destination as! MyRecipesViewController).profileViewController = self
+            myRecipesViewController = (segue.destination as! MyRecipesViewController)
+            myRecipesViewController!.profileViewController = self
         }else if segue.identifier == "favoritesContainerSegue" {
-            (segue.destination as! FavoritesViewController).profileViewController = self
+            favoritesViewController = (segue.destination as! FavoritesViewController)
+            favoritesViewController!.profileViewController = self
         }else if segue.identifier == "followingContainerSegue" {
             followingViewController = (segue.destination as! FollowingViewController)
             followingViewController!.profileViewController = self

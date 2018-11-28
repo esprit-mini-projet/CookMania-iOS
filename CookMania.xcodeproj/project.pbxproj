@@ -27,6 +27,7 @@
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
 		C324D9BD21AF1C9300D9C5E8 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService.swift */; };
+		C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */; };
 		C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */; };
 		C32B1C7D2194DF2600153DC9 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */; };
 		C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */; };
@@ -72,6 +73,7 @@
 		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
 		C324D9BC21AF1C9300D9C5E8 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
+		C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
 		C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
@@ -125,12 +127,13 @@
 		2608CEBC218D0D8E008A706E /* CookMania */ = {
 			isa = PBXGroup;
 			children = (
+				2608CECC218D0D9B008A706E /* Info.plist */,
 				2608CEBD218D0D8E008A706E /* AppDelegate.swift */,
 				2608CEC7218D0D9B008A706E /* Assets.xcassets */,
 				C32B1C762194D9C600153DC9 /* Controllers */,
 				2608CEC4218D0D8E008A706E /* CookMania.xcdatamodeld */,
 				C32B1C772194D9CD00153DC9 /* Entities */,
-				2608CECC218D0D9B008A706E /* Info.plist */,
+				C324D9BF21AF38E600D9C5E8 /* Helpers */,
 				C36AC735219E0CD00070CDE8 /* Services */,
 				C32B1C792194D9F400153DC9 /* Storyboards */,
 				C32B1C782194D9DF00153DC9 /* Utils */,
@@ -144,6 +147,14 @@
 				747431A0824657B3C9112F01 /* Pods_CookMania.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C324D9BF21AF38E600D9C5E8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		C32B1C762194D9C600153DC9 /* Controllers */ = {
@@ -409,6 +420,7 @@
 				C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */,
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
+				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,

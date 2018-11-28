@@ -20,24 +20,13 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "dd MMM, yyyy"
-        let persistance = appDelegate.persistentContainer
-        let context = persistance.viewContext
-        
-        let request = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-        request.predicate = NSPredicate(format: "userId == %@", ((profileViewController?.user)!.id)!)
-        do {
-            let results = try context.fetch(request)
-            for result in results {
-                let recipeId = result.value(forKey: "recipeId") as! Int
-            }
-            //Need to be recplaced with getting recipe based on returned id
-            UserService.getInstance().getUsersRecipes(user: (profileViewController?.user)!, completionHandler: { recipes in
-                self.recipes = recipes
-                self.favoriteTableView.reloadData()
-            })
-        } catch  {
-            print("error")
-        }
+    }
+    
+    func updateTableView() {
+        FavoriteHelper.getInstance().getFavoriteRecipes(userId: (profileViewController?.user?.id)!, completionHandler: { recTab in
+            self.recipes = recTab
+            self.favoriteTableView.reloadData()
+        })
     }
     
 
@@ -75,13 +64,60 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell!
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if(profileViewController?.user?.id == appDelegate.user!.id){
-            if editingStyle == .delete{
-                
-            }
+            let removeFavoriteAction = removeFavorite(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [removeFavoriteAction])
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+    
+    func removeFavorite(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
+            let recipe = self.recipes[indexPath.item]
+            let alert = UIAlertController(title: "Confirmation", message: "Do you really want to remove this recipe from your favorite list?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                FavoriteHelper.getInstance().getFavorite(userId: (self.appDelegate.user?.id)!, recipeId: recipe.id!, successCompletionHandler: { favorite in
+                    FavoriteHelper.getInstance().removeFavoriteRecipe(favorite: favorite!, successCompletionHandler: {
+                        self.updateTableView()
+                        let alertDisapperTimeInSeconds = 2.0
+                        let alert = UIAlertController(title: nil, message: "Recipe removed from your favorite list.", preferredStyle: .actionSheet)
+                        self.present(alert, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + alertDisapperTimeInSeconds) {
+                            alert.dismiss(animated: true)
+                        }
+                    }, errorCompletionHandler: {
+                        UIUtils.showErrorAlert(title: "Error", message: "An error has occured while removing revipe from your favorite list, please try again.", viewController: self)
+                    })
+                }, errorCompletionHandler: {
+                    UIUtils.showErrorAlert(title: "Error", message: "An error has occured while removing revipe from your favorite list, please try again.", viewController: self)
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            completion(true)
+        }
+        action.image = UIImage(named: "remove-favorite")
+        action.backgroundColor = UIColor.red
+        return action
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recipe = recipes[indexPath.item]
+        RecipeService.getInstance().getRecipe(recipeId: recipe.id!, completionHandler: { rec in
+            self.performSegue(withIdentifier: "toDetails", sender: rec)
+        })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetails" {
+            let destination = segue.destination as! RecipeDetailsViewController
+            let recipe = sender as! Recipe
+            
+            destination.recipe = recipe
         }
     }
+    
     /*
     // MARK: - Navigation
 
