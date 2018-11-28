@@ -21,10 +21,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var favoriteViewContainer: UIView!
     @IBOutlet weak var profileSegmentedController: UISegmentedControl!
     @IBOutlet weak var followerViewContainer: UIView!
+    @IBOutlet weak var followingViewContainer: UIView!
     @IBOutlet weak var segmentedController: UISegmentedControl!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatter = DateFormatter()
+    
+    var followersViewController: FollowersViewController?
+    var followingViewController: FollowingViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,16 +64,25 @@ class ProfileViewController: UIViewController {
             myRecipeViewContainer.alpha = 1
             favoriteViewContainer.alpha = 0
             followerViewContainer.alpha = 0
+            followingViewContainer.alpha = 0
             break
         case 1:
             myRecipeViewContainer.alpha = 0
             favoriteViewContainer.alpha = 1
             followerViewContainer.alpha = 0
+            followingViewContainer.alpha = 0
             break
         case 2:
             myRecipeViewContainer.alpha = 0
             favoriteViewContainer.alpha = 0
             followerViewContainer.alpha = 1
+            followingViewContainer.alpha = 0
+            break
+        case 3:
+            myRecipeViewContainer.alpha = 0
+            favoriteViewContainer.alpha = 0
+            followerViewContainer.alpha = 0
+            followingViewContainer.alpha = 1
             break
         default: break
         }
@@ -78,6 +91,12 @@ class ProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "myRecipesContainerSegue" {
             (segue.destination as! MyRecipesViewController).myRecipeViewContainer = self.myRecipeViewContainer
+        }else if segue.identifier == "followingContainerSegue" {
+            followingViewController = (segue.destination as! FollowingViewController)
+            followingViewController!.profileViewController = self
+        }else if segue.identifier == "followersContainerSegue" {
+            followersViewController = (segue.destination as! FollowersViewController)
+            followersViewController!.profileViewController = self
         }
     }
     

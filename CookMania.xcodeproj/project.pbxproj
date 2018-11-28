@@ -35,6 +35,7 @@
 		C32B1C892194EEEE00153DC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C882194EEEE00153DC9 /* User.swift */; };
 		C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3474AA021A0BCD6005EADBC /* UserService.swift */; };
 		C3474AA521A0BE4D005EADBC /* ServiceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */; };
+		C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BE80021ADE3B900D050EF /* FollowingViewController.swift */; };
 		C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BBB60219B5058007CA580 /* GradientViewSecond.swift */; };
 		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
 		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
@@ -78,6 +79,7 @@
 		C32B1C882194EEEE00153DC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3474AA021A0BCD6005EADBC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUtils.swift; sourceTree = "<group>"; };
+		C34BE80021ADE3B900D050EF /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		C35BBB60219B5058007CA580 /* GradientViewSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewSecond.swift; sourceTree = "<group>"; };
 		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
 				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
 				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
+				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
+				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
 				C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,

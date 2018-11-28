@@ -71,12 +71,53 @@ class UserService: NSObject {
         })
     }
     
-    func getUserFollowers(usre: User, completionHandler: @escaping (_ followers: [Following]) -> ()) {
-        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "followers/"+String(usre.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
+    func getUserFollowers(user: User, completionHandler: @escaping (_ followers: [Following]) -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "followers/"+String(user.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let followers: [Following] = Mapper<Following>().mapArray(JSONString: response.result.value!)!
                 completionHandler(followers)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
+    func getUserFollowing(user: User, completionHandler: @escaping (_ following: [Following]) -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "following/"+String(user.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                let following: [Following] = Mapper<Following>().mapArray(JSONString: response.result.value!)!
+                completionHandler(following)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
+    func follow(follower: User, followed: User, completionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "follow/"+String(follower.id!)+"/"+String(followed.id!)), method: .post).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                completionHandler()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
+    func unfollow(follower: User, followed: User, completionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "unfollow/"+String(follower.id!)+"/"+String(followed.id!)), method: .delete)
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                completionHandler()
                 break
             case .failure(let error):
                 print(error)

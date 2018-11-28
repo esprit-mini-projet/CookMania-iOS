@@ -15,16 +15,23 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatter = DateFormatter()
     var followers: [Following] = []
+    var followersLabel: UILabel?
+    var profileViewController: ProfileViewController?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "dd MMM, yyyy"
-        UserService.getInstance().getUserFollowers(usre: appDelegate.user!, completionHandler: { followers in
+        updateTableView()
+        // Do any additional setup after loading the view.
+    }
+    
+    func updateTableView() {
+        UserService.getInstance().getUserFollowers(user: appDelegate.user!, completionHandler: { followers in
             self.followers = followers
+            self.profileViewController?.followersCountLabel.text = String(followers.count)
             self.followersTableView.reloadData()
         })
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,12 +76,32 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let removeFollowerAction = removeFollower(at: indexPath)
         let followBackAction = followBack(at: indexPath)
+        let follower = followers[indexPath.item]
+        
+        if (profileViewController?.followingViewController?.following.contains(where: { $0.following?.id == follower.follower?.id}))! {
+            return UISwipeActionsConfiguration(actions: [removeFollowerAction])
+        }
         return UISwipeActionsConfiguration(actions: [removeFollowerAction, followBackAction])
     }
     
     func removeFollower(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Remove follower") { (action, view, completion) in
-            print("Remove follower")
+            let follower = self.followers[indexPath.item].follower!
+            let alert = UIAlertController(title: "Confirmation", message: "Do you really want to remove "+follower.username!+"'s follow?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                UserService.getInstance().unfollow(follower: follower, followed: self.appDelegate.user!, completionHandler: {
+                    self.updateTableView()
+                    let alertDisapperTimeInSeconds = 2.0
+                    let alert = UIAlertController(title: nil, message: "You have removed "+follower.username!+"'s follow", preferredStyle: .actionSheet)
+                    self.present(alert, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + alertDisapperTimeInSeconds) {
+                        alert.dismiss(animated: true)
+                    }
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
             completion(true)
         }
         action.image = UIImage(named: "unfollow")
@@ -84,7 +111,17 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func followBack(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Follow back") { (action, view, completion) in
-            print("Follow Back")
+            let followed = self.followers[indexPath.item].follower!
+            UserService.getInstance().follow(follower: self.appDelegate.user!, followed: followed, completionHandler: {
+                self.profileViewController?.followingViewController?.updateTableView()
+                let alertDisapperTimeInSeconds = 2.0
+                let alert = UIAlertController(title: nil, message: "You are following "+followed.username!, preferredStyle: .actionSheet)
+                self.present(alert, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + alertDisapperTimeInSeconds) {
+                    alert.dismiss(animated: true)
+                }
+            })
+            
             completion(true)
         }
         action.image = UIImage(named: "follow")
