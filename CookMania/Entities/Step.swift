@@ -17,6 +17,10 @@ class Step: Mappable{
     var time: Int?
     var ingredients: [Ingredient]?
     
+    init(){
+        
+    }
+    
     required init?(map: Map) {
         
     }

@@ -24,6 +24,10 @@ class Recipe: Mappable{
     var steps: [Step]?
     var labels: [String]?
     
+    init(){
+        
+    }
+    
     required init?(map: Map) {
         
     }
