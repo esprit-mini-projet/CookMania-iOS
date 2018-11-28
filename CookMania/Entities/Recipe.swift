@@ -38,7 +38,7 @@ class Recipe: Mappable{
         views <- map["views"]
         rating <- map["rating"]
         time <- map["time"]
-        userId <- map["userId"]
+        userId <- map["user_id"]
         steps <- map["steps"]
         labels <- map["labels"]
     }

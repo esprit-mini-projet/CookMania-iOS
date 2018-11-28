@@ -15,6 +15,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipes: [Recipe] = []
     let dateFormatter = DateFormatter()
+    var profileViewController: ProfileViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +24,14 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         let context = persistance.viewContext
         
         let request = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-        request.predicate = NSPredicate(format: "userId == %@", (appDelegate.user?.id)!)
+        request.predicate = NSPredicate(format: "userId == %@", ((profileViewController?.user)!.id)!)
         do {
             let results = try context.fetch(request)
             for result in results {
                 let recipeId = result.value(forKey: "recipeId") as! Int
             }
             //Need to be recplaced with getting recipe based on returned id
-            UserService.getInstance().getUsersRecipes(user: appDelegate.user!, completionHandler: { recipes in
+            UserService.getInstance().getUsersRecipes(user: (profileViewController?.user)!, completionHandler: { recipes in
                 self.recipes = recipes
                 self.favoriteTableView.reloadData()
             })
@@ -75,8 +76,10 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete{
-            
+        if(profileViewController?.user?.id == appDelegate.user!.id){
+            if editingStyle == .delete{
+                
+            }
         }
     }
     /*

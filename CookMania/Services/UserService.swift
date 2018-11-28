@@ -24,6 +24,20 @@ class UserService: NSObject {
         return instance!
     }
     
+    func getUser(id: String, completionHandler: @escaping (_ user: User) -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: id)).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                let user: User = Mapper<User>().map(JSONString: response.result.value!)!
+                completionHandler(user)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
     func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User) -> ()){
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password],encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {

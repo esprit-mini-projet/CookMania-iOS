@@ -101,6 +101,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
     @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var visitProfileButton: UIButton!
     
     
     
@@ -108,6 +109,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var favorite: NSManagedObject?
     var recipe: Recipe?
+    var user: User?
     var ingredients: [Ingredient] = []
     
     /*var recipe = Recipe(id: 1, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
@@ -172,13 +174,16 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ExperienceService.getInstance().getRecipeExperience(recipeID: 1, completionHandler: {experiences in
+        ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
             self.experiences = experiences
             self.experiencesCollectionView.reloadData()
         })
         recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
         initMargin()
-        initView()
+        UserService.getInstance().getUser(id: (recipe?.userId)!, completionHandler: { user in
+            self.user = user
+            self.initView()
+        })
         stepsTableView.rowHeight = UITableView.automaticDimension
         stepsTableView.estimatedRowHeight = 140
         
@@ -210,7 +215,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeRatingInput.settings.fillMode = .half
         ratingView.settings.updateOnTouch = false
         //Need to send non nil rating, take recipe from web service
-        //ratingView.rating = Double(recipe!.rating!)
+        ratingView.rating = Double(recipe!.rating!)
         recipeNameLabel.text = recipe!.name
         ingredientsValueLabel.text = String(ingredients.count)
         caloriesValueLabel.text = String((recipe!.calories)!)
@@ -228,11 +233,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.layer.borderWidth = 2
         recipeOwnerProfileImageView.layer.borderColor = UIColor.white.cgColor
-        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height
+        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height / 2
         recipeOwnerProfileImageView.layer.masksToBounds = true
-        recipeOwnerProfileImageView.image = UIImage(named: "melanzana")
         
-        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height
+        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height / 2
         recipeOwnerProfileImageShadowView.layer.shadowColor = UIColor.black.cgColor
         recipeOwnerProfileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         recipeOwnerProfileImageShadowView.layer.shadowOpacity = 1
@@ -241,12 +245,16 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeOwnerProfileImageView.isUserInteractionEnabled = true
         recipeOwnerProfileImageView.addGestureRecognizer(singleTap)
         
-        recipeOwnerNameLabel.text = "Seif Abdennadher"
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM, yyyy"
-        recipeOwnerDateLabel.text = dateFormatter.string(from: dateFormatter.date(from: "21 Nov, 2018")!)
         initPosition = recipeOwnerView.center.x*1.1
+        
+        recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
+        recipeOwnerNameLabel.text = user?.username
+        recipeOwnerDateLabel.text = dateFormatter.string(from: (user?.date)!)
+        if self.user?.id == appDelegate.user?.id {
+            visitProfileButton.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -311,10 +319,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == stepsTableView {
-            return 0
-            //return recipe!.steps!.count
-        }
-        else{
+            return recipe!.steps!.count
+        }else{
             return ingredients.count
         }
     }
@@ -334,8 +340,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             //Set Data
             nameLabel.text = String((step.time)!)
             descriptionTextView.text = step.description
-            stepImage.image = UIImage(named: step.imageUrl!)
-            
+            stepImage.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+step.imageUrl!)!)
             //Init views
             contentView?.layer.cornerRadius = 10
             contentView?.layer.masksToBounds = true
@@ -392,10 +397,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             cell.frame.size.height = similarRecipesCollectionView.frame.size.height
             cell.frame.size.width = similarRecipesCollectionView.frame.size.height
             
-            let contentView = cell.viewWithTag(0)
-            let image = contentView?.viewWithTag(1) as! UIImageView
-            let rating = contentView?.viewWithTag(2) as! CosmosView
-            let nameLabel = contentView?.viewWithTag(3) as! UILabel
+            //let contentView = cell.viewWithTag(0)
+            let image = cell.viewWithTag(1) as! UIImageView
+            let rating = cell.viewWithTag(2) as! CosmosView
+            let nameLabel = cell.viewWithTag(3) as! UILabel
+            
+            cell.layer.cornerRadius = 8
+            cell.layer.masksToBounds = true
+            image.layer.cornerRadius = 8
+            image.layer.masksToBounds = true
             
             rating.settings.updateOnTouch = false
             rating.settings.emptyBorderColor = UIColor.clear
@@ -416,8 +426,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let commentTV = contentView?.viewWithTag(7) as! UITextView
             
             //Setting Data
-            coverImageView.image = UIImage(named: experience.imageURL!)
-            profileImageView.image = UIImage(named: (experience.user?.imageUrl!)!)
+            coverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+experience.imageURL!)!)
+            profileImageView.af_setImage(withURL: URL(string: (experience.user?.imageUrl!)!)!)
             rating.rating = Double(experience.rating!)
             nameLabel.text = experience.user?.username!
             let dateFormatter = DateFormatter()
@@ -432,7 +442,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             contentView?.layer.masksToBounds = true
             
             //ProfileImage
-            profileImageView.layer.borderWidth = 5
+            profileImageView.layer.borderWidth = 3
             profileImageView.layer.borderColor = UIColor.white.cgColor
             profileImageView.layer.cornerRadius = radius
             
@@ -463,7 +473,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {
-        print("Go to users profile")
+        performSegue(withIdentifier: "toProfile", sender: sender)
     }
     
     //Favorite
@@ -521,6 +531,12 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             checkIfFavorite()
         }catch{
             print("Error")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfile" {
+            (segue.destination as! ProfileViewController).user = self.user
         }
     }
     /*

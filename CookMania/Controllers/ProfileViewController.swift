@@ -29,6 +29,14 @@ class ProfileViewController: UIViewController {
     
     var followersViewController: FollowersViewController?
     var followingViewController: FollowingViewController?
+    var user: User?
+    
+    override func loadView() {
+        if(user == nil){
+            user = appDelegate.user!
+        }
+        super.loadView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +57,11 @@ class ProfileViewController: UIViewController {
     }
     
     func populateFields() {
-        let user = appDelegate.user!
-        print(user.imageUrl!)
-        profilePhotoImageView.af_setImage(withURL: URL(string: (user.imageUrl)!)!)
-        followingCountLabel.text = String(user.following)
-        followersCountLabel.text = String(user.followers)
-        nameLabel.text = user.username!
-        dateLabel.text = dateFormatter.string(from: user.date!)
+        profilePhotoImageView.af_setImage(withURL: URL(string: (user!.imageUrl)!)!)
+        followingCountLabel.text = String(user!.following)
+        followersCountLabel.text = String(user!.followers)
+        nameLabel.text = user!.username!
+        dateLabel.text = dateFormatter.string(from: user!.date!)
     }
     
     @IBAction func segmentDidChange(_ sender: Any) {
@@ -90,7 +96,9 @@ class ProfileViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "myRecipesContainerSegue" {
-            (segue.destination as! MyRecipesViewController).myRecipeViewContainer = self.myRecipeViewContainer
+            (segue.destination as! MyRecipesViewController).profileViewController = self
+        }else if segue.identifier == "favoritesContainerSegue" {
+            (segue.destination as! FavoritesViewController).profileViewController = self
         }else if segue.identifier == "followingContainerSegue" {
             followingViewController = (segue.destination as! FollowingViewController)
             followingViewController!.profileViewController = self

@@ -43,6 +43,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.2.0)
   - ObjectMapper (3.3.0)
   - SwiftKeychainWrapper (3.0.1)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - ObjectMapper
   - SwiftKeychainWrapper
+  - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -69,6 +71,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - ObjectMapper
     - SwiftKeychainWrapper
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -85,7 +88,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 97986b3a61a5a798951d2edced4ad6e37b9d9ad0
+PODFILE CHECKSUM: 0c92080b2021124377886401e1249e8d061d12ba
 
 COCOAPODS: 1.5.3

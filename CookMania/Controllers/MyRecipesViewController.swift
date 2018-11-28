@@ -14,12 +14,12 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatter = DateFormatter()
     var recipes: [Recipe] = []
-    var myRecipeViewContainer: UIView!
+    var profileViewController: ProfileViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "dd MMM, yyyy"
-        UserService.getInstance().getUsersRecipes(user: appDelegate.user!, completionHandler: { recipes in
+        UserService.getInstance().getUsersRecipes(user: (profileViewController?.user)!, completionHandler: { recipes in
             self.recipes = recipes
             self.myRecipesTableView.reloadData()
         })
@@ -60,23 +60,26 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toDetails", sender: indexPath)
+        let recipe = recipes[indexPath.item]
+        RecipeService.getInstance().getRecipe(recipeId: recipe.id!, completionHandler: { rec in
+            self.performSegue(withIdentifier: "toDetails", sender: rec)
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetails" {
-            print("Here")
             let destination = segue.destination as! RecipeDetailsViewController
-            let indexPath = sender as! IndexPath
-            let recipe = recipes[indexPath.item]
+            let recipe = sender as! Recipe
             
             destination.recipe = recipe
         }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
+        if(profileViewController?.user?.id == appDelegate.user?.id){
+            if editingStyle == .delete {
+                
+            }
         }
     }
     /*
