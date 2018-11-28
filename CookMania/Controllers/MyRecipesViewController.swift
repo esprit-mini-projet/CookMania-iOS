@@ -59,6 +59,21 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toDetails", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetails" {
+            print("Here")
+            let destination = segue.destination as! RecipeDetailsViewController
+            let indexPath = sender as! IndexPath
+            let recipe = recipes[indexPath.item]
+            
+            destination.recipe = recipe
+        }
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             

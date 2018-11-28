@@ -152,7 +152,10 @@
 				C3995DDC21964CE800179246 /* CommunityViewController.swift */,
 				C32B1C822194E21B00153DC9 /* EditProfileViewController.swift */,
 				26101085218FC37B00E8344F /* FavoritesViewController.swift */,
+				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
+				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
 				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
+				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
 				262543AE21935E6C003601A4 /* ProfileViewController.swift */,
 				C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */,
 				26101083218FAE0B00E8344F /* RecipeListViewController.swift */,
@@ -161,9 +164,6 @@
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
-				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
-				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
-				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
