@@ -7,18 +7,34 @@
 //
 
 import UIKit
+import Cosmos
 
 class AddExperienceViewController: UIViewController {
-
+    @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var commentTextView: UITextView!
+    
     var rating: Double?
+    var recipe: Recipe?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ratingView.rating = rating!
+        ratingView.settings.fillMode = .precise
+        commentTextView.layer.borderColor = UIColor.lightGray.cgColor
+        commentTextView.layer.borderWidth = 1
+        commentTextView.layer.masksToBounds = true
+        commentTextView.layer.cornerRadius = 5
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func saveAction(_ sender: Any) {
+        let experience = Experience(user: appDelegate.user!, rating: Float(ratingView.rating), comment: commentTextView.text!, imageUrl: "")
+        ExperienceService.getInstance().addRecipeExperience(experience: experience, recipeId: (recipe?.id)!, completionHandler: {
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -176,11 +176,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         RecipeService.getInstance().addToViewsCount(recipeId: (recipe?.id)!, sucessCompletionHandler: nil)
         getRecipeIngredients()
-        ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
-            self.experiences = experiences
-            self.experiencesCollectionView.reloadData()
-        })
-        recipeRatingInput.didFinishTouchingCosmos = { rating in self.toAddExperience(rating: rating)}
+        recipeRatingInput.didFinishTouchingCosmos = { rating in
+            if self.recipeRatingInput.settings.updateOnTouch {
+                self.toAddExperience(rating: rating)
+            }
+        }
         initMargin()
         UserService.getInstance().getUser(id: (recipe?.userId)!, completionHandler: { user in
             self.user = user
@@ -264,7 +264,18 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recipeRatingInput.rating = 0
+        ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
+            self.experiences = experiences
+            let exp = experiences.first(where: { $0.user?.id == self.appDelegate.user?.id})
+            if exp != nil {
+                self.recipeRatingInput.rating = Double((exp?.rating)!)
+                self.recipeRatingInput.settings.updateOnTouch = false
+            }else{
+                self.recipeRatingInput.rating = 0
+                self.recipeRatingInput.settings.updateOnTouch = true
+            }
+            self.experiencesCollectionView.reloadData()
+        })
     }
     
     var isExpanded: CGFloat = 1
@@ -464,6 +475,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             rating.settings.updateOnTouch = false
             rating.settings.emptyBorderColor = UIColor.clear
+            rating.settings.fillMode = .precise
             
             commentTV.textContainer.lineFragmentPadding = 0
             commentTV.textContainerInset = .zero
@@ -521,7 +533,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if segue.identifier == "toProfile" {
             (segue.destination as! ProfileViewController).user = self.user
         }else if segue.identifier == "toAddExperience" {
-            (segue.destination as! AddExperienceViewController).rating = sender as! Double
+            let destination = (segue.destination as! AddExperienceViewController)
+            destination.rating = sender as! Double
+            destination.recipe = self.recipe!
         }
     }
     /*

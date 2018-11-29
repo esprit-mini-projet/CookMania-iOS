@@ -37,4 +37,23 @@ class ExperienceService: NSObject {
             }
         })
     }
+    
+    func addRecipeExperience(experience: Experience, recipeId: Int, completionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "add"), method: .post, parameters: [
+            "user_id": (experience.user?.id)!,
+            "recipe_id": recipeId,
+            "rating": experience.rating!,
+            "comment": experience.comment!,
+            "image_url": experience.imageURL!
+        ], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                completionHandler()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
 }
