@@ -14,6 +14,7 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatter = DateFormatter()
     var following: [Following] = []
+    var connectedUserFollowing: [Following] = []
     var followingLabel: UILabel?
     var profileViewController: ProfileViewController?
     
@@ -23,10 +24,13 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func updateTableView() {
-        UserService.getInstance().getUserFollowing(user: appDelegate.user!, completionHandler: { following in
+        UserService.getInstance().getUserFollowing(user: (profileViewController?.user)!, completionHandler: { following in
             self.following = following
             self.profileViewController?.followingCountLabel.text = String(following.count)
-            self.followingTableView.reloadData()
+            UserService.getInstance().getUserFollowing(user: (self.appDelegate.user)!, completionHandler: { foll in
+                self.connectedUserFollowing = foll
+                self.followingTableView.reloadData()
+            })
         })
     }
     
@@ -71,7 +75,15 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let unfollowAction = unfollow(at: indexPath)
-        return UISwipeActionsConfiguration(actions: [unfollowAction])
+        let followAction = followBack(at: indexPath)
+        let followingUser = following[indexPath.item].following
+        
+        if (!(self.connectedUserFollowing.contains(where: { $0.following?.id == followingUser?.id})) && followingUser?.id != appDelegate.user?.id ){
+            return UISwipeActionsConfiguration(actions: [followAction])
+        }else if (profileViewController?.user?.id == appDelegate.user?.id) {
+            return UISwipeActionsConfiguration(actions: [unfollowAction])
+        }
+        return UISwipeActionsConfiguration(actions: [])
     }
     
     func unfollow(at indexPath: IndexPath) -> UIContextualAction {
@@ -96,6 +108,39 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
         action.image = UIImage(named: "unfollow")
         action.backgroundColor = UIColor.red
         return action
+    }
+    
+    func followBack(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
+            let followed = self.following[indexPath.item].follower!
+            UserService.getInstance().follow(follower: self.appDelegate.user!, followed: followed, completionHandler: {
+                self.profileViewController?.followingViewController?.updateTableView()
+                let alertDisapperTimeInSeconds = 2.0
+                let alert = UIAlertController(title: nil, message: "You are following "+followed.username!, preferredStyle: .actionSheet)
+                self.present(alert, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + alertDisapperTimeInSeconds) {
+                    alert.dismiss(animated: true)
+                }
+            })
+            
+            completion(true)
+        }
+        action.image = UIImage(named: "follow")
+        action.backgroundColor = UIColor.blue
+        return action
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toProfile", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfile" {
+            let destination = segue.destination as! ProfileViewController
+            let user = following[(sender as! IndexPath).item].following
+            
+            destination.user = user
+        }
     }
 
     /*

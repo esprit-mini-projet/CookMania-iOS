@@ -15,6 +15,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatter = DateFormatter()
     var followers: [Following] = []
+    var connectedUserFollowing: [Following] = []
     var followersLabel: UILabel?
     var profileViewController: ProfileViewController?
     
@@ -27,10 +28,13 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func updateTableView() {
-        UserService.getInstance().getUserFollowers(user: appDelegate.user!, completionHandler: { followers in
+        UserService.getInstance().getUserFollowers(user: (profileViewController?.user)!, completionHandler: { followers in
             self.followers = followers
             self.profileViewController?.followersCountLabel.text = String(followers.count)
-            self.followersTableView.reloadData()
+            UserService.getInstance().getUserFollowing(user: (self.appDelegate.user)!, completionHandler: { following in
+                self.connectedUserFollowing = following
+                self.followersTableView.reloadData()
+            })
         })
     }
     
@@ -78,14 +82,19 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         let followBackAction = followBack(at: indexPath)
         let follower = followers[indexPath.item]
         
-        if (profileViewController?.followingViewController?.following.contains(where: { $0.following?.id == follower.follower?.id}))! {
-            return UISwipeActionsConfiguration(actions: [removeFollowerAction])
+        var actions: [UIContextualAction] = []
+        
+        if (!(self.connectedUserFollowing.contains(where: { $0.following?.id == follower.follower?.id})) && follower.follower?.id != appDelegate.user?.id ){
+            actions.append(followBackAction)
         }
-        return UISwipeActionsConfiguration(actions: [removeFollowerAction, followBackAction])
+        if (profileViewController?.user?.id == appDelegate.user?.id) {
+            actions.append(removeFollowerAction)
+        }
+        return UISwipeActionsConfiguration(actions: actions)
     }
     
     func removeFollower(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Remove follower") { (action, view, completion) in
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
             let follower = self.followers[indexPath.item].follower!
             let alert = UIAlertController(title: "Confirmation", message: "Do you really want to remove "+follower.username!+"'s follow?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -110,7 +119,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func followBack(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Follow back") { (action, view, completion) in
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
             let followed = self.followers[indexPath.item].follower!
             UserService.getInstance().follow(follower: self.appDelegate.user!, followed: followed, completionHandler: {
                 self.profileViewController?.followingViewController?.updateTableView()
@@ -127,6 +136,19 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         action.image = UIImage(named: "follow")
         action.backgroundColor = UIColor.blue
         return action
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toProfile", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfile" {
+            let destination = segue.destination as! ProfileViewController
+            let user = followers[(sender as! IndexPath).item].follower!
+            
+            destination.user = user
+        }
     }
     
     

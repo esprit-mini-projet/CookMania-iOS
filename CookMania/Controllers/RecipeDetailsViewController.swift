@@ -174,6 +174,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getRecipeIngredients()
         ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
             self.experiences = experiences
             self.experiencesCollectionView.reloadData()
@@ -376,7 +377,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             button.restorationIdentifier = String((ingredient.id)!)
             nameLabel.text = ingredient.name
-            quantityLabel.text = String((ingredient.quantity)!)+" "+(ingredient.unit)!
+            print("quantity")
+            print(ingredient.quantity)
+            print("unit")
+            print(ingredient.unit)
+            quantityLabel.text = String((ingredient.quantity)!)+" "+String((ingredient.unit)!)
             return cell!
         }
         

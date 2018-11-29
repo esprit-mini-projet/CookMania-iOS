@@ -14,7 +14,7 @@ class Ingredient: Mappable{
     var id: Int?
     var name: String?
     var quantity: Int?
-    var unit: String?
+    var unit: Int?
     
     required init?(map: Map) {
         
