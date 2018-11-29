@@ -1453,11 +1453,49 @@ EDE5OA
                         <outlet property="timeValueLabel" destination="vuH-3K-62e" id="cnj-lo-Xml"/>
                         <outlet property="visitProfileButton" destination="iXG-rz-kq5" id="YrT-jS-a8L"/>
                         <segue destination="yJ2-Dp-Ir6" kind="show" identifier="toProfile" id="3Hv-pz-kTR"/>
+                        <segue destination="Uer-RZ-r6X" kind="show" identifier="toAddExperience" id="SSW-JV-kr6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAZ-Fj-0uW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5858.3999999999996" y="610.79460269865069"/>
+        </scene>
+        <!--Add Experience View Controller-->
+        <scene sceneID="Vxp-YV-Bbj">
+            <objects>
+                <viewController id="Uer-RZ-r6X" customClass="AddExperienceViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="meq-81-XNY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="380.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="LJD-5f-jpK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6O-ZB-zPk">
+                                <rect key="frame" x="332" y="58" width="27" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="d6O-ZB-zPk" secondAttribute="height" multiplier="1:1" id="M0A-7W-fMh"/>
+                                    <constraint firstAttribute="height" constant="27" id="iHp-CM-0Df"/>
+                                </constraints>
+                                <state key="normal" image="add-image"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LJD-5f-jpK" firstAttribute="height" secondItem="meq-81-XNY" secondAttribute="height" multiplier="0.25" id="0zX-N0-Ttj"/>
+                            <constraint firstItem="0nu-Bw-FRB" firstAttribute="trailing" secondItem="LJD-5f-jpK" secondAttribute="trailing" id="VwY-Sn-OmB"/>
+                            <constraint firstItem="LJD-5f-jpK" firstAttribute="top" secondItem="0nu-Bw-FRB" secondAttribute="top" id="euv-od-8bk"/>
+                            <constraint firstItem="LJD-5f-jpK" firstAttribute="leading" secondItem="0nu-Bw-FRB" secondAttribute="leading" id="mIi-Rm-Mdh"/>
+                            <constraint firstItem="d6O-ZB-zPk" firstAttribute="leading" secondItem="LJD-5f-jpK" secondAttribute="trailing" constant="-43" id="tPV-vm-kIc"/>
+                            <constraint firstItem="d6O-ZB-zPk" firstAttribute="top" secondItem="LJD-5f-jpK" secondAttribute="bottom" constant="-37" id="zr4-wU-dYd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0nu-Bw-FRB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iCd-mM-Y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7104.8000000000002" y="571.66416791604206"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7eD-xa-b5w">
@@ -2303,7 +2341,9 @@ EDE5OA
         </scene>
     </scenes>
     <resources>
+        <image name="Image" width="72" height="72"/>
         <image name="add-icon" width="36" height="36"/>
+        <image name="add-image" width="48" height="48"/>
         <image name="blitz" width="48" height="48"/>
         <image name="cacciatore" width="420" height="236.25"/>
         <image name="caponata" width="420" height="236.25"/>
@@ -2323,7 +2363,7 @@ EDE5OA
         <image name="views" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uED-xn-5ft"/>
+        <segue reference="3Hv-pz-kTR"/>
         <segue reference="Vkf-f1-W4L"/>
         <segue reference="DtB-Bu-ib5"/>
     </inferredMetricsTieBreakers>

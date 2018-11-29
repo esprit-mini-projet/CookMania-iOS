@@ -203,7 +203,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func toAddExperience(rating: Double) {
-        print(rating)
+        performSegue(withIdentifier: "toAddExperience", sender: rating)
     }
     
     func getRecipeIngredients(){
@@ -261,6 +261,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         tapDetected()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        recipeRatingInput.rating = 0
     }
     
     var isExpanded: CGFloat = 1
@@ -516,6 +520,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
             (segue.destination as! ProfileViewController).user = self.user
+        }else if segue.identifier == "toAddExperience" {
+            (segue.destination as! AddExperienceViewController).rating = sender as! Double
         }
     }
     /*

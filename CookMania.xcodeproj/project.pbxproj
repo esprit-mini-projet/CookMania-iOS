@@ -41,6 +41,7 @@
 		C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BBB60219B5058007CA580 /* GradientViewSecond.swift */; };
 		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
 		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
+		C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
 		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
@@ -87,6 +88,7 @@
 		C35BBB60219B5058007CA580 /* GradientViewSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewSecond.swift; sourceTree = "<group>"; };
 		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
+		C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
 		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
+				C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,
+				C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
