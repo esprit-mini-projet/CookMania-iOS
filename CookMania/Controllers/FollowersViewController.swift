@@ -122,6 +122,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
             let followed = self.followers[indexPath.item].follower!
             UserService.getInstance().follow(follower: self.appDelegate.user!, followed: followed, completionHandler: {
+                self.updateTableView()
                 self.profileViewController?.followingViewController?.updateTableView()
                 let alertDisapperTimeInSeconds = 2.0
                 let alert = UIAlertController(title: nil, message: "You are following "+followed.username!, preferredStyle: .actionSheet)

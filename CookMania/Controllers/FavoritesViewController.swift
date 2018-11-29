@@ -80,6 +80,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                 FavoriteHelper.getInstance().getFavorite(userId: (self.appDelegate.user?.id)!, recipeId: recipe.id!, successCompletionHandler: { favorite in
                     FavoriteHelper.getInstance().removeFavoriteRecipe(favorite: favorite!, successCompletionHandler: {
                         self.updateTableView()
+                        self.profileViewController?.myRecipesViewController?.updateTableView()
                         let alertDisapperTimeInSeconds = 2.0
                         let alert = UIAlertController(title: nil, message: "Recipe removed from your favorite list.", preferredStyle: .actionSheet)
                         self.present(alert, animated: true)

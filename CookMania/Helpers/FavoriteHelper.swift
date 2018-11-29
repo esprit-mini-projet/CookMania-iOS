@@ -71,10 +71,13 @@ class FavoriteHelper: NSObject {
     func removeFavoriteRecipe(favorite: NSManagedObject, successCompletionHandler: @escaping () -> (), errorCompletionHandler: @escaping () -> ()) {
         let persistanceContainer = appDelegate.persistentContainer
         let managedContext = persistanceContainer.viewContext
+        let recipeId = favorite.value(forKey: "recipeId") as! Int
         managedContext.delete(favorite)
         do{
             try managedContext.save()
-            successCompletionHandler()
+            RecipeService.getInstance().removeFromFavoritesCount(recipeId: recipeId, sucessCompletionHandler: {
+                successCompletionHandler()
+            })
         }catch{
             errorCompletionHandler()
         }
@@ -90,7 +93,9 @@ class FavoriteHelper: NSObject {
         favorite.setValue(Date(), forKey: "date")
         do{
             try managedContext.save()
-            successCompletionHandler()
+            RecipeService.getInstance().addToFavoritesCount(recipeId: recipeId, sucessCompletionHandler: {
+                successCompletionHandler()
+            })
         } catch {
             errorCompletionHandler()
         }

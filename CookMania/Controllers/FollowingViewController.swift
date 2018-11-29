@@ -93,6 +93,7 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 UserService.getInstance().unfollow(follower: self.appDelegate.user!, followed: following, completionHandler: {
                     self.updateTableView()
+                    self.profileViewController?.followersViewController?.updateTableView()
                     let alertDisapperTimeInSeconds = 2.0
                     let alert = UIAlertController(title: nil, message: "You have unfollowed "+following.username!, preferredStyle: .actionSheet)
                     self.present(alert, animated: true)

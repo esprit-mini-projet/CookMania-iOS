@@ -174,6 +174,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        RecipeService.getInstance().addToViewsCount(recipeId: (recipe?.id)!, sucessCompletionHandler: nil)
         getRecipeIngredients()
         ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
             self.experiences = experiences
@@ -183,13 +184,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         initMargin()
         UserService.getInstance().getUser(id: (recipe?.userId)!, completionHandler: { user in
             self.user = user
+            self.checkIfFavorite()
             self.initView()
         })
         stepsTableView.rowHeight = UITableView.automaticDimension
         stepsTableView.estimatedRowHeight = 140
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
-        checkIfFavorite()
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -500,6 +501,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func checkIfFavorite() {
+        if user?.id == appDelegate.user?.id {
+            self.navigationBar.rightBarButtonItem = nil
+            return
+        }
         FavoriteHelper.getInstance().getFavorite(userId: (appDelegate.user?.id)!, recipeId: (recipe?.id)!, successCompletionHandler: { favorite in
             self.addToFavoriteBarButton.image = UIImage(named: favorite != nil ? "favorite" : "unfavorite")
             self.favorite = favorite
