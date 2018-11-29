@@ -54,7 +54,6 @@ class ProfileViewController: UIViewController {
         dateFormatter.dateFormat = "dd MMM, yyyy"
         
         //segmentedController.removeSegment(at: 1, animated: false)
-        
         populateFields()
     }
     
@@ -63,6 +62,12 @@ class ProfileViewController: UIViewController {
         favoritesViewController?.updateTableView()
         followersViewController?.updateTableView()
         followingViewController?.updateTableView()
+    }
+    
+    func updateCoverImage(recipe: Recipe?) {
+        if recipe != nil {
+            profileCoverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+(recipe!.imageUrl)!)!)
+        }
     }
     
     func populateFields() {

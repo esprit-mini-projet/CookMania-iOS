@@ -25,6 +25,7 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
         UserService.getInstance().getUsersRecipes(user: (profileViewController?.user)!, completionHandler: { recipes in
             self.recipes = recipes
             self.myRecipesTableView.reloadData()
+            self.profileViewController?.updateCoverImage(recipe: recipes.count == 0 ? nil : recipes[recipes.count-1])
         })
     }
     
@@ -55,9 +56,9 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
         recipeCoverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!)
         recipeNameLabel.text = recipe.name!
         recipeDateLabel.text = dateFormatter.string(from: Date())
-        recipeViewsLabel.text = "100"
-        recipeRatingLabel.text = "3.5"
-        recipeFavoriteLabel.text = "20"
+        recipeViewsLabel.text = String((recipe.views)!)
+        recipeRatingLabel.text = String((recipe.rating)!)
+        recipeFavoriteLabel.text = String((recipe.favorites)!)
         
         return cell!
     }

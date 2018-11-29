@@ -57,9 +57,9 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         recipeCoverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!)
         recipeNameLabel.text = recipe.name!
         recipeDateLabel.text = dateFormatter.string(from: Date())
-        recipeViewsLabel.text = "100"
-        recipeRatingLabel.text = "3.5"
-        recipeFavoriteLabel.text = "20"
+        recipeViewsLabel.text = String((recipe.views)!)
+        recipeRatingLabel.text = String((recipe.rating)!)
+        recipeFavoriteLabel.text = String((recipe.favorites)!)
         
         return cell!
     }
