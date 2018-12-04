@@ -14,4 +14,5 @@ target 'CookMania' do
   pod 'ObjectMapper'
   pod 'SwiftKeychainWrapper' 
   pod 'SwiftyJSON'
+  pod 'Gallery'
 end

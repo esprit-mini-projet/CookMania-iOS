@@ -38,8 +38,64 @@ class ExperienceService: NSObject {
         })
     }
     
-    func addRecipeExperience(experience: Experience, recipeId: Int, completionHandler: @escaping () -> ()) {
-        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "add"), method: .post, parameters: [
+    func addRecipeExperience(experience: Experience, image: UIImage, recipeId: Int, completionHandler: @escaping () -> ()) {
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
+            multipartFormData.append((experience.user?.id)!.data(using: .utf8)!, withName: "user_id", mimeType: "text/plain")
+            multipartFormData.append(String(recipeId).data(using: .utf8)!, withName: "recipe_id", mimeType: "text/plain")
+            multipartFormData.append(String(experience.rating!).data(using: .utf8)!, withName: "rating", mimeType: "text/plain")
+            multipartFormData.append(String(experience.comment!).data(using: .utf8)!, withName: "comment", mimeType: "text/plain")
+        }, to:ServiceUtils.buildURL(route: ROUTE, postfix: "add")){ (result) in
+            switch result {
+            case .success( _, _, _):
+                    completionHandler()
+                case .failure(let encodingError):
+                    print("",encodingError.localizedDescription)
+                    break
+            }
+        }
+        
+        /*Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(image.accessibilityIdentifier, withName: "image")
+        }, to: ServiceUtils.buildURL(route: ROUTE, postfix: "add"), encodingCompletion: { (encodingResult) in
+            switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { request, response, JSON, error in
+                    
+                    }
+                case .Failure(let encodingError): break
+            }
+        })*/
+        
+       /*Alamofire.upload(
+            .POST,
+            URLString: ServiceUtils.buildURL(route: ROUTE, postfix: "add"), // http://httpbin.org/post
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: imagePathUrl!, name: "photo")
+                multipartFormData.appendBodyPart(fileURL: videoPathUrl!, name: "video")
+                multipartFormData.appendBodyPart(data: Constants.AuthKey.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"authKey")
+                multipartFormData.appendBodyPart(data: "\(16)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"idUserChallenge")
+                multipartFormData.appendBodyPart(data: "comment".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"comment")
+                multipartFormData.appendBodyPart(data:"\(0.00)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"latitude")
+                multipartFormData.appendBodyPart(data:"\(0.00)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"longitude")
+                multipartFormData.appendBodyPart(data:"India".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"location")
+        },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { request, response, JSON, error in
+                        
+                        
+                    }
+                case .Failure(let encodingError):
+                    
+                }
+        }
+        )*/
+        
+        
+        
+        /*Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "add"), method: .post, parameters: [
             "user_id": (experience.user?.id)!,
             "recipe_id": recipeId,
             "rating": experience.rating!,
@@ -54,6 +110,6 @@ class ExperienceService: NSObject {
                 print(error)
                 break
             }
-        })
+        })*/
     }
 }

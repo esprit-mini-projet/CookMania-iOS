@@ -8,14 +8,18 @@
 
 import UIKit
 import Cosmos
+import Gallery
 
-class AddExperienceViewController: UIViewController {
+class AddExperienceViewController: UIViewController, GalleryControllerDelegate {
+    
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var coverImagePreview: UIImageView!
     
     var rating: Double?
     var recipe: Recipe?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var experienceImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +34,41 @@ class AddExperienceViewController: UIViewController {
     
     @IBAction func saveAction(_ sender: Any) {
         let experience = Experience(user: appDelegate.user!, rating: Float(ratingView.rating), comment: commentTextView.text!, imageUrl: "")
-        ExperienceService.getInstance().addRecipeExperience(experience: experience, recipeId: (recipe?.id)!, completionHandler: {
+        /*ExperienceService.getInstance().addRecipeExperience(experience: experience, recipeId: (recipe?.id)!, completionHandler: {
             self.navigationController?.popViewController(animated: true)
+        })*/
+        ExperienceService.getInstance().addRecipeExperience(experience: experience, image: experienceImage!, recipeId: (recipe?.id)!, completionHandler: {
+            print("Uploaded")
         })
     }
     
+    @IBAction func selectImage(_ sender: Any) {
+        Config.tabsToShow = [.cameraTab, .imageTab]
+        Config.Camera.imageLimit = 1
+        
+        let gallery = GalleryController()
+        gallery.delegate = self
+        present(gallery, animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        controller.dismiss(animated: true, completion: nil)
+        images[0].resolve(completion: { image in
+            self.coverImagePreview.image = image!
+            self.experienceImage = image!
+        })
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+        
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
