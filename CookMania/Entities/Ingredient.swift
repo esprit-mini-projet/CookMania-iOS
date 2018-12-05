@@ -16,6 +16,10 @@ class Ingredient: Mappable{
     var quantity: Int?
     var unit: Int?
     
+    init(){
+        
+    }
+    
     required init?(map: Map) {
         
     }
