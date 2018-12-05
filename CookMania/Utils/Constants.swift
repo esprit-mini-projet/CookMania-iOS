@@ -15,5 +15,6 @@ struct Constants {
     struct URL {
         static let topRatedRecipes = ipAddress + "/recipes/top"
         static let imagesFolder = ipAddress + "/public/images/"
+        static let imagesFolderrr = ipAddress + "/public/images/"
     }
 }
