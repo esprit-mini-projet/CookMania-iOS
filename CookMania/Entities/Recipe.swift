@@ -19,10 +19,15 @@ class Recipe: Mappable{
     var imageUrl: String?
     var rating: Float?
     var views: Int?
+    var favorites: Int?
     var time: Int?
     var userId: String?
     var steps: [Step]?
     var labels: [String]?
+    
+    init(){
+        
+    }
     
     required init?(map: Map) {
         
@@ -37,8 +42,9 @@ class Recipe: Mappable{
         imageUrl <- map["image_url"]
         views <- map["views"]
         rating <- map["rating"]
+        favorites <- map["favorites"]
         time <- map["time"]
-        userId <- map["userId"]
+        userId <- map["user_id"]
         steps <- map["steps"]
         labels <- map["labels"]
     }

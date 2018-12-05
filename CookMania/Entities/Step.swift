@@ -17,6 +17,10 @@ class Step: Mappable{
     var time: Int?
     var ingredients: [Ingredient]?
     
+    init(){
+        
+    }
+    
     required init?(map: Map) {
         
     }
@@ -24,7 +28,7 @@ class Step: Mappable{
     func mapping(map: Map) {
         id <- map["id"]
         description <- map["description"]
-        imageUrl <- map["imageUrl"]
+        imageUrl <- map["image_url"]
         time <- map["time"]
         ingredients <- map["ingredients"]
     }
