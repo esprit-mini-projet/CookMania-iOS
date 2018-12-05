@@ -26,7 +26,7 @@
 		262543B121937811003601A4 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262543B021937811003601A4 /* GradientView.swift */; };
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
-		C324D9BD21AF1C9300D9C5E8 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService.swift */; };
+		C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */; };
 		C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */; };
 		C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */; };
 		C32B1C7D2194DF2600153DC9 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */; };
@@ -73,7 +73,7 @@
 		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
 		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
-		C324D9BC21AF1C9300D9C5E8 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
+		C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService_Seif.swift; sourceTree = "<group>"; };
 		C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
 		C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 			children = (
 				C36AC736219E0CF30070CDE8 /* ExperienceService.swift */,
 				C3474AA021A0BCD6005EADBC /* UserService.swift */,
-				C324D9BC21AF1C9300D9C5E8 /* RecipeService.swift */,
+				C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -435,7 +435,7 @@
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
-				C324D9BD21AF1C9300D9C5E8 /* RecipeService.swift in Sources */,
+				C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */,
 				C36AC734219E08D20070CDE8 /* Experience.swift in Sources */,
 				C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */,
 				C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */,

@@ -11,16 +11,16 @@ import ObjectMapper
 import Alamofire
 import SwiftyJSON
 
-public class RecipeService: NSObject{
+public class RecipeServiceSeif: NSObject{
     private let ROUTE = "/recipes"
     
-    private static var instance: RecipeService?
+    private static var instance: RecipeServiceSeif?
     
     private override init() {}
     
-    public static func getInstance() -> RecipeService{
+    public static func getInstance() -> RecipeServiceSeif{
         if(instance == nil){
-            instance = RecipeService()
+            instance = RecipeServiceSeif()
         }
         return instance!
     }
