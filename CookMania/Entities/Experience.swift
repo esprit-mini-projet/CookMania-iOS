@@ -23,8 +23,11 @@ class Experience: Mappable {
         return "<\(type(of: self)): user = \(String(describing: user)), rating = \(String(describing: rating)), comment = \(String(describing: comment)), imageURL = \(String(describing: imageURL)), date = \(String(describing: date))>"
     }
     
-    init() {
-        
+    init(user: User, rating: Float, comment: String, imageUrl: String) {
+        self.user = user
+        self.rating = rating
+        self.comment = comment
+        self.imageURL = imageUrl
     }
     
     required init?(map: Map) {

@@ -21,6 +21,7 @@ PODS:
     - Bolts (~> 1.9)
   - FBSDKLoginKit (4.38.1):
     - FBSDKCoreKit
+  - Gallery (2.2.0)
   - GoogleSignIn (4.3.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -44,6 +45,7 @@ PODS:
   - iOSDropDown (0.2.6)
   - ObjectMapper (3.3.0)
   - SnapKit (4.0.1)
+  - SwiftKeychainWrapper (3.0.1)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
@@ -51,10 +53,12 @@ DEPENDENCIES:
   - AlamofireImage
   - Cosmos (~> 17.0)
   - FacebookLogin
+  - Gallery
   - GoogleSignIn
   - iOSDropDown
   - ObjectMapper
   - SnapKit (~> 4.0.0)
+  - SwiftKeychainWrapper
   - SwiftyJSON
 
 SPEC REPOS:
@@ -67,6 +71,7 @@ SPEC REPOS:
     - FacebookLogin
     - FBSDKCoreKit
     - FBSDKLoginKit
+    - Gallery
     - GoogleSignIn
     - GoogleToolboxForMac
     - GTMOAuth2
@@ -74,6 +79,7 @@ SPEC REPOS:
     - iOSDropDown
     - ObjectMapper
     - SnapKit
+    - SwiftKeychainWrapper
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -85,6 +91,7 @@ SPEC CHECKSUMS:
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
   FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
   FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
+  Gallery: 3f4c780c4b22906d6b0a5e55d12167cdc4b4fc5b
   GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
@@ -93,7 +100,9 @@ SPEC CHECKSUMS:
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: ef967fc9ad78fc75a144407a6fb778dba86e637d
+PODFILE CHECKSUM: d79e737f8ea9c696a0fc9124a559ecdb83999359
 
 COCOAPODS: 1.5.3

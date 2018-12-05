@@ -12,7 +12,7 @@ target 'CookMania' do
   pod 'GoogleSignIn'
   pod 'Cosmos', '~> 17.0'
   pod 'ObjectMapper'
+  pod 'SwiftKeychainWrapper' 
   pod 'SwiftyJSON'
-  pod 'iOSDropDown'
-  pod 'SnapKit', '~> 4.0.0'
+  pod 'Gallery'
 end
