@@ -28,8 +28,6 @@
 		2689B75B21AF4E87007BBC54 /* AddStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */; };
 		269F7DDC219F4EDE00478F20 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269F7DDB219F4EDE00478F20 /* RecipeService.swift */; };
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
-		26D3678E21ADB5EC00D7EEF8 /* AddIngredientView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D3678D21ADB5EC00D7EEF8 /* AddIngredientView.xib */; };
-		26D3679021ADBBA800D7EEF8 /* AddIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3678F21ADBBA800D7EEF8 /* AddIngredientView.swift */; };
 		26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3679121AE002000D7EEF8 /* ActionTextField.swift */; };
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
 		C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */; };
@@ -78,8 +76,6 @@
 		2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStepViewController.swift; sourceTree = "<group>"; };
 		269F7DDB219F4EDE00478F20 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		26B9E89C2194579F00E326F3 /* VKCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKCheckBox.swift; sourceTree = "<group>"; };
-		26D3678D21ADB5EC00D7EEF8 /* AddIngredientView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddIngredientView.xib; sourceTree = "<group>"; };
-		26D3678F21ADBBA800D7EEF8 /* AddIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientView.swift; sourceTree = "<group>"; };
 		26D3679121AE002000D7EEF8 /* ActionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTextField.swift; sourceTree = "<group>"; };
 		26F92254219CB07200E55B09 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,7 +209,6 @@
 		C32B1C782194D9DF00153DC9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				26D3678F21ADBBA800D7EEF8 /* AddIngredientView.swift */,
 				C35BBB60219B5058007CA580 /* GradientViewSecond.swift */,
 				262543B021937811003601A4 /* GradientView.swift */,
 				26B9E89C2194579F00E326F3 /* VKCheckBox.swift */,
@@ -230,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				2608CEC1218D0D8E008A706E /* Main.storyboard */,
-				26D3678D21ADB5EC00D7EEF8 /* AddIngredientView.xib */,
 				2608CEC9218D0D9B008A706E /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -319,7 +313,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2608CECB218D0D9B008A706E /* LaunchScreen.storyboard in Resources */,
-				26D3678E21ADB5EC00D7EEF8 /* AddIngredientView.xib in Resources */,
 				2608CEC8218D0D9B008A706E /* Assets.xcassets in Resources */,
 				2608CEC3218D0D8E008A706E /* Main.storyboard in Resources */,
 			);
@@ -350,8 +343,6 @@
 				"${BUILT_PRODUCTS_DIR}/Gallery/Gallery.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -372,8 +363,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gallery.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iOSDropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -456,7 +445,6 @@
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
 				C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */,
-				26D3679021ADBBA800D7EEF8 /* AddIngredientView.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,

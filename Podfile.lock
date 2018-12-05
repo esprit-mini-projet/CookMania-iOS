@@ -42,9 +42,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
-  - iOSDropDown (0.2.6)
   - ObjectMapper (3.3.0)
-  - SnapKit (4.0.1)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftyJSON (4.2.0)
 
@@ -55,9 +53,7 @@ DEPENDENCIES:
   - FacebookLogin
   - Gallery
   - GoogleSignIn
-  - iOSDropDown
   - ObjectMapper
-  - SnapKit (~> 4.0.0)
   - SwiftKeychainWrapper
   - SwiftyJSON
 
@@ -76,9 +72,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMOAuth2
     - GTMSessionFetcher
-    - iOSDropDown
     - ObjectMapper
-    - SnapKit
     - SwiftKeychainWrapper
     - SwiftyJSON
 
@@ -96,10 +90,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
-  iOSDropDown: 90608a7270234c503260ef13314907b6703b39aa
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
-  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 

@@ -70,4 +70,59 @@ public class RecipeService: NSObject{
                 completionHandler(title, recipes!)
             })
     }
+    
+    func deleteRecipe(recipeId: Int, sucessCompletionHandler: @escaping () -> (), errorCompletionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: String(recipeId)), method: .delete).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                sucessCompletionHandler()
+                break
+            case .failure( _):
+                errorCompletionHandler()
+                break
+            }
+        })
+    }
+    
+    //add 1 to recipe's favorites count
+    func addToFavoritesCount(recipeId: Int, sucessCompletionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "addFavorites/"+String(recipeId)), method: .put).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                sucessCompletionHandler()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
+    //remove 1 from recipe's favorites count
+    func removeFromFavoritesCount(recipeId: Int, sucessCompletionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "removeFavorites/"+String(recipeId)), method: .put).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                sucessCompletionHandler()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
+    //add 1 to recipe's views count
+    func addToViewsCount(recipeId: Int, sucessCompletionHandler: (() -> ())?) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "addViews/"+String(recipeId)), method: .put).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                sucessCompletionHandler?()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
 }
