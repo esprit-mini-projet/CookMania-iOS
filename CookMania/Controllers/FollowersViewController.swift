@@ -55,7 +55,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         let follower = self.followers[indexPath.item]
         
         //prepare the view
-        imageView.layer.borderWidth = 5
+        imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.height / 2
         
@@ -114,7 +114,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
             completion(true)
         }
         action.image = UIImage(named: "unfollow")
-        action.backgroundColor = UIColor.red
+        action.backgroundColor = UIColor.init(rgb: 0xE32929)
         return action
     }
     
@@ -135,18 +135,21 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
             completion(true)
         }
         action.image = UIImage(named: "follow")
-        action.backgroundColor = UIColor.blue
+        action.backgroundColor = UIColor.init(rgb: 0x477998)
         return action
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toProfile", sender: indexPath)
+        let follower = followers[indexPath.item].follower
+        if(follower?.id != appDelegate.user?.id){
+            performSegue(withIdentifier: "toProfile", sender: follower!)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
             let destination = segue.destination as! ProfileViewController
-            let user = followers[(sender as! IndexPath).item].follower!
+            let user = sender as! User
             
             destination.user = user
         }

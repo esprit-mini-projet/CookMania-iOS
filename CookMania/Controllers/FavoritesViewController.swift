@@ -99,7 +99,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             completion(true)
         }
         action.image = UIImage(named: "remove-favorite")
-        action.backgroundColor = UIColor.red
+        action.backgroundColor = UIColor.init(rgb: 0xE32929)
         return action
     }
     
