@@ -35,7 +35,7 @@
 		C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */; };
 		C32B1C7D2194DF2600153DC9 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */; };
 		C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */; };
-		C32B1C832194E21B00153DC9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C822194E21B00153DC9 /* EditProfileViewController.swift */; };
+		C32B1C832194E21B00153DC9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C822194E21B00153DC9 /* SettingsViewController.swift */; };
 		C32B1C852194EA0E00153DC9 /* BlitzViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */; };
 		C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */; };
 		C32B1C892194EEEE00153DC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C882194EEEE00153DC9 /* User.swift */; };
@@ -45,6 +45,7 @@
 		C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BBB60219B5058007CA580 /* GradientViewSecond.swift */; };
 		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
 		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
+		C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3834A3921B9A913006CE670 /* UIColor.swift */; };
 		C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
@@ -86,7 +87,7 @@
 		C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
-		C32B1C822194E21B00153DC9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		C32B1C822194E21B00153DC9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzViewController.swift; sourceTree = "<group>"; };
 		C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		C32B1C882194EEEE00153DC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -96,6 +97,7 @@
 		C35BBB60219B5058007CA580 /* GradientViewSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewSecond.swift; sourceTree = "<group>"; };
 		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
+		C3834A3921B9A913006CE670 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
@@ -170,11 +172,12 @@
 		C32B1C762194D9C600153DC9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */,
+				C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */,
 				C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */,
+				2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */,
 				C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */,
 				C3995DDC21964CE800179246 /* CommunityViewController.swift */,
-				C32B1C822194E21B00153DC9 /* EditProfileViewController.swift */,
+				C32B1C822194E21B00153DC9 /* SettingsViewController.swift */,
 				26101085218FC37B00E8344F /* FavoritesViewController.swift */,
 				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
 				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
@@ -188,7 +191,6 @@
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
-				C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +219,7 @@
 				2689B75821AF3E96007BBC54 /* ActionSegmentControl.swift */,
 				C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */,
 				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
+				C3834A3921B9A913006CE670 /* UIColor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -425,7 +428,7 @@
 				26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */,
 				2689B75B21AF4E87007BBC54 /* AddStepViewController.swift in Sources */,
 				C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */,
-				C32B1C832194E21B00153DC9 /* EditProfileViewController.swift in Sources */,
+				C32B1C832194E21B00153DC9 /* SettingsViewController.swift in Sources */,
 				2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */,
 				C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */,
 				2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */,
@@ -451,6 +454,7 @@
 				2689B75921AF3E96007BBC54 /* ActionSegmentControl.swift in Sources */,
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
 				C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */,
+				C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */,
 				C36AC734219E08D20070CDE8 /* Experience.swift in Sources */,
 				C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */,
 				C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */,
@@ -609,6 +613,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G96V29LG5G;
 				INFOPLIST_FILE = CookMania/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -627,6 +632,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G96V29LG5G;
 				INFOPLIST_FILE = CookMania/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

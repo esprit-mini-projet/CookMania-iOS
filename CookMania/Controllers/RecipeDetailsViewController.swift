@@ -112,21 +112,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var user: User?
     var ingredients: [Ingredient] = []
     
-    /*var recipe = Recipe(id: 1, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            Step(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            Step(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                    Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                    Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                    Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: []),
-            Step(name: "Let rest for 4 minutes", desc: "This is a common problem — the data is not ready when the table view first appears. Simply give correct answers to the questions that the table view data source and delegate are asked, given the current state of things;", time: 4, imageUrl: "melanzana", ingredients: [])
-        ], ingredients: [
-            Ingredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-            Ingredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-            Ingredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-        ])*/
-    
     var similarRecipes = [
         LocalRecipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: Float(3.0), imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
             LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: [LocalIngredient]()),
@@ -202,6 +187,22 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tapDetected()
+        ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
+            self.experiences = experiences
+            let exp = experiences.first(where: { $0.user?.id == self.appDelegate.user?.id})
+            if exp != nil {
+                self.recipeRatingInput.rating = Double((exp?.rating)!)
+                self.recipeRatingInput.settings.updateOnTouch = false
+            }else{
+                self.recipeRatingInput.rating = 0
+                self.recipeRatingInput.settings.updateOnTouch = true
+            }
+            self.experiencesCollectionView.reloadData()
+        })
+    }
+    
     func toAddExperience(rating: Double) {
         performSegue(withIdentifier: "toAddExperience", sender: rating)
     }
@@ -257,25 +258,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if self.user?.id == appDelegate.user?.id {
             visitProfileButton.isHidden = true
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tapDetected()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
-            self.experiences = experiences
-            let exp = experiences.first(where: { $0.user?.id == self.appDelegate.user?.id})
-            if exp != nil {
-                self.recipeRatingInput.rating = Double((exp?.rating)!)
-                self.recipeRatingInput.settings.updateOnTouch = false
-            }else{
-                self.recipeRatingInput.rating = 0
-                self.recipeRatingInput.settings.updateOnTouch = true
-            }
-            self.experiencesCollectionView.reloadData()
-        })
     }
     
     var isExpanded: CGFloat = 1

@@ -42,11 +42,11 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.width / 2
+        profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.height / 2
         profilePhotoImageView.layer.borderWidth = 5
         profilePhotoImageView.layer.borderColor = UIColor.white.cgColor
         
-        profilePhotoShadowView.layer.cornerRadius = profilePhotoImageView.frame.height / 2
+        profilePhotoShadowView.layer.cornerRadius = profilePhotoShadowView.frame.height / 2
         profilePhotoShadowView.layer.shadowColor = UIColor.black.cgColor
         profilePhotoShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         profilePhotoShadowView.layer.shadowOpacity = 0.8

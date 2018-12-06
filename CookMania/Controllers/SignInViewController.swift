@@ -23,21 +23,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     let CLIEND_ID = "323514335162-ut1n697tbepfjk414bsiju9g5fo567h4.apps.googleusercontent.com"
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
-    //Temp func call
-    func logoutAll() {AccessToken.current = nil
-        UserProfile.current = nil
-        let loginManager = LoginManager()
-        loginManager.logOut()
-        GIDSignIn.sharedInstance()?.signOut()
-        
-        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
-        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
-        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        UIApplication.shared.statusBarStyle = .lightContent
         GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
@@ -45,7 +33,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // change 2 to desired number of seconds
             //Temp func call
             //self.logoutAll()
             //Facebook User is already connected
@@ -58,6 +46,14 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 GIDSignIn.sharedInstance()?.signInSilently()
             }
          }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        (UIApplication.shared.value(forKey: "statusBar") as! UIView).backgroundColor = UIColor.clear
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        (UIApplication.shared.value(forKey: "statusBar") as! UIView).backgroundColor = UIColor(rgb: 0x2E5065)
     }
     
     //Google signin
