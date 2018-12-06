@@ -21,7 +21,7 @@ class Recipe: Mappable{
     var views: Int?
     var favorites: Int?
     var time: Int?
-    var userId: String?
+    var user: User?
     var steps: [Step]?
     var labels: [String]?
     
@@ -44,7 +44,7 @@ class Recipe: Mappable{
         rating <- map["rating"]
         favorites <- map["favorites"]
         time <- map["time"]
-        userId <- map["user_id"]
+        user <- map["user"]
         steps <- map["steps"]
         labels <- map["labels"]
     }

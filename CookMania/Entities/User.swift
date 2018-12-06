@@ -111,4 +111,8 @@ class User: Mappable {
         self.dateString = dateFroamtter.string(from: self.date!)
         print(dateString)
     }
+    
+    init(id: String){
+        self.id = id
+    }
 }

@@ -124,5 +124,25 @@ public class RecipeService: NSObject{
                 break
             }
         })
+      
+    func createRecipe(recipe: Recipe, completionHandler: @escaping (_ recipe: Recipe) -> ()){
+        var request = URLRequest(url: URL(string: buildURL(postfix: "create"))!)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        recipe.user = User(id: "au_1541965560996N3V6L")
+        let json = recipe.toJSONString(prettyPrint: false)
+        let data = (json?.data(using: .utf8))! as Data
+        
+        request.httpBody = data
+        
+        Alamofire.request(request).responseString { (response) in
+            print(response.result.value)
+            if response.response?.statusCode == 500{
+                return
+            }
+            let recipe = Mapper<Recipe>().map(JSONString: response.result.value!)!
+            completionHandler(recipe)
+        }
     }
 }
