@@ -109,7 +109,7 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
             completion(true)
         }
         action.image = UIImage(named: "delete")
-        action.backgroundColor = UIColor.init(rgb: 0x477998)
+        action.backgroundColor = UIColor.init(rgb: 0xE32929)
         return action
     }
     /*
