@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import FacebookLogin
+import FacebookCore
+import GoogleSignIn
+import SwiftKeychainWrapper
 
-class EditProfileViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +20,18 @@ class EditProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func logoutClicked(_ sender: Any) {
+        UserProfile.current = nil
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
