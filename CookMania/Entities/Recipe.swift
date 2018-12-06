@@ -19,6 +19,7 @@ class Recipe: Mappable{
     var imageUrl: String?
     var rating: Float?
     var views: Int?
+    var favorites: Int?
     var time: Int?
     var user: User?
     var steps: [Step]?
@@ -41,6 +42,7 @@ class Recipe: Mappable{
         imageUrl <- map["image_url"]
         views <- map["views"]
         rating <- map["rating"]
+        favorites <- map["favorites"]
         time <- map["time"]
         user <- map["user"]
         steps <- map["steps"]

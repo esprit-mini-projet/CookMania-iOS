@@ -118,7 +118,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @objc func addRecipe() {
-        performSegue(withIdentifier: "toAddRecipe", sender: nil)
+        //performSegue(withIdentifier: "toAddRecipe", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
