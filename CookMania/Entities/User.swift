@@ -76,4 +76,8 @@ class User: Mappable {
         self.username = username
         self.imageUrl = imageUrl
     }
+    
+    init(id: String){
+        self.id = id
+    }
 }
