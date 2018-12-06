@@ -170,8 +170,9 @@
 		C32B1C762194D9C600153DC9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */,
+				C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */,
 				C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */,
+				2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */,
 				C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */,
 				C3995DDC21964CE800179246 /* CommunityViewController.swift */,
 				C32B1C822194E21B00153DC9 /* EditProfileViewController.swift */,
@@ -188,7 +189,6 @@
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
-				C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

@@ -34,11 +34,8 @@ class AddExperienceViewController: UIViewController, GalleryControllerDelegate {
     
     @IBAction func saveAction(_ sender: Any) {
         let experience = Experience(user: appDelegate.user!, rating: Float(ratingView.rating), comment: commentTextView.text!, imageUrl: "")
-        /*ExperienceService.getInstance().addRecipeExperience(experience: experience, recipeId: (recipe?.id)!, completionHandler: {
-            self.navigationController?.popViewController(animated: true)
-        })*/
         ExperienceService.getInstance().addRecipeExperience(experience: experience, image: experienceImage!, recipeId: (recipe?.id)!, completionHandler: {
-            print("Uploaded")
+            self.navigationController?.popViewController(animated: true)
         })
     }
     
