@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Gallery
 
-class AddRecipeContainerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UITextViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSource, UITextViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GalleryControllerDelegate{
     
     let blue = UIColor(red: 71/255, green: 121/255, blue: 152/255, alpha: 1.0)
     let white = UIColor.white
@@ -25,7 +26,6 @@ class AddRecipeContainerViewController: UIViewController, UIImagePickerControlle
     @IBOutlet weak var descText: UITextView!
     @IBOutlet weak var labelsCV: UICollectionView!
     
-    var recipe: Recipe?
     var imageChanged = false
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -70,30 +70,38 @@ class AddRecipeContainerViewController: UIViewController, UIImagePickerControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipe = Recipe()
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(AddRecipeContainerViewController.importImage))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(singleTap)
         
         descText.text = descriptionPlaceHolder
         descText.textColor = UIColor.lightGray
         descText.layer.borderColor = UIColor.lightGray.cgColor
     }
     
-    @objc func importImage(){
-        let picker = UIImagePickerController()
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
+    @IBAction func selectImage(_ sender: Any) {
+        Config.tabsToShow = [.cameraTab, .imageTab]
+        Config.Camera.imageLimit = 1
+        
+        let gallery = GalleryController()
+        gallery.delegate = self
+        present(gallery, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.editedImage] as? UIImage else { return }
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        controller.dismiss(animated: true, completion: nil)
+        images[0].resolve(completion: { image in
+            self.imageView.image = image!
+            self.imageChanged = true
+        })
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
         
-        dismiss(animated: true)
-        
-        imageView.image = image
-        imageChanged = true
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     func addSteps(_ sender: Any){
@@ -117,19 +125,27 @@ class AddRecipeContainerViewController: UIViewController, UIImagePickerControlle
             showAlert()
             return
         }
-        recipe?.name = title
-        recipe?.servings = Int(servings)
-        recipe?.calories = Int(calories)
-        recipe?.time = Int(time)
-        recipe!.steps = [Step]()*/
-        performSegue(withIdentifier: "toAddStep", sender: nil)
+        guard let desc = descText.text, !desc.isEmpty else{
+        showAlert()
+        return
+        }*/
+        let recipe = Recipe()/*
+        recipe.name = title
+        recipe.description = desc
+        recipe.servings = Int(servings)
+        recipe.calories = Int(calories)
+        recipe.time = Int(time)*/
+        recipe.steps = [Step]()
+        performSegue(withIdentifier: "toAddStep", sender: recipe)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAddStep"{
-            let dest = segue.destination as! AddStepViewController/*
+            let dest = segue.destination as! AddStepViewController
+            let recipe = sender as! Recipe
             dest.recipe = recipe
-            dest.recipeImage = imageView.image*/
+            dest.recipeImage = imageView.image
+            dest.images = [UIImage]()
         }
     }
     

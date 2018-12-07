@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Gallery
 
-class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GalleryControllerDelegate {
     
     let descriptionPlaceHolder = "Description..."
     
@@ -16,14 +17,11 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var descText: UITextView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeText: UITextField!
-    @IBOutlet weak var addImageButton: UIButton!
     
     var recipe: Recipe?
     var recipeImage: UIImage?
     var step: Step?
-    var images = [UIImage?]()
-    var currentImage: UIImage?
-    var imageChanged = false
+    var images: [UIImage?]?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return step!.ingredients!.count
@@ -39,7 +37,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         
         //affecting values
         if let n = step!.ingredients![indexPath.row].quantity{
-            print(n)
             quantity.text = String(n)
         }else{
             quantity.text = nil
@@ -86,63 +83,39 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         descText.layer.borderColor = UIColor.lightGray.cgColor
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(AddRecipeContainerViewController.importImage))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(singleTap)
         
-        if let _ = step{
-            loadFromStep()
-            return
-        }
         step = Step()
         step?.ingredients = [Ingredient(), Ingredient(), Ingredient()]
-        tableView.reloadData()
+        
         descText.text = descriptionPlaceHolder
         descText.textColor = UIColor.lightGray
-        imageView.image = UIImage(named: "placeholder-img")
-        timeText.text = nil
-        imageChanged = false
     }
     
-    func loadFromStep(){
-        tableView.reloadData()
+    @IBAction func selectImage(_ sender: Any) {
+        Config.tabsToShow = [.cameraTab, .imageTab]
+        Config.Camera.imageLimit = 1
         
-        if let desc = step?.description{
-            descText.text = desc
-        }
-        if let time = step?.time{
-            timeText.text = String(time)
-        }else{
-            timeText.text = nil
-        }
-        
-        guard let cgImage = currentImage?.cgImage?.copy() else {
-            print("current image could not be copied")
-            return
-        }
-        imageView.image = UIImage(cgImage: cgImage,
-                               scale: imageView.image!.scale,
-                               orientation: imageView.image!.imageOrientation)
+        let gallery = GalleryController()
+        gallery.delegate = self
+        present(gallery, animated: true, completion: nil)
     }
     
-    @objc func importImage(){
-        let picker = UIImagePickerController()
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        controller.dismiss(animated: true, completion: nil)
+        images[0].resolve(completion: { image in
+            self.imageView.image = image!
+        })
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.editedImage] as? UIImage else { return }
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
         
-        dismiss(animated: true)
-        
-        imageView.image = image
-        imageChanged = true
-        let cgImage = image.cgImage!.copy()
-        currentImage = UIImage(cgImage: cgImage!,
-                               scale: imageView.image!.scale,
-                               orientation: imageView.image!.imageOrientation)
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func addIngredient(_ sender: Any){
@@ -152,7 +125,7 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         tableView.endUpdates()
     }
     
-    @IBAction func addStep(_ sender: Any){
+    func checkStep(){
         guard let desc = descText.text, !desc.isEmpty else{
             showAlert()
             return
@@ -171,58 +144,48 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
                 return
             }
         }
+        step!.description = desc
+        if let time = timeText.text{
+            step!.time = Int(time)
+        }else{
+            step!.time = nil
+        }
         recipe!.steps!.append(step!)
-        step = nil
-        images.append(currentImage)
-        currentImage = nil
-        self.viewDidLoad()
+        images?.append(imageView.image)
     }
     
-    /*@IBAction func back(_ sender: Any){
-        if recipe!.steps!.count == 0{
-            navigationController?.popViewController(animated: true)
-        }else{
-            step = recipe!.steps!.popLast()
-            currentImage = images.popLast()!
-            self.viewDidLoad()
-        }
-    }*/
+    @IBAction func addStep(_ sender: Any){
+        //checkStep()
+        performSegue(withIdentifier: "toAddStep", sender: nil)
+    }
     
-    @IBAction func finish(_ sender: Any){
-        guard let desc = descText.text, !desc.isEmpty else{
-            showAlert()
-            return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAddStep"{
+            let dest = segue.destination as! AddStepViewController
+            dest.recipe = recipe
+            dest.recipeImage = recipeImage
+            dest.images = images
         }
-        for ingredient in step!.ingredients!{
-            guard let name = ingredient.name, !name.isEmpty else{
-                showAlert()
-                return
-            }
-            guard let quantity = ingredient.quantity, quantity > 0 else{
-                showAlert()
-                return
-            }
-            guard let unit = ingredient.unit, !unit.isEmpty else{
-                showAlert()
-                return
-            }
-        }
-        recipe!.steps!.append(step!)
-        images.append(currentImage)
+    }
+    
+    func finish(){
+        //checkStep()
         
         recipe?.imageUrl = ""
         recipe?.description = "very good"
         
-        for (i, step) in recipe!.steps!.enumerated(){
+        /*for (i, step) in recipe!.steps!.enumerated(){
             if let _ = step.time {
             }else{
                 step.time = 0
             }
-            if let _ = images[i] {
+            if let _ = images![i] {
             } else{
                 step.imageUrl = ""
             }
-        }
+        }*/
+        
+        print("yo")
         
         /*RecipeService.getInstance().createRecipe(recipe: recipe!) { (recipe) in
             

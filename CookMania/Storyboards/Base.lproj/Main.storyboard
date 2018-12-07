@@ -533,7 +533,7 @@ d2lkdGggPSAxNxAyA
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UUJ-ki-5WI"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="gfz-t2-JDY"/>
+                    <navigationItem key="navigationItem" title="Home" id="gfz-t2-JDY"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1250"/>
                     <connections>
@@ -826,6 +826,7 @@ d2lkdGggPSAxNxAyA
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <segue destination="De3-2X-Xfy" kind="show" identifier="toAddStep" id="72L-3e-IyP"/>
                     </connections>
@@ -968,6 +969,9 @@ d2lkdGggPSAxNxAyA
                                     <constraint firstAttribute="width" constant="25" id="dNY-Ym-ZXp"/>
                                 </constraints>
                                 <state key="normal" image="add-image"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="J5c-1b-iLD" eventType="touchUpInside" id="f8E-sp-Cez"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipe Title..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-M5-Wci" userLabel="title">
                                 <rect key="frame" x="16" y="166.5" width="343" height="33"/>
@@ -1175,9 +1179,9 @@ d2lkdGggPSAxNxAyA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LiX-bP-z7l">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="133" width="375" height="647"/>
                                 <connections>
-                                    <segue destination="pbv-3u-x6g" kind="embed" id="gvL-Vb-F03"/>
+                                    <segue destination="pbv-3u-x6g" kind="embed" identifier="toAddStepContainer" id="gvL-Vb-F03"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1192,7 +1196,11 @@ d2lkdGggPSAxNxAyA
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Add Step" id="ImQ-20-Wsz">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ufX-zf-iQ8"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ufX-zf-iQ8">
+                            <connections>
+                                <action selector="finish:" destination="De3-2X-Xfy" id="0VR-uA-ucp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cup-Kz-wmR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3214,6 +3222,9 @@ EDE5OA
                                     <constraint firstAttribute="height" constant="25" id="f2w-oW-0hT"/>
                                 </constraints>
                                 <state key="normal" image="add-image"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="pbv-3u-x6g" eventType="touchUpInside" id="cwj-4i-EaF"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVp-hA-Fw6">
                                 <rect key="frame" x="16" y="171.5" width="343" height="80"/>
@@ -3248,7 +3259,7 @@ EDE5OA
                                     <action selector="timeChanged:" destination="De3-2X-Xfy" eventType="editingChanged" id="rdp-bx-6fy"/>
                                 </connections>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0bY-re-lZH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0bY-re-lZH">
                                 <rect key="frame" x="16" y="291.5" width="343" height="245.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -3256,7 +3267,7 @@ EDE5OA
                                         <rect key="frame" x="0.0" y="28" width="343" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Drf-Sx-EI6" id="TYN-Ui-pnb">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="100" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qbz-2r-Ycs" userLabel="quantity" customClass="ActionTextField" customModule="CookMania" customModuleProvider="target">
@@ -3366,7 +3377,6 @@ EDE5OA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addImageButton" destination="JV9-v5-g0B" id="dMh-WB-rjP"/>
                         <outlet property="descText" destination="BVp-hA-Fw6" id="5Bi-oz-xR4"/>
                         <outlet property="imageView" destination="Jhr-HC-hfG" id="Oru-Jg-fo9"/>
                         <outlet property="tableView" destination="0bY-re-lZH" id="i2N-Uz-prb"/>
