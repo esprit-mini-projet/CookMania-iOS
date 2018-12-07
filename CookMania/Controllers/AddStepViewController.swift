@@ -19,14 +19,14 @@ class AddStepViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var timeText: UITextField!
 
     var recipe: Recipe?
+    var recipeImage: UIImage?
     var step: Step?
-    var images: [UIImage]?
+    var images = [UIImage?]()
     var currentImage: UIImage?
     var imageChanged = false
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return step!.ingredients!.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +74,6 @@ class AddStepViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     @objc func unitDidChange(_ sender: ActionSegmentControl) {
         step!.ingredients![sender.indexPath!.row].unit = sender.titleForSegment(at: sender.selectedSegmentIndex)
-        print(sender.titleForSegment(at: sender.selectedSegmentIndex))
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -100,6 +99,9 @@ class AddStepViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.reloadData()
         descText.text = descriptionPlaceHolder
         descText.textColor = UIColor.lightGray
+        imageView.image = UIImage(named: "placeholder-img")
+        timeText.text = nil
+        imageChanged = false
     }
     
     func loadFromStep(){
@@ -108,8 +110,14 @@ class AddStepViewController: UIViewController, UITableViewDataSource, UITableVie
         if let desc = step?.description{
             descText.text = desc
         }
+        if let time = step?.time{
+            timeText.text = String(time)
+        }else{
+            timeText.text = nil
+        }
         
         guard let cgImage = currentImage?.cgImage?.copy() else {
+            print("current image could not be copied")
             return
         }
         imageView.image = UIImage(cgImage: cgImage,
@@ -131,16 +139,42 @@ class AddStepViewController: UIViewController, UITableViewDataSource, UITableVie
         
         imageView.image = image
         imageChanged = true
+        let cgImage = image.cgImage!.copy()
+        currentImage = UIImage(cgImage: cgImage!,
+                               scale: imageView.image!.scale,
+                               orientation: imageView.image!.imageOrientation)
     }
     
     @IBAction func addIngredient(_ sender: Any){
-        
+        step!.ingredients!.append(Ingredient())
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: step!.ingredients!.count - 1, section: 0)], with: .automatic)
+        tableView.endUpdates()
     }
     
     @IBAction func addStep(_ sender: Any){
-        
+        guard let desc = descText.text, !desc.isEmpty else{
+            showAlert()
+            return
+        }
+        for ingredient in step!.ingredients!{
+            guard let name = ingredient.name, !name.isEmpty else{
+                showAlert()
+                return
+            }
+            guard let quantity = ingredient.quantity, quantity > 0 else{
+                showAlert()
+                return
+            }
+            guard let unit = ingredient.unit, !unit.isEmpty else{
+                showAlert()
+                return
+            }
+        }
         recipe!.steps!.append(step!)
         step = nil
+        images.append(currentImage)
+        currentImage = nil
         self.viewDidLoad()
     }
     
@@ -149,18 +183,65 @@ class AddStepViewController: UIViewController, UITableViewDataSource, UITableVie
             navigationController?.popViewController(animated: true)
         }else{
             step = recipe!.steps!.popLast()
+            currentImage = images.popLast()!
             self.viewDidLoad()
         }
     }
     
     @IBAction func finish(_ sender: Any){
-        print("yo")
+        guard let desc = descText.text, !desc.isEmpty else{
+            showAlert()
+            return
+        }
+        for ingredient in step!.ingredients!{
+            guard let name = ingredient.name, !name.isEmpty else{
+                showAlert()
+                return
+            }
+            guard let quantity = ingredient.quantity, quantity > 0 else{
+                showAlert()
+                return
+            }
+            guard let unit = ingredient.unit, !unit.isEmpty else{
+                showAlert()
+                return
+            }
+        }
+        recipe!.steps!.append(step!)
+        images.append(currentImage)
+        
+        recipe?.imageUrl = ""
+        recipe?.description = "very good"
+        
+        for (i, step) in recipe!.steps!.enumerated(){
+            if let _ = step.time {
+            }else{
+                step.time = 0
+            }
+            if let _ = images[i] {
+            } else{
+                step.imageUrl = ""
+            }
+        }
+        
+        RecipeService.getInstance().createRecipe(recipe: recipe!) { (recipe) in
+            
+        }
     }
     
     @IBAction func timeChanged(_ sender: Any){
         if let text = timeText.text{
             step?.time = Int(text)
         }
+    }
+    
+    func showAlert(){
+        let alert = UIAlertController(title: "Information Missing", message: "Make sure to add all necessary information.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        
+        self.present(alert,animated: true,completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
