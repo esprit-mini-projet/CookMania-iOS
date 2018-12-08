@@ -125,4 +125,29 @@ public class RecipeService: NSObject{
             }
         })
     }
+    
+    func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping () -> ()) {
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(recipeImage.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/png")
+            multipartFormData.append((recipe.userId)!.data(using: .utf8)!, withName: "user_id", mimeType: "text/plain")
+            multipartFormData.append((recipe.name)!.data(using: .utf8)!, withName: "name", mimeType: "text/plain")
+            multipartFormData.append((recipe.description)!.data(using: .utf8)!, withName: "description", mimeType: "text/plain")
+            multipartFormData.append(String(recipe.calories!).data(using: .utf8)!, withName: "calories", mimeType: "text/plain")
+            multipartFormData.append(String(recipe.time!).data(using: .utf8)!, withName: "time", mimeType: "text/plain")
+            multipartFormData.append(String(recipe.servings!).data(using: .utf8)!, withName: "servings", mimeType: "text/plain")
+            
+            let labelsData = try! JSONSerialization.data(withJSONObject: recipe.labels!, options: [])
+            let labelsJsonString = String(data: labelsData, encoding: .utf8)!
+            multipartFormData.append(labelsJsonString.data(using: .utf8)!, withName: "labels")
+            
+        }, to:ServiceUtils.buildURL(route: ROUTE, postfix: "add")){ (result) in
+            switch result {
+            case .success( _, _, _):
+                completionHandler()
+            case .failure(let encodingError):
+                print("",encodingError.localizedDescription)
+                break
+            }
+        }
+    }
 }

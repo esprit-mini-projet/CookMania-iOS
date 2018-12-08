@@ -171,9 +171,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     func finish(){
         //checkStep()
         
-        recipe?.imageUrl = ""
-        recipe?.description = "very good"
-        
         /*for (i, step) in recipe!.steps!.enumerated(){
             if let _ = step.time {
             }else{
@@ -185,11 +182,18 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
             }
         }*/
         
-        print("yo")
+        let recipe = Recipe()
+        recipe.name = "pizza"
+        recipe.calories = 444
+        recipe.servings = 3
+        recipe.description = "delicious"
+        recipe.time = 45
+        recipe.labels = ["Cheap", "Healthy", "Date Night"]
+        recipe.userId = (UIApplication.shared.delegate as! AppDelegate).user?.id!
         
-        /*RecipeService.getInstance().createRecipe(recipe: recipe!) { (recipe) in
-            
-        }*/
+        RecipeService.getInstance().createRecipe(recipe: recipe, recipeImage: recipeImage!, images: images!) { () in
+            print("success")
+        }
     }
     
     func showAlert(){

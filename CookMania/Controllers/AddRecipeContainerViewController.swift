@@ -104,30 +104,30 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         controller.dismiss(animated: true, completion: nil)
     }
     
-    func addSteps(_ sender: Any){
+    func checkRecipe() -> Recipe?{
         /*guard imageChanged else{
             showAlert()
-            return
+            return nil
         }
         guard let title = titleText.text, !title.isEmpty else{
             showAlert()
-            return
+            return nil
         }
         guard let servings = servingsText.text, !servings.isEmpty else{
             showAlert()
-            return
+            return nil
         }
         guard let calories = caloriesText.text, !calories.isEmpty else{
             showAlert()
-            return
+            return nil
         }
         guard let time = timeText.text, !time.isEmpty else{
             showAlert()
-            return
+            return nil
         }
         guard let desc = descText.text, !desc.isEmpty else{
-        showAlert()
-        return
+            showAlert()
+            return nil
         }*/
         let recipe = Recipe()/*
         recipe.name = title
@@ -136,17 +136,7 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         recipe.calories = Int(calories)
         recipe.time = Int(time)*/
         recipe.steps = [Step]()
-        performSegue(withIdentifier: "toAddStep", sender: recipe)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toAddStep"{
-            let dest = segue.destination as! AddStepViewController
-            let recipe = sender as! Recipe
-            dest.recipe = recipe
-            dest.recipeImage = imageView.image
-            dest.images = [UIImage]()
-        }
+        return recipe
     }
     
     func showAlert(){

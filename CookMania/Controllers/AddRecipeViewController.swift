@@ -10,6 +10,7 @@ import UIKit
 
 class AddRecipeViewController: UIViewController {
 
+    var containerController: AddRecipeContainerViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +18,21 @@ class AddRecipeViewController: UIViewController {
     
     
     @IBAction func addSteps(_ sender: Any) {
-        performSegue(withIdentifier: "toAddStep", sender: nil)
+        if let recipe = containerController!.checkRecipe() {
+            performSegue(withIdentifier: "toAddStep", sender: recipe)
+        }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAddRecipeContainer"{
+            containerController = segue.destination as? AddRecipeContainerViewController
+        }else if segue.identifier == "toAddStep"{
+            let dest = segue.destination as! AddStepViewController
+            let recipe = sender as! Recipe
+            dest.recipe = recipe
+            dest.recipeImage = containerController!.imageView.image
+            dest.images = [UIImage]()
+        }
+    }
     
 }
