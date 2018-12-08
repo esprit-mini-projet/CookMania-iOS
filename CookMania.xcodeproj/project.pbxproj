@@ -28,6 +28,7 @@
 		2689B75B21AF4E87007BBC54 /* AddStepContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */; };
 		26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */; };
 		26925D6B21BAEFF700773AB3 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */; };
+		2693920021BC895A00900C9F /* SuggestionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269391FF21BC895A00900C9F /* SuggestionImageView.swift */; };
 		269F7DDC219F4EDE00478F20 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269F7DDB219F4EDE00478F20 /* RecipeService.swift */; };
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
 		26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3679121AE002000D7EEF8 /* ActionTextField.swift */; };
@@ -79,6 +80,7 @@
 		2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStepContainerViewController.swift; sourceTree = "<group>"; };
 		26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepViewController.swift; sourceTree = "<group>"; };
 		26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		269391FF21BC895A00900C9F /* SuggestionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionImageView.swift; sourceTree = "<group>"; };
 		269F7DDB219F4EDE00478F20 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		26B9E89C2194579F00E326F3 /* VKCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKCheckBox.swift; sourceTree = "<group>"; };
 		26D3679121AE002000D7EEF8 /* ActionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTextField.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */,
 				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
 				C3834A3921B9A913006CE670 /* UIColor.swift */,
+				269391FF21BC895A00900C9F /* SuggestionImageView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				C32B1C832194E21B00153DC9 /* SettingsViewController.swift in Sources */,
 				2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */,
 				C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */,
+				2693920021BC895A00900C9F /* SuggestionImageView.swift in Sources */,
 				2608CEBE218D0D8E008A706E /* AppDelegate.swift in Sources */,
 				C32B1C852194EA0E00153DC9 /* BlitzViewController.swift in Sources */,
 				262543B121937811003601A4 /* GradientView.swift in Sources */,

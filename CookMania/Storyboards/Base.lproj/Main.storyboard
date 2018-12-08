@@ -211,16 +211,16 @@ d2lkdGggPSAxNxAyA
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWq-Aw-BMI" userLabel="SuggestionView">
                                                 <rect key="frame" x="8" y="8" width="359" height="400"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-8a-Prh" userLabel="1">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-8a-Prh" userLabel="1" customClass="SuggestionImageView" customModule="CookMania" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="176" height="196"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9HS-WN-O3Y" userLabel="2">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9HS-WN-O3Y" userLabel="2" customClass="SuggestionImageView" customModule="CookMania" customModuleProvider="target">
                                                         <rect key="frame" x="183" y="0.0" width="176" height="196"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3a7-MK-vem" userLabel="3">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3a7-MK-vem" userLabel="3" customClass="SuggestionImageView" customModule="CookMania" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="204" width="176" height="196"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-k2-JHW" userLabel="4">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-k2-JHW" userLabel="4" customClass="SuggestionImageView" customModule="CookMania" customModuleProvider="target">
                                                         <rect key="frame" x="183" y="204" width="176" height="196"/>
                                                     </imageView>
                                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mU7-MX-Q2J" customClass="GradientViewSecond" customModule="CookMania" customModuleProvider="target">
@@ -539,10 +539,10 @@ d2lkdGggPSAxNxAyA
                     <connections>
                         <outlet property="cheapCV" destination="b3k-hA-b5O" id="83F-YF-yfK"/>
                         <outlet property="healthyCV" destination="zc4-hO-ZG1" id="EeD-9v-n9v"/>
-                        <outlet property="suggestion1" destination="dPR-8a-Prh" id="Y9f-B3-jKa"/>
-                        <outlet property="suggestion2" destination="9HS-WN-O3Y" id="qdh-P6-MbP"/>
-                        <outlet property="suggestion3" destination="3a7-MK-vem" id="tYk-QZ-Usb"/>
-                        <outlet property="suggestion4" destination="OMh-k2-JHW" id="ffi-84-vQ8"/>
+                        <outlet property="suggestion1" destination="dPR-8a-Prh" id="ysC-80-cPD"/>
+                        <outlet property="suggestion2" destination="9HS-WN-O3Y" id="6as-Qb-h92"/>
+                        <outlet property="suggestion3" destination="3a7-MK-vem" id="vz3-86-RB4"/>
+                        <outlet property="suggestion4" destination="OMh-k2-JHW" id="Rlt-eK-V0b"/>
                         <outlet property="suggestionsTitle" destination="BLy-Yf-4Wf" id="2jy-W9-Ysx"/>
                         <outlet property="topRatedCV" destination="xmV-UH-ANC" id="BML-qR-2t1"/>
                         <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="DtB-Bu-ib5"/>

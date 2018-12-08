@@ -129,16 +129,16 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     
     func checkStep(){
         guard let desc = descText.text, !desc.isEmpty else{
-            showAlert()
+            showAlert(title: "Description Missing", message: "Make sure to write a description.")
             return
         }
         for ingredient in step!.ingredients!{
             guard let name = ingredient.name, !name.isEmpty else{
-                showAlert()
+                showAlert(title: "Ingredient name Missing", message: "Make sure to add all ingredient names.")
                 return
             }
             guard let quantity = ingredient.quantity, quantity > 0 else{
-                showAlert()
+                showAlert(title: "Ingredient Quantity Missing", message: "Make sure to add all ingredient quantities.")
                 return
             }
             if let _ = ingredient.unit {
@@ -184,11 +184,12 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         
         RecipeService.getInstance().createRecipe(recipe: recipe!, recipeImage: recipeImage!, images: images!) { (isSuccess)  in
             print(isSuccess)
+            self.showAlert(title: "Error", message: "An error has occured on the server. We apologize.")
         }
     }
     
-    func showAlert(){
-        let alert = UIAlertController(title: "Information Missing", message: "Make sure to add all necessary information.", preferredStyle: .alert)
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "ok", style: .cancel, handler: nil)
         alert.addAction(action)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShoppingListViewController: UIViewController, UITableViewDataSource {
+class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var cells = [Any]()
     
@@ -39,6 +39,10 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
             checkBox.cornerRadius = 0*/
             return cell!
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
 

@@ -126,27 +126,27 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     
     func checkRecipe() -> Recipe?{
         guard imageChanged else{
-            showAlert()
+            showAlert(title: "Image Missing", message: "Make sure to add an image for your recipe.")
             return nil
         }
         guard let title = titleText.text, !title.isEmpty else{
-            showAlert()
+            showAlert(title: "Title Missing", message: "Make sure to add a title for the recipe.")
             return nil
         }
         guard let servings = servingsText.text, !servings.isEmpty, Int(servings)! > 0 else{
-            showAlert()
+            showAlert(title: "Number of servings Missing", message: "Make sure to add the number of servings.")
             return nil
         }
         guard let calories = caloriesText.text, !calories.isEmpty, Int(calories)! > 0 else{
-            showAlert()
+            showAlert(title: "Calories Missing", message: "Make sure to add the recipe calories.")
             return nil
         }
         guard let time = timeText.text, !time.isEmpty, Int(time)! > 0 else{
-            showAlert()
+            showAlert(title: "Time Missing", message: "Make sure to add the recipe duration.")
             return nil
         }
         guard let desc = descText.text, !desc.isEmpty else{
-            showAlert()
+            showAlert(title: "Description Missing", message: "Make sure to add a description for your recipe.")
             return nil
         }
         recipe!.name = title
@@ -158,8 +158,8 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         return recipe
     }
     
-    func showAlert(){
-        let alert = UIAlertController(title: "Information Missing", message: "Make sure to add all necessary information.", preferredStyle: .alert)
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "ok", style: .cancel, handler: nil)
         alert.addAction(action)
