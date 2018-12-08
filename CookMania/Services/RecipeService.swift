@@ -144,11 +144,15 @@ public class RecipeService: NSObject{
             switch result {
             case .success( let upload, _, _):
                 upload.responseString(completionHandler: { (response) in
-                    let json = JSON(parseJSON: response.result.value!)
-                    let recipeId = json["id"].intValue
-                    self.addSteps(recipeId: recipeId, steps: recipe.steps!, images: images, completionHandler: { (isSuccess) in
-                        completionHandler(isSuccess)
-                    })
+                    if response.response?.statusCode == 200 {
+                        let json = JSON(parseJSON: response.result.value!)
+                        let recipeId = json["id"].intValue
+                        self.addSteps(recipeId: recipeId, steps: recipe.steps!, images: images, completionHandler: { (isSuccess) in
+                            completionHandler(isSuccess)
+                        })
+                    }else{
+                        completionHandler(false)
+                    }
                 })
             case .failure(let encodingError):
                 print("",encodingError.localizedDescription)
@@ -192,7 +196,7 @@ public class RecipeService: NSObject{
             switch result {
             case .success( let upload, _, _):
                 upload.responseString(completionHandler: { (response) in
-                    completionHandler(response.result.isSuccess)
+                    completionHandler(response.response?.statusCode == 200)
                 })
             case .failure(let encodingError):
                 print("",encodingError.localizedDescription)

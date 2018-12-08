@@ -15,8 +15,19 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     let white = UIColor.white
     var labelColor: CGColor?
     let descriptionPlaceHolder = "Description..."
-    let labels = ["Cheap", "Easy", "Kids Friendly", "Expensive", "Healthy", "Date Night",
-                      "Fast", "Take Time", "Beginner Friendly", "Breakfast", "Dinner"]
+    let labels = [
+        "Healthy",
+        "Cheap",
+        "Easy",
+        "Fast",
+        "Vegetarian",
+        "Breakfast",
+        "Dinner",
+        "Date Night",
+        "Kids Friendly",
+        "Takes Time"]
+    
+    var recipe: Recipe?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleText: UITextField!
@@ -41,7 +52,6 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.cgColor
         labelColor = button.titleColor(for: .normal)?.cgColor.copy()
-        
         return cell
     }
     
@@ -61,15 +71,25 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
             sender.backgroundColor = blue
             sender.setTitleColor(white, for: .normal)
             sender.layer.borderWidth = 0
+            recipe?.labels?.append(sender.title(for: .normal)!)
             return
         }
         sender.backgroundColor = white
         sender.setTitleColor(UIColor(cgColor: labelColor!), for: .normal)
         sender.layer.borderWidth = 1
+        for (i, label) in (recipe?.labels?.enumerated())!{
+            if label == sender.title(for: .normal)! {
+                recipe?.labels?.remove(at: i)
+                return
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recipe = Recipe()
+        recipe?.labels = [String]()
         
         descText.text = descriptionPlaceHolder
         descText.textColor = UIColor.lightGray
@@ -105,7 +125,7 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     }
     
     func checkRecipe() -> Recipe?{
-        /*guard imageChanged else{
+        guard imageChanged else{
             showAlert()
             return nil
         }
@@ -113,29 +133,28 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
             showAlert()
             return nil
         }
-        guard let servings = servingsText.text, !servings.isEmpty else{
+        guard let servings = servingsText.text, !servings.isEmpty, Int(servings)! > 0 else{
             showAlert()
             return nil
         }
-        guard let calories = caloriesText.text, !calories.isEmpty else{
+        guard let calories = caloriesText.text, !calories.isEmpty, Int(calories)! > 0 else{
             showAlert()
             return nil
         }
-        guard let time = timeText.text, !time.isEmpty else{
+        guard let time = timeText.text, !time.isEmpty, Int(time)! > 0 else{
             showAlert()
             return nil
         }
         guard let desc = descText.text, !desc.isEmpty else{
             showAlert()
             return nil
-        }*/
-        let recipe = Recipe()/*
-        recipe.name = title
-        recipe.description = desc
-        recipe.servings = Int(servings)
-        recipe.calories = Int(calories)
-        recipe.time = Int(time)*/
-        recipe.steps = [Step]()
+        }
+        recipe!.name = title
+        recipe!.description = desc
+        recipe!.servings = Int(servings)
+        recipe!.calories = Int(calories)
+        recipe!.time = Int(time)
+        recipe!.steps = [Step]()
         return recipe
     }
     
@@ -150,7 +169,7 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
-            textView.text = nil
+            textView.text = ""
             textView.textColor = UIColor.black
         }
     }

@@ -22,6 +22,7 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     var recipeImage: UIImage?
     var step: Step?
     var images: [UIImage?]?
+    var imageChanged = false
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return step!.ingredients!.count
@@ -104,6 +105,7 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         controller.dismiss(animated: true, completion: nil)
         images[0].resolve(completion: { image in
             self.imageView.image = image!
+            self.imageChanged = true
         })
     }
     
@@ -139,23 +141,30 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
                 showAlert()
                 return
             }
-            guard let unit = ingredient.unit, !unit.isEmpty else{
-                showAlert()
-                return
+            if let _ = ingredient.unit {
+                if ingredient.unit == "N/A"{
+                    ingredient.unit = ""
+                }
+            }else{
+                ingredient.unit = "g"
             }
         }
         step!.description = desc
-        if let time = timeText.text{
-            step!.time = Int(time)
+        if let time = Int(timeText.text!){
+            step!.time = time
         }else{
-            step!.time = nil
+            step!.time = 0
         }
         recipe!.steps!.append(step!)
-        images?.append(imageView.image)
+        if imageChanged {
+            images?.append(imageView.image)
+        }else {
+            images?.append(nil)
+        }
     }
     
     @IBAction func addStep(_ sender: Any){
-        //checkStep()
+        checkStep()
         performSegue(withIdentifier: "toAddStep", sender: nil)
     }
     
@@ -169,29 +178,11 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     }
     
     func finish(){
-        //checkStep()
+        checkStep()
         
-        /*for (i, step) in recipe!.steps!.enumerated(){
-            if let _ = step.time {
-            }else{
-                step.time = 0
-            }
-            if let _ = images![i] {
-            } else{
-                step.imageUrl = ""
-            }
-        }*/
+        recipe!.userId = (UIApplication.shared.delegate as! AppDelegate).user?.id!
         
-        let recipe = Recipe()
-        recipe.name = "pizza"
-        recipe.calories = 444
-        recipe.servings = 3
-        recipe.description = "delicious"
-        recipe.time = 45
-        recipe.labels = ["Cheap", "Healthy", "Date Night"]
-        recipe.userId = (UIApplication.shared.delegate as! AppDelegate).user?.id!
-        
-        RecipeService.getInstance().createRecipe(recipe: recipe, recipeImage: recipeImage!, images: images!) { (isSuccess)  in
+        RecipeService.getInstance().createRecipe(recipe: recipe!, recipeImage: recipeImage!, images: images!) { (isSuccess)  in
             print(isSuccess)
         }
     }

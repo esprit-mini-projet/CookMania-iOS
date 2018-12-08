@@ -17,7 +17,7 @@ class Ingredient: Mappable{
     var unit: String?
     
     init(){
-        
+        unit = "g"
     }
     
     required init?(map: Map) {
