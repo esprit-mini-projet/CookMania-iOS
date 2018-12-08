@@ -126,7 +126,7 @@ public class RecipeService: NSObject{
         })
     }
     
-    func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping () -> ()) {
+    func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping (Bool) -> ()) {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(recipeImage.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/png")
             multipartFormData.append((recipe.userId)!.data(using: .utf8)!, withName: "user_id", mimeType: "text/plain")
@@ -142,8 +142,58 @@ public class RecipeService: NSObject{
             
         }, to:ServiceUtils.buildURL(route: ROUTE, postfix: "add")){ (result) in
             switch result {
-            case .success( _, _, _):
-                completionHandler()
+            case .success( let upload, _, _):
+                upload.responseString(completionHandler: { (response) in
+                    let json = JSON(parseJSON: response.result.value!)
+                    let recipeId = json["id"].intValue
+                    self.addSteps(recipeId: recipeId, steps: recipe.steps!, images: images, completionHandler: { (isSuccess) in
+                        completionHandler(isSuccess)
+                    })
+                })
+            case .failure(let encodingError):
+                print("",encodingError.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    //Recursive call to chain requests and make a callback at the end
+    func addSteps(recipeId: Int, steps: [Step], images: [UIImage?], completionHandler: @escaping (Bool) -> ()){
+        if steps.isEmpty {
+            completionHandler(true)
+            return
+        }
+        var s = steps
+        var i = images
+        let step = s.removeFirst()
+        let image = i.removeFirst()
+        addSingleStep(recipeId: recipeId, step: step, image: image, completionHandler: { (isSuccess) in
+            if isSuccess {
+                self.addSteps(recipeId: recipeId, steps: s, images: i, completionHandler: completionHandler)
+            }else {
+                completionHandler(false)
+            }
+        })
+    }
+    
+    func addSingleStep(recipeId: Int, step: Step, image: UIImage?, completionHandler: @escaping (Bool) -> ()){
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if let _ = image {
+                multipartFormData.append(image!.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/png")
+            }
+            multipartFormData.append(String(recipeId).data(using: .utf8)!, withName: "recipe_id", mimeType: "text/plain")
+            multipartFormData.append((step.description)!.data(using: .utf8)!, withName: "description", mimeType: "text/plain")
+            multipartFormData.append(String(step.time!).data(using: .utf8)!, withName: "time", mimeType: "text/plain")
+            
+            let ingredientsJsonString = step.ingredients?.toJSONString(prettyPrint: false)
+            multipartFormData.append(ingredientsJsonString!.data(using: .utf8)!, withName: "ingredients")
+            
+        }, to:ServiceUtils.buildURL(route: "/steps", postfix: "add")){ (result) in
+            switch result {
+            case .success( let upload, _, _):
+                upload.responseString(completionHandler: { (response) in
+                    completionHandler(response.result.isSuccess)
+                })
             case .failure(let encodingError):
                 print("",encodingError.localizedDescription)
                 break

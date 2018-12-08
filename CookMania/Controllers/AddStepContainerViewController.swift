@@ -191,8 +191,8 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         recipe.labels = ["Cheap", "Healthy", "Date Night"]
         recipe.userId = (UIApplication.shared.delegate as! AppDelegate).user?.id!
         
-        RecipeService.getInstance().createRecipe(recipe: recipe, recipeImage: recipeImage!, images: images!) { () in
-            print("success")
+        RecipeService.getInstance().createRecipe(recipe: recipe, recipeImage: recipeImage!, images: images!) { (isSuccess)  in
+            print(isSuccess)
         }
     }
     
