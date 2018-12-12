@@ -49,6 +49,8 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         /*for recipe in recipes {
             cells.append(recipe)
             for ingredient in recipe.ingredients{

@@ -30,6 +30,7 @@
 		26925D6B21BAEFF700773AB3 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */; };
 		2693920021BC895A00900C9F /* SuggestionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269391FF21BC895A00900C9F /* SuggestionImageView.swift */; };
 		269F7DDC219F4EDE00478F20 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269F7DDB219F4EDE00478F20 /* RecipeService.swift */; };
+		26A8D01F21C1B2C700BF3AAE /* ShopRecipeDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D01E21C1B2C700BF3AAE /* ShopRecipeDao.swift */; };
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
 		26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3679121AE002000D7EEF8 /* ActionTextField.swift */; };
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
@@ -82,6 +83,7 @@
 		26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		269391FF21BC895A00900C9F /* SuggestionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionImageView.swift; sourceTree = "<group>"; };
 		269F7DDB219F4EDE00478F20 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
+		26A8D01E21C1B2C700BF3AAE /* ShopRecipeDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRecipeDao.swift; sourceTree = "<group>"; };
 		26B9E89C2194579F00E326F3 /* VKCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKCheckBox.swift; sourceTree = "<group>"; };
 		26D3679121AE002000D7EEF8 /* ActionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTextField.swift; sourceTree = "<group>"; };
 		26F92254219CB07200E55B09 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -153,10 +155,19 @@
 				C32B1C772194D9CD00153DC9 /* Entities */,
 				C324D9BF21AF38E600D9C5E8 /* Helpers */,
 				C36AC735219E0CD00070CDE8 /* Services */,
+				26A8D01D21C1B28E00BF3AAE /* Dao */,
 				C32B1C792194D9F400153DC9 /* Storyboards */,
 				C32B1C782194D9DF00153DC9 /* Utils */,
 			);
 			path = CookMania;
+			sourceTree = "<group>";
+		};
+		26A8D01D21C1B28E00BF3AAE /* Dao */ = {
+			isa = PBXGroup;
+			children = (
+				26A8D01E21C1B2C700BF3AAE /* ShopRecipeDao.swift */,
+			);
+			path = Dao;
 			sourceTree = "<group>";
 		};
 		996BFF27D5550BF06B51A18A /* Frameworks */ = {
@@ -345,12 +356,12 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/Gallery/Gallery.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -365,12 +376,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gallery.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -451,6 +462,7 @@
 				C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */,
 				C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */,
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
+				26A8D01F21C1B2C700BF3AAE /* ShopRecipeDao.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,
 				C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */,
