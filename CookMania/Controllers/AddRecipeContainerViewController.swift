@@ -17,15 +17,15 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     let descriptionPlaceHolder = "Description..."
     let labels = [
         "Healthy",
-        "Cheap",
-        "Easy",
-        "Fast",
         "Vegetarian",
+        "Cheap",
         "Breakfast",
         "Dinner",
         "Date Night",
+        "Fast",
         "Kids Friendly",
-        "Takes Time"]
+        "Takes Time",
+        "Easy"]
     
     var recipe: Recipe?
     
@@ -57,13 +57,29 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = labels[indexPath.item]
-        var size = CGSize(width: 78, height: 50)
-        print(label)
-        print(label.count)
+        let width = 78
+        let height = 50
+        var bonus = 0
         if label.count > 6{
-            size = CGSize(width: 125, height: 50)
+            bonus = (label.count - 6) * 8
         }
-        return size
+        return CGSize(width: width + bonus, height: height)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
     }
     
     @objc func highlight(_ sender: UIButton){

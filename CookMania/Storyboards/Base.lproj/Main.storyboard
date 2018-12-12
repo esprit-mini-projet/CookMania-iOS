@@ -698,6 +698,7 @@ d2lkdGggPSAxNxAyA
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Gjk-RB-pLa" id="R6x-pB-78q"/>
+                                    <outlet property="delegate" destination="Gjk-RB-pLa" id="Jtz-zf-2hr"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1087,7 +1088,7 @@ d2lkdGggPSAxNxAyA
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yh2-nn-DqU">
-                                                    <rect key="frame" x="1" y="10" width="75" height="30"/>
+                                                    <rect key="frame" x="1" y="10" width="73" height="30"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Cheap"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1101,8 +1102,8 @@ d2lkdGggPSAxNxAyA
                                         </view>
                                         <constraints>
                                             <constraint firstItem="yh2-nn-DqU" firstAttribute="centerY" secondItem="5r4-s8-8os" secondAttribute="centerY" id="6cd-gh-G0V"/>
-                                            <constraint firstItem="yh2-nn-DqU" firstAttribute="width" secondItem="5r4-s8-8os" secondAttribute="width" id="UD7-0I-7sL"/>
                                             <constraint firstItem="yh2-nn-DqU" firstAttribute="leading" secondItem="5r4-s8-8os" secondAttribute="leading" constant="1" id="V0v-3a-ZQD"/>
+                                            <constraint firstAttribute="trailing" secondItem="yh2-nn-DqU" secondAttribute="trailing" constant="1" id="wQb-HE-g96"/>
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
@@ -1169,18 +1170,18 @@ d2lkdGggPSAxNxAyA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lzO-Xx-UYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3657" y="1729"/>
+            <point key="canvasLocation" x="3656.8000000000002" y="1728.9355322338831"/>
         </scene>
         <!--Add Step-->
         <scene sceneID="rlt-P3-dtn">
             <objects>
                 <viewController title="Add Step" id="De3-2X-Xfy" customClass="AddStepViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="34O-7U-qUb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LiX-bP-z7l">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <connections>
                                     <segue destination="pbv-3u-x6g" kind="embed" identifier="toAddStepContainer" id="gvL-Vb-F03"/>
                                 </connections>
@@ -1325,7 +1326,7 @@ d2lkdGggPSAxNxAyA
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBb-62-YZB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1598.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1628.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="melanzana" translatesAutoresizingMaskIntoConstraints="NO" id="HuM-5a-GOW" userLabel="Cover">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
@@ -1354,7 +1355,7 @@ d2lkdGggPSAxNxAyA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ftk-zP-oyo" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ftk-zP-oyo" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="0.0" y="130.5" width="120" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1576,8 +1577,8 @@ EDE5OA
                                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMK-HO-58M" customClass="CosmosView" customModule="Cosmos">
-                                                <rect key="frame" x="102.5" y="1110.5" width="170" height="0.0"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMK-HO-58M" customClass="CosmosView" customModule="Cosmos">
+                                                <rect key="frame" x="102.5" y="1110.5" width="170" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="starSize">
@@ -1595,7 +1596,7 @@ EDE5OA
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zpr-IB-e6y">
-                                                <rect key="frame" x="0.0" y="1134.5" width="375" height="211"/>
+                                                <rect key="frame" x="0.0" y="1164.5" width="375" height="211"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lwc-gz-Atj">
                                                     <size key="itemSize" width="360" height="238"/>
@@ -1740,13 +1741,13 @@ EDE5OA
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar recipes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZq-wQ-att">
-                                                <rect key="frame" x="0.0" y="1375.5" width="135" height="23"/>
+                                                <rect key="frame" x="0.0" y="1405.5" width="135" height="23"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V7g-el-DuP">
-                                                <rect key="frame" x="0.0" y="1406.5" width="375" height="151"/>
+                                                <rect key="frame" x="0.0" y="1436.5" width="375" height="151"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="KOk-20-pjh">
                                                     <size key="itemSize" width="214" height="202.5"/>
@@ -3183,14 +3184,14 @@ EDE5OA
             <objects>
                 <viewController title="Add Step" id="pbv-3u-x6g" customClass="AddStepContainerViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RMB-uR-Zzj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-img" translatesAutoresizingMaskIntoConstraints="NO" id="Jhr-HC-hfG" userLabel="upload photo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="138.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
                             </imageView>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q49-sZ-NMU" userLabel="gradient" customClass="GradientViewSecond" customModule="CookMania" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="86.5" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="110" width="375" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="WIg-kW-iWa"/>
@@ -3217,7 +3218,7 @@ EDE5OA
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JV9-v5-g0B" userLabel="add image">
-                                <rect key="frame" x="342" y="105.5" width="25" height="25"/>
+                                <rect key="frame" x="342" y="129" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="Yag-4Z-oKE"/>
                                     <constraint firstAttribute="height" constant="25" id="f2w-oW-0hT"/>
@@ -3228,7 +3229,7 @@ EDE5OA
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVp-hA-Fw6">
-                                <rect key="frame" x="16" y="148" width="343" height="80"/>
+                                <rect key="frame" x="16" y="171.5" width="343" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Md3-7m-LFx"/>
@@ -3249,7 +3250,7 @@ EDE5OA
                                 </connections>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How many minutes does it take? (Optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rR8-Zb-h91" userLabel="time">
-                                <rect key="frame" x="16" y="236" width="343" height="24"/>
+                                <rect key="frame" x="16" y="259.5" width="343" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Z9K-Xy-zpX"/>
                                 </constraints>
@@ -3261,7 +3262,7 @@ EDE5OA
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0bY-re-lZH">
-                                <rect key="frame" x="16" y="268" width="343" height="176"/>
+                                <rect key="frame" x="16" y="291.5" width="343" height="245.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Ingredient" rowHeight="40" id="Drf-Sx-EI6">
@@ -3319,7 +3320,7 @@ EDE5OA
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3e-K6-L3u" userLabel="next">
-                                <rect key="frame" x="142.5" y="498" width="90" height="36"/>
+                                <rect key="frame" x="142.5" y="591" width="90" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Next Step"/>
                                 <userDefinedRuntimeAttributes>
@@ -3334,7 +3335,7 @@ EDE5OA
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.5" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfC-xn-gmg" userLabel="add ingredient">
-                                <rect key="frame" x="16" y="452" width="30" height="30"/>
+                                <rect key="frame" x="16" y="545" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="PRt-9P-TGh"/>
                                     <constraint firstAttribute="height" constant="30" id="UTJ-HC-eZd"/>
@@ -3384,6 +3385,7 @@ EDE5OA
                         <outlet property="tableView" destination="0bY-re-lZH" id="i2N-Uz-prb"/>
                         <outlet property="timeText" destination="rR8-Zb-h91" id="9h2-HZ-fpJ"/>
                         <segue destination="De3-2X-Xfy" kind="show" identifier="toAddStep" id="zjX-6Z-rTw"/>
+                        <segue destination="oY8-TY-LDq" kind="show" identifier="toRecipeDetails" id="6x9-Hc-UlO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kqb-IQ-ZZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3415,8 +3417,8 @@ EDE5OA
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uED-xn-5ft"/>
-        <segue reference="kdF-uh-brg"/>
-        <segue reference="72L-3e-IyP"/>
+        <segue reference="gyG-aW-51a"/>
+        <segue reference="zjX-6Z-rTw"/>
         <segue reference="DtB-Bu-ib5"/>
     </inferredMetricsTieBreakers>
 </document>

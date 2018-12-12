@@ -174,6 +174,9 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
             dest.recipe = recipe
             dest.recipeImage = recipeImage
             dest.images = images
+        }else if segue.identifier == "toRecipeDetails"{
+            let dest = segue.destination as! RecipeDetailsViewController
+            dest.recipe = (sender as! Recipe)
         }
     }
     
@@ -182,9 +185,15 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         
         recipe!.userId = (UIApplication.shared.delegate as! AppDelegate).user?.id!
         
-        RecipeService.getInstance().createRecipe(recipe: recipe!, recipeImage: recipeImage!, images: images!) { (isSuccess)  in
+        RecipeService.getInstance().createRecipe(recipe: recipe!, recipeImage: recipeImage!, images: images!) { (isSuccess, recipeId)  in
             print(isSuccess)
-            self.showAlert(title: "Error", message: "An error has occured on the server. We apologize.")
+            if !isSuccess{
+                self.showAlert(title: "Error", message: "An error has occured on the server. We apologize.")
+                return
+            }
+            RecipeService.getInstance().getRecipe(recipeId: recipeId, completionHandler: { (recipe) in
+                self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
+            })
         }
     }
     

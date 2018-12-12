@@ -126,7 +126,7 @@ public class RecipeService: NSObject{
         })
     }
     
-    func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping (Bool) -> ()) {
+    func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping (Bool, Int) -> ()) {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(recipeImage.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/png")
             multipartFormData.append((recipe.userId)!.data(using: .utf8)!, withName: "user_id", mimeType: "text/plain")
@@ -148,10 +148,10 @@ public class RecipeService: NSObject{
                         let json = JSON(parseJSON: response.result.value!)
                         let recipeId = json["id"].intValue
                         self.addSteps(recipeId: recipeId, steps: recipe.steps!, images: images, completionHandler: { (isSuccess) in
-                            completionHandler(isSuccess)
+                            completionHandler(isSuccess, recipeId)
                         })
                     }else{
-                        completionHandler(false)
+                        completionHandler(false, 0)
                     }
                 })
             case .failure(let encodingError):
