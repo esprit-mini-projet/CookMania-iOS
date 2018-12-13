@@ -87,8 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        print("Device Token: ", deviceTokenString)
+        let refereshToken = InstanceID.instanceID().token()
+        print("instance ID token is \(refereshToken)")
+        //print("Device Token: ", deviceTokenString)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {

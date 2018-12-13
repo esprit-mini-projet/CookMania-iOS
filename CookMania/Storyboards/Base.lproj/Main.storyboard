@@ -533,7 +533,7 @@ d2lkdGggPSAxNxAyA
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UUJ-ki-5WI"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="gfz-t2-JDY"/>
+                    <navigationItem key="navigationItem" title="CookMania" id="gfz-t2-JDY"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1250"/>
                     <connections>
@@ -843,7 +843,7 @@ d2lkdGggPSAxNxAyA
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dm1-mF-dSJ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Jof-Rf-9gg">
+                    <navigationItem key="navigationItem" title="Profile" id="Jof-Rf-9gg">
                         <barButtonItem key="rightBarButtonItem" image="settings_icon" id="cGP-XV-dlf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -1321,7 +1321,7 @@ d2lkdGggPSAxNxAyA
             </objects>
             <point key="canvasLocation" x="4632" y="-1136"/>
         </scene>
-        <!--Title-->
+        <!--Details-->
         <scene sceneID="Jmy-Zu-dX2">
             <objects>
                 <viewController storyboardIdentifier="RecipeDetailsViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oY8-TY-LDq" customClass="RecipeDetailsViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
@@ -2064,7 +2064,7 @@ EDE5OA
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ocf-ZE-jW6"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="dqO-xt-FEm">
+                    <navigationItem key="navigationItem" title="Details" id="dqO-xt-FEm">
                         <barButtonItem key="rightBarButtonItem" id="HUE-eV-Cc6">
                             <connections>
                                 <action selector="favoriteButtonClicked:" destination="oY8-TY-LDq" id="tgx-HQ-dwJ"/>
@@ -2253,21 +2253,21 @@ EDE5OA
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="yJ2-Dp-Ir6" customClass="ProfileViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oH3-CT-bbz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YI0-em-yAN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kL-F5-Vcg">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spaghetti" translatesAutoresizingMaskIntoConstraints="NO" id="nVU-ce-fbL" userLabel="CoverImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="151"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="138.5"/>
                                                 <color key="backgroundColor" red="0.58291549499999995" green="1" blue="0.43738061760000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6N-nq-ULp" userLabel="ShadowView" customClass="GradientViewSecond" customModule="CookMania" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="90.5" width="375" height="60.5"/>
+                                                <rect key="frame" x="0.0" y="83" width="375" height="55.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="topColor">
@@ -2291,18 +2291,18 @@ EDE5OA
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OcI-Qu-pMM" userLabel="profileImageShadowView">
-                                                <rect key="frame" x="28" y="104" width="94" height="93.5"/>
+                                                <rect key="frame" x="28" y="91.5" width="94" height="94"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caponata" translatesAutoresizingMaskIntoConstraints="NO" id="zTa-wU-Dx9" userLabel="ProfileImageView">
-                                                <rect key="frame" x="28" y="104" width="94" height="93.5"/>
+                                                <rect key="frame" x="28" y="91.5" width="94" height="94"/>
                                                 <color key="backgroundColor" red="0.86666666670000003" green="0.31764705879999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="zTa-wU-Dx9" secondAttribute="height" multiplier="1:1" id="Bbs-tO-vLO"/>
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-xC-0v5">
-                                                <rect key="frame" x="135" y="114" width="225" height="34.5"/>
+                                                <rect key="frame" x="135" y="103" width="225" height="34.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="WCU-ER-T8c">
                                                         <rect key="frame" x="0.0" y="0.0" width="225" height="14.5"/>
@@ -2350,13 +2350,13 @@ EDE5OA
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Qn-JJh" userLabel="NameLabel">
-                                                <rect key="frame" x="135" y="152.5" width="300" height="20.5"/>
+                                                <rect key="frame" x="135" y="139.5" width="300" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member since " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WrC-WF-EmV">
-                                                <rect key="frame" x="135" y="168.5" width="90" height="16"/>
+                                                <rect key="frame" x="135" y="154" width="90" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="yzO-Of-vUp"/>
                                                 </constraints>
@@ -2365,13 +2365,13 @@ EDE5OA
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWL-4M-9bx" userLabel="DateLabel">
-                                                <rect key="frame" x="228" y="168.5" width="131" height="16"/>
+                                                <rect key="frame" x="228" y="154" width="131" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="0.69594520246478875" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Xd-Wv-aNB">
-                                                <rect key="frame" x="0.0" y="214.5" width="375" height="29"/>
+                                                <rect key="frame" x="0.0" y="202.5" width="375" height="29"/>
                                                 <segments>
                                                     <segment title="My recipes"/>
                                                     <segment title="Favorites"/>
@@ -2384,25 +2384,25 @@ EDE5OA
                                                 </connections>
                                             </segmentedControl>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSX-BT-aRz">
-                                                <rect key="frame" x="0.0" y="250.5" width="375" height="332.5"/>
+                                                <rect key="frame" x="0.0" y="238.5" width="375" height="295.5"/>
                                                 <connections>
                                                     <segue destination="ArZ-5D-9uW" kind="embed" identifier="myRecipesContainerSegue" id="zNx-IP-b1B"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oer-tO-f76" userLabel="Favorite View Container">
-                                                <rect key="frame" x="0.0" y="250.5" width="375" height="332.5"/>
+                                                <rect key="frame" x="0.0" y="238.5" width="375" height="295.5"/>
                                                 <connections>
                                                     <segue destination="qQ2-a1-6Y2" kind="embed" identifier="favoritesContainerSegue" id="0Qq-x6-TAK"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odc-cx-s01">
-                                                <rect key="frame" x="0.0" y="250.5" width="375" height="332.5"/>
+                                                <rect key="frame" x="0.0" y="238.5" width="375" height="295.5"/>
                                                 <connections>
                                                     <segue destination="xB6-Q4-stU" kind="embed" identifier="followersContainerSegue" id="4N6-v5-rOG"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKR-m1-EuH" userLabel="Follwing View Container">
-                                                <rect key="frame" x="0.0" y="250.5" width="375" height="332.5"/>
+                                                <rect key="frame" x="0.0" y="238.5" width="375" height="295.5"/>
                                                 <connections>
                                                     <segue destination="vg7-Dk-GzB" kind="embed" identifier="followingContainerSegue" id="15Q-Za-SkA"/>
                                                 </connections>
@@ -2502,11 +2502,11 @@ EDE5OA
             <objects>
                 <viewController id="ArZ-5D-9uW" customClass="MyRecipesViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1A0-SH-dtj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="153" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j2W-4k-UR0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -2678,11 +2678,11 @@ EDE5OA
             <objects>
                 <viewController id="qQ2-a1-6Y2" customClass="FavoritesViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4OV-j0-OlG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="153" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CRF-44-TLw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -2854,11 +2854,11 @@ EDE5OA
             <objects>
                 <viewController id="xB6-Q4-stU" customClass="FollowersViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LKy-W8-mGo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdq-S6-m4i">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="followerCell" rowHeight="100" id="ve4-mA-K5m">
@@ -2966,11 +2966,11 @@ EDE5OA
             <objects>
                 <viewController id="vg7-Dk-GzB" customClass="FollowingViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CM0-hc-5vM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2A2-bZ-qyV" userLabel="Following Table View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="295.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="followingCell" rowHeight="100" id="lNO-du-6GB">
@@ -3210,7 +3210,7 @@ EDE5OA
         <image name="views" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Hv-pz-kTR"/>
+        <segue reference="hfH-QJ-d5b"/>
         <segue reference="kdF-uh-brg"/>
         <segue reference="DtB-Bu-ib5"/>
     </inferredMetricsTieBreakers>
