@@ -15,4 +15,6 @@ target 'CookMania' do
   pod 'SwiftKeychainWrapper' 
   pod 'SwiftyJSON'
   pod 'Gallery'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 end

@@ -33,7 +33,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // change 2 to desired number of seconds
             //Temp func call
             //self.logoutAll()
             //Facebook User is already connected
