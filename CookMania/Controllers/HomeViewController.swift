@@ -27,7 +27,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var cheap = [Recipe]()
     var healthy = [Recipe]()
     var suggestions = [Recipe]()
+    var notificationRecipeId: Int?
     
+    override func viewDidAppear(_ animated: Bool) {
+        let tabController = self.navigationController?.parent as! MainTabLayoutViewController
+        notificationRecipeId = tabController.notificationRecipeId
+        
+        if(notificationRecipeId != nil && notificationRecipeId != 0){
+            RecipeService.getInstance().getRecipe(recipeId: notificationRecipeId!, completionHandler: { recipe in
+                tabController.notificationRecipeId = 0
+                self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
+            })
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
@@ -126,6 +138,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         case "toRecipeList":
             let destinationController = segue.destination as! RecipeListViewController
             destinationController.urlEndPoint = sender as? String
+            break
+        case "toRecipeDetails":
+            let destinationController = segue.destination as! RecipeDetailsViewController
+            destinationController.recipe = sender as! Recipe
+            break
         default:
             print()
         }

@@ -49,6 +49,7 @@
 		C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3834A3921B9A913006CE670 /* UIColor.swift */; };
 		C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
+		C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
 		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
 		C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */; };
@@ -103,6 +104,7 @@
 		C3834A3921B9A913006CE670 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabLayoutViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
 		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
+				C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				262543AF21935E6C003601A4 /* ProfileViewController.swift in Sources */,
 				C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */,
 				C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */,
+				C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */,
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,

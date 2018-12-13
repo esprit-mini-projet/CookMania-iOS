@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://localhost:3000"
+    public static let SERVER_DOMAIN = "http://192.168.1.9:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
@@ -39,6 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         Messaging.messaging().delegate = self
+        
+        if let userInfo = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
+            if let recipeID = userInfo["recipe_id"] as? String {
+                let signInViewController = self.window?.rootViewController as! SignInViewController
+                signInViewController.notificationRecipeId = Int(recipeID)
+            }
+        }
+        
         application.registerForRemoteNotifications()
 
         
@@ -80,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        print("Device Token: ", deviceToken)
+        print("Device Token: ", deviceTokenString)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
@@ -196,8 +204,33 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
+        /*if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
+        }*/
+        
+        if(UIApplication.shared.applicationState == .active){
+            RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["recipe_id"] as? String)!)!, completionHandler: {recipe in
+                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
+                    if let window = self.window, let rootViewController = window.rootViewController {
+                        let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
+                        let navigationController = currentController?.selectedViewController as? UINavigationController
+                        controller.recipe = recipe
+                        navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            })
+        }
+        if(UIApplication.shared.applicationState == .inactive){
+            RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["recipe_id"] as? String)!)!, completionHandler: {recipe in
+                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
+                    if let window = self.window, let rootViewController = window.rootViewController {
+                        let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
+                        let navigationController = currentController?.selectedViewController as? UINavigationController
+                        controller.recipe = recipe
+                        navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            })
         }
         
         // Print full message.
@@ -205,6 +238,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
+    
 }
 
 extension AppDelegate: MessagingDelegate{
