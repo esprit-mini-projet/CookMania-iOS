@@ -176,6 +176,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         stepsTableView.estimatedRowHeight = 140
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        experiencesCollectionView.isPagingEnabled = true
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
