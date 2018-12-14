@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://192.168.1.9:3000"
+    public static let SERVER_DOMAIN = "http://172.19.19.100:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
@@ -41,9 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         
         if let userInfo = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
-            if let recipeID = userInfo["recipe_id"] as? String {
-                let signInViewController = self.window?.rootViewController as! SignInViewController
-                signInViewController.notificationRecipeId = Int(recipeID)
+            let notificationType = Int(userInfo["notif_type"] as! String)
+            if notificationType == NotificationType.followingAddedRecipe {
+                if let recipeID = userInfo["recipe_id"] as? String {
+                    let signInViewController = self.window?.rootViewController as! SignInViewController
+                    signInViewController.notificationRecipeId = Int(recipeID)
+                }
             }
         }
         
@@ -209,29 +212,19 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }*/
         
-        if(UIApplication.shared.applicationState == .active){
-            RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["recipe_id"] as? String)!)!, completionHandler: {recipe in
-                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
-                    if let window = self.window, let rootViewController = window.rootViewController {
-                        let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
-                        let navigationController = currentController?.selectedViewController as? UINavigationController
-                        controller.recipe = recipe
-                        navigationController?.pushViewController(controller, animated: true)
+        if(UIApplication.shared.applicationState == .active || UIApplication.shared.applicationState == .inactive){
+            if(Int(userInfo["notif_type"] as! String) == NotificationType.followingAddedRecipe){
+                RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["recipe_id"] as? String)!)!, completionHandler: {recipe in
+                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
+                        if let window = self.window, let rootViewController = window.rootViewController {
+                            let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
+                            let navigationController = currentController?.selectedViewController as? UINavigationController
+                            controller.recipe = recipe
+                            navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
-                }
-            })
-        }
-        if(UIApplication.shared.applicationState == .inactive){
-            RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["recipe_id"] as? String)!)!, completionHandler: {recipe in
-                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
-                    if let window = self.window, let rootViewController = window.rootViewController {
-                        let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
-                        let navigationController = currentController?.selectedViewController as? UINavigationController
-                        controller.recipe = recipe
-                        navigationController?.pushViewController(controller, animated: true)
-                    }
-                }
-            })
+                })
+            }
         }
         
         // Print full message.
