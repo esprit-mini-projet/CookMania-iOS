@@ -21,15 +21,17 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func logoutClicked(_ sender: Any) {
-        UserProfile.current = nil
-        let loginManager = LoginManager()
-        loginManager.logOut()
-        GIDSignIn.sharedInstance()?.signOut()
-        
-        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
-        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
-        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
-        dismiss(animated: true, completion: nil)
+        UserService.getInstance().logout(completionHandler: {
+            UserProfile.current = nil
+            let loginManager = LoginManager()
+            loginManager.logOut()
+            GIDSignIn.sharedInstance()?.signOut()
+            
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     /*

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://172.19.19.100:3000"
+    public static let SERVER_DOMAIN = "http://192.168.1.2:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
@@ -41,13 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         
         if let userInfo = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
+            let notificationId = userInfo["notif_id"] as? String
+            let signInViewController = self.window?.rootViewController as! SignInViewController
             let notificationType = Int(userInfo["notif_type"] as! String)
-            if notificationType == NotificationType.followingAddedRecipe {
-                if let recipeID = userInfo["recipe_id"] as? String {
-                    let signInViewController = self.window?.rootViewController as! SignInViewController
-                    signInViewController.notificationRecipeId = Int(recipeID)
-                }
-            }
+            
+            signInViewController.notification = NotificationWrapper(notificationId: notificationId!, notificationType: notificationType!)
         }
         
         application.registerForRemoteNotifications()
@@ -90,9 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let refereshToken = InstanceID.instanceID().token()
-        print("instance ID token is \(refereshToken)")
-        //print("Device Token: ", deviceTokenString)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
@@ -176,6 +171,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    static func getDeviceToken() -> String {
+        return InstanceID.instanceID().token()!
+    }
 
 }
 
@@ -213,13 +212,25 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }*/
         
         if(UIApplication.shared.applicationState == .active || UIApplication.shared.applicationState == .inactive){
-            if(Int(userInfo["notif_type"] as! String) == NotificationType.followingAddedRecipe){
-                RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["recipe_id"] as? String)!)!, completionHandler: {recipe in
+            let notificationType = Int(userInfo["notif_type"] as! String)
+            if(notificationType == NotificationType.followingAddedRecipe){
+                RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["notif_id"] as? String)!)!, completionHandler: {recipe in
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
                         if let window = self.window, let rootViewController = window.rootViewController {
                             let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
                             let navigationController = currentController?.selectedViewController as? UINavigationController
                             controller.recipe = recipe
+                            navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }
+                })
+            }else if(notificationType == NotificationType.follower){
+                UserService.getInstance().getUser(id: (userInfo["notif_id"] as? String)!, completionHandler: { user in
+                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
+                        if let window = self.window, let rootViewController = window.rootViewController {
+                            let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
+                            let navigationController = currentController?.selectedViewController as? UINavigationController
+                            controller.user = user
                             navigationController?.pushViewController(controller, animated: true)
                         }
                     }

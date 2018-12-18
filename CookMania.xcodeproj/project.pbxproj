@@ -32,7 +32,7 @@
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
 		C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */; };
 		C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */; };
-		C325704F21C3C91B005B5BA1 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325704E21C3C91B005B5BA1 /* NotificationType.swift */; };
+		C325704F21C3C91B005B5BA1 /* NotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */; };
 		C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */; };
 		C32B1C7D2194DF2600153DC9 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */; };
 		C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */; };
@@ -87,7 +87,7 @@
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
 		C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService_Seif.swift; sourceTree = "<group>"; };
 		C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
-		C325704E21C3C91B005B5BA1 /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtils.swift; sourceTree = "<group>"; };
 		C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		C32B1C7E2194E10400153DC9 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
@@ -186,21 +186,21 @@
 				2689B75A21AF4E86007BBC54 /* AddStepViewController.swift */,
 				C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */,
 				C3995DDC21964CE800179246 /* CommunityViewController.swift */,
-				C32B1C822194E21B00153DC9 /* SettingsViewController.swift */,
 				26101085218FC37B00E8344F /* FavoritesViewController.swift */,
 				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
 				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
 				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
+				C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */,
 				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
 				262543AE21935E6C003601A4 /* ProfileViewController.swift */,
 				C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */,
 				26101083218FAE0B00E8344F /* RecipeListViewController.swift */,
 				C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */,
 				262543AC21935E55003601A4 /* SearchViewController.swift */,
+				C32B1C822194E21B00153DC9 /* SettingsViewController.swift */,
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
-				C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -230,7 +230,7 @@
 				C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */,
 				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
 				C3834A3921B9A913006CE670 /* UIColor.swift */,
-				C325704E21C3C91B005B5BA1 /* NotificationType.swift */,
+				C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -479,7 +479,7 @@
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
 				2689B75921AF3E96007BBC54 /* ActionSegmentControl.swift in Sources */,
-				C325704F21C3C91B005B5BA1 /* NotificationType.swift in Sources */,
+				C325704F21C3C91B005B5BA1 /* NotificationUtils.swift in Sources */,
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
 				C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */,
 				C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */,

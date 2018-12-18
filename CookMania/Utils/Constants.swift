@@ -10,7 +10,7 @@ import Foundation
 
 struct Constants {
     
-    static let ipAddress = "http://172.19.19.100:3000"
+    static let ipAddress = "http://192.168.1.2:3000"
     
     struct URL {
         static let topRatedRecipes = ipAddress + "/recipes/top"

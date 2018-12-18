@@ -22,7 +22,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     let CLIEND_ID = "323514335162-ut1n697tbepfjk414bsiju9g5fo567h4.apps.googleusercontent.com"
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    var notificationRecipeId: Int? = 0
+    var notification: NotificationWrapper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,8 +93,8 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toHome"{
             let destination = segue.destination as? MainTabLayoutViewController
-            destination?.notificationRecipeId = notificationRecipeId
-            notificationRecipeId = 0
+            destination?.notification = notification
+            notification = nil
         }
     }
     

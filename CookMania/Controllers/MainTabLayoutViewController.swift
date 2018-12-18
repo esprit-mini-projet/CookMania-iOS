@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabLayoutViewController: UITabBarController {
 
-    var notificationRecipeId: Int?
+    var notification: NotificationWrapper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
