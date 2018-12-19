@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireImage
 import CoreData
 
-class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     class LocalIngredient: NSObject {
         var id: Int
@@ -102,6 +102,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var visitProfileButton: UIButton!
+    @IBOutlet weak var experiencesPageController: UIPageControl!
     
     
     
@@ -201,6 +202,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                 self.recipeRatingInput.settings.updateOnTouch = true
             }
             self.experiencesCollectionView.reloadData()
+            self.experiencesPageController.numberOfPages = experiences.count
         })
     }
     
@@ -422,7 +424,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
-            let profileImageShadowView = contentView?.viewWithTag(2) as! UIView
+            let coverImageShadowView = (contentView?.viewWithTag(8))!
+            let profileImageShadowView = (contentView?.viewWithTag(2))!
             let profileImageView = contentView?.viewWithTag(3) as! UIImageView
             let rating = contentView?.viewWithTag(4) as! CosmosView
             let nameLabel = contentView?.viewWithTag(5) as! UILabel
@@ -456,6 +459,17 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             profileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
             profileImageShadowView.layer.shadowOpacity = 1
             
+            
+            //cell Shadow
+            coverImageShadowView.layer.cornerRadius = 5
+            coverImageShadowView.layer.shadowColor = UIColor.black.cgColor
+            coverImageShadowView.layer.shadowOffset = CGSize(width:  0, height: 0)
+            coverImageShadowView.layer.shadowOpacity = 1
+            
+            //Image
+            coverImageView.layer.cornerRadius = 5
+            coverImageView.layer.masksToBounds = true
+            
             rating.settings.updateOnTouch = false
             rating.settings.emptyBorderColor = UIColor.clear
             rating.settings.fillMode = .precise
@@ -464,6 +478,16 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             commentTV.textContainerInset = .zero
             
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: experiencesCollectionView.bounds.width, height: experiencesCollectionView.bounds.height)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if let collectionView = scrollView as? UICollectionView, collectionView == experiencesCollectionView {
+            experiencesPageController.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
         }
     }
     
