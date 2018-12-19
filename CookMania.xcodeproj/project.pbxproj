@@ -29,6 +29,7 @@
 		26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */; };
 		26925D6B21BAEFF700773AB3 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */; };
 		2693920021BC895A00900C9F /* SuggestionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269391FF21BC895A00900C9F /* SuggestionImageView.swift */; };
+		269DB38721CAEE9400797273 /* ShopIngredientDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DB38621CAEE9400797273 /* ShopIngredientDao.swift */; };
 		269F7DDC219F4EDE00478F20 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269F7DDB219F4EDE00478F20 /* RecipeService.swift */; };
 		26A8D01F21C1B2C700BF3AAE /* ShopRecipeDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D01E21C1B2C700BF3AAE /* ShopRecipeDao.swift */; };
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
@@ -82,6 +83,7 @@
 		26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepViewController.swift; sourceTree = "<group>"; };
 		26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		269391FF21BC895A00900C9F /* SuggestionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionImageView.swift; sourceTree = "<group>"; };
+		269DB38621CAEE9400797273 /* ShopIngredientDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIngredientDao.swift; sourceTree = "<group>"; };
 		269F7DDB219F4EDE00478F20 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		26A8D01E21C1B2C700BF3AAE /* ShopRecipeDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRecipeDao.swift; sourceTree = "<group>"; };
 		26B9E89C2194579F00E326F3 /* VKCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKCheckBox.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				26A8D01E21C1B2C700BF3AAE /* ShopRecipeDao.swift */,
+				269DB38621CAEE9400797273 /* ShopIngredientDao.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */,
 				2689B75B21AF4E87007BBC54 /* AddStepContainerViewController.swift in Sources */,
 				C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */,
+				269DB38721CAEE9400797273 /* ShopIngredientDao.swift in Sources */,
 				C32B1C832194E21B00153DC9 /* SettingsViewController.swift in Sources */,
 				2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */,
 				C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */,
