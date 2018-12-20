@@ -757,28 +757,81 @@ d2lkdGggPSAxNxAyA
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Search ingredient" translatesAutoresizingMaskIntoConstraints="NO" id="bdF-Gz-0d0">
-                                <rect key="frame" x="16" y="75" width="343" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="What are you looking for ?" translatesAutoresizingMaskIntoConstraints="NO" id="bdF-Gz-0d0">
+                                <rect key="frame" x="16" y="0.0" width="343" height="56"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="6qe-kK-Ooc" id="D41-yT-83q"/>
                                 </connections>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptV-YC-DXh" userLabel="no result">
+                                <rect key="frame" x="16" y="56" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lml-fm-XPO">
+                                <rect key="frame" x="16" y="85" width="343" height="469"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewLayout key="collectionViewLayout" id="GNu-gf-Rso" customClass="PinterestLayout" customModule="CookMania" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Recipe" id="vVb-KK-tFD">
+                                        <rect key="frame" x="0.0" y="0.0" width="152" height="134"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="152" height="134"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Ag-Kf-m47">
+                                                    <rect key="frame" x="0.0" y="0.0" width="152" height="134"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="5Ag-Kf-m47" firstAttribute="top" secondItem="vVb-KK-tFD" secondAttribute="top" id="SMd-7g-WAQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Ag-Kf-m47" secondAttribute="trailing" id="llC-Cv-QoK"/>
+                                            <constraint firstItem="5Ag-Kf-m47" firstAttribute="leading" secondItem="vVb-KK-tFD" secondAttribute="leading" id="nHO-Zv-fxB"/>
+                                            <constraint firstAttribute="bottom" secondItem="5Ag-Kf-m47" secondAttribute="bottom" id="o1S-Gr-3WF"/>
+                                        </constraints>
+                                        <size key="customSize" width="152" height="134"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="7Sd-b5-1zf" id="sQx-6I-qB1"/>
+                                    <outlet property="delegate" destination="7Sd-b5-1zf" id="Rju-GX-YTJ"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bdF-Gz-0d0" firstAttribute="leading" secondItem="WHY-iJ-VEg" secondAttribute="leading" constant="16" id="04Y-HW-FAv"/>
+                            <constraint firstItem="lml-fm-XPO" firstAttribute="leading" secondItem="WHY-iJ-VEg" secondAttribute="leading" constant="16" id="4Sa-nj-nOk"/>
+                            <constraint firstItem="WHY-iJ-VEg" firstAttribute="trailing" secondItem="ptV-YC-DXh" secondAttribute="trailing" priority="999" constant="228" id="Aa4-lK-9xP"/>
+                            <constraint firstItem="ptV-YC-DXh" firstAttribute="leading" secondItem="WHY-iJ-VEg" secondAttribute="leading" constant="16" id="FaL-Ah-5Pl"/>
+                            <constraint firstItem="lml-fm-XPO" firstAttribute="top" secondItem="ptV-YC-DXh" secondAttribute="bottom" constant="8" id="RKK-hZ-9RY"/>
+                            <constraint firstItem="WHY-iJ-VEg" firstAttribute="trailing" secondItem="bdF-Gz-0d0" secondAttribute="trailing" constant="16" id="Xtf-vP-Xgi"/>
+                            <constraint firstItem="bdF-Gz-0d0" firstAttribute="top" secondItem="WHY-iJ-VEg" secondAttribute="top" id="Zfi-TL-hcP"/>
+                            <constraint firstItem="WHY-iJ-VEg" firstAttribute="bottom" secondItem="lml-fm-XPO" secondAttribute="bottom" id="dJx-AF-aXa"/>
+                            <constraint firstItem="WHY-iJ-VEg" firstAttribute="trailing" secondItem="lml-fm-XPO" secondAttribute="trailing" constant="16" id="lqI-8F-TQN"/>
+                            <constraint firstItem="ptV-YC-DXh" firstAttribute="top" secondItem="bdF-Gz-0d0" secondAttribute="bottom" id="zcO-2Z-Df0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="WHY-iJ-VEg"/>
                     </view>
                     <navigationItem key="navigationItem" id="p6M-Kc-Beh"/>
                     <connections>
+                        <outlet property="resultCV" destination="lml-fm-XPO" id="bmX-zW-caY"/>
                         <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="di5-D0-Hv1"/>
                         <segue destination="ixf-7k-OTP" kind="show" identifier="toSearchResult" id="4mZ-e8-A2h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NbD-lA-66o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4321" y="851"/>
+            <point key="canvasLocation" x="4320.8000000000002" y="850.52473763118451"/>
         </scene>
         <!--Search Result View Controller-->
         <scene sceneID="07Q-Nf-EkB">
@@ -900,7 +953,7 @@ d2lkdGggPSAxNxAyA
             </objects>
             <point key="canvasLocation" x="73.913043478260875" y="1780.5803571428571"/>
         </scene>
-        <!--Community View Controller-->
+        <!--Shopping List-->
         <scene sceneID="GqJ-br-gj2">
             <objects>
                 <viewController id="mvd-ic-DP3" customClass="CommunityViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
@@ -924,7 +977,7 @@ d2lkdGggPSAxNxAyA
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0zd-XF-P4M"/>
                     </view>
-                    <navigationItem key="navigationItem" id="W7P-Q1-fau">
+                    <navigationItem key="navigationItem" title="Shopping List" id="W7P-Q1-fau">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="PNx-Dm-4YI">
                             <connections>
                                 <action selector="clearShoppingList:" destination="mvd-ic-DP3" id="dNG-zU-nb4"/>
@@ -3469,6 +3522,6 @@ EDE5OA
         <segue reference="uED-xn-5ft"/>
         <segue reference="tsZ-Bu-7I5"/>
         <segue reference="zjX-6Z-rTw"/>
-        <segue reference="DtB-Bu-ib5"/>
+        <segue reference="di5-D0-Hv1"/>
     </inferredMetricsTieBreakers>
 </document>

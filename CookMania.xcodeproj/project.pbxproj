@@ -24,6 +24,7 @@
 		262543AD21935E55003601A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262543AC21935E55003601A4 /* SearchViewController.swift */; };
 		262543AF21935E6C003601A4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262543AE21935E6C003601A4 /* ProfileViewController.swift */; };
 		262543B121937811003601A4 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262543B021937811003601A4 /* GradientView.swift */; };
+		263BDE0821CC25C500D98416 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263BDE0721CC25C500D98416 /* PinterestLayout.swift */; };
 		2689B75921AF3E96007BBC54 /* ActionSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689B75821AF3E96007BBC54 /* ActionSegmentControl.swift */; };
 		2689B75B21AF4E87007BBC54 /* AddStepContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */; };
 		26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */; };
@@ -78,6 +79,7 @@
 		262543AC21935E55003601A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		262543AE21935E6C003601A4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		262543B021937811003601A4 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		263BDE0721CC25C500D98416 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		2689B75821AF3E96007BBC54 /* ActionSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSegmentControl.swift; sourceTree = "<group>"; };
 		2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStepContainerViewController.swift; sourceTree = "<group>"; };
 		26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
 				C3834A3921B9A913006CE670 /* UIColor.swift */,
 				269391FF21BC895A00900C9F /* SuggestionImageView.swift */,
+				263BDE0721CC25C500D98416 /* PinterestLayout.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				2689B75B21AF4E87007BBC54 /* AddStepContainerViewController.swift in Sources */,
 				C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */,
 				269DB38721CAEE9400797273 /* ShopIngredientDao.swift in Sources */,
+				263BDE0821CC25C500D98416 /* PinterestLayout.swift in Sources */,
 				C32B1C832194E21B00153DC9 /* SettingsViewController.swift in Sources */,
 				2608CEC0218D0D8E008A706E /* SignInViewController.swift in Sources */,
 				C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */,
