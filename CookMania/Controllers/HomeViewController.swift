@@ -202,10 +202,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func testShoppinglist(){
         /*do{
-            ShopRecipeDao.getInstance()
-        try CoreStore.perform(synchronous: { (transaction) -> Int? in
-            transaction.deleteAll(From<ShopIngredient>())
-        }, waitForAllObservers: true)
+            try CoreStore.perform(synchronous: { (transaction) -> Int? in
+                transaction.deleteAll(From<ShopIngredient>())
+            }, waitForAllObservers: true)
         }catch{
             print("error deleting")
         }*/
@@ -237,15 +236,28 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let recipe = Recipe()
         recipe.id = 4
         recipe.name = "pizza"
-        recipe.imageUrl = "hahaha"
+        recipe.imageUrl = "1.jpg"
         recipe.steps = [Step]()
         recipe.steps?.append(step1)
         recipe.steps?.append(step2)
         
+        let recipe2 = Recipe()
+        recipe2.id = 5
+        recipe2.name = "spaghetti"
+        recipe2.imageUrl = "2.jpg"
+        recipe2.steps = [Step]()
+        recipe2.steps?.append(step1)
+        
         ShopRecipeDao.getInstance().add(recipe: recipe) { (success) in
+            
+        }
+        ShopRecipeDao.getInstance().add(recipe: recipe2) { (success) in
+            
+        }*/
+        
+        /*ShopRecipeDao.getInstance().add(recipe: recipe) { (success) in
             let recipes = ShopRecipeDao.getInstance().getRecipes()
-            print(recipes.count)
-            for recipe in recipes{
+            /*for recipe in recipes{
                 var string = "{id: \(recipe.id),\nname: \(recipe.name!),\ningredients:[\n"
                 print(recipe.ingredients!.count)
                 for ingr in recipe.ingredients!{
@@ -253,19 +265,25 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     string = string + "{id: \(ing.id),\nname: \(ing.name!),\nquantity: \(ing.quantity),\nunit: \(ing.unit)},\n"
                 }
                 print(string)
-            }
-            let recipess = ShopRecipeDao.getInstance().getRecipes()
-            print("Recipe count: ", recipess.count)
+            }*/
+            
+            print("Recipe count: ", recipes.count)
             let ingredients = CoreStore.fetchAll(From<ShopIngredient>())
             print("Ingredients count: ", ingredients!.count)
+            
+            ShopIngredientDao.getInstance().add(ingredient: ingredient3, recipe: recipe, completionHandler: { (success) in
+                print("Recipe count: ", recipes.count)
+                let ingredients = CoreStore.fetchAll(From<ShopIngredient>())
+                print("Ingredients count: ", ingredients!.count)
+            })
          
         }*/
-        ShopRecipeDao.getInstance().delete(recipeId: 4) {
+        /*ShopRecipeDao.getInstance().delete(recipeId: 4) {
             let recipes = ShopRecipeDao.getInstance().getRecipes()
             print("Recipe count: ", recipes.count)
             let ingredients = CoreStore.fetchAll(From<ShopIngredient>())
             print("Ingredients count: ", ingredients!.count)
-        }
+        }*/
     }
     
 }

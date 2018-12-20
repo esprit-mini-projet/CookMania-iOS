@@ -12,6 +12,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="ShopIngredient" representedClassName="ShopIngredient" syncable="YES" codeGenerationType="class">
+        <attribute name="checked" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -27,7 +28,7 @@
     </entity>
     <elements>
         <element name="Favorite" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="ShopIngredient" positionX="196.015625" positionY="83.96875" width="128" height="120"/>
+        <element name="ShopIngredient" positionX="196.015625" positionY="83.96875" width="128" height="135"/>
         <element name="ShopRecipe" positionX="-187.98828125" positionY="149.01953125" width="128" height="120"/>
     </elements>
 </model>

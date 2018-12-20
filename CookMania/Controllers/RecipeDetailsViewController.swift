@@ -373,7 +373,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
             contentView!.addConstraint(NSLayoutConstraint(item: button, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin*0.5))
             
-            button.restorationIdentifier = String((ingredient.id)!)
+            button.restorationIdentifier = String(indexPath.row)
             nameLabel.text = ingredient.name
             print("quantity")
             print(ingredient.quantity)
@@ -470,10 +470,24 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         let button = sender as! UIButton
         let rowNumber = Int(button.restorationIdentifier!)
         print(rowNumber)
+        ShopIngredientDao.getInstance().add(ingredient: ingredients[rowNumber!], recipe: recipe!) { (success) in
+            if success{
+                print("success")
+            }else{
+                print("failure")
+            }
+        }
     }
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
+        ShopRecipeDao.getInstance().add(recipe: recipe!) { (success) in
+            if success{
+                print("success")
+            }else{
+                print("failure")
+            }
+        }
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {

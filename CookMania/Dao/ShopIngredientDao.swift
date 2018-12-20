@@ -36,8 +36,8 @@ class ShopIngredientDao: NSObject{
             ing.quantity = Int32(String(ingredient.quantity!))!
             ing.unit = ingredient.unit
             
-            if let r = CoreStore.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId!)){
-                ing.recipe = r
+            if let r = transaction.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId!)){
+                r.addToIngredients(ing)
             }else{
                 let r: ShopRecipe = transaction.create(Into<ShopRecipe>())
                 r.name = recipe.name
@@ -49,10 +49,8 @@ class ShopIngredientDao: NSObject{
         }) { (result) in
             switch result{
             case .success:
-                print("success")
                 completionHandler(true)
             case .failure:
-                print("failure")
                 completionHandler(false)
             }
         }
@@ -60,15 +58,32 @@ class ShopIngredientDao: NSObject{
     
     public func delete(ingredientId: Int, completionHandler: @escaping () -> ()){
         let ing = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d", ingredientId))
-        let recipeId = Int(String(ing!.recipe!.id))!
+        let recipe = ing!.recipe
+        let count = recipe!.ingredients?.count
         CoreStore.perform(
             asynchronous: { (transaction) -> Void in
                 transaction.delete(ing)
             },
                 completion: { _ in
-                    ShopRecipeDao.getInstance().delete(recipeId: recipeId, completionHandler: {
+                    if count == 1{
+                        ShopRecipeDao.getInstance().delete(recipeId: Int(String(recipe!.id))!, completionHandler: {
+                            completionHandler()
+                        })
+                    }else{
                         completionHandler()
-                    })
+                    }
+            }
+        )
+    }
+    
+    public func updateChecked(ingredient: ShopIngredient, checked: Bool,  completionHandler: @escaping () -> ()){
+        CoreStore.perform(
+            asynchronous: { (transaction) -> Void in
+                let ing = transaction.edit(ingredient)
+                ing?.checked = checked
+            },
+                completion: { _ in
+                    
             }
         )
     }

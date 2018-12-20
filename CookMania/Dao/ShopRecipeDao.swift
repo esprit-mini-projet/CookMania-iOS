@@ -47,20 +47,33 @@ class ShopRecipeDao: NSObject{
         }) { (result) in
             switch result{
             case .success:
-                print("success")
                 completionHandler(true)
             case .failure:
-                print("failure")
                 completionHandler(false)
             }
         }
     }
     
     public func delete(recipeId: Int, completionHandler: @escaping () -> ()){
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
         CoreStore.perform(
             asynchronous: { (transaction) -> Int? in
                 transaction.deleteAll(
-                    From<ShopRecipe>().where(format: "id == %d", argumentArray: [recipeId])
+                    From<ShopRecipe>().where(format: "id == %d AND userId == %@", argumentArray: [recipeId, userId!])
+                )
+            },
+                completion: { _ in
+                    completionHandler()
+            }
+        )
+    }
+    
+    public func deleteAll(completionHandler: @escaping () -> ()){
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        CoreStore.perform(
+            asynchronous: { (transaction) -> Int? in
+                transaction.deleteAll(
+                    From<ShopRecipe>().where(format: "userId == %@", argumentArray: [userId!])
                 )
             },
                 completion: { _ in
