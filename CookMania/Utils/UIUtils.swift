@@ -24,4 +24,26 @@ final class UIUtils: NSObject {
         }))
         viewController.present(alert, animated: true, completion: nil)
     }
+    
+    public static func addRoudedDottedBorder(view: UIView, color: UIColor){
+        let rect = CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: CGSize.init(width: view.frame.width, height: view.frame.height))
+        let layer = CAShapeLayer.init()
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: view.frame.width/2)
+        layer.path = path.cgPath;
+        layer.strokeColor = color.cgColor
+        layer.lineWidth = 2
+        layer.lineDashPattern = [5,5];
+        layer.backgroundColor = UIColor.clear.cgColor;
+        layer.fillColor = UIColor.clear.cgColor;
+        
+        let lineDashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
+        lineDashAnimation.fromValue = layer.lineDashPattern?.reduce(0) { $0 + $1.intValue }
+        lineDashAnimation.toValue = 0
+        lineDashAnimation.duration = 0.7
+        lineDashAnimation.repeatCount = Float.greatestFiniteMagnitude
+        
+        layer.add(lineDashAnimation, forKey: nil)
+        
+        view.layer.addSublayer(layer);
+    }
 }

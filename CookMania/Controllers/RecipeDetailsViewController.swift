@@ -333,12 +333,22 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let step = recipe!.steps![indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "stepCell")
             let contentView = cell?.viewWithTag(0)?.viewWithTag(1)
-            let shadowView = cell?.viewWithTag(5) as! UIView
+            let descriptionTextView = contentView?.viewWithTag(2) as! UITextView
+            let stepImage = contentView?.viewWithTag(3) as! UIImageView
+            let borderView = contentView?.viewWithTag(4)
+            let timeLabel = contentView?.viewWithTag(5) as! UILabel
             
-            let nameLabel = contentView?.viewWithTag(2) as! UILabel
-            let descriptionTextView = contentView?.viewWithTag(3) as! UITextView
-            let stepImage = contentView?.viewWithTag(4) as! UIImageView
-            let stepImageShadowView = contentView?.viewWithTag(6) as! UIView
+            if step.time != 0 {
+                UIUtils.addRoudedDottedBorder(view: borderView!, color: UIColor.init(red: 221, green: 81, blue: 68))
+                timeLabel.text = String((step.time)!)+"''"
+            }
+            
+            descriptionTextView.text = step.description
+            stepImage.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+step.imageUrl!)!)
+            if step.imageUrl == nil || step.imageUrl == "" {
+                stepImage.constraints[0].constant = 0
+            }
+            /*let stepImageShadowView = contentView?.viewWithTag(6) as! UIView
             
             //Set Data
             nameLabel.text = String((step.time)!)
@@ -359,7 +369,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             stepImageShadowView.layer.cornerRadius = 10
             stepImageShadowView.layer.shadowColor = UIColor.black.cgColor
             stepImageShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            stepImageShadowView.layer.shadowOpacity = 0.5
+            stepImageShadowView.layer.shadowOpacity = 0.5*/
             
             descriptionTextView.sizeToFit()
             descriptionTextView.isScrollEnabled = false
