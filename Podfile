@@ -17,4 +17,5 @@ target 'CookMania' do
   pod 'Gallery'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'ISPageControl', '~> 0.1.0'
 end

@@ -11,6 +11,7 @@ import Cosmos
 import Alamofire
 import AlamofireImage
 import CoreData
+import ISPageControl
 
 class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -102,7 +103,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var visitProfileButton: UIButton!
-    @IBOutlet weak var experiencesPageController: UIPageControl!
+    @IBOutlet weak var experiencesPageController: ISPageControl!
     
     
     

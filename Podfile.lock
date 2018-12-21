@@ -97,6 +97,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
+  - ISPageControl (0.1.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -116,6 +117,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Gallery
   - GoogleSignIn
+  - ISPageControl (~> 0.1.0)
   - ObjectMapper
   - SwiftKeychainWrapper
   - SwiftyJSON
@@ -143,6 +145,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMOAuth2
     - GTMSessionFetcher
+    - ISPageControl
     - nanopb
     - ObjectMapper
     - Protobuf
@@ -171,12 +174,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  ISPageControl: cadeb38e9ecdf05540c69ea1132612521b3caa2a
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: e8de15569243112ba1fffeec816160cfa5953498
+PODFILE CHECKSUM: 4b87bf923485fb94353414c8646faef32529eaba
 
 COCOAPODS: 1.5.3

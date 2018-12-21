@@ -1334,7 +1334,7 @@ d2lkdGggPSAxNxAyA
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1936"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBb-62-YZB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2881.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2854.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="melanzana" translatesAutoresizingMaskIntoConstraints="NO" id="HuM-5a-GOW" userLabel="Cover">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="677.5"/>
@@ -1756,19 +1756,30 @@ EDE5OA
                                                     <outlet property="delegate" destination="oY8-TY-LDq" id="pC4-m5-hxb"/>
                                                 </connections>
                                             </collectionView>
-                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="7ys-4I-67g">
-                                                <rect key="frame" x="168" y="2278.5" width="39" height="37"/>
-                                                <color key="pageIndicatorTintColor" red="0.89019607840000003" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <color key="currentPageIndicatorTintColor" red="0.89019607840000003" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </pageControl>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ow2-ID-1fD" customClass="ISPageControl" customModule="ISPageControl">
+                                                <rect key="frame" x="0.0" y="2268.5" width="375" height="20"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="6m2-qg-j08"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="currentPageTintColor">
+                                                        <color key="value" red="0.89019607840000003" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveTintColor">
+                                                        <color key="value" red="0.89019607840000003" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideForSinglePage" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar recipes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZq-wQ-att">
-                                                <rect key="frame" x="0.0" y="2325.5" width="135" height="23"/>
+                                                <rect key="frame" x="0.0" y="2298.5" width="135" height="23"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V7g-el-DuP">
-                                                <rect key="frame" x="0.0" y="2356.5" width="375" height="484"/>
+                                                <rect key="frame" x="0.0" y="2329.5" width="375" height="484"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="KOk-20-pjh">
                                                     <size key="itemSize" width="214" height="202.5"/>
@@ -2002,10 +2013,10 @@ EDE5OA
                                             <constraint firstItem="kzZ-FT-gTu" firstAttribute="height" secondItem="HuM-5a-GOW" secondAttribute="height" multiplier="0.6" id="64Y-Jp-BUo"/>
                                             <constraint firstItem="V7g-el-DuP" firstAttribute="top" secondItem="rZq-wQ-att" secondAttribute="bottom" constant="8" id="67f-qr-lPK"/>
                                             <constraint firstItem="qH8-f5-jCT" firstAttribute="top" secondItem="Boq-Jr-H9O" secondAttribute="bottom" constant="30" id="6ag-IF-aG0"/>
+                                            <constraint firstItem="Ow2-ID-1fD" firstAttribute="width" secondItem="zpr-IB-e6y" secondAttribute="width" id="6bC-uO-Egr"/>
                                             <constraint firstItem="Ftk-zP-oyo" firstAttribute="leading" secondItem="kzZ-FT-gTu" secondAttribute="leading" id="6we-hq-Mm0"/>
                                             <constraint firstItem="qH8-f5-jCT" firstAttribute="leading" secondItem="kzZ-FT-gTu" secondAttribute="leading" id="7cL-oW-Cpu"/>
                                             <constraint firstAttribute="trailing" secondItem="HuM-5a-GOW" secondAttribute="trailing" id="9Fk-0s-iBB"/>
-                                            <constraint firstItem="zpr-IB-e6y" firstAttribute="bottom" secondItem="7ys-4I-67g" secondAttribute="top" id="9YH-JQ-864"/>
                                             <constraint firstItem="Ive-Pw-fhZ" firstAttribute="trailing" secondItem="kzZ-FT-gTu" secondAttribute="trailing" id="BMl-Vc-feo"/>
                                             <constraint firstItem="rZq-wQ-att" firstAttribute="leading" secondItem="kzZ-FT-gTu" secondAttribute="leading" id="BcE-Or-WfG"/>
                                             <constraint firstItem="qB9-Uj-hh6" firstAttribute="top" secondItem="ZSg-jO-NPU" secondAttribute="bottom" constant="8" id="Bhf-Z9-sAr"/>
@@ -2014,8 +2025,9 @@ EDE5OA
                                             <constraint firstItem="vuH-3K-62e" firstAttribute="leading" secondItem="5bl-pH-eEc" secondAttribute="trailing" constant="2" id="EcH-hv-yjf"/>
                                             <constraint firstItem="zpr-IB-e6y" firstAttribute="top" secondItem="VMK-HO-58M" secondAttribute="bottom" constant="24" id="Eze-c4-hux"/>
                                             <constraint firstItem="695-Dd-neT" firstAttribute="top" secondItem="qB9-Uj-hh6" secondAttribute="bottom" constant="27.5" id="Ie0-8f-ikG"/>
+                                            <constraint firstItem="Ow2-ID-1fD" firstAttribute="centerX" secondItem="zpr-IB-e6y" secondAttribute="centerX" id="Ix8-lP-gqq"/>
                                             <constraint firstItem="eAC-yX-RlQ" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="1.3" id="JVA-uS-O0N"/>
-                                            <constraint firstItem="rZq-wQ-att" firstAttribute="top" secondItem="7ys-4I-67g" secondAttribute="bottom" constant="10" id="KH8-4y-HVH"/>
+                                            <constraint firstItem="rZq-wQ-att" firstAttribute="top" secondItem="Ow2-ID-1fD" secondAttribute="bottom" constant="10" id="KH8-4y-HVH"/>
                                             <constraint firstItem="eAC-yX-RlQ" firstAttribute="centerX" secondItem="kzZ-FT-gTu" secondAttribute="centerX" id="Krv-Y4-Yfy"/>
                                             <constraint firstItem="VMK-HO-58M" firstAttribute="top" secondItem="695-Dd-neT" secondAttribute="bottom" constant="7" id="LSl-Ec-LSl"/>
                                             <constraint firstAttribute="trailing" secondItem="V7g-el-DuP" secondAttribute="trailing" id="MBq-R1-Lcd"/>
@@ -2031,7 +2043,7 @@ EDE5OA
                                             <constraint firstItem="8Ss-8W-i5n" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="1.1" id="Xf7-7O-Ga3"/>
                                             <constraint firstItem="Ftk-zP-oyo" firstAttribute="centerY" secondItem="kzZ-FT-gTu" secondAttribute="centerY" multiplier="0.95" id="Yp3-6C-qKb"/>
                                             <constraint firstItem="e0z-RS-t4U" firstAttribute="top" secondItem="qH8-f5-jCT" secondAttribute="bottom" constant="8" id="bHA-go-4XB"/>
-                                            <constraint firstItem="7ys-4I-67g" firstAttribute="centerX" secondItem="zpr-IB-e6y" secondAttribute="centerX" id="bIm-KI-rVc"/>
+                                            <constraint firstItem="zpr-IB-e6y" firstAttribute="bottom" secondItem="Ow2-ID-1fD" secondAttribute="top" constant="10" id="bzg-5L-5fw"/>
                                             <constraint firstItem="ZSg-jO-NPU" firstAttribute="leading" secondItem="kzZ-FT-gTu" secondAttribute="leading" id="cuY-Kn-sQm"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZSg-jO-NPU" secondAttribute="trailing" constant="20" symbolic="YES" id="dqC-yu-mlr"/>
                                             <constraint firstItem="qB9-Uj-hh6" firstAttribute="leading" secondItem="xBb-62-YZB" secondAttribute="leading" id="eCz-Bt-TAH"/>
@@ -2093,7 +2105,7 @@ EDE5OA
                         <outlet property="caloriesValueLabel" destination="msN-3D-JlP" id="HnQ-Jn-Fiz"/>
                         <outlet property="contentView" destination="xBb-62-YZB" id="i0D-3M-w8O"/>
                         <outlet property="experiencesCollectionView" destination="zpr-IB-e6y" id="6QH-zY-unX"/>
-                        <outlet property="experiencesPageController" destination="7ys-4I-67g" id="jxW-Ft-4VJ"/>
+                        <outlet property="experiencesPageController" destination="Ow2-ID-1fD" id="bOM-3C-dcL"/>
                         <outlet property="ingredientsLabel" destination="qH8-f5-jCT" id="Jmb-Tp-tph"/>
                         <outlet property="ingredientsStack" destination="DR1-OG-VNm" id="mTL-iz-l9e"/>
                         <outlet property="ingredientsTableView" destination="e0z-RS-t4U" id="zsE-4x-E6q"/>
