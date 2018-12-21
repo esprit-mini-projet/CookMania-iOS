@@ -43,7 +43,7 @@
 		C32B1C7F2194E10400153DC9 /* AddRecipeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7E2194E10400153DC9 /* AddRecipeContainerViewController.swift */; };
 		C32B1C832194E21B00153DC9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C822194E21B00153DC9 /* SettingsViewController.swift */; };
 		C32B1C852194EA0E00153DC9 /* BlitzViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */; };
-		C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */; };
+		C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C862194EE3E00153DC9 /* SearchFilterViewController.swift */; };
 		C32B1C892194EEEE00153DC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C882194EEEE00153DC9 /* User.swift */; };
 		C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3474AA021A0BCD6005EADBC /* UserService.swift */; };
 		C3474AA521A0BE4D005EADBC /* ServiceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */; };
@@ -101,7 +101,7 @@
 		C32B1C7E2194E10400153DC9 /* AddRecipeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeContainerViewController.swift; sourceTree = "<group>"; };
 		C32B1C822194E21B00153DC9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzViewController.swift; sourceTree = "<group>"; };
-		C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		C32B1C862194EE3E00153DC9 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterViewController.swift; sourceTree = "<group>"; };
 		C32B1C882194EEEE00153DC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3474AA021A0BCD6005EADBC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUtils.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				262543AE21935E6C003601A4 /* ProfileViewController.swift */,
 				C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */,
 				26101083218FAE0B00E8344F /* RecipeListViewController.swift */,
-				C32B1C862194EE3E00153DC9 /* SearchResultViewController.swift */,
+				C32B1C862194EE3E00153DC9 /* SearchFilterViewController.swift */,
 				262543AC21935E55003601A4 /* SearchViewController.swift */,
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
@@ -373,6 +373,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -393,6 +394,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +480,7 @@
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
 				26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */,
-				C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */,
+				C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,

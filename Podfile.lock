@@ -38,6 +38,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.1)
   - ObjectMapper (3.4.1)
   - SwiftKeychainWrapper (3.0.1)
+  - SwiftRangeSlider (2.0.0)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - ObjectMapper
   - SwiftKeychainWrapper
+  - SwiftRangeSlider
   - SwiftyJSON
 
 SPEC REPOS:
@@ -69,6 +71,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - ObjectMapper
     - SwiftKeychainWrapper
+    - SwiftRangeSlider
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -87,8 +90,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftRangeSlider: f86e3b637c961120158fa1a89277c8343845cbe4
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: c745f66226c68adda63e676e67c2c849358822f1
+PODFILE CHECKSUM: d770defcc92499519361fe285430e32d224aee74
 
 COCOAPODS: 1.5.3

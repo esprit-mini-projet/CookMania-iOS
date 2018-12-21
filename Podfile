@@ -16,4 +16,5 @@ target 'CookMania' do
   pod 'SwiftyJSON'
   pod 'Gallery'
   pod 'CoreStore', '~> 5.0'
+  pod ‘SwiftRangeSlider’
 end
