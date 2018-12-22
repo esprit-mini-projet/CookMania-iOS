@@ -2269,11 +2269,24 @@ EDE5OA
                                 <color key="textColor" red="0.86666666670000003" green="0.31764705879999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aez-5a-nFX">
+                                <rect key="frame" x="167.5" y="98.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="729-HL-4hZ"/>
+                                    <constraint firstAttribute="width" secondItem="aez-5a-nFX" secondAttribute="height" multiplier="1:1" id="pHC-yr-OVf"/>
+                                </constraints>
+                                <color key="tintColor" red="0.86666666670000003" green="0.31764705879999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="refresh"/>
+                                <connections>
+                                    <action selector="rewingButtonClicked:" destination="eQc-gy-fgp" eventType="touchUpInside" id="Xut-Mk-6lY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="eLo-Ym-Tgl" firstAttribute="centerY" secondItem="49B-X5-6lO" secondAttribute="centerY" id="4KI-p5-2LE"/>
                             <constraint firstItem="pEK-cN-8NB" firstAttribute="width" secondItem="eLo-Ym-Tgl" secondAttribute="width" multiplier="0.8" id="4ea-R4-Alc"/>
+                            <constraint firstItem="aez-5a-nFX" firstAttribute="bottom" secondItem="hvF-kO-eFc" secondAttribute="top" id="ArI-RO-EUL"/>
                             <constraint firstItem="eLo-Ym-Tgl" firstAttribute="height" secondItem="CTq-sC-HvT" secondAttribute="height" id="J1G-Qf-KPa"/>
                             <constraint firstItem="2j3-AV-dJe" firstAttribute="centerY" secondItem="hvF-kO-eFc" secondAttribute="centerY" id="QE2-cT-jk9"/>
                             <constraint firstItem="eLo-Ym-Tgl" firstAttribute="width" secondItem="CTq-sC-HvT" secondAttribute="width" id="QqW-sR-Go8"/>
@@ -2281,6 +2294,7 @@ EDE5OA
                             <constraint firstItem="pEK-cN-8NB" firstAttribute="centerY" secondItem="eLo-Ym-Tgl" secondAttribute="centerY" id="XZC-fw-ztz"/>
                             <constraint firstItem="2j3-AV-dJe" firstAttribute="width" secondItem="hvF-kO-eFc" secondAttribute="width" id="bvi-41-WoW"/>
                             <constraint firstItem="eLo-Ym-Tgl" firstAttribute="centerX" secondItem="49B-X5-6lO" secondAttribute="centerX" id="epF-8F-Ahy"/>
+                            <constraint firstItem="aez-5a-nFX" firstAttribute="centerX" secondItem="pEK-cN-8NB" secondAttribute="centerX" id="ksA-wt-QVU"/>
                             <constraint firstItem="2j3-AV-dJe" firstAttribute="centerX" secondItem="hvF-kO-eFc" secondAttribute="centerX" id="lHv-JK-OdF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="49B-X5-6lO"/>
@@ -2299,7 +2313,7 @@ EDE5OA
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7998" y="1298"/>
+            <point key="canvasLocation" x="7997.6000000000004" y="1297.6011994002999"/>
         </scene>
         <!--Title-->
         <scene sceneID="Vxp-YV-Bbj">
@@ -3393,6 +3407,7 @@ EDE5OA
         <image name="profile" width="72" height="72"/>
         <image name="rating-star" width="48" height="48"/>
         <image name="recipe-time" width="48" height="48"/>
+        <image name="refresh" width="96" height="96"/>
         <image name="search" width="72" height="72"/>
         <image name="settings_icon" width="48" height="48"/>
         <image name="shop-cart" width="72" height="72"/>

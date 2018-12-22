@@ -37,7 +37,13 @@ class TimerViewController: UIViewController {
         super.viewDidLoad()
         
         circularSlider.maximumValue = CGFloat(time!*60)
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updatePlayerUI), userInfo: nil, repeats: true)
+        startTimer()
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.tick), userInfo: nil, repeats: true)
+        stopAlarmButton.alpha = 0
+        stopAlarm = true
     }
     
     func playSystemSound(){
@@ -54,13 +60,17 @@ class TimerViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func updatePlayerUI() {
+    func updatePlayerUI(){
+        circularSlider.endPointValue = CGFloat(seconds)
+        var components = DateComponents()
+        components.second = Int(seconds)
+        timerLabel.text = dateComponentsFormatter.string(from: components)
+    }
+    
+    @objc func tick() {
         if !isPaused {
             if seconds <= (time!*60) {
-                circularSlider.endPointValue = CGFloat(seconds)
-                var components = DateComponents()
-                components.second = Int(seconds)
-                timerLabel.text = dateComponentsFormatter.string(from: components)
+                updatePlayerUI()
                 seconds+=1
             }else{
                 timer?.invalidate()
@@ -68,6 +78,7 @@ class TimerViewController: UIViewController {
                 AudioServicesPlaySystemSound (systemSoundID)
                 timerLabel.text = "Time is up!"
                 stopAlarmButton.alpha = 1
+                stopAlarm = false
                 playSystemSound()
             }
         }
@@ -90,6 +101,17 @@ class TimerViewController: UIViewController {
     @IBAction func stopAlarm(_ sender: Any) {
         stopAlarm = true
     }
+    
+    @IBAction func rewingButtonClicked(_ sender: Any) {
+        seconds = 0
+        playerSegmentedControl.selectedSegmentIndex = 1
+        isPaused = true
+        updatePlayerUI()
+        if !(timer?.isValid)! {
+            startTimer()
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
