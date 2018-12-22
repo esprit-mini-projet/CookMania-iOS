@@ -21,6 +21,7 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     let diets = ["Healthy", "Vegetarian"]
     let types = ["Breakfast", "Lunch", "Dinner"]
     let occasions = ["Date Night"]
+    let calories = ["All", "Low", "Normal", "Rich"]
     
     var categories = [[Any]]()
     
@@ -34,6 +35,14 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
             ["Type", types],
             ["Occasion", occasions]
         ]
+        for (i, value) in calories.enumerated(){
+            if value == filter?.calories{
+                caloriesSegCont.selectedSegmentIndex = i
+                break
+            }
+        }
+        servingsSlider.selectedMinimum = Float((filter?.minServings)!)
+        servingsSlider.selectedMaximum = Float((filter?.maxServings)!)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,6 +119,7 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
             //Occasion
             button.setTitle(occasions[indexPath.item], for: UIControl.State.normal)
         }
+        initCategoryButtonFromFilter(button: button)
         return cell
     }
     
@@ -129,6 +139,17 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
                 filter!.labels.remove(at: i)
                 break
             }
+        }
+    }
+    
+    func initCategoryButtonFromFilter(button: UIButton){
+        if (filter?.labels.contains(button.title(for: UIControl.State.normal)!))!{
+            button.setTitleColor(blue, for: .normal)
+            button.layer.borderWidth = 1
+            button.layer.borderColor = blue.cgColor
+        }else{
+            button.setTitleColor(lightGray, for: .normal)
+            button.layer.borderWidth = 0
         }
     }
     

@@ -204,4 +204,20 @@ public class RecipeService: NSObject{
             }
         }
     }
+    
+    func search(filter: Filter, completionHandler: @escaping ([SearchResult]) -> ()){
+        let body: [String: Any] = [
+            "name" : filter.name,
+            "calories" : filter.calories,
+            "minServings" : filter.minServings,
+            "maxServings" : filter.maxServings,
+            "labels" : filter.labels
+        ]
+        
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "search"), method: .post, parameters: body, encoding: JSONEncoding.default)
+            .responseString{ response in
+                let result = Mapper<SearchResult>().mapArray(JSONString: response.result.value!)!
+                completionHandler(result)
+        }
+    }
 }

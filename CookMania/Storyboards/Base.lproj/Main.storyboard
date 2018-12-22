@@ -766,7 +766,7 @@ d2lkdGggPSAxNxAyA
                                     <string>Title</string>
                                 </scopeButtonTitles>
                                 <connections>
-                                    <outlet property="delegate" destination="6qe-kK-Ooc" id="D41-yT-83q"/>
+                                    <outlet property="delegate" destination="7Sd-b5-1zf" id="auC-7c-FYU"/>
                                 </connections>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptV-YC-DXh" userLabel="no result">
@@ -831,6 +831,8 @@ d2lkdGggPSAxNxAyA
                     </navigationItem>
                     <connections>
                         <outlet property="resultCV" destination="lml-fm-XPO" id="bmX-zW-caY"/>
+                        <outlet property="resultCount" destination="ptV-YC-DXh" id="Woe-q6-Apx"/>
+                        <outlet property="searchBar" destination="bdF-Gz-0d0" id="UVQ-zi-wbj"/>
                         <segue destination="Gjk-RB-pLa" kind="show" identifier="toRecipeList" id="di5-D0-Hv1"/>
                     </connections>
                 </viewController>
@@ -3747,6 +3749,6 @@ EDE5OA
         <segue reference="uED-xn-5ft"/>
         <segue reference="kdF-uh-brg"/>
         <segue reference="zjX-6Z-rTw"/>
-        <segue reference="DtB-Bu-ib5"/>
+        <segue reference="di5-D0-Hv1"/>
     </inferredMetricsTieBreakers>
 </document>

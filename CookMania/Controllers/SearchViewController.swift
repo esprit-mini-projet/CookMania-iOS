@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import AlamofireImage
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
     
     @IBOutlet weak var resultCV: UICollectionView!
+    @IBOutlet weak var resultCount: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     let filter = Filter()
+    var result = [SearchResult]()
     
     var images = [
         UIImage(named: "d1"),
@@ -31,13 +35,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return result.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Recipe", for: indexPath)
         let photo = cell.viewWithTag(1) as! UIImageView
-        photo.image = images[indexPath.item]
+        photo.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + (result[indexPath.item].recipe?.imageUrl)!)!)
         return cell
     }
     
@@ -49,6 +53,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if filter.isChanged{
+            performSearch()
+        }
         print("calories:", filter.calories)
         print("servingsMin:", filter.minServings)
         print("servingsMax:", filter.maxServings)
@@ -56,11 +63,25 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             print(label)
         }
     }
-
+    
+    func performSearch(){
+        RecipeService.getInstance().search(filter: filter) { (result) in
+            self.result.removeAll()
+            self.result += result
+            self.resultCV.reloadData()
+            self.resultCount.text = String("\(result.count) results found.")
+            self.filter.isChanged = false
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filter.name = searchText
+        performSearch()
+    }
 }
 
 extension SearchViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, ratioForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return images[indexPath.item]!.size.height / images[indexPath.item]!.size.width
+        return CGFloat(result[indexPath.item].imageHeight! / result[indexPath.item].imageWidth!)
     }
 }
