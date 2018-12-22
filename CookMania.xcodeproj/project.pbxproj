@@ -27,6 +27,7 @@
 		263BDE0821CC25C500D98416 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263BDE0721CC25C500D98416 /* PinterestLayout.swift */; };
 		2689B75921AF3E96007BBC54 /* ActionSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689B75821AF3E96007BBC54 /* ActionSegmentControl.swift */; };
 		2689B75B21AF4E87007BBC54 /* AddStepContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */; };
+		268FC1F421CE6E2C004A87E1 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FC1F321CE6E2C004A87E1 /* Filter.swift */; };
 		26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */; };
 		26925D6B21BAEFF700773AB3 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */; };
 		2693920021BC895A00900C9F /* SuggestionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269391FF21BC895A00900C9F /* SuggestionImageView.swift */; };
@@ -82,6 +83,7 @@
 		263BDE0721CC25C500D98416 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		2689B75821AF3E96007BBC54 /* ActionSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSegmentControl.swift; sourceTree = "<group>"; };
 		2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStepContainerViewController.swift; sourceTree = "<group>"; };
+		268FC1F321CE6E2C004A87E1 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepViewController.swift; sourceTree = "<group>"; };
 		26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		269391FF21BC895A00900C9F /* SuggestionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionImageView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				C3834A3921B9A913006CE670 /* UIColor.swift */,
 				269391FF21BC895A00900C9F /* SuggestionImageView.swift */,
 				263BDE0721CC25C500D98416 /* PinterestLayout.swift */,
+				268FC1F321CE6E2C004A87E1 /* Filter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -373,8 +376,8 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -394,8 +397,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -466,6 +469,7 @@
 				C32B1C852194EA0E00153DC9 /* BlitzViewController.swift in Sources */,
 				262543B121937811003601A4 /* GradientView.swift in Sources */,
 				C32B1C7D2194DF2600153DC9 /* RecipeDetailsViewController.swift in Sources */,
+				268FC1F421CE6E2C004A87E1 /* Filter.swift in Sources */,
 				26F92255219CB07300E55B09 /* Constants.swift in Sources */,
 				26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */,
 				262543AF21935E6C003601A4 /* ProfileViewController.swift in Sources */,

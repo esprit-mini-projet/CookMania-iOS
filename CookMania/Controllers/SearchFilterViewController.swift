@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import TTRangeSlider
 
 class SearchFilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    
+    @IBOutlet weak var caloriesSegCont: UISegmentedControl!
+    @IBOutlet weak var servingsSlider: TTRangeSlider!
+    
+    var filter: Filter?
     
     let sortItems = ["Rating", "Time"]
     
@@ -108,14 +114,22 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func highlightCategory(_ sender: UIButton) {
+        let title = sender.title(for: UIControl.State.normal)!
         if sender.titleColor(for: UIControl.State.normal) == lightGray{
             sender.setTitleColor(blue, for: .normal)
             sender.layer.borderWidth = 1
             sender.layer.borderColor = blue.cgColor
+            filter!.labels.append(title)
             return
         }
         sender.setTitleColor(lightGray, for: .normal)
         sender.layer.borderWidth = 0
+        for (i, label) in (filter?.labels.enumerated())!{
+            if label == title{
+                filter!.labels.remove(at: i)
+                break
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -144,6 +158,14 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
+    }
+    
+    @IBAction func apply(_ sender: Any) {
+        filter!.calories = caloriesSegCont.titleForSegment(at: caloriesSegCont.selectedSegmentIndex)!
+        filter?.minServings = Int(servingsSlider.selectedMinimum)
+        filter?.maxServings = Int(servingsSlider.selectedMaximum)
+        filter?.isChanged = true
+        navigationController?.popViewController(animated: true)
     }
     
 }

@@ -12,6 +12,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBOutlet weak var resultCV: UICollectionView!
     
+    let filter = Filter()
+    
     var images = [
         UIImage(named: "d1"),
         UIImage(named: "d5"),
@@ -41,7 +43,17 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFilter"{
-            
+            let dest = segue.destination as! SearchFilterViewController
+            dest.filter = filter
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("calories:", filter.calories)
+        print("servingsMin:", filter.minServings)
+        print("servingsMax:", filter.maxServings)
+        for label in filter.labels{
+            print(label)
         }
     }
 
