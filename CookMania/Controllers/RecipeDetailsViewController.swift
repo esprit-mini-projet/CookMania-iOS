@@ -301,25 +301,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if(tableView == stepsTableView && recipe!.steps![indexPath.row].time != 0){
-            let timer = timerAction(at: indexPath)
-            return UISwipeActionsConfiguration(actions: [timer])
-        }
-        return UISwipeActionsConfiguration(actions: [])
-    }
-    
-    func timerAction(at indexPath: IndexPath) -> UIContextualAction {
-        //let step = recipe.steps[indexPath.row]
-        let action = UIContextualAction(style: .normal, title: "Set timer") { (action, view, completion) in
-            print("Set timer")
-            completion(true)
-        }
-        action.image = UIImage(named: "timer")
-        action.backgroundColor = UIColor.lightGray
-        return action
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == stepsTableView {
             return recipe!.steps!.count
@@ -348,28 +329,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             if step.imageUrl == nil || step.imageUrl == "" {
                 stepImage.constraints[0].constant = 0
             }
-            /*let stepImageShadowView = contentView?.viewWithTag(6) as! UIView
-            
-            //Set Data
-            nameLabel.text = String((step.time)!)
-            descriptionTextView.text = step.description
-            stepImage.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+step.imageUrl!)!)
-            //Init views
-            contentView?.layer.cornerRadius = 10
-            contentView?.layer.masksToBounds = true
-            
-            shadowView.layer.cornerRadius = 10
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            shadowView.layer.shadowOpacity = 0.5
-            
-            stepImage.layer.cornerRadius = 10
-            stepImage.layer.masksToBounds = true
-            
-            stepImageShadowView.layer.cornerRadius = 10
-            stepImageShadowView.layer.shadowColor = UIColor.black.cgColor
-            stepImageShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            stepImageShadowView.layer.shadowOpacity = 0.5*/
             
             descriptionTextView.sizeToFit()
             descriptionTextView.isScrollEnabled = false
@@ -547,13 +506,23 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         })
     }
     
+    @IBAction func timerTapped(_ sender: Any) {
+        let labelText = (((sender as! UITapGestureRecognizer).view?.subviews[0] as! UILabel).text)!
+        let index = labelText.index(labelText.endIndex, offsetBy: -2)
+        let timeText = labelText[..<index]
+        performSegue(withIdentifier: "toTimer", sender: Int(timeText))
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
             (segue.destination as! ProfileViewController).user = self.user
         }else if segue.identifier == "toAddExperience" {
             let destination = (segue.destination as! AddExperienceViewController)
-            destination.rating = sender as! Double
+            destination.rating = (sender as! Double)
             destination.recipe = self.recipe!
+        }else if segue.identifier == "toTime" {
+            let destination = (segue.destination as! TimerViewController)
+            destination.time = (sender as! Int)
         }
     }
     /*

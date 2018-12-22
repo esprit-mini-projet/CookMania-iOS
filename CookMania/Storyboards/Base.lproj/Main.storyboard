@@ -1325,7 +1325,7 @@ d2lkdGggPSAxNxAyA
         <!--Details-->
         <scene sceneID="Jmy-Zu-dX2">
             <objects>
-                <viewController storyboardIdentifier="RecipeDetailsViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oY8-TY-LDq" customClass="RecipeDetailsViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeDetailsViewController" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oY8-TY-LDq" customClass="RecipeDetailsViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="goH-xx-hpd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1936"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1517,6 +1517,7 @@ EDE5OA
                                                                         </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" red="0.2784313725" green="0.47450980390000003" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <gestureRecognizers/>
                                                                     <constraints>
                                                                         <constraint firstItem="IGH-yX-2S5" firstAttribute="centerY" secondItem="gPW-r6-jtE" secondAttribute="centerY" id="75n-Em-Xt2"/>
                                                                         <constraint firstAttribute="width" constant="45" id="NbS-RW-gvB"/>
@@ -1529,6 +1530,9 @@ EDE5OA
                                                                             <real key="value" value="22.5"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <outletCollection property="gestureRecognizers" destination="pEq-yr-pVY" appends="YES" id="g9B-Iq-Z1a"/>
+                                                                    </connections>
                                                                 </view>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWh-1e-AWk">
                                                                     <rect key="frame" x="69.5" y="22" width="281.5" height="276"/>
@@ -2137,11 +2141,86 @@ EDE5OA
                         <outlet property="visitProfileButton" destination="iXG-rz-kq5" id="YrT-jS-a8L"/>
                         <segue destination="yJ2-Dp-Ir6" kind="show" identifier="toProfile" id="3Hv-pz-kTR"/>
                         <segue destination="Uer-RZ-r6X" kind="show" identifier="toAddExperience" id="SSW-JV-kr6"/>
+                        <segue destination="eQc-gy-fgp" kind="presentation" identifier="toTimer" modalTransitionStyle="crossDissolve" id="mqO-XR-bw4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAZ-Fj-0uW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pEq-yr-pVY">
+                    <connections>
+                        <action selector="timerTapped:" destination="oY8-TY-LDq" id="bhN-ig-ao0"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="7047.1999999999998" y="922.93853073463276"/>
+        </scene>
+        <!--Timer View Controller-->
+        <scene sceneID="QEL-AE-nhB">
+            <objects>
+                <viewController modalPresentationStyle="overFullScreen" id="eQc-gy-fgp" customClass="TimerViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CTq-sC-HvT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILi-13-3Ba">
+                                <rect key="frame" x="0.0" y="10" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pzC-vg-nis">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WbQ-cX-kCu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="3pQ-Jk-nio">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Tjs-ze-ZYP" appends="YES" id="oBs-vM-2QA"/>
+                                                </connections>
+                                            </view>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bn6-LK-Pgo">
+                                            <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                                            <color key="backgroundColor" red="0.86666666670000003" green="0.31764705879999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="128" id="Kjw-ME-Gfc"/>
+                                                <constraint firstAttribute="width" constant="240" id="efi-yU-62b"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="bn6-LK-Pgo" firstAttribute="centerX" secondItem="pzC-vg-nis" secondAttribute="centerX" id="LVe-IQ-uMY"/>
+                                        <constraint firstItem="bn6-LK-Pgo" firstAttribute="centerY" secondItem="pzC-vg-nis" secondAttribute="centerY" id="VS4-dJ-BgZ"/>
+                                    </constraints>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ILi-13-3Ba" firstAttribute="height" secondItem="CTq-sC-HvT" secondAttribute="height" id="EWh-ru-8xY"/>
+                            <constraint firstItem="ILi-13-3Ba" firstAttribute="centerX" secondItem="49B-X5-6lO" secondAttribute="centerX" id="FA9-5I-40Y"/>
+                            <constraint firstItem="ILi-13-3Ba" firstAttribute="width" secondItem="CTq-sC-HvT" secondAttribute="width" id="QNL-Wa-Nkg"/>
+                            <constraint firstItem="ILi-13-3Ba" firstAttribute="centerY" secondItem="49B-X5-6lO" secondAttribute="centerY" id="tRl-zw-UZd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="49B-X5-6lO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aiy-Vv-uHN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Tjs-ze-ZYP">
+                    <connections>
+                        <action selector="dismissTimerView:" destination="eQc-gy-fgp" id="Uyb-p7-oed"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="7998" y="1298"/>
         </scene>
         <!--Title-->
         <scene sceneID="Vxp-YV-Bbj">

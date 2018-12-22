@@ -53,6 +53,7 @@
 		C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
 		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
+		C3EED56D21CDAF33006C2FC3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */; };
 		C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */; };
 		C3FE11F021A35298007D5F16 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11EF21A35298007D5F16 /* Following.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,7 @@
 		C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabLayoutViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
 		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
+		C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		C3FE11EF21A35298007D5F16 /* Following.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +203,7 @@
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
+				C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,
 				C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */,
+				C3EED56D21CDAF33006C2FC3 /* TimerViewController.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
