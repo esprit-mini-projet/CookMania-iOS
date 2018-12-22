@@ -2184,7 +2184,7 @@ EDE5OA
                                             </subviews>
                                         </view>
                                         <gestureRecognizers/>
-                                        <blurEffect style="light"/>
+                                        <blurEffect style="extraLight"/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="jTc-lV-xVs" appends="YES" id="ySA-ak-Dob"/>
                                         </connections>
@@ -2199,7 +2199,7 @@ EDE5OA
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-cN-8NB">
-                                <rect key="frame" x="37.5" y="142" width="300" height="403"/>
+                                <rect key="frame" x="37.5" y="138.5" width="300" height="410"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvF-kO-eFc" customClass="CircularSlider" customModule="HGCircularSlider">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
@@ -2251,9 +2251,9 @@ EDE5OA
                                             <action selector="playSegmentedToggled:" destination="eQc-gy-fgp" eventType="valueChanged" id="Xcm-Kq-C2Z"/>
                                         </connections>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuB-8R-96w">
-                                        <rect key="frame" x="0.0" y="368" width="300" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuB-8R-96w">
+                                        <rect key="frame" x="0.0" y="368" width="300" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                         <state key="normal" title="Stop the alarm">
                                             <color key="titleColor" red="0.86666666670000003" green="0.31764705879999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -2264,7 +2264,7 @@ EDE5OA
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="167" placeholderIntrinsicHeight="48" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2j3-AV-dJe">
-                                <rect key="frame" x="37.5" y="268" width="300" height="48"/>
+                                <rect key="frame" x="37.5" y="264.5" width="300" height="48"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="60"/>
                                 <color key="textColor" red="0.86666666670000003" green="0.31764705879999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2288,6 +2288,7 @@ EDE5OA
                     <connections>
                         <outlet property="circularSlider" destination="hvF-kO-eFc" id="JDD-qQ-QGm"/>
                         <outlet property="playerSegmentedControl" destination="FrB-Ke-nuU" id="oQx-NQ-Ij8"/>
+                        <outlet property="stopAlarmButton" destination="XuB-8R-96w" id="pUH-HI-tjd"/>
                         <outlet property="timerLabel" destination="2j3-AV-dJe" id="IJH-7X-6Mj"/>
                     </connections>
                 </viewController>

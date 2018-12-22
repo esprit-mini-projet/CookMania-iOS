@@ -15,6 +15,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var circularSlider: CircularSlider!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var playerSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var stopAlarmButton: UIButton!
     
     // date formatter user for timer label
     let dateComponentsFormatter: DateComponentsFormatter = {
@@ -66,6 +67,7 @@ class TimerViewController: UIViewController {
                 AudioServicesRemoveSystemSoundCompletion(systemSoundID);
                 AudioServicesPlaySystemSound (systemSoundID)
                 timerLabel.text = "Time is up!"
+                stopAlarmButton.alpha = 1
                 playSystemSound()
             }
         }
