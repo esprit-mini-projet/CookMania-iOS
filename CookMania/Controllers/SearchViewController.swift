@@ -15,17 +15,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var resultCount: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let filter = Filter()
+    var filter = Filter()
     var result = [SearchResult]()
-    
-    var images = [
-        UIImage(named: "d1"),
-        UIImage(named: "d5"),
-        UIImage(named: "d3"),
-        UIImage(named: "d4"),
-        UIImage(named: "d2"),
-        UIImage(named: "d6")
-    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +32,27 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Recipe", for: indexPath)
         let photo = cell.viewWithTag(1) as! UIImageView
+        photo.layer.cornerRadius = 8
+        photo.layer.masksToBounds = true
         photo.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + (result[indexPath.item].recipe?.imageUrl)!)!)
+        let name = cell.viewWithTag(2) as! UILabel
+        name.text = result[indexPath.item].recipe?.name
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        RecipeService.getInstance().getRecipe(recipeId: (result[indexPath.item].recipe?.id)!) { (recipe) in
+            self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFilter"{
             let dest = segue.destination as! SearchFilterViewController
             dest.filter = filter
+        } else if segue.identifier == "toRecipeDetails"{
+            let dest = segue.destination as! RecipeDetailsViewController
+            dest.recipe = (sender as! Recipe)
         }
     }
     
@@ -78,10 +82,17 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         filter.name = searchText
         performSearch()
     }
+    
+    @IBAction func reset(_ sender: Any) {
+        filter = Filter()
+        searchBar.text = nil
+        performSearch()
+    }
+    
 }
 
 extension SearchViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, ratioForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return CGFloat(result[indexPath.item].imageHeight! / result[indexPath.item].imageWidth!)
+        return CGFloat((result[indexPath.item].imageHeight! + 5 + 38.5) / result[indexPath.item].imageWidth!)
     }
 }
