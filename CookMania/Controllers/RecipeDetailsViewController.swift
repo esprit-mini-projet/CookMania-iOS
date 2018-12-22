@@ -520,7 +520,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let destination = (segue.destination as! AddExperienceViewController)
             destination.rating = (sender as! Double)
             destination.recipe = self.recipe!
-        }else if segue.identifier == "toTime" {
+        }else if segue.identifier == "toTimer" {
             let destination = (segue.destination as! TimerViewController)
             destination.time = (sender as! Int)
         }

@@ -18,4 +18,5 @@ target 'CookMania' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'ISPageControl', '~> 0.1.0'
+  pod 'HGCircularSlider'
 end
