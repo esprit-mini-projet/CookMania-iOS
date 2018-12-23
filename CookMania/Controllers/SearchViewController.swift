@@ -77,6 +77,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.resultCV.reloadData()
             self.resultCount.text = String("\(sorted.count) results found.")
             self.filter.isChanged = false
+            print("======")
+            for sr in sorted{
+                print("rating:", sr.recipe!.rating!, "calories:", sr.recipe!.calories!)
+            }
         }
     }
     
@@ -107,6 +111,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         result.removeAll()
         result += sorted
         resultCV.reloadData()
+        print("======")
+        for sr in sorted{
+            print("rating:", sr.recipe!.rating!, "calories:", sr.recipe!.calories!)
+        }
     }
 }
 
