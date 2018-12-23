@@ -41,6 +41,7 @@ final class UIUtils: NSObject {
         lineDashAnimation.toValue = 0
         lineDashAnimation.duration = 0.7
         lineDashAnimation.repeatCount = Float.greatestFiniteMagnitude
+        lineDashAnimation.isRemovedOnCompletion = false
         
         layer.add(lineDashAnimation, forKey: nil)
         
