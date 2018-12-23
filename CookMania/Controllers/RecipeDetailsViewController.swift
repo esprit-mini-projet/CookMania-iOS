@@ -105,8 +105,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var visitProfileButton: UIButton!
     @IBOutlet weak var experiencesPageController: ISPageControl!
     
-    
-    
     var experiences = [Experience]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var favorite: NSManagedObject?
@@ -115,107 +113,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var ingredients: [Ingredient] = []
     
     var similarRecipes: [Recipe] = []
-    
-    var similarRecipes2 = [
-        LocalRecipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: Float(3.0), imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: [LocalIngredient]()),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        )
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -310,7 +207,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeOwnerProfileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         recipeOwnerProfileImageShadowView.layer.shadowOpacity = 1
         
-        let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapDetected"))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(RecipeDetailsViewController.tapDetected))
         recipeOwnerProfileImageView.isUserInteractionEnabled = true
         recipeOwnerProfileImageView.addGestureRecognizer(singleTap)
         
@@ -334,7 +231,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let viewWidth = self.recipeOwnerView.frame.width
             let imageViewWidth = self.recipeOwnerProfileImageView.frame.width
             self.recipeOwnerView.center.x = (self.recipeOwnerView.center.x + (viewWidth * self.isExpanded)) - ((imageViewWidth * 2) * self.isExpanded)
-            //self.recipeOwnerView.center.x = self.isExpanded ? self.initPosition!+self.recipeCoverIV.frame.width * 0.38 : self.initPosition!
             self.isExpanded *= -1
         })
     }
@@ -361,6 +257,25 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         //Similar recipes Label
         contentView.addConstraint(NSLayoutConstraint(item: similarRecipiesLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if tableView == ingredientsTableView {
+            let addToShoppingListAction = getAddToShoppingListAction(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [addToShoppingListAction])
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+    
+    func getAddToShoppingListAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
+            let ingredient = self.ingredients[indexPath.item]
+            print("Clicked: "+ingredient.name!)
+            completion(true)
+        }
+        action.image = UIImage(named: "add-icon2")
+        action.backgroundColor = UIColor.init(rgb: 0x477998)
+        return action
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -401,19 +316,12 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell")
             let contentView = cell?.viewWithTag(0)
             let margin = contentView!.frame.width * 0.15
-            let button = contentView?.viewWithTag(1) as! UIButton
             let nameLabel = contentView?.viewWithTag(2) as! UILabel
             let quantityLabel = contentView?.viewWithTag(3) as! UILabel
             
-            contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
-            contentView!.addConstraint(NSLayoutConstraint(item: button, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin*0.5))
+            /*contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))*/
             
-            button.restorationIdentifier = String((ingredient.id)!)
             nameLabel.text = ingredient.name
-            print("quantity")
-            print(ingredient.quantity)
-            print("unit")
-            print(ingredient.unit)
             quantityLabel.text = String((ingredient.quantity)!)+" "+String((ingredient.unit)!)
             return cell!
         }
@@ -537,12 +445,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             experiencesPageController.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
         }
     }
-    
-    @IBAction func addIngredientClicked(_ sender: Any) {
-        let button = sender as! UIButton
-        let rowNumber = Int(button.restorationIdentifier!)
-        print(rowNumber)
-    }
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
@@ -602,7 +504,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             destination.time = (sender as! Int)
         }else if segue.identifier == "toDetails" {
             let destination = (segue.destination as! RecipeDetailsViewController)
-            destination.recipe = sender as! Recipe
+            destination.recipe = (sender as! Recipe)
         }
     }
     /*
