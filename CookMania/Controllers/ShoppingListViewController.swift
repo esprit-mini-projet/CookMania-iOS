@@ -36,14 +36,16 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredient")
             let content = cell?.viewWithTag(0)
             let ingredientLabel = content?.viewWithTag(1) as! UILabel
+            let checkBox = content?.viewWithTag(2) as! VKCheckbox
             ingredientLabel.text = String("\(ingredient.quantity)\(ingredient.unit!) \(ingredient.name!)")
             let lineView = content?.viewWithTag(3)
             if ingredient.checked{
                 lineView?.isHidden = false
+                checkBox.setOn(true, animated: true)
             }else{
                 lineView?.isHidden = true
+                checkBox.setOn(false, animated: false)
             }
-            let checkBox = content?.viewWithTag(2) as! VKCheckbox
             checkBox.borderWidth = 1
             checkBox.cornerRadius = 0
             checkBox.checkboxValueChangedBlock = {
