@@ -15,4 +15,6 @@ target 'CookMania' do
   pod 'SwiftKeychainWrapper' 
   pod 'SwiftyJSON'
   pod 'Gallery'
+  pod 'CoreStore', '~> 5.0'
+  pod "TTRangeSlider"
 end

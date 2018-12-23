@@ -10,6 +10,7 @@ import UIKit
 import AlamofireImage
 import Alamofire
 import ObjectMapper
+import CoreStore
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -91,8 +92,21 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeCoreStore()
         fetchRecipes()
         addTapActionToSuggestions()
+        //testShoppinglist()
+    }
+    
+    func initializeCoreStore(){
+        let stack = DataStack(xcodeModelName: "CookMania")
+        CoreStore.defaultStack = stack
+        do {
+            try CoreStore.addStorageAndWait()
+        }
+        catch {
+            print("error adding storage to CoreStore")
+        }
     }
     
     func addTapActionToSuggestions(){
@@ -184,6 +198,92 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         default:
             return
         }
+    }
+    
+    func testShoppinglist(){
+        /*do{
+            try CoreStore.perform(synchronous: { (transaction) -> Int? in
+                transaction.deleteAll(From<ShopIngredient>())
+            }, waitForAllObservers: true)
+        }catch{
+            print("error deleting")
+        }*/
+        /*let ingredient = Ingredient()
+        ingredient.id = 5
+        ingredient.name = "sugar"
+        ingredient.quantity = 20
+        ingredient.unit = "g"
+        let ingredient2 = Ingredient()
+        ingredient2.id = 4
+        ingredient2.name = "salt"
+        ingredient2.quantity = 13
+        ingredient2.unit = "ml"
+        let ingredient3 = Ingredient()
+        ingredient3.id = 1
+        ingredient3.name = "water"
+        ingredient3.quantity = 4
+        ingredient3.unit = ""
+        
+        let step1 = Step()
+        step1.ingredients = [Ingredient]()
+        step1.ingredients?.append(ingredient)
+        step1.ingredients?.append(ingredient2)
+        
+        let step2 = Step()
+        step2.ingredients = [Ingredient]()
+        step2.ingredients?.append(ingredient3)
+        
+        let recipe = Recipe()
+        recipe.id = 4
+        recipe.name = "pizza"
+        recipe.imageUrl = "1.jpg"
+        recipe.steps = [Step]()
+        recipe.steps?.append(step1)
+        recipe.steps?.append(step2)
+        
+        let recipe2 = Recipe()
+        recipe2.id = 5
+        recipe2.name = "spaghetti"
+        recipe2.imageUrl = "2.jpg"
+        recipe2.steps = [Step]()
+        recipe2.steps?.append(step1)
+        
+        ShopRecipeDao.getInstance().add(recipe: recipe) { (success) in
+            
+        }
+        ShopRecipeDao.getInstance().add(recipe: recipe2) { (success) in
+            
+        }*/
+        
+        /*ShopRecipeDao.getInstance().add(recipe: recipe) { (success) in
+            let recipes = ShopRecipeDao.getInstance().getRecipes()
+            /*for recipe in recipes{
+                var string = "{id: \(recipe.id),\nname: \(recipe.name!),\ningredients:[\n"
+                print(recipe.ingredients!.count)
+                for ingr in recipe.ingredients!{
+                    let ing = ingr as! ShopIngredient
+                    string = string + "{id: \(ing.id),\nname: \(ing.name!),\nquantity: \(ing.quantity),\nunit: \(ing.unit)},\n"
+                }
+                print(string)
+            }*/
+            
+            print("Recipe count: ", recipes.count)
+            let ingredients = CoreStore.fetchAll(From<ShopIngredient>())
+            print("Ingredients count: ", ingredients!.count)
+            
+            ShopIngredientDao.getInstance().add(ingredient: ingredient3, recipe: recipe, completionHandler: { (success) in
+                print("Recipe count: ", recipes.count)
+                let ingredients = CoreStore.fetchAll(From<ShopIngredient>())
+                print("Ingredients count: ", ingredients!.count)
+            })
+         
+        }*/
+        /*ShopRecipeDao.getInstance().delete(recipeId: 4) {
+            let recipes = ShopRecipeDao.getInstance().getRecipes()
+            print("Recipe count: ", recipes.count)
+            let ingredients = CoreStore.fetchAll(From<ShopIngredient>())
+            print("Ingredients count: ", ingredients!.count)
+        }*/
     }
     
 }
