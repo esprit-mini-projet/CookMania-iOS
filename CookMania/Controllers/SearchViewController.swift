@@ -17,6 +17,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var filter = Filter()
     var result = [SearchResult]()
+    var sortByRating = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,12 +71,23 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func performSearch(){
         RecipeService.getInstance().search(filter: filter) { (result) in
+            let sorted = self.performSorting(array: result)
             self.result.removeAll()
-            self.result += result
+            self.result += sorted
             self.resultCV.reloadData()
-            self.resultCount.text = String("\(result.count) results found.")
+            self.resultCount.text = String("\(sorted.count) results found.")
             self.filter.isChanged = false
         }
+    }
+    
+    func performSorting(array: [SearchResult]) -> [SearchResult]{
+        return array.sorted(by: { (r1, r2) -> Bool in
+            if sortByRating{
+                return r1.recipe!.rating! >= r2.recipe!.rating!
+            }else{
+                return r1.recipe!.calories! <= r2.recipe!.calories!
+            }
+        })
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -89,10 +101,19 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         performSearch()
     }
     
+    @IBAction func sort(_ sender: UISegmentedControl) {
+        sortByRating = sender.selectedSegmentIndex == 0 ? true : false
+        let sorted = performSorting(array: result)
+        result.removeAll()
+        result += sorted
+        resultCV.reloadData()
+    }
 }
 
 extension SearchViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, ratioForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return CGFloat((result[indexPath.item].imageHeight! + 5 + 38.5) / result[indexPath.item].imageWidth!)
+        let imageRatio = CGFloat(result[indexPath.item].imageHeight! / result[indexPath.item].imageWidth!)
+        let textRatio = CGFloat((5 + 38.5) / result[indexPath.item].imageWidth!)
+        return (imageRatio >= 0.8 ? imageRatio : 0.8) + textRatio
     }
 }
