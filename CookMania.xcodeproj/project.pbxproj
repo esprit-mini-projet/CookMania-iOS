@@ -30,6 +30,9 @@
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
 		26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3679121AE002000D7EEF8 /* ActionTextField.swift */; };
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
+		C31E1F5521D0145000786771 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E1F5421D0145000786771 /* MenuItem.swift */; };
+		C31E1F5721D037C400786771 /* UserFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E1F5621D037C400786771 /* UserFormViewController.swift */; };
+		C31E1F5921D0524200786771 /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E1F5821D0524200786771 /* FormTableViewController.swift */; };
 		C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */; };
 		C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */; };
 		C325704F21C3C91B005B5BA1 /* NotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */; };
@@ -86,6 +89,9 @@
 		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
 		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
+		C31E1F5421D0145000786771 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		C31E1F5621D037C400786771 /* UserFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFormViewController.swift; sourceTree = "<group>"; };
+		C31E1F5821D0524200786771 /* FormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService_Seif.swift; sourceTree = "<group>"; };
 		C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
 		C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtils.swift; sourceTree = "<group>"; };
@@ -204,6 +210,8 @@
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
 				C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */,
+				C31E1F5621D037C400786771 /* UserFormViewController.swift */,
+				C31E1F5821D0524200786771 /* FormTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +225,7 @@
 				260917CE219C716900C713C6 /* Ingredient.swift */,
 				C36AC733219E08D20070CDE8 /* Experience.swift */,
 				C3FE11EF21A35298007D5F16 /* Following.swift */,
+				C31E1F5421D0145000786771 /* MenuItem.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -481,7 +490,9 @@
 				C3EED56D21CDAF33006C2FC3 /* TimerViewController.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
+				C31E1F5921D0524200786771 /* FormTableViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
+				C31E1F5521D0145000786771 /* MenuItem.swift in Sources */,
 				C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
@@ -492,6 +503,7 @@
 				C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */,
 				C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */,
 				C36AC734219E08D20070CDE8 /* Experience.swift in Sources */,
+				C31E1F5721D037C400786771 /* UserFormViewController.swift in Sources */,
 				C32B1C7F2194E10400153DC9 /* AddRecipeViewController.swift in Sources */,
 				C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */,
 				260917CD219C70AC00C713C6 /* Step.swift in Sources */,
