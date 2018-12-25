@@ -15,16 +15,33 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     @IBOutlet weak var profileImageBlurContainer: UIView!
     @IBOutlet weak var doneButtonBarItem: UIBarButtonItem!
     
+    var usernameIsValide: Bool = false
+    var emailIsValide: Bool = false
+    var passwordIsValide: Bool = false
+    var confirmationIsValide: Bool = false
+    var imageDidChange: Bool = false
+    var usernameDidChange: Bool = false
+    var emailDidChange: Bool = false
+    var passwordDidChange: Bool = false
+    
     var image: UIImage?
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var email: String = ""
+    var password: String = ""
+    var username: String = ""
+    
+    let user = (UIApplication.shared.delegate as! AppDelegate).user
     
     override func viewDidLoad() {
         super.viewDidLoad()
         doneButtonBarItem.isEnabled = false
         profileImage.layer.cornerRadius = profileImage.bounds.width / 2
         profileImageBlurContainer.layer.cornerRadius = profileImageBlurContainer.bounds.width / 2
-        if appDelegate.user != nil {
-            profileImage.af_setImage(withURL: URL(string: (appDelegate.user?.imageUrl)!)!)
+        if user != nil {
+            profileImage.af_setImage(withURL: URL(string: (user!.imageUrl)!)!)
+            usernameIsValide = true
+            emailIsValide = true
+            passwordIsValide = true
+            confirmationIsValide = true
         }
         // Do any additional setup after loading the view.
     }
@@ -50,6 +67,8 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
         images[0].resolve(completion: { image in
             self.image = image!
             self.profileImage.image = image!
+            self.imageDidChange = true
+            self.validateForm()
         })
     }
     
@@ -62,6 +81,35 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     func galleryControllerDidCancel(_ controller: GalleryController) {
     }
     
+    func validateForm() {
+        if user != nil {
+            if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide && (usernameDidChange || emailDidChange || imageDidChange || passwordDidChange) {
+                doneButtonBarItem.isEnabled = true
+                return
+            }
+        }else{
+            if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide {
+                doneButtonBarItem.isEnabled = true
+                return
+            }
+        }
+        doneButtonBarItem.isEnabled = false
+    }
+    
+    @IBAction func doneClicked(_ sender: Any) {
+        if user != nil {
+            let newUser = User(id: (user?.id)!, email: email, username: username, password: password)
+            UserService.getInstance().updateUser(user: newUser, image: image, completionHandler: {
+                print("AFTER UPDATE")
+                UserService.getInstance().getUser(id: (self.user?.id)!, completionHandler: { us in
+                    print("AFTER GET")
+                    if((UIApplication.shared.delegate as! AppDelegate).setUser(user: us)){
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
+            })
+        }
+    }
     
     /*
     // MARK: - Navigation

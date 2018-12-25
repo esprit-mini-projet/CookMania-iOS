@@ -24,6 +24,17 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var notification: NotificationWrapper?
     
+    func logout(){
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.statusBarStyle = .lightContent
@@ -34,7 +45,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             //Temp func call
             //self.logoutAll()
             //Facebook User is already connected
@@ -173,14 +184,14 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     func SignIn(email: String, password: String) {
         UserService.getInstance().logUserIn(email: email, password: password, completionHandler: { user in
-            self.appDelegate?.user = user
-            if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
-                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
-                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
-                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
-            }
-            if KeychainWrapper.standard.set(user.id!, forKey: "cookmania_user_id") && KeychainWrapper.standard.set(user.email!, forKey: "cookmania_user_email") && KeychainWrapper.standard.set(user.password!, forKey: "cookmania_user_password"){
+            if user != nil && (self.appDelegate?.setUser(user: user!))!{
                 self.continueToHome()
+            }else{
+                let alert = UIAlertController(title: "Error", message: "Please verify your credentials.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         })
     }

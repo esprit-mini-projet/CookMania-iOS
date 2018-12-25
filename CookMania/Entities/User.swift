@@ -57,7 +57,6 @@ class User: Mappable {
         self.imageUrl = imageUrl
         self.date = date
         self.dateString = dateFroamtter.string(from: self.date!)
-        print(dateString)
         self.following = following
         self.followers = followers
     }
@@ -73,7 +72,6 @@ class User: Mappable {
         self.imageUrl = imageUrl
         self.date = date
         self.dateString = dateFroamtter.string(from: self.date!)
-        print(dateString)
         self.following = following
         self.followers = followers
     }
@@ -109,6 +107,16 @@ class User: Mappable {
         self.password = "placeholder password"
         self.date = Date()
         self.dateString = dateFroamtter.string(from: self.date!)
-        print(dateString)
+    }
+    
+    init(id: String, email: String, username: String, password: String) {
+        dateFroamtter.locale = Locale(identifier: "en_US_POSIX")
+        dateFroamtter.timeZone = TimeZone.autoupdatingCurrent
+        dateFroamtter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        self.id = id
+        self.email = email
+        self.username = username
+        self.password = password
     }
 }

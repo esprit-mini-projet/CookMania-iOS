@@ -30,7 +30,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }))
             }else{
                 menu.append(MenuItem(name: "Edit Account", icon: UIImage(named: "edit")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
-                    print("Edit clicked")
+                    self.performSegue(withIdentifier: "toUserForm", sender: nil)
                 }))
             }
         }

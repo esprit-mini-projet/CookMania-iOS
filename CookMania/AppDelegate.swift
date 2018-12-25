@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
 import UserNotifications
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
 
+    func setUser(user: User) -> Bool {
+        if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+        }
+        if KeychainWrapper.standard.set(user.id!, forKey: "cookmania_user_id") && KeychainWrapper.standard.set(user.email!, forKey: "cookmania_user_email") && KeychainWrapper.standard.set(user.password!, forKey: "cookmania_user_password"){
+            self.user = user
+            return true
+        }
+        return false
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if #available(iOS 10.0, *) {

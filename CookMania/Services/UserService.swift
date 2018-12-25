@@ -25,6 +25,7 @@ class UserService: NSObject {
     }
     
     func getUser(id: String, completionHandler: @escaping (_ user: User) -> ()) {
+        print("BEGIN GET")
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: id)).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
@@ -38,11 +39,11 @@ class UserService: NSObject {
         })
     }
     
-    func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User) -> ()){
+    func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User?) -> ()){
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password],encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
-                let user: User = Mapper<User>().map(JSONString: response.result.value!)!
+                let user: User? = Mapper<User>().map(JSONString: response.result.value!)
                 completionHandler(user)
                 break
             case .failure(let error):
@@ -156,6 +157,29 @@ class UserService: NSObject {
             case .failure(let error):
                 print(error)
                 break
+            }
+        })
+    }
+    
+    func updateUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
+        print("BEGIN UPDATE")
+        let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "update"))!, method: .post, headers: nil)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if image != nil {
+                multipartFormData.append(image!.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
+            }
+            multipartFormData.append((user.id)!.data(using: .utf8)!, withName: "id", mimeType: "text/plain")
+            multipartFormData.append((user.username)!.data(using: .utf8)!, withName: "username", mimeType: "text/plain")
+            multipartFormData.append((user.email)!.data(using: .utf8)!, withName: "email", mimeType: "text/plain")
+            multipartFormData.append((user.password)!.data(using: .utf8)!, withName: "password", mimeType: "text/plain")
+        }, with: url, encodingCompletion: { (result) in
+            switch result {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        completionHandler()
+                    }
+                case .failure(let encodingError):
+                    print("",encodingError.localizedDescription)
             }
         })
     }

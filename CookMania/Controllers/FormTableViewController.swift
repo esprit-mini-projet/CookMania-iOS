@@ -20,10 +20,6 @@ class FormTableViewController: UITableViewController{
     @IBOutlet weak var confirmationErrorLabel: UILabel!
     
     var userFormViewController: UserFormViewController?
-    var usernameIsValide: Bool = false
-    var emailIsValide: Bool = false
-    var passwordIsValide: Bool = false
-    var confirmationIsValide: Bool = false
     
     let user = (UIApplication.shared.delegate as! AppDelegate).user
     
@@ -32,8 +28,6 @@ class FormTableViewController: UITableViewController{
         if user != nil {
             usernameTextField.text = user?.username
             emailTextField.text = user?.email
-            usernameIsValide = true
-            emailIsValide = true
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -59,48 +53,67 @@ class FormTableViewController: UITableViewController{
     }
     
     @IBAction func usernameDidChange(_ sender: Any) {
+        userFormViewController?.username = usernameTextField.text!
         if usernameTextField.text == "" {
-            usernameIsValide = false
+            userFormViewController!.usernameIsValide = false
             usernameErrorLabel.text = "Username can't be empty"
             usernameErrorLabel.alpha = 1
         }else{
-            usernameIsValide = true
+            if usernameTextField.text != user?.username{
+                userFormViewController?.usernameDidChange = true
+            }else {
+                userFormViewController?.usernameDidChange = false
+            }
+            userFormViewController!.usernameIsValide = true
             usernameErrorLabel.alpha = 0
         }
-        validateForm()
+        userFormViewController!.validateForm()
     }
     
     @IBAction func emailDidChange(_ sender: Any) {
+        userFormViewController?.email = emailTextField.text!
         if emailTextField.text == "" {
-            emailIsValide = false
+            userFormViewController!.emailIsValide = false
             emailErrorLabel.text = "Email can't be empty"
             emailErrorLabel.alpha = 1
         }else{
-            emailIsValide = true
+            if user != nil && emailTextField.text != user?.email {
+                userFormViewController?.emailDidChange = true
+            }else{
+                userFormViewController?.emailDidChange = false
+            }
+            userFormViewController!.emailIsValide = true
             emailErrorLabel.alpha = 0
         }
-        validateForm()
+        userFormViewController!.validateForm()
     }
     
     @IBAction func passwordDidChange(_ sender: Any) {
         if user == nil && passwordTextField.text == "" {
-            passwordIsValide = false
+            userFormViewController!.passwordIsValide = false
+            userFormViewController?.passwordDidChange = false
             passwordErrorLabel.text = "Password can't be empty"
             passwordErrorLabel.alpha = 1
         }else{
-            confirmationIsValide = validateConfirmation()
-            passwordIsValide = true
+            if passwordTextField.text == "" {
+                userFormViewController?.passwordDidChange = false
+            }else{
+                userFormViewController?.passwordDidChange = true
+            }
+            userFormViewController!.confirmationIsValide = validateConfirmation()
+            userFormViewController!.passwordIsValide = true
             passwordErrorLabel.alpha = 0
         }
-        validateForm()
+        userFormViewController!.validateForm()
     }
     
     @IBAction func confirmationDidChange(_ sender: Any) {
-        confirmationIsValide = validateConfirmation()
-        validateForm()
+        userFormViewController!.confirmationIsValide = validateConfirmation()
+        userFormViewController!.validateForm()
     }
     
     func validateConfirmation() -> Bool {
+        userFormViewController?.password = confirmationTextField.text!
         if user == nil && confirmationTextField.text == ""{
             confirmationErrorLabel.text = "Confirmation can't be empty"
             confirmationErrorLabel.alpha = 1
@@ -113,21 +126,6 @@ class FormTableViewController: UITableViewController{
             confirmationErrorLabel.alpha = 0
             return true
         }
-    }
-    
-    func validateForm() {
-        if user != nil {
-            if usernameIsValide && emailIsValide && ((passwordIsValide && confirmationIsValide) || (usernameTextField.text != user?.username || emailTextField.text != user?.email)) {
-                userFormViewController?.doneButtonBarItem.isEnabled = true
-                return
-            }
-        }else{
-            if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide {
-                userFormViewController?.doneButtonBarItem.isEnabled = true
-                return
-            }
-        }
-        userFormViewController?.doneButtonBarItem.isEnabled = false
     }
     
     /*
