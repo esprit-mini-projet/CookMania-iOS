@@ -178,6 +178,14 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     @IBAction func loginButtonClicked(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
+            if !FormUtils.validateEmail(email: emailTextField.text!){
+                let alert = UIAlertController(title: "Error", message: "This is not a valid email address!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                present(alert, animated: true, completion: nil)
+                return
+            }
             SignIn(email: email, password: password)
         }
     }

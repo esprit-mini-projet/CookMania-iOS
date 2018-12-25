@@ -72,9 +72,13 @@ class FormTableViewController: UITableViewController{
     
     @IBAction func emailDidChange(_ sender: Any) {
         userFormViewController?.email = emailTextField.text!
-        if emailTextField.text == "" {
+        if emailTextField.text == ""{
             userFormViewController!.emailIsValide = false
             emailErrorLabel.text = "Email can't be empty"
+            emailErrorLabel.alpha = 1
+        }else if !FormUtils.validateEmail(email: emailTextField.text!){
+            userFormViewController!.emailIsValide = false
+            emailErrorLabel.text = "Email is not valid"
             emailErrorLabel.alpha = 1
         }else{
             if user != nil && emailTextField.text != user?.email {

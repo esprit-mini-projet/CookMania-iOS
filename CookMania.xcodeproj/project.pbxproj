@@ -50,6 +50,7 @@
 		C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BBB60219B5058007CA580 /* GradientViewSecond.swift */; };
 		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
 		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
+		C37A4C0121D1C17C009AC30A /* FormUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37A4C0021D1C17C009AC30A /* FormUtils.swift */; };
 		C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3834A3921B9A913006CE670 /* UIColor.swift */; };
 		C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
@@ -110,6 +111,7 @@
 		C35BBB60219B5058007CA580 /* GradientViewSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewSecond.swift; sourceTree = "<group>"; };
 		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
+		C37A4C0021D1C17C009AC30A /* FormUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUtils.swift; sourceTree = "<group>"; };
 		C3834A3921B9A913006CE670 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
 				C3834A3921B9A913006CE670 /* UIColor.swift */,
 				C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */,
+				C37A4C0021D1C17C009AC30A /* FormUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				26101082218FA85900E8344F /* Recipe.swift in Sources */,
 				C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */,
 				C32B1C892194EEEE00153DC9 /* User.swift in Sources */,
+				C37A4C0121D1C17C009AC30A /* FormUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
