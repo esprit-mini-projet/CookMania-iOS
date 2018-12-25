@@ -15,6 +15,10 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     @IBOutlet weak var profileImageBlurContainer: UIView!
     @IBOutlet weak var doneButtonBarItem: UIBarButtonItem!
     
+    var doneButton: UIBarButtonItem?
+    var signinViewController: SignInViewController?
+    var signupViewControoler: SignUpViewController?
+    
     var usernameIsValide: Bool = false
     var emailIsValide: Bool = false
     var passwordIsValide: Bool = false
@@ -33,7 +37,10 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doneButtonBarItem.isEnabled = false
+        if doneButton == nil {
+            doneButton = doneButtonBarItem
+        }
+        doneButton!.isEnabled = false
         profileImage.layer.cornerRadius = profileImage.bounds.width / 2
         profileImageBlurContainer.layer.cornerRadius = profileImageBlurContainer.bounds.width / 2
         if user != nil {
@@ -84,28 +91,33 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     func validateForm() {
         if user != nil {
             if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide && (usernameDidChange || emailDidChange || imageDidChange || passwordDidChange) {
-                doneButtonBarItem.isEnabled = true
+                doneButton!.isEnabled = true
                 return
             }
         }else{
             if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide {
-                doneButtonBarItem.isEnabled = true
+                doneButton!.isEnabled = true
                 return
             }
         }
-        doneButtonBarItem.isEnabled = false
+        doneButton!.isEnabled = false
     }
     
     @IBAction func doneClicked(_ sender: Any) {
         if user != nil {
             let newUser = User(id: (user?.id)!, email: email, username: username, password: password)
             UserService.getInstance().updateUser(user: newUser, image: image, completionHandler: {
-                print("AFTER UPDATE")
                 UserService.getInstance().getUser(id: (self.user?.id)!, completionHandler: { us in
-                    print("AFTER GET")
                     if((UIApplication.shared.delegate as! AppDelegate).setUser(user: us)){
                         self.navigationController?.popViewController(animated: true)
                     }
+                })
+            })
+        }else{
+            let newUser = User(email: email, username: username, password: password)
+            UserService.getInstance().addUser(user: newUser, image: image, completionHandler: {
+                self.signupViewControoler?.dismiss(animated: true, completion: {
+                    self.signinViewController?.SignIn(email: self.email, password: self.password)
                 })
             })
         }

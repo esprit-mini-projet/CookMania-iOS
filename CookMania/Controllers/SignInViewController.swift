@@ -37,6 +37,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        logout()
         UIApplication.shared.statusBarStyle = .lightContent
         GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
@@ -106,6 +107,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             let destination = segue.destination as? MainTabLayoutViewController
             destination?.notification = notification
             notification = nil
+        }else if segue.identifier == "toSignUp"{
+            let destination = segue.destination as? SignUpViewController
+            destination?.signinViewController = self
         }
     }
     

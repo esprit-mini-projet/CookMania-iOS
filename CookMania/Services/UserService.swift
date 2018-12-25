@@ -183,4 +183,25 @@ class UserService: NSObject {
             }
         })
     }
+    
+    func addUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
+        let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "insert"))!, method: .post, headers: nil)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if image != nil {
+                multipartFormData.append(image!.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
+            }
+            multipartFormData.append((user.username)!.data(using: .utf8)!, withName: "username", mimeType: "text/plain")
+            multipartFormData.append((user.email)!.data(using: .utf8)!, withName: "email", mimeType: "text/plain")
+            multipartFormData.append((user.password)!.data(using: .utf8)!, withName: "password", mimeType: "text/plain")
+        }, with: url, encodingCompletion: { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    completionHandler()
+                }
+            case .failure(let encodingError):
+                print("",encodingError.localizedDescription)
+            }
+        })
+    }
 }
