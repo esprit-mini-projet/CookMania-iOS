@@ -54,62 +54,18 @@ class ExperienceService: NSObject {
                     break
             }
         }
-        
-        /*Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(image.accessibilityIdentifier, withName: "image")
-        }, to: ServiceUtils.buildURL(route: ROUTE, postfix: "add"), encodingCompletion: { (encodingResult) in
-            switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON { request, response, JSON, error in
-                    
-                    }
-                case .Failure(let encodingError): break
-            }
-        })*/
-        
-       /*Alamofire.upload(
-            .POST,
-            URLString: ServiceUtils.buildURL(route: ROUTE, postfix: "add"), // http://httpbin.org/post
-            multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: imagePathUrl!, name: "photo")
-                multipartFormData.appendBodyPart(fileURL: videoPathUrl!, name: "video")
-                multipartFormData.appendBodyPart(data: Constants.AuthKey.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"authKey")
-                multipartFormData.appendBodyPart(data: "\(16)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"idUserChallenge")
-                multipartFormData.appendBodyPart(data: "comment".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"comment")
-                multipartFormData.appendBodyPart(data:"\(0.00)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"latitude")
-                multipartFormData.appendBodyPart(data:"\(0.00)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"longitude")
-                multipartFormData.appendBodyPart(data:"India".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"location")
-        },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON { request, response, JSON, error in
-                        
-                        
-                    }
-                case .Failure(let encodingError):
-                    
-                }
-        }
-        )*/
-        
-        
-        
-        /*Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "add"), method: .post, parameters: [
-            "user_id": (experience.user?.id)!,
-            "recipe_id": recipeId,
-            "rating": experience.rating!,
-            "comment": experience.comment!,
-            "image_url": experience.imageURL!
-        ], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+    }
+    
+    func removeExperience(userId: String, recipeId: Int, sucessCompletionHandler: @escaping () -> (), errorCompletionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "remove/"+userId+"/"+String(recipeId)), method: .delete).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
-                completionHandler()
+                sucessCompletionHandler()
                 break
-            case .failure(let error):
-                print(error)
+            case .failure( _):
+                errorCompletionHandler()
                 break
             }
-        })*/
+        })
     }
 }

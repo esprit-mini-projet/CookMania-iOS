@@ -147,6 +147,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         tapDetected()
+        loadExperiences()
+        RecipeService.getInstance().getSimilarRecipies(recipe: recipe!, successCompletionHandler: { recipes in
+            self.similarRecipes = recipes
+            self.similarRecipesCollectionView.reloadData()
+        })
+    }
+    
+    func loadExperiences() {
         ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
             self.experiences = experiences
             let exp = experiences.first(where: { $0.user?.id == self.appDelegate.user?.id})
@@ -159,10 +167,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             }
             self.experiencesCollectionView.reloadData()
             self.experiencesPageController.numberOfPages = experiences.count
-        })
-        RecipeService.getInstance().getSimilarRecipies(recipe: recipe!, successCompletionHandler: { recipes in
-            self.similarRecipes = recipes
-            self.similarRecipesCollectionView.reloadData()
+            self.experiencesPageController.currentPage = 0
         })
     }
     
@@ -374,6 +379,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let nameLabel = contentView?.viewWithTag(5) as! UILabel
             let dateLabel = contentView?.viewWithTag(6) as! UILabel
             let commentTV = contentView?.viewWithTag(7) as! UITextView
+            let removeButton = contentView?.viewWithTag(9) as! UIButton
+            
+            if experience.user?.id == appDelegate.user?.id {
+                removeButton.isHidden = false
+            }
             
             //Setting Data
             coverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+experience.imageURL!)!)
@@ -506,6 +516,19 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let destination = (segue.destination as! RecipeDetailsViewController)
             destination.recipe = (sender as! Recipe)
         }
+    }
+    
+    @IBAction func removeExperience(_ sender: Any) {
+        let alert = UIAlertController(title: "Confirmation", message: "So yout want to delete this experience?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            ExperienceService.getInstance().removeExperience(userId: (self.appDelegate.user?.id)!, recipeId: (self.recipe?.id)!, sucessCompletionHandler: {
+                self.loadExperiences()
+            }, errorCompletionHandler: {
+                UIUtils.showErrorAlert(viewController: self)
+            })
+        }))
+        present(alert, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
