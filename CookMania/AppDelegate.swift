@@ -10,18 +10,62 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import GoogleSignIn
+import Firebase
+import UserNotifications
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://127.0.0.1:3000"
+    public static let SERVER_DOMAIN = "http://192.168.1.8:3000"
+  
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
+    let gcmMessageIDKey = "gcm.message_id"
 
+    func setUser(user: User) -> Bool {
+        if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+            KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+        }
+        if KeychainWrapper.standard.set(user.id!, forKey: "cookmania_user_id") && KeychainWrapper.standard.set(user.email!, forKey: "cookmania_user_email") && KeychainWrapper.standard.set(user.password!, forKey: "cookmania_user_password"){
+            self.user = user
+            return true
+        }
+        return false
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        Messaging.messaging().delegate = self
+        
+        if let userInfo = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
+            let notificationId = userInfo["notif_id"] as? String
+            let signInViewController = self.window?.rootViewController as! SignInViewController
+            let notificationType = Int(userInfo["notif_type"] as! String)
+            
+            signInViewController.notification = NotificationWrapper(notificationId: notificationId!, notificationType: notificationType!)
+        }
+        
+        application.registerForRemoteNotifications()
+
+        
+        FirebaseApp.configure()
         return true
     }
     
@@ -55,6 +99,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
     }
 
     // MARK: - Core Data stack
@@ -101,6 +185,95 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    static func getDeviceToken() -> String {
+        return InstanceID.instanceID().token()!
+    }
 
+}
+
+@available(iOS 10, *)
+extension AppDelegate : UNUserNotificationCenterDelegate {
+    
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([.alert])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        /*if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }*/
+        
+        if(UIApplication.shared.applicationState == .active || UIApplication.shared.applicationState == .inactive){
+            let notificationType = Int(userInfo["notif_type"] as! String)
+            if(notificationType == NotificationType.followingAddedRecipe){
+                RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["notif_id"] as? String)!)!, completionHandler: {recipe in
+                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
+                        if let window = self.window, let rootViewController = window.rootViewController {
+                            let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
+                            let navigationController = currentController?.selectedViewController as? UINavigationController
+                            controller.recipe = recipe
+                            navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }
+                })
+            }else if(notificationType == NotificationType.follower){
+                UserService.getInstance().getUser(id: (userInfo["notif_id"] as? String)!, completionHandler: { user in
+                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
+                        if let window = self.window, let rootViewController = window.rootViewController {
+                            let currentController = rootViewController.presentedViewController as? MainTabLayoutViewController
+                            let navigationController = currentController?.selectedViewController as? UINavigationController
+                            controller.user = user
+                            navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }
+                })
+            }
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler()
+    }
+    
+}
+
+extension AppDelegate: MessagingDelegate{
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Message data: ", remoteMessage.appData)
+    }
+    
 }
 

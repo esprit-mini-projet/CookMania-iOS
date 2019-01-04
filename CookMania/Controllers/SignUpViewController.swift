@@ -9,14 +9,31 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-
+    @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
+    
+    var userFormViewController: UserFormViewController?
+    var signinViewController: SignInViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func doneClicked(_ sender: Any) {
+        userFormViewController!.doneClicked(sender)
+    }
+    
+    @IBAction func cancelClicked(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toUserForm" {
+            userFormViewController = segue.destination as? UserFormViewController
+            userFormViewController?.doneButton = doneBarButtonItem
+            userFormViewController?.signinViewController = signinViewController
+            userFormViewController?.signupViewControoler = self
+        }
+    }
     /*
     // MARK: - Navigation
 

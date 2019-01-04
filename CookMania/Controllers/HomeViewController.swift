@@ -29,6 +29,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var healthy = [Recipe]()
     var suggestions = [Recipe]()
     
+    override func viewDidAppear(_ animated: Bool) {
+        let tabController = self.navigationController?.parent as! MainTabLayoutViewController
+        
+        if tabController.notification != nil && tabController.notification!.notificationId != nil{
+            let notification = tabController.notification
+            if notification!.notificationType == NotificationType.followingAddedRecipe{
+                RecipeService.getInstance().getRecipe(recipeId: Int(notification!.notificationId)!, completionHandler: { recipe in
+                    tabController.notification = nil
+                    self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
+                })
+            }else if notification!.notificationType == NotificationType.follower{
+                UserService.getInstance().getUser(id: notification!.notificationId, completionHandler: { user in
+                    tabController.notification = nil
+                    self.performSegue(withIdentifier: "toProfile", sender: user)
+                })
+            }
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
@@ -190,11 +208,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "toRecipeList":
-            let dest = segue.destination as! RecipeListViewController
-            dest.urlEndPoint = sender as? String
+            let destinationController = segue.destination as! RecipeListViewController
+            destinationController.urlEndPoint = sender as? String
+            break
         case "toRecipeDetails":
-            let dest = segue.destination as! RecipeDetailsViewController
-            dest.recipe = (sender as! Recipe)
+            let destinationController = segue.destination as! RecipeDetailsViewController
+            destinationController.recipe = sender as? Recipe
+            break
+        case "toProfile":
+            let destinationController = segue.destination as! ProfileViewController
+            destinationController.user = sender as? User
+            break;
         default:
             return
         }
