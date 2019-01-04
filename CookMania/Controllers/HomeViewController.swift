@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var topRatedCV: UICollectionView!
     @IBOutlet weak var healthyCV: UICollectionView!
     @IBOutlet weak var cheapCV: UICollectionView!
+    @IBOutlet weak var feedTV: UITableView!
     
     @IBOutlet weak var suggestionsTitle: UILabel!
     @IBOutlet weak var suggestion1: SuggestionImageView!
