@@ -48,4 +48,15 @@ class Recipe: Mappable{
         steps <- map["steps"]
         labels <- map["labels"]
     }
+    
+    public func getIngredients() -> [Ingredient]{
+        var ingredients = [Ingredient]()
+        guard let _ = steps else {
+            return ingredients
+        }
+        for step in steps!{
+            ingredients += step.ingredients!
+        }
+        return ingredients
+    }
 }
