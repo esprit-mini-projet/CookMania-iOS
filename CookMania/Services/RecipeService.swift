@@ -221,5 +221,14 @@ public class RecipeService: NSObject{
         }
     }
     
-    
+    func getFeed(completionHandler: @escaping (_ items: [FeedItem]) -> ()){
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        print("user id:", userId)
+        Alamofire.request(buildURL(postfix: "feed/" + userId!))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let items = Mapper<FeedItem>().mapArray(JSONString: response.result.value!)
+                print("count:", items!.count)
+                completionHandler(items!)
+            })
+    }
 }

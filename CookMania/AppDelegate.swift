@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://127.0.0.1:3000"
+    public static let SERVER_DOMAIN = "http://192.168.30.128:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
 
