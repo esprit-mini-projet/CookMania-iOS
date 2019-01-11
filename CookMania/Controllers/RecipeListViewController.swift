@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class RecipeListViewController: UIViewController, UITableViewDataSource {
+class RecipeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var urlEndPoint: String? = nil
     var recipeList = [Recipe]()
@@ -34,6 +34,21 @@ class RecipeListViewController: UIViewController, UITableViewDataSource {
         caloriesLabel.text = String(recipeList[indexPath.row].calories!)
         servingsLabel.text = String(recipeList[indexPath.row].servings!)
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recipe = recipeList[indexPath.item]
+        RecipeService.getInstance().getRecipe(recipeId: recipe.id!, completionHandler: { recipe in
+            self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
+        })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRecipeDetails" {
+            let destination = segue.destination as! RecipeDetailsViewController
+            let recipe = sender as! Recipe
+            destination.recipe = recipe
+        }
     }
     
     override func viewDidLoad() {

@@ -458,6 +458,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
+        ShopRecipeDao.getInstance().add(recipe: recipe!) { (success) in
+            if success{
+                print("success")
+            }else{
+                print("failure")
+            }
+        }
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {
