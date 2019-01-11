@@ -299,11 +299,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let descriptionTextView = contentView?.viewWithTag(2) as! UITextView
             let stepImage = contentView?.viewWithTag(3) as! UIImageView
             let borderView = contentView?.viewWithTag(4)
-            let timeLabel = contentView?.viewWithTag(5) as! UILabel
+            let timeLabel = contentView?.viewWithTag(5) as! UIButton
             
             if step.time != 0 {
                 UIUtils.addRoudedDottedBorder(view: borderView!, color: UIColor.init(red: 221, green: 81, blue: 68))
-                timeLabel.text = String((step.time)!)+"''"
+                timeLabel.setTitle(String((step.time)!)+"''", for: .normal)
             }
             
             descriptionTextView.text = step.description
@@ -503,10 +503,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @IBAction func timerTapped(_ sender: Any) {
-        let labelText = (((sender as! UITapGestureRecognizer).view?.subviews[0] as! UILabel).text)!
-        let index = labelText.index(labelText.endIndex, offsetBy: -2)
-        let timeText = labelText[..<index]
-        performSegue(withIdentifier: "toTimer", sender: Int(timeText))
+        if let labelText = (sender as! UIButton).titleLabel?.text {
+            let index = labelText.index(labelText.endIndex, offsetBy: -2)
+            let timeText = labelText[..<index]
+            performSegue(withIdentifier: "toTimer", sender: Int(timeText))
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
