@@ -419,8 +419,8 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -445,8 +445,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -535,7 +535,7 @@
 				C31E1F5921D0524200786771 /* FormTableViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
 				C31E1F5521D0145000786771 /* MenuItem.swift in Sources */,
-				C32B1C872194EE3E00153DC9 /* SearchResultViewController.swift in Sources */,
+				C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */,
 				26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */,
 				C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,
