@@ -8,7 +8,10 @@ target 'CookMania' do
   # Pods for CookMania
   pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'FBSDKCoreKit', :git => 'https://github.com/facebook/facebook-objc-sdk.git', :branch => 'master'
+  pod 'FacebookCore'
   pod 'FacebookLogin'
+  pod 'FacebookShare'
   pod 'GoogleSignIn'
   pod 'Cosmos', '~> 17.0'
   pod 'ObjectMapper'
