@@ -182,7 +182,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func initView() {
-        ratingView.settings.emptyBorderColor = UIColor.clear
         recipeRatingInput.settings.fillMode = .half
         ratingView.settings.updateOnTouch = false
         //Need to send non nil rating, take recipe from web service
