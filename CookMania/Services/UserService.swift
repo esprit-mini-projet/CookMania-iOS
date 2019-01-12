@@ -57,6 +57,7 @@ class UserService: NSObject {
         var JSONObject = user.toJSON()
         JSONObject["uuid"] = UIDevice.current.identifierForVendor?.uuidString
         JSONObject["token"] = AppDelegate.getDeviceToken()
+        JSONObject["type"] = "ios"
         do{
             let JSONString = try JSONSerialization.data(withJSONObject: JSONObject, options: [])
             var request = URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "social/check"))! )
