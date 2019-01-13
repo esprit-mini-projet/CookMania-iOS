@@ -35,9 +35,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidAppear(_ animated: Bool) {
         let tabController = self.navigationController?.parent as! MainTabLayoutViewController
         
-        if tabController.notification != nil && tabController.notification!.notificationId != nil{
+        if let _ = tabController.notification, tabController.notification!.notificationId != nil{
             let notification = tabController.notification
-            if notification!.notificationType == NotificationType.followingAddedRecipe{
+            if notification!.notificationType == NotificationType.followingAddedRecipe || notification!.notificationType == NotificationType.experience{
                 RecipeService.getInstance().getRecipe(recipeId: Int(notification!.notificationId)!, completionHandler: { recipe in
                     tabController.notification = nil
                     self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)

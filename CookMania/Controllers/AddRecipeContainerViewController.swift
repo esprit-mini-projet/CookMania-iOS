@@ -24,6 +24,8 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         "Date Night",
         "Fast",
         "Kids Friendly",
+        "Lunch",
+        "Dessert",
         "Takes Time",
         "Easy"]
     
