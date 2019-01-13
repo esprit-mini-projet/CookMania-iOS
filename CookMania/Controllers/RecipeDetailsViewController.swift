@@ -98,12 +98,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeOwnerProfileImageView: UIImageView!
     @IBOutlet weak var recipeOwnerProfileImageShadowView: UIView!
     @IBOutlet weak var recipeOwnerNameLabel: UILabel!
-    @IBOutlet weak var recipeOwnerDateLabel: UILabel!
     @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
     @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var visitProfileButton: UIButton!
     @IBOutlet weak var experiencesPageController: ISPageControl!
+    @IBOutlet weak var noExpereinceLabel: UILabel!
+    @IBOutlet weak var experiencesCollectionViewHeightConstraint: NSLayoutConstraint!
     
     var experiences = [Experience]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -117,6 +118,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         RecipeService.getInstance().addToViewsCount(recipeId: (recipe?.id)!, sucessCompletionHandler: nil)
+        loadExperiences()
         getRecipeIngredients()
         recipeRatingInput.didFinishTouchingCosmos = { rating in
             if self.recipeRatingInput.settings.updateOnTouch {
@@ -147,7 +149,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         tapDetected()
-        loadExperiences()
         RecipeService.getInstance().getSimilarRecipies(recipe: recipe!, successCompletionHandler: { recipes in
             self.similarRecipes = recipes
             self.similarRecipesCollectionView.reloadData()
@@ -157,6 +158,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     func loadExperiences() {
         ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
             self.experiences = experiences
+            if self.experiences.count == 0{
+                self.noExpereinceLabel.isHidden = false
+                self.experiencesCollectionViewHeightConstraint.constant = 0
+            }else{
+                self.noExpereinceLabel.isHidden = true
+                self.experiencesCollectionViewHeightConstraint.constant = 250
+            }
             let exp = experiences.first(where: { $0.user?.id == self.appDelegate.user?.id})
             if exp != nil {
                 self.recipeRatingInput.rating = Double((exp?.rating)!)
@@ -182,7 +190,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func initView() {
-        ratingView.settings.emptyBorderColor = UIColor.clear
         recipeRatingInput.settings.fillMode = .half
         ratingView.settings.updateOnTouch = false
         //Need to send non nil rating, take recipe from web service
@@ -222,7 +229,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
         recipeOwnerNameLabel.text = user?.username
-        recipeOwnerDateLabel.text = dateFormatter.string(from: (user?.date)!)
         if self.user?.id == appDelegate.user?.id {
             visitProfileButton.isHidden = true
         }
@@ -299,11 +305,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let descriptionTextView = contentView?.viewWithTag(2) as! UITextView
             let stepImage = contentView?.viewWithTag(3) as! UIImageView
             let borderView = contentView?.viewWithTag(4)
-            let timeLabel = contentView?.viewWithTag(5) as! UILabel
+            let timeLabel = contentView?.viewWithTag(5) as! UIButton
             
             if step.time != 0 {
                 UIUtils.addRoudedDottedBorder(view: borderView!, color: UIColor.init(red: 221, green: 81, blue: 68))
-                timeLabel.text = String((step.time)!)+"''"
+                timeLabel.setTitle(String((step.time)!)+"''", for: .normal)
             }
             
             descriptionTextView.text = step.description
@@ -503,15 +509,17 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @IBAction func timerTapped(_ sender: Any) {
-        let labelText = (((sender as! UITapGestureRecognizer).view?.subviews[0] as! UILabel).text)!
-        let index = labelText.index(labelText.endIndex, offsetBy: -2)
-        let timeText = labelText[..<index]
-        performSegue(withIdentifier: "toTimer", sender: Int(timeText))
+        if let labelText = (sender as! UIButton).titleLabel?.text {
+            let index = labelText.index(labelText.endIndex, offsetBy: -2)
+            let timeText = labelText[..<index]
+            performSegue(withIdentifier: "toTimer", sender: Int(timeText))
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
-            (segue.destination as! ProfileViewController).user = self.user
+            print(self.user?.username)
+            (segue.destination as! OthersProfileViewController).user = self.user
         }else if segue.identifier == "toAddExperience" {
             let destination = (segue.destination as! AddExperienceViewController)
             destination.rating = (sender as! Double)

@@ -150,6 +150,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             switch loginResult {
             case .failed( _):
                 UIUtils.showErrorAlert(title: "Sorry", message: "An error has occured while trying to log you in, please try again.", viewController: self)
+                print(loginResult)
                 break
             case .cancelled:
                 break

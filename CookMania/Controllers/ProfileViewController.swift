@@ -50,7 +50,9 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        user = appDelegate.user!
+        if user == nil {
+            user = appDelegate.user!
+        }
         populateFields()
         myRecipesViewController?.updateTableView()
         favoritesViewController?.updateTableView()

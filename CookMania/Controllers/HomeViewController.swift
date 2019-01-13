@@ -216,7 +216,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             destinationController.recipe = sender as? Recipe
             break
         case "toProfile":
-            let destinationController = segue.destination as! ProfileViewController
+            let destinationController = segue.destination as! OthersProfileViewController
             destinationController.user = sender as? User
             break;
         default:
