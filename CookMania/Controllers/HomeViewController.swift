@@ -109,8 +109,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let userBtn = contentView?.viewWithTag(1) as! UIButton
         let userNameLabel = contentView?.viewWithTag(2) as! UILabel
         let dateLabel = contentView?.viewWithTag(3) as! UILabel
-        //let blurImage = contentView?.viewWithTag(4) as! UIImageView
-        let sharpBtn = contentView?.viewWithTag(5) as! UIButton
+        let blurImage = contentView?.viewWithTag(4) as! UIImageView
+        let sharpImage = contentView?.viewWithTag(5) as! UIImageView
+        let recipeButton = contentView?.viewWithTag(12) as! UIButton
         let ratingView = contentView?.viewWithTag(6) as! CosmosView
         let recipeNameLabel = contentView?.viewWithTag(7) as! UILabel
         let heartBtn = contentView?.viewWithTag(8) as! UIButton
@@ -123,11 +124,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         userBtn.restorationIdentifier = feedItem.user!.id!
         userNameLabel.text = feedItem.user?.username
         dateLabel.text = getDateFormatted(string: (feedItem.recipe?.dateString)!)
-        /*blurImage.addSubview(getBlurView(imageView: blurImage))
         blurImage.af_setImage(withURL: URL(string: (Constants.URL.imagesFolder + (feedItem.recipe?.imageUrl!)!))!)
-        sharpImage.frame.size.width = CGFloat((feedItem.recipe!.imageWidth! / feedItem.recipe!.imageWidth!)) * sharpImage.frame.size.height*/
-        sharpBtn.af_setImage(for: ControlState.normal, url: URL(string: Constants.URL.imagesFolder + (feedItem.recipe?.imageUrl!)!)!)
-        sharpBtn.restorationIdentifier = String(feedItem.recipe!.id!)
+        sharpImage.af_setImage(withURL: URL(string: (Constants.URL.imagesFolder + (feedItem.recipe?.imageUrl!)!))!)
+        recipeButton.restorationIdentifier = String(feedItem.recipe!.id!)
         ratingView.rating = Double((feedItem.recipe?.rating)!)
         recipeNameLabel.text = feedItem.recipe?.name
         viewsLabel.text = String(feedItem.recipe!.views!)
