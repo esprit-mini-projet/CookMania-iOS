@@ -13,14 +13,11 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var caloriesSegCont: UISegmentedControl!
     @IBOutlet weak var servingsSlider: TTRangeSlider!
+    @IBOutlet weak var categoriesTV: UITableView!
     
     var filter: Filter?
     
     let sortItems = ["Rating", "Time"]
-    
-    let diets = ["Healthy", "Vegetarian"]
-    let types = ["Breakfast", "Lunch", "Dinner"]
-    let occasions = ["Date Night"]
     let calories = ["All", "Low", "Normal", "Rich"]
     
     var categories = [[Any]]()
@@ -30,11 +27,11 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categories = [
-            ["Diet", diets],
-            ["Type", types],
-            ["Occasion", occasions]
-        ]
+        RecipeService.getInstance().getLabels { (labels) in
+            self.categories = labels
+            self.categoriesTV.reloadData()
+            
+        }
         for (i, value) in calories.enumerated(){
             if value == filter?.calories{
                 caloriesSegCont.selectedSegmentIndex = i
@@ -70,7 +67,7 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
             let collectionView = contentView?.viewWithTag(2) as! UICollectionView
             let categoryText = categories[indexPath.item][0] as! String
             category.text = categoryText
-            collectionView.restorationIdentifier = categoryText
+            collectionView.restorationIdentifier = String(indexPath.item)
             collectionView.dataSource = self
             collectionView.delegate = self
             return cell!
@@ -94,15 +91,7 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.restorationIdentifier{
-        case "Diet":
-            return diets.count
-        case "Type":
-            return types.count
-        default:
-            //Occasion
-            return occasions.count
-        }
+        return (categories[Int(collectionView.restorationIdentifier!)!][1] as! [String]).count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -110,15 +99,8 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
         let button = cell.viewWithTag(1) as! UIButton
         button.setTitleColor(lightGray, for: UIControl.State.normal)
         button.layer.cornerRadius = 14
-        switch collectionView.restorationIdentifier{
-        case "Diet":
-            button.setTitle(diets[indexPath.item], for: UIControl.State.normal)
-        case "Type":
-            button.setTitle(types[indexPath.item], for: UIControl.State.normal)
-        default:
-            //Occasion
-            button.setTitle(occasions[indexPath.item], for: UIControl.State.normal)
-        }
+        let labels = categories[Int(collectionView.restorationIdentifier!)!][1] as! [String]
+        button.setTitle(labels[indexPath.item], for: UIControl.State.normal)
         initCategoryButtonFromFilter(button: button)
         return cell
     }
@@ -154,16 +136,8 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var label: String
-        switch collectionView.restorationIdentifier {
-        case "Diet":
-            label = diets[indexPath.item]
-        case "Type":
-            label = types[indexPath.item]
-        default:
-            //Occasion
-            label = occasions[indexPath.item]
-        }
+        let labels = categories[Int(collectionView.restorationIdentifier!)!][1] as! [String]
+        let label = labels[indexPath.item]
         let width = 78
         let height = 50
         var bonus = 0

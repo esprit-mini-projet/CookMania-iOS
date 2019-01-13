@@ -728,6 +728,12 @@ d2lkdGggPSAxNxAyA
                                                     <outlet property="delegate" destination="6qe-kK-Ooc" id="HnJ-Pe-P4I"/>
                                                 </connections>
                                             </tableView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to show." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snt-7R-VMI" userLabel="No feed items">
+                                                <rect key="frame" x="123" y="1166" width="129" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -762,7 +768,9 @@ d2lkdGggPSAxNxAyA
                                             <constraint firstItem="0NH-fc-ZNU" firstAttribute="centerY" secondItem="3v5-HL-K3s" secondAttribute="centerY" id="gTz-Y5-fxy"/>
                                             <constraint firstItem="Kmq-tw-ag8" firstAttribute="centerY" secondItem="HPa-jc-V0b" secondAttribute="centerY" id="guM-NA-X7i"/>
                                             <constraint firstItem="cWq-Aw-BMI" firstAttribute="top" secondItem="9YG-iv-ZYt" secondAttribute="top" constant="8" id="hEN-3B-7rl"/>
+                                            <constraint firstItem="snt-7R-VMI" firstAttribute="top" secondItem="3v5-HL-K3s" secondAttribute="bottom" constant="32" id="hFk-0y-dr3"/>
                                             <constraint firstAttribute="bottom" secondItem="tWe-2e-cQg" secondAttribute="bottom" id="iAr-kS-hga"/>
+                                            <constraint firstItem="snt-7R-VMI" firstAttribute="centerX" secondItem="9YG-iv-ZYt" secondAttribute="centerX" id="js7-5n-gIk"/>
                                             <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="G0i-lK-aVQ" secondAttribute="trailing" constant="271" id="lC5-NK-Dzz"/>
                                             <constraint firstItem="1G6-ES-kih" firstAttribute="leading" relation="lessThanOrEqual" secondItem="9YG-iv-ZYt" secondAttribute="leading" constant="332" id="mTo-wE-hpZ"/>
                                             <constraint firstAttribute="trailing" secondItem="tWe-2e-cQg" secondAttribute="trailing" id="pLK-5i-VDD"/>
@@ -803,6 +811,7 @@ d2lkdGggPSAxNxAyA
                         <outlet property="cheapCV" destination="b3k-hA-b5O" id="83F-YF-yfK"/>
                         <outlet property="feedTV" destination="tWe-2e-cQg" id="GSc-Sh-YPz"/>
                         <outlet property="healthyCV" destination="zc4-hO-ZG1" id="EeD-9v-n9v"/>
+                        <outlet property="noFeedLabel" destination="snt-7R-VMI" id="fQx-p8-MdN"/>
                         <outlet property="suggestion1" destination="dPR-8a-Prh" id="ysC-80-cPD"/>
                         <outlet property="suggestion2" destination="9HS-WN-O3Y" id="6as-Qb-h92"/>
                         <outlet property="suggestion3" destination="3a7-MK-vem" id="vz3-86-RB4"/>
@@ -1157,10 +1166,10 @@ d2lkdGggPSAxNxAyA
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="category" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="83" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="udt-be-NbA" userLabel="categories">
-                                                <rect key="frame" x="0.0" y="37" width="375" height="250"/>
+                                                <rect key="frame" x="0.0" y="37" width="375" height="333"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="nkH-UO-IMt"/>
+                                                    <constraint firstAttribute="height" constant="333" id="nkH-UO-IMt"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Category" rowHeight="83" id="acw-hX-Axi">
@@ -1230,13 +1239,13 @@ d2lkdGggPSAxNxAyA
                                                 </connections>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STt-pm-vHH">
-                                                <rect key="frame" x="8" y="295" width="62" height="21"/>
+                                                <rect key="frame" x="8" y="378" width="62" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYp-aK-Zfv" userLabel="filter by">
-                                                <rect key="frame" x="0.0" y="324" width="375" height="167"/>
+                                                <rect key="frame" x="0.0" y="407" width="375" height="167"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0F-4W-PWN">
                                                         <rect key="frame" x="8" y="8" width="64" height="21"/>
@@ -1364,6 +1373,7 @@ d2lkdGggPSAxNxAyA
                     </navigationItem>
                     <connections>
                         <outlet property="caloriesSegCont" destination="tm1-if-Yfd" id="cKd-Se-En8"/>
+                        <outlet property="categoriesTV" destination="udt-be-NbA" id="Zv0-Cs-uWZ"/>
                         <outlet property="servingsSlider" destination="yw8-ja-1Qj" id="7DE-cd-ys9"/>
                     </connections>
                 </viewController>
@@ -2098,7 +2108,7 @@ d2lkdGggPSAxNxAyA
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBb-62-YZB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2104.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2134.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="melanzana" translatesAutoresizingMaskIntoConstraints="NO" id="HuM-5a-GOW" userLabel="Cover">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
@@ -2127,7 +2137,7 @@ d2lkdGggPSAxNxAyA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ftk-zP-oyo" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ftk-zP-oyo" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="0.0" y="126.5" width="120" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
@@ -2151,7 +2161,7 @@ d2lkdGggPSAxNxAyA
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLv-w6-c24">
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLv-w6-c24">
                                                 <rect key="frame" x="130" y="126.5" width="42.5" height="20"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recipe-time" translatesAutoresizingMaskIntoConstraints="NO" id="5bl-pH-eEc">
@@ -2362,8 +2372,8 @@ EDE5OA
                                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMK-HO-58M" customClass="CosmosView" customModule="Cosmos">
-                                                <rect key="frame" x="102.5" y="1410.5" width="170" height="0.0"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMK-HO-58M" customClass="CosmosView" customModule="Cosmos">
+                                                <rect key="frame" x="102.5" y="1410.5" width="170" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="starSize">
@@ -2381,7 +2391,7 @@ EDE5OA
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zpr-IB-e6y">
-                                                <rect key="frame" x="0.0" y="1434.5" width="375" height="250"/>
+                                                <rect key="frame" x="0.0" y="1464.5" width="375" height="250"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="250" id="xPB-df-eMY"/>
@@ -2556,7 +2566,7 @@ EDE5OA
                                                 </connections>
                                             </collectionView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ow2-ID-1fD" customClass="ISPageControl" customModule="ISPageControl">
-                                                <rect key="frame" x="0.0" y="1689.5" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="1719.5" width="375" height="20"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="6m2-qg-j08"/>
@@ -2572,14 +2582,14 @@ EDE5OA
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qOz-CM-94Y">
-                                                <rect key="frame" x="75" y="1724.5" width="225" height="1"/>
+                                                <rect key="frame" x="75" y="1754.5" width="225" height="1"/>
                                                 <color key="backgroundColor" white="0.67000000000000004" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="hWV-NT-A1A"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar recipes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZq-wQ-att">
-                                                <rect key="frame" x="0.0" y="1739.5" width="135" height="23"/>
+                                                <rect key="frame" x="0.0" y="1769.5" width="135" height="23"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -2682,7 +2692,7 @@ EDE5OA
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V7g-el-DuP">
-                                                <rect key="frame" x="0.0" y="1772.5" width="375" height="290"/>
+                                                <rect key="frame" x="0.0" y="1802.5" width="375" height="290"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="290" id="S04-7u-lzf"/>
@@ -2776,7 +2786,7 @@ EDE5OA
                                                 </constraints>
                                             </view>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No experiences yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-LW-gYz">
-                                                <rect key="frame" x="114" y="1434.5" width="147" height="20.5"/>
+                                                <rect key="frame" x="114" y="1464.5" width="147" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <nil key="highlightedColor"/>

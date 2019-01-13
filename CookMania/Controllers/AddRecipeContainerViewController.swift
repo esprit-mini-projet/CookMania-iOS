@@ -15,19 +15,7 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     let white = UIColor.white
     var labelColor: CGColor?
     let descriptionPlaceHolder = "Description..."
-    let labels = [
-        "Healthy",
-        "Vegetarian",
-        "Cheap",
-        "Breakfast",
-        "Dinner",
-        "Date Night",
-        "Fast",
-        "Kids Friendly",
-        "Lunch",
-        "Dessert",
-        "Takes Time",
-        "Easy"]
+    var labels = [String]()
     
     var recipe: Recipe?
     
@@ -112,6 +100,11 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         descText.text = descriptionPlaceHolder
         descText.textColor = UIColor.lightGray
         descText.layer.borderColor = UIColor.lightGray.cgColor
+        
+        RecipeService.getInstance().getLabelsFlat { (labels) in
+            self.labels += labels
+            self.labelsCV.reloadData()
+        }
     }
     
     @IBAction func selectImage(_ sender: Any) {
