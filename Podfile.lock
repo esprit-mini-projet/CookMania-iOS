@@ -29,12 +29,12 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.39.0):
     - FBSDKCoreKit
-  - Firebase/Core (5.15.0):
+  - Firebase/Core (5.14.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.4.0)
-  - Firebase/CoreOnly (5.15.0):
-    - FirebaseCore (= 5.1.10)
-  - Firebase/Messaging (5.15.0):
+  - Firebase/CoreOnly (5.14.0):
+    - FirebaseCore (= 5.1.9)
+  - Firebase/Messaging (5.14.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (= 3.2.2)
   - FirebaseAnalytics (5.4.0):
@@ -47,7 +47,7 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
   - FirebaseAnalyticsInterop (1.1.0)
-  - FirebaseCore (5.1.10):
+  - FirebaseCore (5.1.9):
     - GoogleUtilities/Logger (~> 5.2)
   - FirebaseInstanceID (3.3.0):
     - FirebaseCore (~> 5.1)
@@ -105,9 +105,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - ObjectMapper (3.4.2)
+  - ObjectMapper (3.4.1)
   - Protobuf (3.6.1)
-  - SwiftKeychainWrapper (3.2.0)
+  - SwiftKeychainWrapper (3.0.1)
   - SwiftyJSON (4.2.0)
   - TTRangeSlider (1.0.6)
 
@@ -186,10 +186,10 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
   FBSDKLoginKit: 30ba5039a2c53d65a75103889bc2deebdacd5a1f
   FBSDKShareKit: 5a0021c30abb64df9eeba87351dd8a627874543b
-  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  Firebase: 963d5685fae888a56d6d4d9cfce6b9c976958798
   FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
   FirebaseAnalyticsInterop: e5f21be9af6548372e2f0815834ff909bff395a2
-  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
+  FirebaseCore: 8f49b70f57ab5cbb032ef41d64992ded21606459
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebaseMessaging: b412996f6a09337d232bb3a6676ce4d1f353d024
   Gallery: 3f4c780c4b22906d6b0a5e55d12167cdc4b4fc5b
@@ -201,9 +201,9 @@ SPEC CHECKSUMS:
   HGCircularSlider: 92e2ee098c814709f455b8f46cd9008147f6a869
   ISPageControl: cadeb38e9ecdf05540c69ea1132612521b3caa2a
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
+  ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  SwiftKeychainWrapper: 82c4c02cdc36f9a24f7edfcaab3e336401caa1a1
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TTRangeSlider: 78188bea83f6471a06f75adbc88da5e990baeafe
 
