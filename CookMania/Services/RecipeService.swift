@@ -254,4 +254,21 @@ public class RecipeService: NSObject{
                 completionHandler(labels!)
             })
     }
+    
+    func getLabels(completionHandler: @escaping (_ labels: [[Any]]) -> ()){
+        Alamofire.request(buildURL(postfix: "labels"))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let json = JSON(parseJSON: response.result.value!)
+                let array = json.arrayObject!
+                var labels = [[Any]]()
+                for dict in array {
+                    let d = dict as! Dictionary<String, Any>
+                    labels.append([
+                        d["category"],
+                        d["labels"]
+                    ])
+                }
+                completionHandler(labels)
+            })
+    }
 }

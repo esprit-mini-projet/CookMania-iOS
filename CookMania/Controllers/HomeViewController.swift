@@ -25,6 +25,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var suggestion2: SuggestionImageView!
     @IBOutlet weak var suggestion3: SuggestionImageView!
     @IBOutlet weak var suggestion4: SuggestionImageView!
+    @IBOutlet weak var noFeedLabel: UILabel!
     
     var topRated = [Recipe]()
     var cheap = [Recipe]()
@@ -364,6 +365,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         RecipeService.getInstance().getFeed { (recipes) in
             self.feedItems = recipes
             self.feedTV.reloadData()
+            if recipes.count == 0 {
+                self.feedTV.isHidden = true
+                self.noFeedLabel.isHidden = false
+            }else{
+                self.feedTV.isHidden = false
+                self.noFeedLabel.isHidden = true
+            }
         }
     }
     
