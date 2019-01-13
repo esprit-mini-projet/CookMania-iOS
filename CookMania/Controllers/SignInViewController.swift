@@ -37,7 +37,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logout()
+        //logout()
         UIApplication.shared.statusBarStyle = .lightContent
         GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
