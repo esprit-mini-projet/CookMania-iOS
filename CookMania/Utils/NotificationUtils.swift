@@ -9,6 +9,7 @@
 struct NotificationType {
     static let followingAddedRecipe = 1
     static let follower = 2
+    static let experience = 3
 }
 
 class NotificationWrapper {
