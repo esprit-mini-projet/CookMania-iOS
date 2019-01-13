@@ -22,9 +22,22 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     let CLIEND_ID = "323514335162-ut1n697tbepfjk414bsiju9g5fo567h4.apps.googleusercontent.com"
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    var notification: NotificationWrapper?
+    
+    func logout(){
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+        KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        logout()
         UIApplication.shared.statusBarStyle = .lightContent
         GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
@@ -33,7 +46,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             //Temp func call
             //self.logoutAll()
             //Facebook User is already connected
@@ -89,6 +102,17 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         performSegue(withIdentifier: "toHome", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toHome"{
+            let destination = segue.destination as? MainTabLayoutViewController
+            destination?.notification = notification
+            notification = nil
+        }else if segue.identifier == "toSignUp"{
+            let destination = segue.destination as? SignUpViewController
+            destination?.signinViewController = self
+        }
+    }
+    
     func fetchProfileFB(withAccessToken accessToken: AccessToken) {
         let request = GraphRequest(graphPath: "me", parameters: ["fields": "id, email, first_name, last_name, picture.type(large)"], accessToken: accessToken)
         request.start { respons, result in
@@ -126,6 +150,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             switch loginResult {
             case .failed( _):
                 UIUtils.showErrorAlert(title: "Sorry", message: "An error has occured while trying to log you in, please try again.", viewController: self)
+                print(loginResult)
                 break
             case .cancelled:
                 break
@@ -158,20 +183,28 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     @IBAction func loginButtonClicked(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
+            if !FormUtils.validateEmail(email: emailTextField.text!){
+                let alert = UIAlertController(title: "Error", message: "This is not a valid email address!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                present(alert, animated: true, completion: nil)
+                return
+            }
             SignIn(email: email, password: password)
         }
     }
     
     func SignIn(email: String, password: String) {
         UserService.getInstance().logUserIn(email: email, password: password, completionHandler: { user in
-            self.appDelegate?.user = user
-            if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
-                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
-                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
-                KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
-            }
-            if KeychainWrapper.standard.set(user.id!, forKey: "cookmania_user_id") && KeychainWrapper.standard.set(user.email!, forKey: "cookmania_user_email") && KeychainWrapper.standard.set(user.password!, forKey: "cookmania_user_password"){
+            if user != nil && (self.appDelegate?.setUser(user: user!))!{
                 self.continueToHome()
+            }else{
+                let alert = UIAlertController(title: "Error", message: "Please verify your credentials.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         })
     }

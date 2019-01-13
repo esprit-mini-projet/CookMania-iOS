@@ -33,13 +33,6 @@ class ProfileViewController: UIViewController {
     var myRecipesViewController: MyRecipesViewController?
     var user: User?
     
-    override func loadView() {
-        if(user == nil){
-            user = appDelegate.user!
-        }
-        super.loadView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.height / 2
@@ -54,10 +47,13 @@ class ProfileViewController: UIViewController {
         dateFormatter.dateFormat = "dd MMM, yyyy"
         
         //segmentedController.removeSegment(at: 1, animated: false)
-        populateFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if user == nil {
+            user = appDelegate.user!
+        }
+        populateFields()
         myRecipesViewController?.updateTableView()
         favoritesViewController?.updateTableView()
         followersViewController?.updateTableView()

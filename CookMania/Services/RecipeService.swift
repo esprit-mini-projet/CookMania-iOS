@@ -126,6 +126,21 @@ public class RecipeService: NSObject{
         })
     }
     
+    func getSimilarRecipies(recipe: Recipe, successCompletionHandler: @escaping ((_ recipies: [Recipe]) -> ())) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "similar"), method: .post, parameters: ["labels": recipe.labels!.description, "recipe_id": recipe.id!],encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+                case .success:
+                    let json = JSON(parseJSON: response.result.value!)
+                    let recipes = Mapper<Recipe>().mapArray(JSONString: json.rawString()!)
+                    successCompletionHandler(recipes!)
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+            }
+        })
+    }
+  
     func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping (Bool, Int) -> ()) {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(recipeImage.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/png")

@@ -25,6 +25,7 @@ class UserService: NSObject {
     }
     
     func getUser(id: String, completionHandler: @escaping (_ user: User) -> ()) {
+        print("BEGIN GET")
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: id)).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
@@ -38,11 +39,11 @@ class UserService: NSObject {
         })
     }
     
-    func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User) -> ()){
+    func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User?) -> ()){
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password],encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
-                let user: User = Mapper<User>().map(JSONString: response.result.value!)!
+                let user: User? = Mapper<User>().map(JSONString: response.result.value!)
                 completionHandler(user)
                 break
             case .failure(let error):
@@ -53,22 +54,30 @@ class UserService: NSObject {
     }
     
     func checkUserSocial(user: User, completionHandler: @escaping (_ user: User) -> ()) {
-        let JSONString = user.toJSONString(prettyPrint: true)
-        var request = URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "social/check"))! )
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        request.httpBody = JSONString!.data(using: .utf8, allowLossyConversion: false)!
-        Alamofire.request(request).responseString(completionHandler: { (response: DataResponse<String>) in
-            switch response.result {
-            case .success:
-                let user: User = Mapper<User>().map(JSONString: response.result.value!)!
-                completionHandler(user)
-                break
-            case .failure(let error):
-                print(error)
-                break
-            }
-        })
+        var JSONObject = user.toJSON()
+        JSONObject["uuid"] = UIDevice.current.identifierForVendor?.uuidString
+        JSONObject["token"] = AppDelegate.getDeviceToken()
+        JSONObject["type"] = "ios"
+        do{
+            let JSONString = try JSONSerialization.data(withJSONObject: JSONObject, options: [])
+            var request = URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "social/check"))! )
+            request.httpMethod = HTTPMethod.post.rawValue
+            request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+            request.httpBody = JSONString
+            Alamofire.request(request).responseString(completionHandler: { (response: DataResponse<String>) in
+                switch response.result {
+                case .success:
+                    let user: User = Mapper<User>().map(JSONString: response.result.value!)!
+                    completionHandler(user)
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+            })
+        }catch{
+            print(error.localizedDescription)
+        }
     }
     
     func getUsersRecipes(user: User, completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
@@ -136,6 +145,63 @@ class UserService: NSObject {
             case .failure(let error):
                 print(error)
                 break
+            }
+        })
+    }
+    
+    func logout(completionHandler: @escaping () -> ()) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "logout"), method: .post, parameters: ["uuid": UIDevice.current.identifierForVendor?.uuidString], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+            case .success:
+                completionHandler()
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
+    
+    func updateUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
+        print("BEGIN UPDATE")
+        let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "update"))!, method: .post, headers: nil)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if image != nil {
+                multipartFormData.append(image!.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
+            }
+            multipartFormData.append((user.id)!.data(using: .utf8)!, withName: "id", mimeType: "text/plain")
+            multipartFormData.append((user.username)!.data(using: .utf8)!, withName: "username", mimeType: "text/plain")
+            multipartFormData.append((user.email)!.data(using: .utf8)!, withName: "email", mimeType: "text/plain")
+            multipartFormData.append((user.password)!.data(using: .utf8)!, withName: "password", mimeType: "text/plain")
+        }, with: url, encodingCompletion: { (result) in
+            switch result {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        completionHandler()
+                    }
+                case .failure(let encodingError):
+                    print("",encodingError.localizedDescription)
+            }
+        })
+    }
+    
+    func addUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
+        let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "insert"))!, method: .post, headers: nil)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if image != nil {
+                multipartFormData.append(image!.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
+            }
+            multipartFormData.append((user.username)!.data(using: .utf8)!, withName: "username", mimeType: "text/plain")
+            multipartFormData.append((user.email)!.data(using: .utf8)!, withName: "email", mimeType: "text/plain")
+            multipartFormData.append((user.password)!.data(using: .utf8)!, withName: "password", mimeType: "text/plain")
+        }, with: url, encodingCompletion: { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    completionHandler()
+                }
+            case .failure(let encodingError):
+                print("",encodingError.localizedDescription)
             }
         })
     }

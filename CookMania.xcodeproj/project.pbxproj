@@ -40,8 +40,12 @@
 		26B9E89D219457A000E326F3 /* VKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9E89C2194579F00E326F3 /* VKCheckBox.swift */; };
 		26D3679221AE002000D7EEF8 /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3679121AE002000D7EEF8 /* ActionTextField.swift */; };
 		26F92255219CB07300E55B09 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F92254219CB07200E55B09 /* Constants.swift */; };
+		C31E1F5521D0145000786771 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E1F5421D0145000786771 /* MenuItem.swift */; };
+		C31E1F5721D037C400786771 /* UserFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E1F5621D037C400786771 /* UserFormViewController.swift */; };
+		C31E1F5921D0524200786771 /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E1F5821D0524200786771 /* FormTableViewController.swift */; };
 		C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */; };
 		C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */; };
+		C325704F21C3C91B005B5BA1 /* NotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */; };
 		C32B1C7B2194DE7800153DC9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */; };
 		C32B1C7D2194DF2600153DC9 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */; };
 		C32B1C7F2194E10400153DC9 /* AddRecipeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C7E2194E10400153DC9 /* AddRecipeContainerViewController.swift */; };
@@ -49,17 +53,22 @@
 		C32B1C852194EA0E00153DC9 /* BlitzViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */; };
 		C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C862194EE3E00153DC9 /* SearchFilterViewController.swift */; };
 		C32B1C892194EEEE00153DC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B1C882194EEEE00153DC9 /* User.swift */; };
+		C3378CE521C1A6A2007DCBC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3378CE421C1A6A2007DCBC1 /* GoogleService-Info.plist */; };
 		C3474AA121A0BCD6005EADBC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3474AA021A0BCD6005EADBC /* UserService.swift */; };
 		C3474AA521A0BE4D005EADBC /* ServiceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */; };
 		C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BE80021ADE3B900D050EF /* FollowingViewController.swift */; };
 		C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BBB60219B5058007CA580 /* GradientViewSecond.swift */; };
 		C36AC734219E08D20070CDE8 /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC733219E08D20070CDE8 /* Experience.swift */; };
 		C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36AC736219E0CF30070CDE8 /* ExperienceService.swift */; };
+		C37A4C0121D1C17C009AC30A /* FormUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37A4C0021D1C17C009AC30A /* FormUtils.swift */; };
 		C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3834A3921B9A913006CE670 /* UIColor.swift */; };
 		C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
+		C3A23CE821EAA10A002C8140 /* OthersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */; };
+		C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
 		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
+		C3EED56D21CDAF33006C2FC3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */; };
 		C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */; };
 		C3FE11F021A35298007D5F16 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11EF21A35298007D5F16 /* Following.swift */; };
 /* End PBXBuildFile section */
@@ -102,8 +111,12 @@
 		58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.release.xcconfig"; sourceTree = "<group>"; };
 		747431A0824657B3C9112F01 /* Pods_CookMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookMania/Pods-CookMania.debug.xcconfig"; sourceTree = "<group>"; };
+		C31E1F5421D0145000786771 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		C31E1F5621D037C400786771 /* UserFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFormViewController.swift; sourceTree = "<group>"; };
+		C31E1F5821D0524200786771 /* FormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		C324D9BC21AF1C9300D9C5E8 /* RecipeService_Seif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService_Seif.swift; sourceTree = "<group>"; };
 		C324D9C021AF391600D9C5E8 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
+		C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtils.swift; sourceTree = "<group>"; };
 		C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		C32B1C7E2194E10400153DC9 /* AddRecipeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeContainerViewController.swift; sourceTree = "<group>"; };
@@ -111,17 +124,23 @@
 		C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzViewController.swift; sourceTree = "<group>"; };
 		C32B1C862194EE3E00153DC9 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterViewController.swift; sourceTree = "<group>"; };
 		C32B1C882194EEEE00153DC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C3378CE421C1A6A2007DCBC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C3378CE621C1C3BA007DCBC1 /* CookMania.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CookMania.entitlements; sourceTree = "<group>"; };
 		C3474AA021A0BCD6005EADBC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUtils.swift; sourceTree = "<group>"; };
 		C34BE80021ADE3B900D050EF /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		C35BBB60219B5058007CA580 /* GradientViewSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewSecond.swift; sourceTree = "<group>"; };
 		C36AC733219E08D20070CDE8 /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		C36AC736219E0CF30070CDE8 /* ExperienceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceService.swift; sourceTree = "<group>"; };
+		C37A4C0021D1C17C009AC30A /* FormUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUtils.swift; sourceTree = "<group>"; };
 		C3834A3921B9A913006CE670 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfileViewController.swift; sourceTree = "<group>"; };
+		C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabLayoutViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
 		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
+		C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		C3FE11EF21A35298007D5F16 /* Following.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,7 +178,9 @@
 		2608CEBC218D0D8E008A706E /* CookMania */ = {
 			isa = PBXGroup;
 			children = (
+				C3378CE621C1C3BA007DCBC1 /* CookMania.entitlements */,
 				2608CECC218D0D9B008A706E /* Info.plist */,
+				C3378CE421C1A6A2007DCBC1 /* GoogleService-Info.plist */,
 				2608CEBD218D0D8E008A706E /* AppDelegate.swift */,
 				2608CEC7218D0D9B008A706E /* Assets.xcassets */,
 				C32B1C762194D9C600153DC9 /* Controllers */,
@@ -209,20 +230,25 @@
 				2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */,
 				C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */,
 				C3995DDC21964CE800179246 /* CommunityViewController.swift */,
-				C32B1C822194E21B00153DC9 /* SettingsViewController.swift */,
 				26101085218FC37B00E8344F /* FavoritesViewController.swift */,
 				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
 				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
 				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
+				C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */,
 				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
 				262543AE21935E6C003601A4 /* ProfileViewController.swift */,
 				C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */,
 				26101083218FAE0B00E8344F /* RecipeListViewController.swift */,
 				C32B1C862194EE3E00153DC9 /* SearchFilterViewController.swift */,
 				262543AC21935E55003601A4 /* SearchViewController.swift */,
+				C32B1C822194E21B00153DC9 /* SettingsViewController.swift */,
 				26101089218FC3D500E8344F /* ShoppingListViewController.swift */,
 				2608CEBF218D0D8E008A706E /* SignInViewController.swift */,
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
+				C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */,
+				C31E1F5621D037C400786771 /* UserFormViewController.swift */,
+				C31E1F5821D0524200786771 /* FormTableViewController.swift */,
+				C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -236,6 +262,7 @@
 				260917CE219C716900C713C6 /* Ingredient.swift */,
 				C36AC733219E08D20070CDE8 /* Experience.swift */,
 				C3FE11EF21A35298007D5F16 /* Following.swift */,
+				C31E1F5421D0145000786771 /* MenuItem.swift */,
 				268FC1F521CE835D004A87E1 /* SearchResult.swift */,
 				2699B06A21DFF252004F8A86 /* FeedItem.swift */,
 			);
@@ -254,6 +281,8 @@
 				C3474AA421A0BE4D005EADBC /* ServiceUtils.swift */,
 				C3DC90CB21A1AEDC0053094A /* UIUtils.swift */,
 				C3834A3921B9A913006CE670 /* UIColor.swift */,
+				C325704E21C3C91B005B5BA1 /* NotificationUtils.swift */,
+				C37A4C0021D1C17C009AC30A /* FormUtils.swift */,
 				269391FF21BC895A00900C9F /* SuggestionImageView.swift */,
 				263BDE0721CC25C500D98416 /* PinterestLayout.swift */,
 				268FC1F321CE6E2C004A87E1 /* Filter.swift */,
@@ -327,6 +356,14 @@
 				TargetAttributes = {
 					2608CEB9218D0D8E008A706E = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -354,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2608CECB218D0D9B008A706E /* LaunchScreen.storyboard in Resources */,
+				C3378CE521C1A6A2007DCBC1 /* GoogleService-Info.plist in Resources */,
 				2608CEC8218D0D9B008A706E /* Assets.xcassets in Resources */,
 				2608CEC3218D0D8E008A706E /* Main.storyboard in Resources */,
 			);
@@ -378,15 +416,22 @@
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/Gallery/Gallery.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/HGCircularSlider/HGCircularSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/ISPageControl/ISPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -399,15 +444,22 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gallery.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGCircularSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -484,26 +536,34 @@
 				262543AF21935E6C003601A4 /* ProfileViewController.swift in Sources */,
 				C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */,
 				C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */,
+				C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */,
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				26A8D01F21C1B2C700BF3AAE /* ShopRecipeDao.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,
 				C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */,
+				C3EED56D21CDAF33006C2FC3 /* TimerViewController.swift in Sources */,
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
+				C31E1F5921D0524200786771 /* FormTableViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
+				C31E1F5521D0145000786771 /* MenuItem.swift in Sources */,
+				C3A23CE821EAA10A002C8140 /* OthersProfileViewController.swift in Sources */,
+				C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */,
 				26925D6921BAE1CF00773AB3 /* AddStepViewController.swift in Sources */,
 				C32B1C872194EE3E00153DC9 /* SearchFilterViewController.swift in Sources */,
 				26101084218FAE0B00E8344F /* RecipeListViewController.swift in Sources */,
 				2610108A218FC3D500E8344F /* ShoppingListViewController.swift in Sources */,
 				2608CEC6218D0D8E008A706E /* CookMania.xcdatamodeld in Sources */,
 				2689B75921AF3E96007BBC54 /* ActionSegmentControl.swift in Sources */,
+				C325704F21C3C91B005B5BA1 /* NotificationUtils.swift in Sources */,
 				2608CED3218D0FD6008A706E /* HomeViewController.swift in Sources */,
 				C324D9BD21AF1C9300D9C5E8 /* RecipeService_Seif.swift in Sources */,
 				C3834A3A21B9A913006CE670 /* UIColor.swift in Sources */,
 				268FC1F621CE835D004A87E1 /* SearchResult.swift in Sources */,
 				C36AC734219E08D20070CDE8 /* Experience.swift in Sources */,
 				2699B06D21E02F38004F8A86 /* ActionImageView.swift in Sources */,
+				C31E1F5721D037C400786771 /* UserFormViewController.swift in Sources */,
 				C32B1C7F2194E10400153DC9 /* AddRecipeContainerViewController.swift in Sources */,
 				26925D6B21BAEFF700773AB3 /* AddRecipeViewController.swift in Sources */,
 				C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */,
@@ -516,6 +576,7 @@
 				C35BBB61219B5059007CA580 /* GradientViewSecond.swift in Sources */,
 				2699B06B21DFF252004F8A86 /* FeedItem.swift in Sources */,
 				C32B1C892194EEEE00153DC9 /* User.swift in Sources */,
+				C37A4C0121D1C17C009AC30A /* FormUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +723,7 @@
 			baseConfigurationReference = B3F7362139CC8910F6B6E7F6 /* Pods-CookMania.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CookMania/CookMania.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G96V29LG5G;
 				INFOPLIST_FILE = CookMania/Info.plist;
@@ -681,6 +743,7 @@
 			baseConfigurationReference = 58BF200591C37736EA5CE1DC /* Pods-CookMania.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CookMania/CookMania.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G96V29LG5G;
 				INFOPLIST_FILE = CookMania/Info.plist;
