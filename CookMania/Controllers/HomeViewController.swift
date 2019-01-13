@@ -11,12 +11,14 @@ import AlamofireImage
 import Alamofire
 import ObjectMapper
 import CoreStore
+import Cosmos
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var topRatedCV: UICollectionView!
     @IBOutlet weak var healthyCV: UICollectionView!
     @IBOutlet weak var cheapCV: UICollectionView!
+    @IBOutlet weak var feedTV: UITableView!
     
     @IBOutlet weak var suggestionsTitle: UILabel!
     @IBOutlet weak var suggestion1: SuggestionImageView!
@@ -28,13 +30,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var cheap = [Recipe]()
     var healthy = [Recipe]()
     var suggestions = [Recipe]()
+    var feedItems = [FeedItem]()
     
     override func viewDidAppear(_ animated: Bool) {
         let tabController = self.navigationController?.parent as! MainTabLayoutViewController
         
-        if tabController.notification != nil && tabController.notification!.notificationId != nil{
+        if let _ = tabController.notification, tabController.notification!.notificationId != nil{
             let notification = tabController.notification
-            if notification!.notificationType == NotificationType.followingAddedRecipe{
+            if notification!.notificationType == NotificationType.followingAddedRecipe || notification!.notificationType == NotificationType.experience{
                 RecipeService.getInstance().getRecipe(recipeId: Int(notification!.notificationId)!, completionHandler: { recipe in
                     tabController.notification = nil
                     self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
@@ -108,12 +111,164 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         })
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return feedItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedItem")
+        let contentView = cell?.viewWithTag(0)
+        
+        //referecing views
+        let userBtn = contentView?.viewWithTag(1) as! UIButton
+        let userNameLabel = contentView?.viewWithTag(2) as! UILabel
+        let dateLabel = contentView?.viewWithTag(3) as! UILabel
+        let blurImage = contentView?.viewWithTag(4) as! UIImageView
+        let sharpImage = contentView?.viewWithTag(5) as! UIImageView
+        let recipeButton = contentView?.viewWithTag(12) as! UIButton
+        let ratingView = contentView?.viewWithTag(6) as! CosmosView
+        let recipeNameLabel = contentView?.viewWithTag(7) as! UILabel
+        let heartBtn = contentView?.viewWithTag(8) as! UIButton
+        let viewsLabel = contentView?.viewWithTag(10) as! UILabel
+        let agoLabel = contentView?.viewWithTag(11) as! UILabel
+        
+        //setting data
+        let feedItem = feedItems[indexPath.row]
+        userBtn.af_setImage(for: ControlState.normal, url: URL(string: (feedItem.user?.imageUrl!)!)!)
+        userBtn.restorationIdentifier = feedItem.user!.id!
+        userNameLabel.text = feedItem.user?.username
+        dateLabel.text = getDateFormatted(string: (feedItem.recipe?.dateString)!)
+        blurImage.af_setImage(withURL: URL(string: (Constants.URL.imagesFolder + (feedItem.recipe?.imageUrl!)!))!)
+        sharpImage.af_setImage(withURL: URL(string: (Constants.URL.imagesFolder + (feedItem.recipe?.imageUrl!)!))!)
+        recipeButton.restorationIdentifier = String(feedItem.recipe!.id!)
+        ratingView.rating = Double((feedItem.recipe?.rating)!)
+        recipeNameLabel.text = feedItem.recipe?.name
+        viewsLabel.text = String(feedItem.recipe!.views!)
+        if let diffString = getDateDiffString(olderDate: feedItem.recipe!.getDate()!, newerDate: Date()){
+            agoLabel.text = diffString + " ago"
+        }else{
+            agoLabel.text = ""
+        }
+        //checking favorites
+        heartBtn.restorationIdentifier = String(indexPath.row)
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        FavoriteHelper.getInstance().getFavorite(userId: userId!, recipeId: feedItem.recipe!.id!, successCompletionHandler: { (favorite) in
+            if let _ = favorite{
+                heartBtn.setImage(UIImage(named: "favorite"), for: UIControl.State.normal)
+            }else{
+                heartBtn.setImage(UIImage(named: "unfavorite"), for: UIControl.State.normal)
+            }
+        }) {
+            heartBtn.isHidden = true
+        }
+        
+        return cell!
+    }
+    
+    func getDateFormatted(string: String) -> String {
+        let dateFroamtter = DateFormatter()
+        dateFroamtter.locale = Locale(identifier: "en_US_POSIX")
+        dateFroamtter.timeZone = TimeZone.autoupdatingCurrent
+        dateFroamtter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "dd MMM, yyyy"
+        
+        if let date = dateFroamtter.date(from: string) {
+            return dateFormatterPrint.string(from: date)
+        } else {
+            return ""
+        }
+    }
+    
+    func getBlurView(imageView: UIImageView) -> UIVisualEffectView {
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = imageView.bounds
+        return blurView
+    }
+    
+    func getDateDiffString(olderDate older: Date, newerDate newer: Date) -> (String?)  {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        
+        let componentsLeftTime = Calendar.current.dateComponents([.minute , .hour , .day,.month, .weekOfMonth,.year], from: older, to: newer)
+        
+        let year = componentsLeftTime.year ?? 0
+        if  year > 0 {
+            formatter.allowedUnits = [.year]
+            return formatter.string(from: older, to: newer)
+        }
+        
+        
+        let month = componentsLeftTime.month ?? 0
+        if  month > 0 {
+            formatter.allowedUnits = [.month]
+            return formatter.string(from: older, to: newer)
+        }
+        
+        let weekOfMonth = componentsLeftTime.weekOfMonth ?? 0
+        if  weekOfMonth > 0 {
+            formatter.allowedUnits = [.weekOfMonth]
+            return formatter.string(from: older, to: newer)
+        }
+        
+        let day = componentsLeftTime.day ?? 0
+        if  day > 0 {
+            formatter.allowedUnits = [.day]
+            return formatter.string(from: older, to: newer)
+        }
+        
+        let hour = componentsLeftTime.hour ?? 0
+        if  hour > 0 {
+            formatter.allowedUnits = [.hour]
+            return formatter.string(from: older, to: newer)
+        }
+        
+        let minute = componentsLeftTime.minute ?? 0
+        if  minute > 0 {
+            formatter.allowedUnits = [.minute]
+            return formatter.string(from: older, to: newer) ?? ""
+        }
+        
+        return nil
+    }
+    
+    @IBAction func onHeartIconClicked(_ sender: UIButton) {
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user!.id!
+        let recipeId = feedItems[Int(sender.restorationIdentifier!)!].recipe!.id!
+        FavoriteHelper.getInstance().getFavorite(userId: userId, recipeId: recipeId, successCompletionHandler: { (favorite) in
+            if let f = favorite{
+                FavoriteHelper.getInstance().removeFavoriteRecipe(favorite: f, successCompletionHandler: {
+                    sender.setImage(UIImage(named: "unfavorite"), for: UIControl.State.normal)
+                }, errorCompletionHandler: {
+                    
+                })
+            }else{
+                FavoriteHelper.getInstance().addRecipeToFavorite(userId: userId, recipeId: recipeId, successCompletionHandler: {
+                    sender.setImage(UIImage(named: "favorite"), for: UIControl.State.normal)
+                }) {
+                    
+                }
+            }
+        }) {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCoreStore()
-        fetchRecipes()
         addTapActionToSuggestions()
         //testShoppinglist()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchRecipes()
     }
     
     func initializeCoreStore(){
@@ -166,6 +321,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         })
     }
     
+    @IBAction func goToRecipe(_ sender: UIButton) {
+        RecipeService.getInstance().getRecipe(recipeId: Int(sender.restorationIdentifier!)!, completionHandler: { recipe in
+            self.performSegue(withIdentifier: "toRecipeDetails", sender: recipe)
+        })
+    }
+    @IBAction func goToUser(_ sender: UIButton) {
+        UserService.getInstance().getUser(id: sender.restorationIdentifier!, completionHandler: { user in
+            self.performSegue(withIdentifier: "toProfile", sender: user)
+        })
+    }
+    
     func fetchRecipes(){
         RecipeService.getInstance().getRecipeSuggestions { (title: String, recipes: [Recipe]) in
             self.suggestions = recipes
@@ -195,6 +361,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.cheap = recipes
             self.cheapCV.reloadData()
         }
+        RecipeService.getInstance().getFeed { (recipes) in
+            self.feedItems = recipes
+            self.feedTV.reloadData()
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -218,7 +388,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         case "toProfile":
             let destinationController = segue.destination as! OthersProfileViewController
             destinationController.user = sender as? User
-            break;
+            break
         default:
             return
         }

@@ -24,6 +24,9 @@ class Recipe: Mappable{
     var userId: String?
     var steps: [Step]?
     var labels: [String]?
+    var dateString: String?
+    var imageHeight: Float?
+    var imageWidth: Float?
     
     init(){
         
@@ -47,6 +50,9 @@ class Recipe: Mappable{
         userId <- map["user_id"]
         steps <- map["steps"]
         labels <- map["labels"]
+        dateString <- map["date"]
+        imageHeight <- map["height"]
+        imageWidth <- map["width"]
     }
     
     public func getIngredients() -> [Ingredient]{
@@ -58,5 +64,13 @@ class Recipe: Mappable{
             ingredients += step.ingredients!
         }
         return ingredients
+    }
+    
+    func getDate() -> Date? {
+        let dateFroamtter = DateFormatter()
+        dateFroamtter.locale = Locale(identifier: "en_US_POSIX")
+        dateFroamtter.timeZone = TimeZone.autoupdatingCurrent
+        dateFroamtter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFroamtter.date(from: dateString!)
     }
 }
