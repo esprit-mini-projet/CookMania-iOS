@@ -19,8 +19,9 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
     let sortItems = ["Rating", "Time"]
     
     let diets = ["Healthy", "Vegetarian"]
-    let types = ["Breakfast", "Lunch", "Dinner"]
+    let types = ["Breakfast", "Lunch", "Dinner", "Dessert"]
     let occasions = ["Date Night"]
+    let other = ["Cheap", "Easy", "Fast", "Kids Friendly", "Takes Time"]
     let calories = ["All", "Low", "Normal", "Rich"]
     
     var categories = [[Any]]()
@@ -33,7 +34,8 @@ class SearchFilterViewController: UIViewController, UITableViewDataSource, UITab
         categories = [
             ["Diet", diets],
             ["Type", types],
-            ["Occasion", occasions]
+            ["Occasion", occasions],
+            ["Other", other]
         ]
         for (i, value) in calories.enumerated(){
             if value == filter?.calories{

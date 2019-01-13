@@ -238,12 +238,20 @@ public class RecipeService: NSObject{
     
     func getFeed(completionHandler: @escaping (_ items: [FeedItem]) -> ()){
         let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
-        print("user id:", userId)
         Alamofire.request(buildURL(postfix: "feed/" + userId!))
             .responseString(completionHandler: { (response: DataResponse<String>) in
                 let items = Mapper<FeedItem>().mapArray(JSONString: response.result.value!)
                 print("count:", items!.count)
                 completionHandler(items!)
+            })
+    }
+    
+    func getLabelsFlat(completionHandler: @escaping (_ labels: [String]) -> ()){
+        Alamofire.request(buildURL(postfix: "labels_flat"))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let json = JSON(parseJSON: response.result.value!)
+                let labels = json.arrayObject as! [String]?
+                completionHandler(labels!)
             })
     }
 }
