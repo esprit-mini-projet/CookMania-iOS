@@ -101,7 +101,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
     @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
-    @IBOutlet weak var visitProfileButton: UIButton!
     @IBOutlet weak var experiencesPageController: ISPageControl!
     @IBOutlet weak var noExpereinceLabel: UILabel!
     @IBOutlet weak var experiencesCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -229,9 +228,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
         recipeOwnerNameLabel.text = user?.username
-        if self.user?.id == appDelegate.user?.id {
-            visitProfileButton.isHidden = true
-        }
     }
     
     var isExpanded: CGFloat = 1
@@ -474,6 +470,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {
+        if self.user?.id == appDelegate.user?.id {
+            return
+        }
         performSegue(withIdentifier: "toProfile", sender: sender)
     }
     
