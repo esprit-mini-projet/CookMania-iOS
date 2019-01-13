@@ -140,7 +140,7 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
-            let destination = segue.destination as! ProfileViewController
+            let destination = segue.destination as! OthersProfileViewController
             let user = sender as! User
             
             destination.user = user
