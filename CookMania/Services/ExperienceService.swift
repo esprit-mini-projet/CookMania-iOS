@@ -38,11 +38,12 @@ class ExperienceService: NSObject {
         })
     }
     
-    func addRecipeExperience(experience: Experience, image: UIImage, recipeId: Int, completionHandler: @escaping () -> ()) {
+    func addRecipeExperience(experience: Experience, image: UIImage, recipeId: Int, ownerId: String, completionHandler: @escaping () -> ()) {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
             multipartFormData.append((experience.user?.id)!.data(using: .utf8)!, withName: "user_id", mimeType: "text/plain")
             multipartFormData.append(String(recipeId).data(using: .utf8)!, withName: "recipe_id", mimeType: "text/plain")
+            multipartFormData.append(ownerId.data(using: .utf8)!, withName: "owner_id", mimeType: "text/plain")
             multipartFormData.append(String(experience.rating!).data(using: .utf8)!, withName: "rating", mimeType: "text/plain")
             multipartFormData.append(String(experience.comment!).data(using: .utf8)!, withName: "comment", mimeType: "text/plain")
         }, to:ServiceUtils.buildURL(route: ROUTE, postfix: "add")){ (result) in

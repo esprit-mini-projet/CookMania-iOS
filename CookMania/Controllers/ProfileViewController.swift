@@ -35,11 +35,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.height / 2
         profilePhotoImageView.layer.borderWidth = 5
         profilePhotoImageView.layer.borderColor = UIColor.white.cgColor
         
-        profilePhotoShadowView.layer.cornerRadius = profilePhotoShadowView.frame.height / 2
         profilePhotoShadowView.layer.shadowColor = UIColor.black.cgColor
         profilePhotoShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         profilePhotoShadowView.layer.shadowOpacity = 0.8
@@ -47,6 +45,11 @@ class ProfileViewController: UIViewController {
         dateFormatter.dateFormat = "dd MMM, yyyy"
         
         //segmentedController.removeSegment(at: 1, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.size.width / 2
+        profilePhotoShadowView.layer.cornerRadius = profilePhotoShadowView.frame.size.width / 2
     }
     
     override func viewWillAppear(_ animated: Bool) {

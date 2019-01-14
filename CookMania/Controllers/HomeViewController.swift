@@ -266,6 +266,25 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         initializeCoreStore()
         addTapActionToSuggestions()
         //testShoppinglist()
+        addLogoToNavigationVar()
+    }
+
+    func addLogoToNavigationVar() {
+        let navController = navigationController!
+        
+        let image = UIImage(named: "logo_name")
+        let imageView = UIImageView(image: image)
+        
+        let bannerWidth = navController.navigationBar.frame.size.width
+        let bannerHeight = navController.navigationBar.frame.size.height
+        
+        let bannerX = bannerWidth / 2 - (image?.size.width)!
+        let bannerY = bannerHeight / 2 - (image?.size.height)!
+        
+        imageView.frame = CGRect(x: bannerX, y: bannerY, width: (image?.size.width)!, height: (image?.size.height)!)
+        imageView.contentMode = .scaleAspectFit
+        
+        navigationItem.titleView = imageView
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -40,7 +40,10 @@ class UserService: NSObject {
     }
     
     func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User?) -> ()){
-        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password],encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+        let uuid: String =  (UIDevice.current.identifierForVendor?.uuidString)!
+        let token: String = AppDelegate.getDeviceToken()
+        
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password, "type": "ios", "uuid": uuid, "token": token], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let user: User? = Mapper<User>().map(JSONString: response.result.value!)

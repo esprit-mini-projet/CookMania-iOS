@@ -99,6 +99,7 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
   - HGCircularSlider (2.0.0)
+  - IQKeyboardManagerSwift (6.2.0)
   - ISPageControl (0.1.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -125,6 +126,7 @@ DEPENDENCIES:
   - Gallery
   - GoogleSignIn
   - HGCircularSlider
+  - IQKeyboardManagerSwift
   - ISPageControl (~> 0.1.0)
   - ObjectMapper
   - SwiftKeychainWrapper
@@ -156,6 +158,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - HGCircularSlider
+    - IQKeyboardManagerSwift
     - ISPageControl
     - nanopb
     - ObjectMapper
@@ -199,6 +202,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   HGCircularSlider: 92e2ee098c814709f455b8f46cd9008147f6a869
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   ISPageControl: cadeb38e9ecdf05540c69ea1132612521b3caa2a
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
@@ -207,6 +211,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TTRangeSlider: 78188bea83f6471a06f75adbc88da5e990baeafe
 
-PODFILE CHECKSUM: 3552af38f2586cc4043c3412c1b2ec2f253e5203
+PODFILE CHECKSUM: 23bc10a33e98743eaa785c14367a0ecc5984bebe
 
 COCOAPODS: 1.5.3

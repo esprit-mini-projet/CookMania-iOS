@@ -23,10 +23,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             if appDelegate.user?.id?.prefix(1) == "f" {
                 menu.append(MenuItem(name: "Linked to facebook account", icon: UIImage(named: "facebook")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
-                    self.performSegue(withIdentifier: "toUserForm", sender: nil)
+                    let alert = UIAlertController(title: nil, message: "You can't edit facebook linked account", preferredStyle: .actionSheet)
+                    self.present(alert, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                        alert.dismiss(animated: true)
+                    }
                 }))
             }else if appDelegate.user?.id?.prefix(1) == "g" {
                 menu.append(MenuItem(name: "Linked to google account", icon: UIImage(named: "google")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
+                    let alert = UIAlertController(title: nil, message: "Can't edit google linked account", preferredStyle: .actionSheet)
+                    self.present(alert, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                        alert.dismiss(animated: true)
+                    }
                 }))
             }else{
                 menu.append(MenuItem(name: "Edit Account", icon: UIImage(named: "edit")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
@@ -34,7 +43,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }))
             }
         }
-        menu.append(MenuItem(name: "Lougout", icon: UIImage(named: "logout")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
+        menu.append(MenuItem(name: "Logout", icon: UIImage(named: "logout")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
             UserService.getInstance().logout(completionHandler: {
                 UserProfile.current = nil
                 let loginManager = LoginManager()
