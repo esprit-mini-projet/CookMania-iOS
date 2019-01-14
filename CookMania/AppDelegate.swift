@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://192.168.1.8:3000"
+    public static let SERVER_DOMAIN = "http://192.168.43.90:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
@@ -228,7 +228,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         if(UIApplication.shared.applicationState == .active || UIApplication.shared.applicationState == .inactive){
             let notificationType = Int(userInfo["notif_type"] as! String)
-            if(notificationType == NotificationType.followingAddedRecipe){
+            if(notificationType == NotificationType.followingAddedRecipe || notificationType == NotificationType.experience){
                 RecipeService.getInstance().getRecipe(recipeId: Int((userInfo["notif_id"] as? String)!)!, completionHandler: {recipe in
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RecipeDetailsViewController") as? RecipeDetailsViewController {
                         if let window = self.window, let rootViewController = window.rootViewController {
