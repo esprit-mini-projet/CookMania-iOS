@@ -104,6 +104,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var experiencesPageController: ISPageControl!
     @IBOutlet weak var noExpereinceLabel: UILabel!
     @IBOutlet weak var experiencesCollectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addIngredientsButton: UIButton!
+    @IBOutlet weak var removeIngredientsButton: UIButton!
     
     var experiences = [Experience]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -113,6 +115,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var ingredients: [Ingredient] = []
     
     var similarRecipes: [Recipe] = []
+    var shopIngredients: [ShopIngredient] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +138,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         experiencesCollectionView.isPagingEnabled = true
+        /*shopIngredients = ShopIngredientDao.getInstance().getIngredients().filter({($0.recipe?.id)! == (self.recipe?.id)!})
+        if(shopIngredients.count == ingredients.count){
+            addIngredientsButton.isHidden = false
+            removeIngredientsButton.isHidden = true
+        }else{
+            addIngredientsButton.isHidden = true
+            removeIngredientsButton.isHidden = false
+        }*/
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -152,6 +163,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             self.similarRecipes = recipes
             self.similarRecipesCollectionView.reloadData()
         })
+        loadExperiences()
     }
     
     func loadExperiences() {
@@ -210,13 +222,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.layer.borderWidth = 2
         recipeOwnerProfileImageView.layer.borderColor = UIColor.white.cgColor
-        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height / 2
         recipeOwnerProfileImageView.layer.masksToBounds = true
         
-        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height / 2
         recipeOwnerProfileImageShadowView.layer.shadowColor = UIColor.black.cgColor
         recipeOwnerProfileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         recipeOwnerProfileImageShadowView.layer.shadowOpacity = 1
+        
+        
+        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageShadowView.frame.size.width / 2
+        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.size.width / 2
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(RecipeDetailsViewController.tapDetected))
         recipeOwnerProfileImageView.isUserInteractionEnabled = true
@@ -228,6 +242,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
         recipeOwnerNameLabel.text = user?.username
+        if(user?.id == appDelegate.user?.id){
+            recipeOwnerNameLabel.textColor = UIColor.black
+        }
     }
     
     var isExpanded: CGFloat = 1

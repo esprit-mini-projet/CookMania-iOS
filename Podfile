@@ -24,4 +24,5 @@ target 'CookMania' do
   pod 'HGCircularSlider'
   pod 'CoreStore', '~> 5.0'
   pod "TTRangeSlider"
+  pod 'IQKeyboardManagerSwift'
 end

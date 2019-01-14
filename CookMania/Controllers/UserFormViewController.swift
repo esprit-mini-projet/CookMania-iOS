@@ -14,10 +14,13 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileImageBlurContainer: UIView!
     @IBOutlet weak var doneButtonBarItem: UIBarButtonItem!
+    @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
     
     var doneButton: UIBarButtonItem?
     var signinViewController: SignInViewController?
     var signupViewControoler: SignUpViewController?
+    var formTableViewController: FormTableViewController?
     
     var usernameIsValide: Bool = false
     var emailIsValide: Bool = false
@@ -50,13 +53,18 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
             passwordIsValide = true
             confirmationIsValide = true
         }
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        containerHeightConstraint.constant = (formTableViewController?.formTableView.frame.height)!
+        containerView.layoutIfNeeded()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFormTable" {
             let destination = segue.destination as! FormTableViewController
             destination.userFormViewController = self
+            self.formTableViewController = destination
         }
     }
     

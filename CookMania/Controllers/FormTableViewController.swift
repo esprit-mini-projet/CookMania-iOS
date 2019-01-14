@@ -18,6 +18,7 @@ class FormTableViewController: UITableViewController{
     @IBOutlet weak var emailErrorLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var confirmationErrorLabel: UILabel!
+    @IBOutlet var formTableView: UITableView!
     
     var userFormViewController: UserFormViewController?
     
