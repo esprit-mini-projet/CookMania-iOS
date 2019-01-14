@@ -106,6 +106,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var experiencesCollectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addIngredientsButton: UIButton!
     @IBOutlet weak var removeIngredientsButton: UIButton!
+    @IBOutlet weak var rateThisRecipeLabel: UILabel!
     
     var experiences = [Experience]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -244,6 +245,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         recipeOwnerNameLabel.text = user?.username
         if(user?.id == appDelegate.user?.id){
             recipeOwnerNameLabel.textColor = UIColor.black
+            recipeRatingInput.isHidden = true
+            rateThisRecipeLabel.text = "Experiences"
+            rateThisRecipeLabel.textColor = UIColor.black
         }
     }
     

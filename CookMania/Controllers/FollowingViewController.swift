@@ -41,9 +41,9 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "followingCell")
         let contentView = cell?.viewWithTag(0)
-        let shadowView = contentView?.viewWithTag(1) as! UIView
-        let cardView = contentView?.viewWithTag(2) as! UIView
-        let imageShadowView = cardView.viewWithTag(3) as! UIView
+        let shadowView = (contentView?.viewWithTag(1))!
+        let cardView = (contentView?.viewWithTag(2))!
+        let imageShadowView = (cardView.viewWithTag(3))!
         let imageView = cardView.viewWithTag(4) as! UIImageView
         let nameLabel = cardView.viewWithTag(5) as! UILabel
         let dateLabel = cardView.viewWithTag(6) as! UILabel
@@ -53,9 +53,6 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
         //prepare the view
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.cornerRadius = imageView.frame.height / 2
-        
-        imageShadowView.layer.cornerRadius = imageView.frame.height / 2
         imageShadowView.layer.shadowColor = UIColor.black.cgColor
         imageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         imageShadowView.layer.shadowOpacity = 0.8
@@ -70,6 +67,10 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
         nameLabel.text = following.following?.username
         dateLabel.text = dateFormatter.string(from: following.date!)
         
+        let imageViewWidth = UIScreen.main.bounds.width * 0.17
+        imageView.layer.cornerRadius = imageViewWidth / 2
+        
+        imageShadowView.layer.cornerRadius = imageViewWidth / 2
         return cell!
     }
     
@@ -135,6 +136,12 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
         let user = following[indexPath.item].following
         if(user?.id != appDelegate.user?.id){
             performSegue(withIdentifier: "toProfile", sender: user!)
+        }else{
+            let alert = UIAlertController(title: nil, message: "You can't access your profile from here", preferredStyle: .actionSheet)
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                alert.dismiss(animated: true)
+            }
         }
     }
     
