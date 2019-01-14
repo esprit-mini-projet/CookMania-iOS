@@ -77,7 +77,8 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             step!.ingredients!.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            //tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -127,19 +128,19 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         tableView.endUpdates()
     }
     
-    func checkStep(){
+    func checkStep() -> Bool{
         guard let desc = descText.text, !desc.isEmpty else{
             showAlert(title: "Description Missing", message: "Make sure to write a description.")
-            return
+            return false
         }
         for ingredient in step!.ingredients!{
             guard let name = ingredient.name, !name.isEmpty else{
                 showAlert(title: "Ingredient name Missing", message: "Make sure to add all ingredient names.")
-                return
+                return false
             }
             guard let quantity = ingredient.quantity, quantity > 0 else{
                 showAlert(title: "Ingredient Quantity Missing", message: "Make sure to add all ingredient quantities.")
-                return
+                return false
             }
             if let _ = ingredient.unit {
                 if ingredient.unit == "N/A"{
@@ -161,11 +162,13 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         }else {
             images?.append(nil)
         }
+        return true
     }
     
     @IBAction func addStep(_ sender: Any){
-        checkStep()
-        performSegue(withIdentifier: "toAddStep", sender: nil)
+        if checkStep(){
+            performSegue(withIdentifier: "toAddStep", sender: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -181,7 +184,9 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     }
     
     func finish(){
-        checkStep()
+        if !checkStep(){
+            return
+        }
         
         recipe!.userId = (UIApplication.shared.delegate as! AppDelegate).user?.id!
         

@@ -15,17 +15,7 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     let white = UIColor.white
     var labelColor: CGColor?
     let descriptionPlaceHolder = "Description..."
-    let labels = [
-        "Healthy",
-        "Vegetarian",
-        "Cheap",
-        "Breakfast",
-        "Dinner",
-        "Date Night",
-        "Fast",
-        "Kids Friendly",
-        "Takes Time",
-        "Easy"]
+    var labels = [String]()
     
     var recipe: Recipe?
     
@@ -71,11 +61,11 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -110,6 +100,11 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         descText.text = descriptionPlaceHolder
         descText.textColor = UIColor.lightGray
         descText.layer.borderColor = UIColor.lightGray.cgColor
+        
+        RecipeService.getInstance().getLabelsFlat { (labels) in
+            self.labels += labels
+            self.labelsCV.reloadData()
+        }
     }
     
     @IBAction func selectImage(_ sender: Any) {

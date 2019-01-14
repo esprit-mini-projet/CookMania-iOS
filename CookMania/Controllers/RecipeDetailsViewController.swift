@@ -11,8 +11,9 @@ import Cosmos
 import Alamofire
 import AlamofireImage
 import CoreData
+import ISPageControl
 
-class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     class LocalIngredient: NSObject {
         var id: Int
@@ -97,13 +98,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var recipeOwnerProfileImageView: UIImageView!
     @IBOutlet weak var recipeOwnerProfileImageShadowView: UIView!
     @IBOutlet weak var recipeOwnerNameLabel: UILabel!
-    @IBOutlet weak var recipeOwnerDateLabel: UILabel!
     @IBOutlet weak var recipeOwnerViewExpandedConstraint: NSLayoutConstraint!
     @IBOutlet weak var addToFavoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
-    @IBOutlet weak var visitProfileButton: UIButton!
-    
-    
+    @IBOutlet weak var experiencesPageController: ISPageControl!
+    @IBOutlet weak var noExpereinceLabel: UILabel!
+    @IBOutlet weak var experiencesCollectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addIngredientsButton: UIButton!
+    @IBOutlet weak var removeIngredientsButton: UIButton!
+    @IBOutlet weak var rateThisRecipeLabel: UILabel!
     
     var experiences = [Experience]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -112,54 +115,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var user: User?
     var ingredients: [Ingredient] = []
     
-    var similarRecipes = [
-        LocalRecipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: Float(3.0), imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "", ingredients: [LocalIngredient]()),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 3, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        ),
-        LocalRecipe(id: 4, name: "Melanzana", desc: "I have a View which has two labels and a Table View inside it. I want label 1 to always stay above my Table View and label 2, to be below the Table View. The problem is that the Table View needs to auto-size meaning either increase in height or decrease.Right now I have a constraint saying the Table View's height is always equal to 85 and a @IBOutlet to the height constraint where i'm able to change the constant.", rating: 3.0, imageUrl: "melanzana", time: 20, calories: 367, servings: 4, steps: [
-            LocalStep(name: "Prepare tatatata", desc: "", time: 0, imageUrl: "melanzana", ingredients: []),
-            LocalStep(name: "Cook the sauce", desc: "Let it simmer for 3 mintues", time: 4, imageUrl: "melanzana", ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-                ]),
-            LocalStep(name: "Let rest for 4 minutes", desc: "", time: 4, imageUrl: "melanzana", ingredients: [])
-            ], ingredients: [
-                LocalIngredient(id: 1, name: "Tomato", quantity: 2, unit: "cans"),
-                LocalIngredient(id: 2, name: "Oil", quantity: 100, unit: "ml"),
-                LocalIngredient(id: 3, name: "Garlic", quantity: 2, unit: "cloves")
-            ]
-        )
-    ]
+    var similarRecipes: [Recipe] = []
+    var shopIngredients: [ShopIngredient] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         RecipeService.getInstance().addToViewsCount(recipeId: (recipe?.id)!, sucessCompletionHandler: nil)
+        loadExperiences()
         getRecipeIngredients()
         recipeRatingInput.didFinishTouchingCosmos = { rating in
             if self.recipeRatingInput.settings.updateOnTouch {
@@ -176,6 +138,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         stepsTableView.estimatedRowHeight = 140
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        experiencesCollectionView.isPagingEnabled = true
+        /*shopIngredients = ShopIngredientDao.getInstance().getIngredients().filter({($0.recipe?.id)! == (self.recipe?.id)!})
+        if(shopIngredients.count == ingredients.count){
+            addIngredientsButton.isHidden = false
+            removeIngredientsButton.isHidden = true
+        }else{
+            addIngredientsButton.isHidden = true
+            removeIngredientsButton.isHidden = false
+        }*/
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -189,8 +160,23 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         tapDetected()
+        RecipeService.getInstance().getSimilarRecipies(recipe: recipe!, successCompletionHandler: { recipes in
+            self.similarRecipes = recipes
+            self.similarRecipesCollectionView.reloadData()
+        })
+        loadExperiences()
+    }
+    
+    func loadExperiences() {
         ExperienceService.getInstance().getRecipeExperience(recipeID: (recipe?.id)!, completionHandler: {experiences in
             self.experiences = experiences
+            if self.experiences.count == 0{
+                self.noExpereinceLabel.isHidden = false
+                self.experiencesCollectionViewHeightConstraint.constant = 0
+            }else{
+                self.noExpereinceLabel.isHidden = true
+                self.experiencesCollectionViewHeightConstraint.constant = 250
+            }
             let exp = experiences.first(where: { $0.user?.id == self.appDelegate.user?.id})
             if exp != nil {
                 self.recipeRatingInput.rating = Double((exp?.rating)!)
@@ -200,6 +186,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
                 self.recipeRatingInput.settings.updateOnTouch = true
             }
             self.experiencesCollectionView.reloadData()
+            self.experiencesPageController.numberOfPages = experiences.count
+            self.experiencesPageController.currentPage = 0
         })
     }
     
@@ -214,7 +202,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func initView() {
-        ratingView.settings.emptyBorderColor = UIColor.clear
         recipeRatingInput.settings.fillMode = .half
         ratingView.settings.updateOnTouch = false
         //Need to send non nil rating, take recipe from web service
@@ -236,15 +223,17 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.layer.borderWidth = 2
         recipeOwnerProfileImageView.layer.borderColor = UIColor.white.cgColor
-        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height / 2
         recipeOwnerProfileImageView.layer.masksToBounds = true
         
-        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageView.frame.height / 2
         recipeOwnerProfileImageShadowView.layer.shadowColor = UIColor.black.cgColor
         recipeOwnerProfileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
         recipeOwnerProfileImageShadowView.layer.shadowOpacity = 1
         
-        let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapDetected"))
+        
+        recipeOwnerProfileImageShadowView.layer.cornerRadius = recipeOwnerProfileImageShadowView.frame.size.width / 2
+        recipeOwnerProfileImageView.layer.cornerRadius = recipeOwnerProfileImageView.frame.size.width / 2
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(RecipeDetailsViewController.tapDetected))
         recipeOwnerProfileImageView.isUserInteractionEnabled = true
         recipeOwnerProfileImageView.addGestureRecognizer(singleTap)
         
@@ -254,9 +243,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
         recipeOwnerNameLabel.text = user?.username
-        recipeOwnerDateLabel.text = dateFormatter.string(from: (user?.date)!)
-        if self.user?.id == appDelegate.user?.id {
-            visitProfileButton.isHidden = true
+        if(user?.id == appDelegate.user?.id){
+            recipeOwnerNameLabel.textColor = UIColor.black
+            recipeRatingInput.isHidden = true
+            rateThisRecipeLabel.text = "Experiences"
+            rateThisRecipeLabel.textColor = UIColor.black
         }
     }
     
@@ -268,7 +259,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let viewWidth = self.recipeOwnerView.frame.width
             let imageViewWidth = self.recipeOwnerProfileImageView.frame.width
             self.recipeOwnerView.center.x = (self.recipeOwnerView.center.x + (viewWidth * self.isExpanded)) - ((imageViewWidth * 2) * self.isExpanded)
-            //self.recipeOwnerView.center.x = self.isExpanded ? self.initPosition!+self.recipeCoverIV.frame.width * 0.38 : self.initPosition!
             self.isExpanded *= -1
         })
     }
@@ -298,21 +288,21 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if(tableView == stepsTableView && recipe!.steps![indexPath.row].time != 0){
-            let timer = timerAction(at: indexPath)
-            return UISwipeActionsConfiguration(actions: [timer])
+        if tableView == ingredientsTableView {
+            let addToShoppingListAction = getAddToShoppingListAction(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [addToShoppingListAction])
         }
         return UISwipeActionsConfiguration(actions: [])
     }
     
-    func timerAction(at indexPath: IndexPath) -> UIContextualAction {
-        //let step = recipe.steps[indexPath.row]
-        let action = UIContextualAction(style: .normal, title: "Set timer") { (action, view, completion) in
-            print("Set timer")
+    func getAddToShoppingListAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
+            let ingredient = self.ingredients[indexPath.item]
+            print("Clicked: "+ingredient.name!)
             completion(true)
         }
-        action.image = UIImage(named: "timer")
-        action.backgroundColor = UIColor.lightGray
+        action.image = UIImage(named: "add-icon2")
+        action.backgroundColor = UIColor.init(rgb: 0x477998)
         return action
     }
     
@@ -329,33 +319,21 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let step = recipe!.steps![indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "stepCell")
             let contentView = cell?.viewWithTag(0)?.viewWithTag(1)
-            let shadowView = cell?.viewWithTag(5) as! UIView
+            let descriptionTextView = contentView?.viewWithTag(2) as! UITextView
+            let stepImage = contentView?.viewWithTag(3) as! UIImageView
+            let borderView = contentView?.viewWithTag(4)
+            let timeLabel = contentView?.viewWithTag(5) as! UIButton
             
-            let nameLabel = contentView?.viewWithTag(2) as! UILabel
-            let descriptionTextView = contentView?.viewWithTag(3) as! UITextView
-            let stepImage = contentView?.viewWithTag(4) as! UIImageView
-            let stepImageShadowView = contentView?.viewWithTag(6) as! UIView
+            if step.time != 0 {
+                UIUtils.addRoudedDottedBorder(view: borderView!, color: UIColor.init(red: 221, green: 81, blue: 68))
+                timeLabel.setTitle(String((step.time)!)+"''", for: .normal)
+            }
             
-            //Set Data
-            nameLabel.text = String((step.time)!)
             descriptionTextView.text = step.description
             stepImage.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+step.imageUrl!)!)
-            //Init views
-            contentView?.layer.cornerRadius = 10
-            contentView?.layer.masksToBounds = true
-            
-            shadowView.layer.cornerRadius = 10
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            shadowView.layer.shadowOpacity = 0.5
-            
-            stepImage.layer.cornerRadius = 10
-            stepImage.layer.masksToBounds = true
-            
-            stepImageShadowView.layer.cornerRadius = 10
-            stepImageShadowView.layer.shadowColor = UIColor.black.cgColor
-            stepImageShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            stepImageShadowView.layer.shadowOpacity = 0.5
+            if step.imageUrl == nil || step.imageUrl == "" {
+                stepImage.constraints[0].constant = 0
+            }
             
             descriptionTextView.sizeToFit()
             descriptionTextView.isScrollEnabled = false
@@ -366,19 +344,12 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell")
             let contentView = cell?.viewWithTag(0)
             let margin = contentView!.frame.width * 0.15
-            let button = contentView?.viewWithTag(1) as! UIButton
             let nameLabel = contentView?.viewWithTag(2) as! UILabel
             let quantityLabel = contentView?.viewWithTag(3) as! UILabel
             
-            contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))
-            contentView!.addConstraint(NSLayoutConstraint(item: button, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin*0.5))
+            /*contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))*/
             
-            button.restorationIdentifier = String((ingredient.id)!)
             nameLabel.text = ingredient.name
-            print("quantity")
-            print(ingredient.quantity)
-            print("unit")
-            print(ingredient.unit)
             quantityLabel.text = String((ingredient.quantity)!)+" "+String((ingredient.unit)!)
             return cell!
         }
@@ -397,36 +368,45 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if collectionView == similarRecipesCollectionView{
             let similarRecipe = similarRecipes[indexPath.row]
             let cell = similarRecipesCollectionView.dequeueReusableCell(withReuseIdentifier: "similarRecipe", for: indexPath)
-            cell.frame.size.height = similarRecipesCollectionView.frame.size.height
-            cell.frame.size.width = similarRecipesCollectionView.frame.size.height
             
-            //let contentView = cell.viewWithTag(0)
             let image = cell.viewWithTag(1) as! UIImageView
             let rating = cell.viewWithTag(2) as! CosmosView
             let nameLabel = cell.viewWithTag(3) as! UILabel
+            let contentView = cell.viewWithTag(5)
+            let shadowView = cell.viewWithTag(4)
             
             cell.layer.cornerRadius = 8
             cell.layer.masksToBounds = true
-            image.layer.cornerRadius = 8
-            image.layer.masksToBounds = true
+            contentView?.layer.cornerRadius = 8
+            contentView?.layer.masksToBounds = true
+            
+            shadowView!.layer.cornerRadius = 8
+            shadowView!.layer.shadowColor = UIColor.black.cgColor
+            shadowView!.layer.shadowOffset = CGSize(width: 1, height: 1)
+            shadowView!.layer.shadowOpacity = 0.5
             
             rating.settings.updateOnTouch = false
-            rating.settings.emptyBorderColor = UIColor.clear
-            rating.rating = Double(similarRecipe.rating)
+            rating.rating = Double(similarRecipe.rating!)
             nameLabel.text = similarRecipe.name
-            image.image = UIImage(named: similarRecipe.imageUrl)
+            image.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+similarRecipe.imageUrl!)!)
             return cell
         }else{
             let experience = experiences[indexPath.item]
             let cell = experiencesCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath)
             let contentView = cell.viewWithTag(0)
             let coverImageView = contentView?.viewWithTag(1) as! UIImageView
-            let profileImageShadowView = contentView?.viewWithTag(2) as! UIView
+            let coverImageShadowView = (contentView?.viewWithTag(8))!
+            let profileImageShadowView = (contentView?.viewWithTag(2))!
             let profileImageView = contentView?.viewWithTag(3) as! UIImageView
             let rating = contentView?.viewWithTag(4) as! CosmosView
             let nameLabel = contentView?.viewWithTag(5) as! UILabel
             let dateLabel = contentView?.viewWithTag(6) as! UILabel
             let commentTV = contentView?.viewWithTag(7) as! UITextView
+            let removeButton = contentView?.viewWithTag(9) as! UIButton
+            
+            if experience.user?.id == appDelegate.user?.id {
+                removeButton.isHidden = false
+            }
             
             //Setting Data
             coverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+experience.imageURL!)!)
@@ -455,6 +435,17 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             profileImageShadowView.layer.shadowOffset = CGSize(width: 1, height: 1)
             profileImageShadowView.layer.shadowOpacity = 1
             
+            
+            //cell Shadow
+            coverImageShadowView.layer.cornerRadius = 5
+            coverImageShadowView.layer.shadowColor = UIColor.black.cgColor
+            coverImageShadowView.layer.shadowOffset = CGSize(width:  0, height: 0)
+            coverImageShadowView.layer.shadowOpacity = 1
+            
+            //Image
+            coverImageView.layer.cornerRadius = 5
+            coverImageView.layer.masksToBounds = true
+            
             rating.settings.updateOnTouch = false
             rating.settings.emptyBorderColor = UIColor.clear
             rating.settings.fillMode = .precise
@@ -466,17 +457,43 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    @IBAction func addIngredientClicked(_ sender: Any) {
-        let button = sender as! UIButton
-        let rowNumber = Int(button.restorationIdentifier!)
-        print(rowNumber)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == similarRecipesCollectionView {
+            RecipeService.getInstance().getRecipe(recipeId: similarRecipes[indexPath.item].id!, completionHandler: { recip in
+                self.performSegue(withIdentifier: "toDetails", sender: recip)
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == experiencesCollectionView {
+            return CGSize(width: experiencesCollectionView.bounds.width, height: experiencesCollectionView.bounds.height)
+        }else{
+            return CGSize(width: similarRecipesCollectionView.bounds.width * 0.53, height: similarRecipesCollectionView.bounds.height)
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if let collectionView = scrollView as? UICollectionView, collectionView == experiencesCollectionView {
+            experiencesPageController.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
+        }
     }
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
+        ShopRecipeDao.getInstance().add(recipe: recipe!) { (success) in
+            if success{
+                print("success")
+            }else{
+                print("failure")
+            }
+        }
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {
+        if self.user?.id == appDelegate.user?.id {
+            return
+        }
         performSegue(withIdentifier: "toProfile", sender: sender)
     }
     
@@ -511,14 +528,42 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         })
     }
     
+    @IBAction func timerTapped(_ sender: Any) {
+        if let labelText = (sender as! UIButton).titleLabel?.text {
+            let index = labelText.index(labelText.endIndex, offsetBy: -2)
+            let timeText = labelText[..<index]
+            performSegue(withIdentifier: "toTimer", sender: Int(timeText))
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
-            (segue.destination as! ProfileViewController).user = self.user
+            print(self.user?.username)
+            (segue.destination as! OthersProfileViewController).user = self.user
         }else if segue.identifier == "toAddExperience" {
             let destination = (segue.destination as! AddExperienceViewController)
-            destination.rating = sender as! Double
+            destination.rating = (sender as! Double)
             destination.recipe = self.recipe!
+        }else if segue.identifier == "toTimer" {
+            let destination = (segue.destination as! TimerViewController)
+            destination.time = (sender as! Int)
+        }else if segue.identifier == "toDetails" {
+            let destination = (segue.destination as! RecipeDetailsViewController)
+            destination.recipe = (sender as! Recipe)
         }
+    }
+    
+    @IBAction func removeExperience(_ sender: Any) {
+        let alert = UIAlertController(title: "Confirmation", message: "So yout want to delete this experience?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            ExperienceService.getInstance().removeExperience(userId: (self.appDelegate.user?.id)!, recipeId: (self.recipe?.id)!, sucessCompletionHandler: {
+                self.loadExperiences()
+            }, errorCompletionHandler: {
+                UIUtils.showErrorAlert(viewController: self)
+            })
+        }))
+        present(alert, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

@@ -126,6 +126,21 @@ public class RecipeService: NSObject{
         })
     }
     
+    func getSimilarRecipies(recipe: Recipe, successCompletionHandler: @escaping ((_ recipies: [Recipe]) -> ())) {
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "similar"), method: .post, parameters: ["labels": recipe.labels!.description, "recipe_id": recipe.id!],encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+            switch response.result {
+                case .success:
+                    let json = JSON(parseJSON: response.result.value!)
+                    let recipes = Mapper<Recipe>().mapArray(JSONString: json.rawString()!)
+                    successCompletionHandler(recipes!)
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+            }
+        })
+    }
+  
     func createRecipe(recipe: Recipe, recipeImage: UIImage, images: [UIImage?], completionHandler: @escaping (Bool, Int) -> ()) {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(recipeImage.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/png")
@@ -203,5 +218,57 @@ public class RecipeService: NSObject{
                 break
             }
         }
+    }
+    
+    func search(filter: Filter, completionHandler: @escaping ([SearchResult]) -> ()){
+        let body: [String: Any] = [
+            "name" : filter.name,
+            "calories" : filter.calories,
+            "minServings" : filter.minServings,
+            "maxServings" : filter.maxServings,
+            "labels" : filter.labels
+        ]
+        
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "search"), method: .post, parameters: body, encoding: JSONEncoding.default)
+            .responseString{ response in
+                let result = Mapper<SearchResult>().mapArray(JSONString: response.result.value!)!
+                completionHandler(result)
+        }
+    }
+    
+    func getFeed(completionHandler: @escaping (_ items: [FeedItem]) -> ()){
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        Alamofire.request(buildURL(postfix: "feed/" + userId!))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let items = Mapper<FeedItem>().mapArray(JSONString: response.result.value!)
+                print("count:", items!.count)
+                completionHandler(items!)
+            })
+    }
+    
+    func getLabelsFlat(completionHandler: @escaping (_ labels: [String]) -> ()){
+        Alamofire.request(buildURL(postfix: "labels_flat"))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let json = JSON(parseJSON: response.result.value!)
+                let labels = json.arrayObject as! [String]?
+                completionHandler(labels!)
+            })
+    }
+    
+    func getLabels(completionHandler: @escaping (_ labels: [[Any]]) -> ()){
+        Alamofire.request(buildURL(postfix: "labels"))
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                let json = JSON(parseJSON: response.result.value!)
+                let array = json.arrayObject!
+                var labels = [[Any]]()
+                for dict in array {
+                    let d = dict as! Dictionary<String, Any>
+                    labels.append([
+                        d["category"],
+                        d["labels"]
+                    ])
+                }
+                completionHandler(labels)
+            })
     }
 }
