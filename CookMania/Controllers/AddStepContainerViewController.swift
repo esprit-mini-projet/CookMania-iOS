@@ -9,7 +9,7 @@
 import UIKit
 import Gallery
 
-class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GalleryControllerDelegate {
+class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GalleryControllerDelegate {
     
     let descriptionPlaceHolder = "Description..."
     
@@ -78,7 +78,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         if editingStyle == .delete {
             step!.ingredients!.remove(at: indexPath.row)
             tableView.reloadData()
-            //tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -88,9 +87,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         
         step = Step()
         step?.ingredients = [Ingredient(), Ingredient(), Ingredient()]
-        
-        descText.text = descriptionPlaceHolder
-        descText.textColor = UIColor.lightGray
     }
     
     @IBAction func selectImage(_ sender: Any) {
@@ -209,20 +205,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         alert.addAction(action)
         
         self.present(alert,animated: true,completion: nil)
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = descriptionPlaceHolder
-            textView.textColor = UIColor.lightGray
-        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
