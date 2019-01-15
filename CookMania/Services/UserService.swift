@@ -25,21 +25,24 @@ class UserService: NSObject {
     }
     
     func getUser(id: String, completionHandler: @escaping (_ user: User) -> ()) {
-        print("BEGIN GET")
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: id)).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let user: User = Mapper<User>().map(JSONString: response.result.value!)!
                 completionHandler(user)
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User?) -> ()){
+        Loader.getInstance().startLoader()
         let uuid: String =  (UIDevice.current.identifierForVendor?.uuidString)!
         let token: String = AppDelegate.getDeviceToken()
         
@@ -48,15 +51,18 @@ class UserService: NSObject {
             case .success:
                 let user: User? = Mapper<User>().map(JSONString: response.result.value!)
                 completionHandler(user)
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func checkUserSocial(user: User, completionHandler: @escaping (_ user: User) -> ()) {
+        Loader.getInstance().startLoader()
         var JSONObject = user.toJSON()
         JSONObject["uuid"] = UIDevice.current.identifierForVendor?.uuidString
         JSONObject["token"] = AppDelegate.getDeviceToken()
@@ -72,101 +78,122 @@ class UserService: NSObject {
                 case .success:
                     let user: User = Mapper<User>().map(JSONString: response.result.value!)!
                     completionHandler(user)
+                    Loader.getInstance().stopLoader()
                     break
                 case .failure(let error):
+                    Loader.getInstance().stopLoader()
                     print(error)
                     break
                 }
             })
         }catch{
+            Loader.getInstance().stopLoader()
             print(error.localizedDescription)
         }
     }
     
     func getUsersRecipes(user: User, completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "recipes/"+String(user.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let recipes: [Recipe] = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
                 completionHandler(recipes)
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func getUserFollowers(user: User, completionHandler: @escaping (_ followers: [Following]) -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "followers/"+String(user.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let followers: [Following] = Mapper<Following>().mapArray(JSONString: response.result.value!)!
                 completionHandler(followers)
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func getUserFollowing(user: User, completionHandler: @escaping (_ following: [Following]) -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "following/"+String(user.id!))).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let following: [Following] = Mapper<Following>().mapArray(JSONString: response.result.value!)!
                 completionHandler(following)
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func follow(follower: User, followed: User, completionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "follow/"+String(follower.id!)+"/"+String(followed.id!)), method: .post).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 completionHandler()
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func unfollow(follower: User, followed: User, completionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "unfollow/"+String(follower.id!)+"/"+String(followed.id!)), method: .delete)
             .responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 completionHandler()
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func logout(completionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "logout"), method: .post, parameters: ["uuid": UIDevice.current.identifierForVendor?.uuidString], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 completionHandler()
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func updateUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
-        print("BEGIN UPDATE")
+        Loader.getInstance().startLoader()
         let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "update"))!, method: .post, headers: nil)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if image != nil {
@@ -181,14 +208,17 @@ class UserService: NSObject {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
                         completionHandler()
+                        Loader.getInstance().stopLoader()
                     }
                 case .failure(let encodingError):
                     print("",encodingError.localizedDescription)
+                    Loader.getInstance().stopLoader()
             }
         })
     }
     
     func addUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
         let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "insert"))!, method: .post, headers: nil)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if image != nil {
@@ -202,9 +232,11 @@ class UserService: NSObject {
             case .success(let upload, _, _):
                 upload.responseJSON { response in
                     completionHandler()
+                    Loader.getInstance().stopLoader()
                 }
             case .failure(let encodingError):
                 print("",encodingError.localizedDescription)
+                Loader.getInstance().stopLoader()
             }
         })
     }

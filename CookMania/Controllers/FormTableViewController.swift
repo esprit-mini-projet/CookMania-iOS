@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Gallery
 
-class FormTableViewController: UITableViewController{
+class FormTableViewController: UITableViewController, GalleryControllerDelegate{
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -19,8 +20,27 @@ class FormTableViewController: UITableViewController{
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var confirmationErrorLabel: UILabel!
     @IBOutlet var formTableView: UITableView!
+    @IBOutlet weak var doneButtonBarItem: UIBarButtonItem!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileImageBlurContainer: UIView!
     
-    var userFormViewController: UserFormViewController?
+    var doneButton: UIBarButtonItem?
+    var signinViewController: SignInViewController?
+    var signupViewControoler: SignUpViewController?
+    
+    var usernameIsValide: Bool = false
+    var emailIsValide: Bool = false
+    var passwordIsValide: Bool = false
+    var confirmationIsValide: Bool = false
+    var imageDidChange: Bool = false
+    var usernameDidChange: Bool = false
+    var emailDidChange: Bool = false
+    var passwordDidChange: Bool = false
+    
+    var image: UIImage?
+    var email: String = ""
+    var password: String = ""
+    var username: String = ""
     
     let user = (UIApplication.shared.delegate as! AppDelegate).user
     
@@ -29,6 +49,19 @@ class FormTableViewController: UITableViewController{
         if user != nil {
             usernameTextField.text = user?.username
             emailTextField.text = user?.email
+        }
+        if doneButton == nil {
+            doneButton = doneButtonBarItem
+        }
+        doneButton!.isEnabled = false
+        profileImage.layer.cornerRadius = profileImage.bounds.width / 2
+        profileImageBlurContainer.layer.cornerRadius = profileImageBlurContainer.bounds.width / 2
+        if user != nil {
+            profileImage.af_setImage(withURL: URL(string: (user!.imageUrl)!)!)
+            usernameIsValide = true
+            emailIsValide = true
+            passwordIsValide = true
+            confirmationIsValide = true
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -50,75 +83,75 @@ class FormTableViewController: UITableViewController{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return 5
     }
     
     @IBAction func usernameDidChange(_ sender: Any) {
-        userFormViewController?.username = usernameTextField.text!
+        self.username = usernameTextField.text!
         if usernameTextField.text == "" {
-            userFormViewController!.usernameIsValide = false
+            self.usernameIsValide = false
             usernameErrorLabel.text = "Username can't be empty"
             usernameErrorLabel.alpha = 1
         }else{
             if usernameTextField.text != user?.username{
-                userFormViewController?.usernameDidChange = true
+                self.usernameDidChange = true
             }else {
-                userFormViewController?.usernameDidChange = false
+                self.usernameDidChange = false
             }
-            userFormViewController!.usernameIsValide = true
+            self.usernameIsValide = true
             usernameErrorLabel.alpha = 0
         }
-        userFormViewController!.validateForm()
+        self.validateForm()
     }
     
     @IBAction func emailDidChange(_ sender: Any) {
-        userFormViewController?.email = emailTextField.text!
+        self.email = emailTextField.text!
         if emailTextField.text == ""{
-            userFormViewController!.emailIsValide = false
+            self.emailIsValide = false
             emailErrorLabel.text = "Email can't be empty"
             emailErrorLabel.alpha = 1
         }else if !FormUtils.validateEmail(email: emailTextField.text!){
-            userFormViewController!.emailIsValide = false
+            self.emailIsValide = false
             emailErrorLabel.text = "Email is not valid"
             emailErrorLabel.alpha = 1
         }else{
             if user != nil && emailTextField.text != user?.email {
-                userFormViewController?.emailDidChange = true
+                self.emailDidChange = true
             }else{
-                userFormViewController?.emailDidChange = false
+                self.emailDidChange = false
             }
-            userFormViewController!.emailIsValide = true
+            self.emailIsValide = true
             emailErrorLabel.alpha = 0
         }
-        userFormViewController!.validateForm()
+        self.validateForm()
     }
     
     @IBAction func passwordDidChange(_ sender: Any) {
         if user == nil && passwordTextField.text == "" {
-            userFormViewController!.passwordIsValide = false
-            userFormViewController?.passwordDidChange = false
+            self.passwordIsValide = false
+            self.passwordDidChange = false
             passwordErrorLabel.text = "Password can't be empty"
             passwordErrorLabel.alpha = 1
         }else{
             if passwordTextField.text == "" {
-                userFormViewController?.passwordDidChange = false
+                self.passwordDidChange = false
             }else{
-                userFormViewController?.passwordDidChange = true
+                self.passwordDidChange = true
             }
-            userFormViewController!.confirmationIsValide = validateConfirmation()
-            userFormViewController!.passwordIsValide = true
+            self.confirmationIsValide = validateConfirmation()
+            self.passwordIsValide = true
             passwordErrorLabel.alpha = 0
         }
-        userFormViewController!.validateForm()
+        self.validateForm()
     }
     
     @IBAction func confirmationDidChange(_ sender: Any) {
-        userFormViewController!.confirmationIsValide = validateConfirmation()
-        userFormViewController!.validateForm()
+        self.confirmationIsValide = validateConfirmation()
+        self.validateForm()
     }
     
     func validateConfirmation() -> Bool {
-        userFormViewController?.password = confirmationTextField.text!
+        self.password = confirmationTextField.text!
         if user == nil && confirmationTextField.text == ""{
             confirmationErrorLabel.text = "Confirmation can't be empty"
             confirmationErrorLabel.alpha = 1
@@ -130,6 +163,69 @@ class FormTableViewController: UITableViewController{
         }else{
             confirmationErrorLabel.alpha = 0
             return true
+        }
+    }
+    
+    @IBAction func addImageClicked(_ sender: Any) {
+        Config.tabsToShow = [.cameraTab, .imageTab]
+        Config.Camera.imageLimit = 1
+        
+        let gallery = GalleryController()
+        gallery.delegate = self
+        present(gallery, animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        controller.dismiss(animated: true, completion: nil)
+        images[0].resolve(completion: { image in
+            self.image = image!
+            self.profileImage.image = image!
+            self.imageDidChange = true
+            self.validateForm()
+        })
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+    }
+    
+    func validateForm() {
+        if user != nil {
+            if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide && (usernameDidChange || emailDidChange || imageDidChange || passwordDidChange) {
+                doneButton!.isEnabled = true
+                return
+            }
+        }else{
+            if usernameIsValide && emailIsValide && passwordIsValide && confirmationIsValide {
+                doneButton!.isEnabled = true
+                return
+            }
+        }
+        doneButton!.isEnabled = false
+    }
+    
+    @IBAction func doneClicked(_ sender: Any) {
+        if user != nil {
+            let newUser = User(id: (user?.id)!, email: email, username: username, password: password)
+            UserService.getInstance().updateUser(user: newUser, image: image, completionHandler: {
+                UserService.getInstance().getUser(id: (self.user?.id)!, completionHandler: { us in
+                    if((UIApplication.shared.delegate as! AppDelegate).setUser(user: us)){
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
+            })
+        }else{
+            let newUser = User(email: email, username: username, password: password)
+            UserService.getInstance().addUser(user: newUser, image: image, completionHandler: {
+                self.signupViewControoler?.dismiss(animated: true, completion: {
+                    self.signinViewController?.SignIn(email: self.email, password: self.password)
+                })
+            })
         }
     }
     

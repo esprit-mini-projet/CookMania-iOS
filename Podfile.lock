@@ -106,6 +106,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - NVActivityIndicatorView (4.5.0):
+    - NVActivityIndicatorView/Presenter (= 4.5.0)
+  - NVActivityIndicatorView/Presenter (4.5.0)
   - ObjectMapper (3.4.1)
   - Protobuf (3.6.1)
   - SwiftKeychainWrapper (3.0.1)
@@ -128,6 +131,7 @@ DEPENDENCIES:
   - HGCircularSlider
   - IQKeyboardManagerSwift
   - ISPageControl (~> 0.1.0)
+  - NVActivityIndicatorView
   - ObjectMapper
   - SwiftKeychainWrapper
   - SwiftyJSON
@@ -161,6 +165,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - ISPageControl
     - nanopb
+    - NVActivityIndicatorView
     - ObjectMapper
     - Protobuf
     - SwiftKeychainWrapper
@@ -205,12 +210,13 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   ISPageControl: cadeb38e9ecdf05540c69ea1132612521b3caa2a
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NVActivityIndicatorView: 1e4e3ed79248cf1666af182593c3a2acf0fcf193
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TTRangeSlider: 78188bea83f6471a06f75adbc88da5e990baeafe
 
-PODFILE CHECKSUM: 23bc10a33e98743eaa785c14367a0ecc5984bebe
+PODFILE CHECKSUM: aad88f74827c430bec2b766fc869e5063a9c8651
 
 COCOAPODS: 1.5.3
