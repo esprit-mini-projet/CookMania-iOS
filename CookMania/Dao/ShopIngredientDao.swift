@@ -27,6 +27,23 @@ class ShopIngredientDao: NSObject{
         return CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId!))!
     }
     
+    public func getIngredients(for recipe: Recipe) -> [Ingredient] {
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let result = CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId!))!
+        var ingredients = [Ingredient]()
+        for ing in result{
+            if Int(String(ing.recipe!.id))! == recipe.id{
+                let ingredient = Ingredient()
+                ingredient.id = Int(String(ing.id))!
+                ingredient.name = ing.name
+                ingredient.quantity = Int(String(ing.quantity))!
+                ingredient.unit = ing.unit
+                ingredients.append(ingredient)
+            }
+        }
+        return ingredients
+    }
+    
     public func add(ingredient: Ingredient, recipe: Recipe, completionHandler: @escaping (Bool) -> ()){
         let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
         CoreStore.perform(asynchronous: { (transaction) -> Void in
