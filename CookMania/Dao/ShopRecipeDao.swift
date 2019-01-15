@@ -45,6 +45,7 @@ class ShopRecipeDao: NSObject{
                 ing.name = ingredient.name
                 ing.quantity = Int32(String(ingredient.quantity!))!
                 ing.unit = ingredient.unit
+                ing.userId = userId
                 ing.recipe = r
             }
         }) { (result) in

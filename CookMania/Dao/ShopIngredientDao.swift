@@ -52,6 +52,7 @@ class ShopIngredientDao: NSObject{
             ing.id = Int32(String(ingredient.id!))!
             ing.quantity = Int32(String(ingredient.quantity!))!
             ing.unit = ingredient.unit
+            ing.userId = userId
             
             if let r = transaction.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId!)){
                 r.addToIngredients(ing)
@@ -74,7 +75,8 @@ class ShopIngredientDao: NSObject{
     }
     
     public func delete(ingredientId: Int, completionHandler: @escaping () -> ()){
-        let ing = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d", ingredientId))
+        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let ing = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d AND userId == %@", ingredientId, userId!))
         let recipe = ing!.recipe
         let count = recipe!.ingredients?.count
         CoreStore.perform(

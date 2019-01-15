@@ -114,6 +114,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var recipe: Recipe?
     var user: User?
     var ingredients: [Ingredient] = []
+    var shouldFinish = true
     
     var similarRecipes: [Recipe] = []
     var shopIngredients: [ShopIngredient] = []
@@ -147,6 +148,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             addIngredientsButton.isHidden = true
             removeIngredientsButton.isHidden = false
         }*/
+        
+        //setting navigation backstack in case of coming from add recipe
+        if(!shouldFinish){
+            var backStack = [UIViewController]()
+            backStack.append(self.navigationController!.viewControllers.first!)
+            backStack.append(self.navigationController!.viewControllers.last!)
+            self.navigationController?.setViewControllers(backStack, animated: false)
+        }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
