@@ -78,7 +78,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         if editingStyle == .delete {
             step!.ingredients!.remove(at: indexPath.row)
             tableView.reloadData()
-            //tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     

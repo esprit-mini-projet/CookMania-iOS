@@ -391,7 +391,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.noFeedLabel.isHidden = false
             }else{
                 self.feedTV.isHidden = false
-                self.feedTVHeightConstraint.constant = recipes.count > 1 ? 503 : 340
+                self.feedTVHeightConstraint.constant = recipes.count > 1 ? 853 : 340
                 self.noFeedLabel.isHidden = true
             }
         }
