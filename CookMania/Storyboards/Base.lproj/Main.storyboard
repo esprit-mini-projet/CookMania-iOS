@@ -1432,7 +1432,7 @@ d2lkdGggPSAxNxAyA
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icI-vM-qfY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <connections>
-                                    <segue destination="yJ2-Dp-Ir6" kind="embed" id="hfH-QJ-d5b"/>
+                                    <segue destination="yJ2-Dp-Ir6" kind="embed" id="PXa-Up-30S"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1642,7 +1642,7 @@ d2lkdGggPSAxNxAyA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBz-Iz-orr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1012" y="1779.7601199400301"/>
+            <point key="canvasLocation" x="593" y="1805"/>
         </scene>
         <!--Shopping List-->
         <scene sceneID="GqJ-br-gj2">
@@ -3329,7 +3329,7 @@ EDE5OA
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-xC-0v5">
-                                                <rect key="frame" x="135" y="-17.5" width="225" height="35"/>
+                                                <rect key="frame" x="135" y="-41.5" width="225" height="34.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="WCU-ER-T8c">
                                                         <rect key="frame" x="0.0" y="0.0" width="225" height="14.5"/>
@@ -3352,10 +3352,10 @@ EDE5OA
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5T-R9-Zbc">
-                                                        <rect key="frame" x="0.0" y="14.5" width="225" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="14.5" width="225" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followed by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW8-Y3-Mop">
-                                                                <rect key="frame" x="0.0" y="0.0" width="77" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="77" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="77" id="gHW-l2-uUz"/>
                                                                 </constraints>
@@ -3364,7 +3364,7 @@ EDE5OA
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7o-d1-0BW" userLabel="FollowersCountLabel">
-                                                                <rect key="frame" x="77" y="0.0" width="148" height="20.5"/>
+                                                                <rect key="frame" x="77" y="0.0" width="148" height="20"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3377,13 +3377,13 @@ EDE5OA
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Qn-JJh" userLabel="NameLabel">
-                                                <rect key="frame" x="135" y="-10.5" width="300" height="21"/>
+                                                <rect key="frame" x="135" y="8.5" width="300" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member since " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WrC-WF-EmV">
-                                                <rect key="frame" x="135" y="-8" width="90" height="16"/>
+                                                <rect key="frame" x="135" y="31.5" width="90" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="yzO-Of-vUp"/>
                                                 </constraints>
@@ -3392,7 +3392,7 @@ EDE5OA
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWL-4M-9bx" userLabel="DateLabel">
-                                                <rect key="frame" x="228" y="-8" width="131" height="16"/>
+                                                <rect key="frame" x="228" y="31.5" width="131" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="0.69594520246478875" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -3448,6 +3448,7 @@ EDE5OA
                                             <constraint firstItem="3Xd-Wv-aNB" firstAttribute="leading" secondItem="2kL-F5-Vcg" secondAttribute="leading" id="EcZ-DB-age"/>
                                             <constraint firstItem="rRY-xC-0v5" firstAttribute="leading" secondItem="LFj-Qn-JJh" secondAttribute="leading" id="Fzb-RS-Cxg"/>
                                             <constraint firstItem="nVU-ce-fbL" firstAttribute="top" secondItem="2kL-F5-Vcg" secondAttribute="top" id="HeB-ND-uK6"/>
+                                            <constraint firstItem="LFj-Qn-JJh" firstAttribute="firstBaseline" secondItem="nVU-ce-fbL" secondAttribute="baseline" multiplier="0.97" constant="24.5" symbolType="layoutAnchor" id="Iih-jv-RCa"/>
                                             <constraint firstItem="LFj-Qn-JJh" firstAttribute="centerX" secondItem="zTa-wU-Dx9" secondAttribute="centerX" multiplier="3.8" id="K4c-V6-3d1"/>
                                             <constraint firstAttribute="trailing" secondItem="QKR-m1-EuH" secondAttribute="trailing" id="ME3-ky-cfE"/>
                                             <constraint firstItem="Oer-tO-f76" firstAttribute="top" secondItem="3Xd-Wv-aNB" secondAttribute="bottom" constant="8" id="Men-ub-EcV"/>
@@ -3466,6 +3467,7 @@ EDE5OA
                                             <constraint firstAttribute="bottom" secondItem="Oer-tO-f76" secondAttribute="bottom" constant="20" id="Zp9-nO-qRv"/>
                                             <constraint firstItem="zTa-wU-Dx9" firstAttribute="centerX" secondItem="nVU-ce-fbL" secondAttribute="centerX" multiplier="0.4" id="bQF-UE-log"/>
                                             <constraint firstItem="OcI-Qu-pMM" firstAttribute="height" secondItem="zTa-wU-Dx9" secondAttribute="height" id="bmp-qK-r9W"/>
+                                            <constraint firstItem="nVU-ce-fbL" firstAttribute="baseline" secondItem="rRY-xC-0v5" secondAttribute="baseline" constant="10" symbolType="layoutAnchor" id="eCr-yu-yBe"/>
                                             <constraint firstItem="aSX-BT-aRz" firstAttribute="top" secondItem="3Xd-Wv-aNB" secondAttribute="bottom" constant="8" id="eKA-2Q-sbg"/>
                                             <constraint firstItem="aSX-BT-aRz" firstAttribute="leading" secondItem="2kL-F5-Vcg" secondAttribute="leading" id="eUe-Px-2qX"/>
                                             <constraint firstItem="QWL-4M-9bx" firstAttribute="width" secondItem="2kL-F5-Vcg" secondAttribute="width" multiplier="0.35" id="fjW-Db-Qoi"/>
@@ -3479,9 +3481,17 @@ EDE5OA
                                             <constraint firstItem="odc-cx-s01" firstAttribute="top" secondItem="3Xd-Wv-aNB" secondAttribute="bottom" constant="8" id="q9T-Ov-56H"/>
                                             <constraint firstItem="L6N-nq-ULp" firstAttribute="height" secondItem="nVU-ce-fbL" secondAttribute="height" multiplier="0.4" id="qZa-qa-kzT"/>
                                             <constraint firstItem="3Xd-Wv-aNB" firstAttribute="top" secondItem="zTa-wU-Dx9" secondAttribute="bottom" constant="17" id="u2D-Z1-z5y"/>
+                                            <constraint firstItem="WrC-WF-EmV" firstAttribute="firstBaseline" secondItem="LFj-Qn-JJh" secondAttribute="baseline" multiplier="0.98" constant="20" symbolType="layoutAnchor" id="wOD-No-36u"/>
                                             <constraint firstItem="LFj-Qn-JJh" firstAttribute="width" secondItem="2kL-F5-Vcg" secondAttribute="width" multiplier="0.8" id="wpE-0P-M2S"/>
                                             <constraint firstItem="WrC-WF-EmV" firstAttribute="leading" secondItem="LFj-Qn-JJh" secondAttribute="leading" id="xD1-t6-Khd"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="XPd-wB-dDS"/>
+                                                <exclude reference="nJq-Ow-VoD"/>
+                                                <exclude reference="TUI-SK-qAe"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -4226,7 +4236,7 @@ EDE5OA
         <scene sceneID="Z8j-k7-ygV">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="j8P-ZO-otG" customClass="FormTableViewController" customModule="CookMania" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S4U-QP-0ud">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S4U-QP-0ud">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4786,7 +4796,7 @@ EDE5OA
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNa-2g-KI9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 <connections>
-                                    <segue destination="yJ2-Dp-Ir6" kind="embed" identifier="toProfile" id="I0h-nC-Akx"/>
+                                    <segue destination="yJ2-Dp-Ir6" kind="embed" identifier="toProfile" id="2Kh-wj-hxZ"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -4840,7 +4850,7 @@ EDE5OA
     <inferredMetricsTieBreakers>
         <segue reference="FPf-lw-VOn"/>
         <segue reference="mWR-Kc-TU7"/>
-        <segue reference="I0h-nC-Akx"/>
+        <segue reference="2Kh-wj-hxZ"/>
         <segue reference="OPd-kw-L1Q"/>
         <segue reference="72L-3e-IyP"/>
     </inferredMetricsTieBreakers>
