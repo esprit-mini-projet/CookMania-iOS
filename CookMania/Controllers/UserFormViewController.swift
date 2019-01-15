@@ -18,8 +18,8 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     @IBOutlet weak var containerView: UIView!
     
     var doneButton: UIBarButtonItem?
-    var signinViewController: SignInViewController?
-    var signupViewControoler: SignUpViewController?
+    //var signinViewController: SignInViewController?
+    //var signupViewControoler: SignUpViewController?
     var formTableViewController: FormTableViewController?
     
     var usernameIsValide: Bool = false
@@ -63,7 +63,7 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFormTable" {
             let destination = segue.destination as! FormTableViewController
-            destination.userFormViewController = self
+            //destination.userFormViewController = self
             self.formTableViewController = destination
         }
     }
@@ -124,9 +124,9 @@ class UserFormViewController: UIViewController, GalleryControllerDelegate {
         }else{
             let newUser = User(email: email, username: username, password: password)
             UserService.getInstance().addUser(user: newUser, image: image, completionHandler: {
-                self.signupViewControoler?.dismiss(animated: true, completion: {
+                /*self.signupViewControoler?.dismiss(animated: true, completion: {
                     self.signinViewController?.SignIn(email: self.email, password: self.password)
-                })
+                })*/
             })
         }
     }
