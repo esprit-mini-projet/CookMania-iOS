@@ -9,7 +9,7 @@
 import UIKit
 import Gallery
 
-class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSource, UITextViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GalleryControllerDelegate{
+class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, GalleryControllerDelegate{
     
     let blue = UIColor(red: 71/255, green: 121/255, blue: 152/255, alpha: 1.0)
     let white = UIColor.white
@@ -97,8 +97,6 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         recipe = Recipe()
         recipe?.labels = [String]()
         
-        descText.text = descriptionPlaceHolder
-        descText.textColor = UIColor.lightGray
         descText.layer.borderColor = UIColor.lightGray.cgColor
         
         RecipeService.getInstance().getLabelsFlat { (labels) in
@@ -176,19 +174,5 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
         alert.addAction(action)
         
         self.present(alert,animated: true,completion: nil)
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = ""
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = descriptionPlaceHolder
-            textView.textColor = UIColor.lightGray
-        }
     }
 }

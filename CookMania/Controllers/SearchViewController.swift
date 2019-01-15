@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBOutlet weak var resultCV: UICollectionView!
     @IBOutlet weak var resultCount: UILabel!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UITextField!
     
     var filter = Filter()
     var result = [SearchResult]()
@@ -94,8 +94,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         })
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filter.name = searchText
+    @IBAction func searchValueChanged(_ sender: UITextField) {
+        print("search value:", sender.text)
+        filter.name = sender.text ?? ""
         performSearch()
     }
     

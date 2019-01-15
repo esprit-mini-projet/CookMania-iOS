@@ -19,6 +19,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var healthyCV: UICollectionView!
     @IBOutlet weak var cheapCV: UICollectionView!
     @IBOutlet weak var feedTV: UITableView!
+    @IBOutlet weak var feedTVHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var suggestionsTitle: UILabel!
     @IBOutlet weak var suggestion1: SuggestionImageView!
@@ -386,9 +387,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.feedTV.reloadData()
             if recipes.count == 0 {
                 self.feedTV.isHidden = true
+                self.feedTVHeightConstraint.constant = 36
                 self.noFeedLabel.isHidden = false
             }else{
                 self.feedTV.isHidden = false
+                self.feedTVHeightConstraint.constant = recipes.count > 1 ? 503 : 340
                 self.noFeedLabel.isHidden = true
             }
         }
