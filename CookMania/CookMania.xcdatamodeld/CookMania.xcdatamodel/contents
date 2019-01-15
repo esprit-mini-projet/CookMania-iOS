@@ -17,6 +17,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopRecipe" inverseName="ingredients" inverseEntity="ShopRecipe" syncable="YES"/>
     </entity>
     <entity name="ShopRecipe" representedClassName="ShopRecipe" syncable="YES" codeGenerationType="class">
@@ -28,7 +29,7 @@
     </entity>
     <elements>
         <element name="Favorite" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="ShopIngredient" positionX="196.015625" positionY="83.96875" width="128" height="135"/>
+        <element name="ShopIngredient" positionX="196.015625" positionY="83.96875" width="128" height="150"/>
         <element name="ShopRecipe" positionX="-187.98828125" positionY="149.01953125" width="128" height="120"/>
     </elements>
 </model>
