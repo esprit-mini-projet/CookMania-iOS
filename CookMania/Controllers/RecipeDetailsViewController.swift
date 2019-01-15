@@ -114,6 +114,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var recipe: Recipe?
     var user: User?
     var ingredients: [Ingredient] = []
+    var shouldFinish = true
     
     var similarRecipes: [Recipe] = []
     var shopIngredients: [Ingredient] = []
@@ -140,6 +141,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         experiencesCollectionView.isPagingEnabled = true
         //checkShopIngredients()
+        //setting navigation backstack in case of coming from add recipe
+        if(!shouldFinish){
+            var backStack = [UIViewController]()
+            backStack.append(self.navigationController!.viewControllers.first!)
+            backStack.append(self.navigationController!.viewControllers.last!)
+            self.navigationController?.setViewControllers(backStack, animated: false)
+        }
     }
     
     func checkShopIngredients() {

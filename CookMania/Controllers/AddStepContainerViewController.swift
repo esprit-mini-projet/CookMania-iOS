@@ -175,6 +175,7 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
             dest.images = images
         }else if segue.identifier == "toRecipeDetails"{
             let dest = segue.destination as! RecipeDetailsViewController
+            dest.shouldFinish = false
             dest.recipe = (sender as! Recipe)
         }
     }

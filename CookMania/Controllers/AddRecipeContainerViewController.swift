@@ -158,6 +158,10 @@ class AddRecipeContainerViewController: UIViewController, UICollectionViewDataSo
             showAlert(title: "Description Missing", message: "Make sure to add a description for your recipe.")
             return nil
         }
+        guard !recipe!.labels!.isEmpty else{
+            showAlert(title: "Labels Missing", message: "Make sure to select at least one label.")
+            return nil
+        }
         recipe!.name = title
         recipe!.description = desc
         recipe!.servings = Int(servings)
