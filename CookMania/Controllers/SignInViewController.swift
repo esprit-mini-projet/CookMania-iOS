@@ -46,19 +46,27 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initLoginButton()
         initFacebookButton()
         initGoogleButton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            //Temp func call
-            //self.logoutAll()
-            //Facebook User is already connected
-            if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
-                self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
-            }else if AccessToken.current != nil {
-                self.fetchProfileFB(withAccessToken: AccessToken.current!)
-            }else if((GIDSignIn.sharedInstance()?.hasAuthInKeychain())!){
-                //Google User is aleady connected
-                GIDSignIn.sharedInstance()?.signInSilently()
+        
+        checkForLogin()
+    }
+    
+    func checkForLogin() {
+        if (UIApplication.shared.delegate as! AppDelegate).reachability.connection != .none {
+            print("Inside login")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                //Temp func call
+                //self.logoutAll()
+                //Facebook User is already connected
+                if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
+                    self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
+                }else if AccessToken.current != nil {
+                    self.fetchProfileFB(withAccessToken: AccessToken.current!)
+                }else if((GIDSignIn.sharedInstance()?.hasAuthInKeychain())!){
+                    //Google User is aleady connected
+                    GIDSignIn.sharedInstance()?.signInSilently()
+                }
             }
-         }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
