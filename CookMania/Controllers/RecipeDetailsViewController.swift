@@ -253,7 +253,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         dateFormatter.dateFormat = "dd MMM, yyyy"
         initPosition = recipeOwnerView.center.x*1.1
         
-        recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
+        let url = URL(string: (user?.imageUrl)!)
+        if url != nil {
+            recipeOwnerProfileImageView.af_setImage(withURL: url!)
+        }
         recipeOwnerNameLabel.text = user?.username
         if(user?.id == appDelegate.user?.id){
             recipeOwnerNameLabel.textColor = UIColor.black
@@ -300,13 +303,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        print("Reloaded")
         if tableView == ingredientsTableView {
             let ing = self.ingredients[indexPath.item]
             if shopIngredients.first(where: {$0.id == ing.id}) == nil{
                 let addToShoppingListAction = getAddToShoppingListAction(at: indexPath)
                 return UISwipeActionsConfiguration(actions: [addToShoppingListAction])
             }else{
-                
+                let removeFromShoppingListAction = getDeleteFromShoppingListAction(at: indexPath)
+                return UISwipeActionsConfiguration(actions: [removeFromShoppingListAction])
             }
         }
         return UISwipeActionsConfiguration(actions: [])
@@ -317,7 +322,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let ingredient = self.ingredients[indexPath.item]
             print("Clicked: "+ingredient.name!)
             ShopIngredientDao.getInstance().add(ingredient: ingredient, recipe: self.recipe!, completionHandler: {bool in
-                //self.checkShopIngredients()
+                self.checkShopIngredients()
                 self.ingredientsTableView.reloadRows(at: [indexPath], with: .automatic)
                 completion(true)
             })
@@ -332,13 +337,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let ingredient = self.ingredients[indexPath.item]
             print("Clicked: "+ingredient.name!)
             ShopIngredientDao.getInstance().delete(ingredientId: ingredient.id!, completionHandler: {
-                //self.checkShopIngredients()
+                self.checkShopIngredients()
                 self.ingredientsTableView.reloadRows(at: [indexPath], with: .automatic)
                 completion(true)
             })
         }
-        action.image = UIImage(named: "remove")
-        action.backgroundColor = UIColor.init(rgb: 0x477998)
+        action.image = UIImage(named: "remove_ingredient")
+        action.backgroundColor = UIColor.init(rgb: 0xE32929)
         return action
     }
     
@@ -445,8 +450,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             }
             
             //Setting Data
-            coverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+experience.imageURL!)!)
-            profileImageView.af_setImage(withURL: URL(string: (experience.user?.imageUrl!)!)!)
+            let experienceUrl = URL(string: Constants.URL.imagesFolder+experience.imageURL!)
+            if experienceUrl != nil {
+                coverImageView.af_setImage(withURL: experienceUrl!)
+            }
+            let userImageUrl = URL(string: (experience.user?.imageUrl!)!)
+            if userImageUrl != nil {
+                profileImageView.af_setImage(withURL: userImageUrl!)
+            }
             rating.rating = Double(experience.rating!)
             nameLabel.text = experience.user?.username!
             let dateFormatter = DateFormatter()
@@ -517,15 +528,24 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
-        DispatchQueue.main.async {
-            ShopRecipeDao.getInstance().add(recipe: self.recipe!) { (success) in
-                if success{
-                    print("success")
-                }else{
-                    print("failure")
-                }
+        ShopRecipeDao.getInstance().add(recipe: self.recipe!) { (success) in
+            if success{
+                print("success")
+                self.checkShopIngredients()
+                self.ingredientsTableView.reloadData()
+            }else{
+                print("failure")
             }
         }
+    }
+    
+    @IBAction func removeAllIngredients(_ sender: Any) {
+        print("remove all ingredients")
+        ShopRecipeDao.getInstance().delete(recipeId: (self.recipe?.id)!, completionHandler: {
+            print("success")
+            self.checkShopIngredients()
+            self.ingredientsTableView.reloadData()
+        })
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {

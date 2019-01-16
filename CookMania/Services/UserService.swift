@@ -188,6 +188,23 @@ class UserService: NSObject {
         })
     }
     
+    func deleteUser(user: User, completionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
+        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "delete/"+(user.id)!), method: .delete)
+            .responseString(completionHandler: { (response: DataResponse<String>) in
+                switch response.result {
+                case .success:
+                    completionHandler()
+                    Loader.getInstance().stopLoader()
+                    break
+                case .failure(let error):
+                    print(error)
+                    Loader.getInstance().stopLoader()
+                    break
+                }
+            })
+    }
+    
     func logout(completionHandler: @escaping () -> ()) {
         Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "logout"), method: .post, parameters: ["uuid": UIDevice.current.identifierForVendor?.uuidString], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
@@ -231,7 +248,7 @@ class UserService: NSObject {
     
     func addUser(user: User, image: UIImage?, completionHandler: @escaping () -> ()) {
         Loader.getInstance().startLoader()
-        let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "insert"))!, method: .post, headers: nil)
+        let url = try! URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "add"))!, method: .post, headers: nil)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if image != nil {
                 multipartFormData.append(image!.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")

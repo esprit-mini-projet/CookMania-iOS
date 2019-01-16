@@ -42,10 +42,11 @@ class FormTableViewController: UITableViewController, GalleryControllerDelegate{
     var password: String = ""
     var username: String = ""
     
-    let user = (UIApplication.shared.delegate as! AppDelegate).user
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        user = (UIApplication.shared.delegate as! AppDelegate).user
         if user != nil {
             usernameTextField.text = user?.username
             emailTextField.text = user?.email
@@ -224,9 +225,17 @@ class FormTableViewController: UITableViewController, GalleryControllerDelegate{
             UserService.getInstance().addUser(user: newUser, image: image, completionHandler: {
                 self.signupViewControoler?.dismiss(animated: true, completion: {
                     self.signinViewController?.SignIn(email: self.email, password: self.password)
+                    self.clearFields()
                 })
             })
         }
+    }
+    
+    func clearFields() {
+        usernameTextField.text = ""
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        confirmationTextField.text = ""
     }
     
     /*
