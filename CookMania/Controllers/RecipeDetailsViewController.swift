@@ -140,7 +140,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         experiencesCollectionView.isPagingEnabled = true
-        //checkShopIngredients()
+        checkShopIngredients()
         //setting navigation backstack in case of coming from add recipe
         if(!shouldFinish){
             var backStack = [UIViewController]()
@@ -517,11 +517,13 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
-        ShopRecipeDao.getInstance().add(recipe: recipe!) { (success) in
-            if success{
-                print("success")
-            }else{
-                print("failure")
+        DispatchQueue.main.async {
+            ShopRecipeDao.getInstance().add(recipe: self.recipe!) { (success) in
+                if success{
+                    print("success")
+                }else{
+                    print("failure")
+                }
             }
         }
     }
