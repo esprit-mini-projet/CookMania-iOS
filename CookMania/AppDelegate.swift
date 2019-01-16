@@ -187,8 +187,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    static func getDeviceToken() -> String {
-        return InstanceID.instanceID().token()!
+    static func getDeviceToken(callback: @escaping (_ token: String) -> ()){
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+                callback("")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+                callback(result.token)
+            }
+        }
     }
 
 }

@@ -44,20 +44,25 @@ class UserService: NSObject {
     func logUserIn(email: String, password: String, completionHandler: @escaping (_ user: User?) -> ()){
         Loader.getInstance().startLoader()
         let uuid: String =  (UIDevice.current.identifierForVendor?.uuidString)!
-        let token: String = AppDelegate.getDeviceToken()
-        
-        Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password, "type": "ios", "uuid": uuid, "token": token], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
-            switch response.result {
-            case .success:
-                let user: User? = Mapper<User>().map(JSONString: response.result.value!)
-                completionHandler(user)
+        AppDelegate.getDeviceToken(callback: {token in
+            if token == "" {
+                print("Token is empty")
                 Loader.getInstance().stopLoader()
-                break
-            case .failure(let error):
-                print(error)
-                Loader.getInstance().stopLoader()
-                break
+                return
             }
+            Alamofire.request(ServiceUtils.buildURL(route: self.ROUTE, postfix: "signin"), method: .post, parameters: ["email": email, "password": password, "type": "ios", "uuid": uuid, "token": token], encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response: DataResponse<String>) in
+                switch response.result {
+                case .success:
+                    let user: User? = Mapper<User>().map(JSONString: response.result.value!)
+                    completionHandler(user)
+                    Loader.getInstance().stopLoader()
+                    break
+                case .failure(let error):
+                    print(error)
+                    Loader.getInstance().stopLoader()
+                    break
+                }
+            })
         })
     }
     
@@ -65,31 +70,38 @@ class UserService: NSObject {
         Loader.getInstance().startLoader()
         var JSONObject = user.toJSON()
         JSONObject["uuid"] = UIDevice.current.identifierForVendor?.uuidString
-        JSONObject["token"] = AppDelegate.getDeviceToken()
         JSONObject["type"] = "ios"
-        do{
-            let JSONString = try JSONSerialization.data(withJSONObject: JSONObject, options: [])
-            var request = URLRequest(url: URL(string: ServiceUtils.buildURL(route: ROUTE, postfix: "social/check"))! )
-            request.httpMethod = HTTPMethod.post.rawValue
-            request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
-            request.httpBody = JSONString
-            Alamofire.request(request).responseString(completionHandler: { (response: DataResponse<String>) in
-                switch response.result {
-                case .success:
-                    let user: User = Mapper<User>().map(JSONString: response.result.value!)!
-                    completionHandler(user)
-                    Loader.getInstance().stopLoader()
-                    break
-                case .failure(let error):
-                    Loader.getInstance().stopLoader()
-                    print(error)
-                    break
-                }
-            })
-        }catch{
-            Loader.getInstance().stopLoader()
-            print(error.localizedDescription)
-        }
+        AppDelegate.getDeviceToken(callback: {token in
+            if token == "" {
+                print("Token is empty")
+                Loader.getInstance().stopLoader()
+                return
+            }
+            JSONObject["token"] = token
+            do{
+                let JSONString = try JSONSerialization.data(withJSONObject: JSONObject, options: [])
+                var request = URLRequest(url: URL(string: ServiceUtils.buildURL(route: self.ROUTE, postfix: "social/check"))! )
+                request.httpMethod = HTTPMethod.post.rawValue
+                request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+                request.httpBody = JSONString
+                Alamofire.request(request).responseString(completionHandler: { (response: DataResponse<String>) in
+                    switch response.result {
+                    case .success:
+                        let user: User = Mapper<User>().map(JSONString: response.result.value!)!
+                        completionHandler(user)
+                        Loader.getInstance().stopLoader()
+                        break
+                    case .failure(let error):
+                        Loader.getInstance().stopLoader()
+                        print(error)
+                        break
+                    }
+                })
+            }catch{
+                Loader.getInstance().stopLoader()
+                print(error.localizedDescription)
+            }
+        })
     }
     
     func getUsersRecipes(user: User, completionHandler: @escaping (_ recipes: [Recipe]) -> ()){
