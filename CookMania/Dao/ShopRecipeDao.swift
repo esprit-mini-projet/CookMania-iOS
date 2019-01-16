@@ -31,13 +31,18 @@ class ShopRecipeDao: NSObject{
     public func add(recipe: Recipe, completionHandler: @escaping (Bool) -> ()){
         let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
         CoreStore.perform(asynchronous: { (transaction) -> Void in
-            let r: ShopRecipe = transaction.create(Into<ShopRecipe>())
-            r.name = recipe.name
-            r.id = Int32(String(recipe.id!))!
-            r.imageUrl = recipe.imageUrl
-            r.userId = userId
+            var r: ShopRecipe
+            if let rec = transaction.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId!)){
+                r = rec
+            }else{
+                r = transaction.create(Into<ShopRecipe>())
+                r.name = recipe.name
+                r.id = Int32(String(recipe.id!))!
+                r.imageUrl = recipe.imageUrl
+                r.userId = userId
+            }
             for ingredient in recipe.getIngredients(){
-                if let _ = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d", ingredient.id!)){
+                if let _ = transaction.fetchOne(From<ShopIngredient>().where(format: "id == %d", ingredient.id!)){
                     continue
                 }
                 let ing: ShopIngredient = transaction.create(Into<ShopIngredient>())
