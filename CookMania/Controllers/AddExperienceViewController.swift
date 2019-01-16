@@ -33,6 +33,24 @@ class AddExperienceViewController: UIViewController, GalleryControllerDelegate {
     }
     
     @IBAction func saveAction(_ sender: Any) {
+        if ratingView.rating == 0 {
+            let alert = UIAlertController(title: "Error", message: "Rating must be greater than 0!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        if experienceImage == nil {
+            let alert = UIAlertController(title: "Error", message: "Image is required!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        if commentTextView.text == nil || commentTextView.text == "" {
+            let alert = UIAlertController(title: "Error", message: "Comment is required!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         let experience = Experience(user: appDelegate.user!, rating: Float(ratingView.rating), comment: commentTextView.text!, imageUrl: "")
         ExperienceService.getInstance().addRecipeExperience(experience: experience, image: experienceImage!, recipeId: (recipe?.id)!, ownerId: (self.recipe?.userId)!, completionHandler: {
             self.navigationController?.popViewController(animated: true)
