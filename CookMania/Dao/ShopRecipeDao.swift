@@ -37,7 +37,7 @@ class ShopRecipeDao: NSObject{
             r.imageUrl = recipe.imageUrl
             r.userId = userId
             for ingredient in recipe.getIngredients(){
-                if let _ = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d", ingredient.id!)){
+                if let _ = transaction.fetchOne(From<ShopIngredient>().where(format: "id == %d", ingredient.id!)){
                     continue
                 }
                 let ing: ShopIngredient = transaction.create(Into<ShopIngredient>())

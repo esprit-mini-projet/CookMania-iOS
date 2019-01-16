@@ -45,6 +45,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         menu.append(MenuItem(name: "Logout", icon: UIImage(named: "logout")!, iconTintColor: UIColor(red: 71, green: 121, blue: 152), clickHandler: {
             UserService.getInstance().logout(completionHandler: {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.user = nil
                 UserProfile.current = nil
                 let loginManager = LoginManager()
                 loginManager.logOut()
@@ -57,6 +59,29 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             })
         }))
         menu.append(MenuItem(name: "Remove Account", icon: UIImage(named: "remove")!, iconTintColor: UIColor(red: 221, green: 81, blue: 68), clickHandler: {
+            let alert = UIAlertController(title: "Confirmation", message: "Do you really want to delete your account? All your delicious recipes will be deleted!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                UserService.getInstance().logout(completionHandler: {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    
+                    //Deleting User
+                    UserService.getInstance().deleteUser(user: appDelegate.user!, completionHandler: {
+                    })
+                    
+                    appDelegate.user = nil
+                    UserProfile.current = nil
+                    let loginManager = LoginManager()
+                    loginManager.logOut()
+                    GIDSignIn.sharedInstance()?.signOut()
+                    
+                    KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
+                    KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
+                    KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
+                    self.dismiss(animated: true, completion: nil)
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print("Remove clicked")
         }))
         menuTableView.reloadData()
