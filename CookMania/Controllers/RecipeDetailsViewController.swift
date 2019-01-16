@@ -274,6 +274,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let viewWidth = self.recipeOwnerView.frame.width
             let imageViewWidth = self.recipeOwnerProfileImageView.frame.width
             self.recipeOwnerView.center.x = (self.recipeOwnerView.center.x + (viewWidth * self.isExpanded)) - ((imageViewWidth * 2) * self.isExpanded)
+            if self.isExpanded < 0 {
+                self.recipeOwnerNameLabel.alpha = 1
+            }else{
+                self.recipeOwnerNameLabel.alpha = 0
+            }
             self.isExpanded *= -1
         })
     }
