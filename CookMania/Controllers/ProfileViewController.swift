@@ -75,7 +75,10 @@ class ProfileViewController: UIViewController {
     }
     
     func populateFields() {
-        profilePhotoImageView.af_setImage(withURL: URL(string: (user!.imageUrl)!)!)
+        let url = URL(string: (user!.imageUrl)!)
+        if url != nil {
+            profilePhotoImageView.af_setImage(withURL: url!)
+        }
         followingCountLabel.text = String(user!.following)
         followersCountLabel.text = String(user!.followers)
         nameLabel.text = user!.username!
