@@ -555,7 +555,7 @@ d2lkdGggPSAxNxAyA
                                                     <constraint firstAttribute="height" constant="0.5" id="Qs0-c3-jFj"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="340" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tWe-2e-cQg" userLabel="feed">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="340" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tWe-2e-cQg" userLabel="feed">
                                                 <rect key="frame" x="0.0" y="1150" width="375" height="553"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -788,6 +788,9 @@ d2lkdGggPSAxNxAyA
                                     <constraint firstItem="9YG-iv-ZYt" firstAttribute="leading" secondItem="LpG-nt-Qxk" secondAttribute="leading" id="IAb-Nv-Hf1"/>
                                     <constraint firstAttribute="trailing" secondItem="9YG-iv-ZYt" secondAttribute="trailing" id="WpV-ak-rgR"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="6qe-kK-Ooc" id="G60-Dw-cOc"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -812,6 +815,7 @@ d2lkdGggPSAxNxAyA
                         <outlet property="feedTVHeightConstraint" destination="puJ-gX-f0e" id="1ni-s9-1B3"/>
                         <outlet property="healthyCV" destination="zc4-hO-ZG1" id="EeD-9v-n9v"/>
                         <outlet property="noFeedLabel" destination="snt-7R-VMI" id="fQx-p8-MdN"/>
+                        <outlet property="scrollView" destination="LpG-nt-Qxk" id="kYW-br-Qyz"/>
                         <outlet property="suggestion1" destination="dPR-8a-Prh" id="ysC-80-cPD"/>
                         <outlet property="suggestion2" destination="9HS-WN-O3Y" id="6as-Qb-h92"/>
                         <outlet property="suggestion3" destination="3a7-MK-vem" id="vz3-86-RB4"/>

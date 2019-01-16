@@ -138,6 +138,17 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
                 showAlert(title: "Ingredient Quantity Missing", message: "Make sure to add all ingredient quantities.")
                 return false
             }
+            var first = true
+            for ing in step!.ingredients!{
+                if ing.name! == ingredient.name!{
+                    if first{
+                        first = false
+                    }else{
+                        showAlert(title: "Ingredient repeated", message: "Make sure to bundle the same ingredients together.")
+                        return false
+                    }
+                }
+            }
             if let _ = ingredient.unit {
                 if ingredient.unit == "N/A"{
                     ingredient.unit = ""

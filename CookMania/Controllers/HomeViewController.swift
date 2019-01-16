@@ -13,13 +13,14 @@ import ObjectMapper
 import CoreStore
 import Cosmos
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var topRatedCV: UICollectionView!
     @IBOutlet weak var healthyCV: UICollectionView!
     @IBOutlet weak var cheapCV: UICollectionView!
     @IBOutlet weak var feedTV: UITableView!
     @IBOutlet weak var feedTVHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var suggestionsTitle: UILabel!
     @IBOutlet weak var suggestion1: SuggestionImageView!
@@ -391,7 +392,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.noFeedLabel.isHidden = false
             }else{
                 self.feedTV.isHidden = false
-                self.feedTVHeightConstraint.constant = recipes.count > 1 ? 853 : 340
+                self.feedTVHeightConstraint.constant = recipes.count > 1 ? self.view.frame.height : 340
                 self.noFeedLabel.isHidden = true
             }
         }
@@ -403,6 +404,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     @IBAction func morePopular(_ sender: Any) {
         performSegue(withIdentifier: "toRecipeList", sender: Constants.URL.topRatedRecipes)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        /*print("offset:", self.scrollView.contentOffset.y)
+        print("diff:", self.scrollView.contentSize.height - self.view.frame.height)
+        print("enabled:", self.scrollView.contentOffset.y >= (self.scrollView.contentSize.height - self.view.frame.height))*/
+        self.feedTV.isScrollEnabled = (self.scrollView.contentOffset.y >= self.scrollView.contentSize.height - self.view.frame.height)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
