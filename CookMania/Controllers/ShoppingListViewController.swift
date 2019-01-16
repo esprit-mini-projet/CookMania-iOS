@@ -11,6 +11,7 @@ import UIKit
 class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     var cells = [Any]()
     
@@ -78,6 +79,13 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
                     self.cells.removeAll()
                     self.getShoppingList()
                     self.tableView.reloadData()
+                    if self.cells.isEmpty{
+                        self.tableView.isHidden = true
+                        self.emptyLabel.isHidden = false
+                    }else{
+                        self.tableView.isHidden = false
+                        self.emptyLabel.isHidden = true
+                    }
                 }
             }else{
                 let ingredient = cells[indexPath.row] as! ShopIngredient
@@ -85,6 +93,13 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
                     self.cells.removeAll()
                     self.getShoppingList()
                     self.tableView.reloadData()
+                    if self.cells.isEmpty{
+                        self.tableView.isHidden = true
+                        self.emptyLabel.isHidden = false
+                    }else{
+                        self.tableView.isHidden = false
+                        self.emptyLabel.isHidden = true
+                    }
                 }
             }
         }
@@ -105,6 +120,13 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         cells.removeAll()
         getShoppingList()
         self.tableView.reloadData()
+        if cells.isEmpty{
+            self.tableView.isHidden = true
+            self.emptyLabel.isHidden = false
+        }else{
+            self.tableView.isHidden = false
+            self.emptyLabel.isHidden = true
+        }
     }
     
     func getShoppingList(){
@@ -120,6 +142,8 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         ShopRecipeDao.getInstance().deleteAll {
             self.cells.removeAll()
             self.tableView.reloadData()
+            self.tableView.isHidden = true
+            self.emptyLabel.isHidden = false
         }
     }
 

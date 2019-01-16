@@ -23,7 +23,7 @@ PODS:
     - FacebookCore (~> 0.5)
     - FBSDKCoreKit (~> 4.37)
     - FBSDKShareKit (~> 4.37)
-  - FBSDKCoreKit (4.39.1):
+  - FBSDKCoreKit (4.40.0):
     - Bolts (~> 1.9)
   - FBSDKLoginKit (4.39.0):
     - FBSDKCoreKit
@@ -106,9 +106,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - NVActivityIndicatorView (4.5.0):
-    - NVActivityIndicatorView/Presenter (= 4.5.0)
-  - NVActivityIndicatorView/Presenter (4.5.0)
+  - NVActivityIndicatorView (4.4.1):
+    - NVActivityIndicatorView/Presenter (= 4.4.1)
+  - NVActivityIndicatorView/Presenter (4.4.1)
   - ObjectMapper (3.4.1)
   - Protobuf (3.6.1)
   - SwiftKeychainWrapper (3.0.1)
@@ -179,7 +179,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   FBSDKCoreKit:
-    :commit: 4c05e566ea2af2b8157d037afab5957c59466fe8
+    :commit: d9e20bbf0d7de9ea0afd63a7a1dc0ca09f82b185
     :git: https://github.com/facebook/facebook-objc-sdk.git
 
 SPEC CHECKSUMS:
@@ -191,7 +191,7 @@ SPEC CHECKSUMS:
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
   FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
-  FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
+  FBSDKCoreKit: ae214474b25033399c131dc81d258e412582a2ba
   FBSDKLoginKit: 30ba5039a2c53d65a75103889bc2deebdacd5a1f
   FBSDKShareKit: 5a0021c30abb64df9eeba87351dd8a627874543b
   Firebase: 963d5685fae888a56d6d4d9cfce6b9c976958798
@@ -210,7 +210,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   ISPageControl: cadeb38e9ecdf05540c69ea1132612521b3caa2a
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  NVActivityIndicatorView: 1e4e3ed79248cf1666af182593c3a2acf0fcf193
+  NVActivityIndicatorView: f0a6b0ed2973d9544da268f4eb76696f0a9577b0
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
