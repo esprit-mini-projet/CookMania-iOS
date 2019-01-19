@@ -67,6 +67,7 @@
 		C3A23CE821EAA10A002C8140 /* OthersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */; };
 		C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
+		C3D62FDC21EE80C2009D4B77 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D62FDB21EE80C2009D4B77 /* Loader.swift */; };
 		C3DC90CC21A1AEDC0053094A /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC90CB21A1AEDC0053094A /* UIUtils.swift */; };
 		C3EED56D21CDAF33006C2FC3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */; };
 		C3FE11EE21A35231007D5F16 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */; };
@@ -139,6 +140,7 @@
 		C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfileViewController.swift; sourceTree = "<group>"; };
 		C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabLayoutViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
+		C3D62FDB21EE80C2009D4B77 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		C3DC90CB21A1AEDC0053094A /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				263BDE0721CC25C500D98416 /* PinterestLayout.swift */,
 				268FC1F321CE6E2C004A87E1 /* Filter.swift */,
 				2699B06C21E02F38004F8A86 /* ActionImageView.swift */,
+				C3D62FDB21EE80C2009D4B77 /* Loader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -427,8 +430,10 @@
 				"${BUILT_PRODUCTS_DIR}/HGCircularSlider/HGCircularSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ISPageControl/ISPageControl.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
@@ -456,8 +461,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGCircularSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISPageControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
@@ -541,6 +548,7 @@
 				C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */,
 				26101086218FC37B00E8344F /* FavoritesViewController.swift in Sources */,
 				26A8D01F21C1B2C700BF3AAE /* ShopRecipeDao.swift in Sources */,
+				C3D62FDC21EE80C2009D4B77 /* Loader.swift in Sources */,
 				260917CF219C716900C713C6 /* Ingredient.swift in Sources */,
 				C324D9C121AF391600D9C5E8 /* FavoriteHelper.swift in Sources */,
 				C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */,

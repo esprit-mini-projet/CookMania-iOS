@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="mMV-my-1Ft">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signin_logo" translatesAutoresizingMaskIntoConstraints="NO" id="mMV-my-1Ft">
                                 <rect key="frame" x="37.5" y="193.5" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mMV-my-1Ft" secondAttribute="height" multiplier="1:1" id="reI-4m-7eE"/>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="1024" height="1024"/>
+        <image name="signin_logo" width="1000" height="1000"/>
     </resources>
 </document>

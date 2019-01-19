@@ -25,4 +25,6 @@ target 'CookMania' do
   pod 'CoreStore', '~> 5.0'
   pod "TTRangeSlider"
   pod 'IQKeyboardManagerSwift'
+  pod 'NVActivityIndicatorView'
+  pod 'ReachabilitySwift'
 end

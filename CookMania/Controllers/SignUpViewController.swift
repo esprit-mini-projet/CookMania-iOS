@@ -11,7 +11,7 @@ import UIKit
 class SignUpViewController: UIViewController {
     @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
     
-    var userFormViewController: UserFormViewController?
+    var formTableViewController: FormTableViewController?
     var signinViewController: SignInViewController?
     
     override func viewDidLoad() {
@@ -19,7 +19,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func doneClicked(_ sender: Any) {
-        userFormViewController!.doneClicked(sender)
+        formTableViewController!.doneClicked(sender)
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -28,10 +28,10 @@ class SignUpViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toUserForm" {
-            userFormViewController = segue.destination as? UserFormViewController
-            userFormViewController?.doneButton = doneBarButtonItem
-            userFormViewController?.signinViewController = signinViewController
-            userFormViewController?.signupViewControoler = self
+            formTableViewController = segue.destination as? FormTableViewController
+            formTableViewController?.doneButton = doneBarButtonItem
+            formTableViewController?.signinViewController = signinViewController
+            formTableViewController?.signupViewControoler = self
         }
     }
     /*

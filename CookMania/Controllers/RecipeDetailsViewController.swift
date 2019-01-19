@@ -114,9 +114,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     var recipe: Recipe?
     var user: User?
     var ingredients: [Ingredient] = []
+    var shouldFinish = true
     
     var similarRecipes: [Recipe] = []
-    var shopIngredients: [ShopIngredient] = []
+    var shopIngredients: [Ingredient] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,14 +140,25 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         stepsTableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         experiencesCollectionView.isPagingEnabled = true
-        /*shopIngredients = ShopIngredientDao.getInstance().getIngredients().filter({($0.recipe?.id)! == (self.recipe?.id)!})
+        checkShopIngredients()
+        //setting navigation backstack in case of coming from add recipe
+        if(!shouldFinish){
+            var backStack = [UIViewController]()
+            backStack.append(self.navigationController!.viewControllers.first!)
+            backStack.append(self.navigationController!.viewControllers.last!)
+            self.navigationController?.setViewControllers(backStack, animated: false)
+        }
+    }
+    
+    func checkShopIngredients() {
+        shopIngredients = ShopIngredientDao.getInstance().getIngredients(for: recipe!)
         if(shopIngredients.count == ingredients.count){
-            addIngredientsButton.isHidden = false
-            removeIngredientsButton.isHidden = true
-        }else{
             addIngredientsButton.isHidden = true
             removeIngredientsButton.isHidden = false
-        }*/
+        }else{
+            addIngredientsButton.isHidden = false
+            removeIngredientsButton.isHidden = true
+        }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -241,7 +253,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         dateFormatter.dateFormat = "dd MMM, yyyy"
         initPosition = recipeOwnerView.center.x*1.1
         
-        recipeOwnerProfileImageView.af_setImage(withURL: URL(string: (user?.imageUrl)!)!)
+        let url = URL(string: (user?.imageUrl)!)
+        if url != nil {
+            recipeOwnerProfileImageView.af_setImage(withURL: url!)
+        }
         recipeOwnerNameLabel.text = user?.username
         if(user?.id == appDelegate.user?.id){
             recipeOwnerNameLabel.textColor = UIColor.black
@@ -259,6 +274,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let viewWidth = self.recipeOwnerView.frame.width
             let imageViewWidth = self.recipeOwnerProfileImageView.frame.width
             self.recipeOwnerView.center.x = (self.recipeOwnerView.center.x + (viewWidth * self.isExpanded)) - ((imageViewWidth * 2) * self.isExpanded)
+            if self.isExpanded < 0 {
+                self.recipeOwnerNameLabel.alpha = 1
+            }else{
+                self.recipeOwnerNameLabel.alpha = 0
+            }
             self.isExpanded *= -1
         })
     }
@@ -288,9 +308,16 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        print("Reloaded")
         if tableView == ingredientsTableView {
-            let addToShoppingListAction = getAddToShoppingListAction(at: indexPath)
-            return UISwipeActionsConfiguration(actions: [addToShoppingListAction])
+            let ing = self.ingredients[indexPath.item]
+            if shopIngredients.first(where: {$0.id == ing.id}) == nil{
+                let addToShoppingListAction = getAddToShoppingListAction(at: indexPath)
+                return UISwipeActionsConfiguration(actions: [addToShoppingListAction])
+            }else{
+                let removeFromShoppingListAction = getDeleteFromShoppingListAction(at: indexPath)
+                return UISwipeActionsConfiguration(actions: [removeFromShoppingListAction])
+            }
         }
         return UISwipeActionsConfiguration(actions: [])
     }
@@ -299,10 +326,29 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
             let ingredient = self.ingredients[indexPath.item]
             print("Clicked: "+ingredient.name!)
-            completion(true)
+            ShopIngredientDao.getInstance().add(ingredient: ingredient, recipe: self.recipe!, completionHandler: {bool in
+                self.checkShopIngredients()
+                self.ingredientsTableView.reloadRows(at: [indexPath], with: .automatic)
+                completion(true)
+            })
         }
         action.image = UIImage(named: "add-icon2")
         action.backgroundColor = UIColor.init(rgb: 0x477998)
+        return action
+    }
+    
+    func getDeleteFromShoppingListAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
+            let ingredient = self.ingredients[indexPath.item]
+            print("Clicked: "+ingredient.name!)
+            ShopIngredientDao.getInstance().delete(ingredientId: ingredient.id!, completionHandler: {
+                self.checkShopIngredients()
+                self.ingredientsTableView.reloadRows(at: [indexPath], with: .automatic)
+                completion(true)
+            })
+        }
+        action.image = UIImage(named: "remove_ingredient")
+        action.backgroundColor = UIColor.init(rgb: 0xE32929)
         return action
     }
     
@@ -409,8 +455,14 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             }
             
             //Setting Data
-            coverImageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder+experience.imageURL!)!)
-            profileImageView.af_setImage(withURL: URL(string: (experience.user?.imageUrl!)!)!)
+            let experienceUrl = URL(string: Constants.URL.imagesFolder+experience.imageURL!)
+            if experienceUrl != nil {
+                coverImageView.af_setImage(withURL: experienceUrl!)
+            }
+            let userImageUrl = URL(string: (experience.user?.imageUrl!)!)
+            if userImageUrl != nil {
+                profileImageView.af_setImage(withURL: userImageUrl!)
+            }
             rating.rating = Double(experience.rating!)
             nameLabel.text = experience.user?.username!
             let dateFormatter = DateFormatter()
@@ -481,13 +533,24 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBAction func addAllIngredients(_ sender: Any) {
         print("add all ingredients")
-        ShopRecipeDao.getInstance().add(recipe: recipe!) { (success) in
+        ShopRecipeDao.getInstance().add(recipe: self.recipe!) { (success) in
             if success{
                 print("success")
+                self.checkShopIngredients()
+                self.ingredientsTableView.reloadData()
             }else{
                 print("failure")
             }
         }
+    }
+    
+    @IBAction func removeAllIngredients(_ sender: Any) {
+        print("remove all ingredients")
+        ShopRecipeDao.getInstance().delete(recipeId: (self.recipe?.id)!, completionHandler: {
+            print("success")
+            self.checkShopIngredients()
+            self.ingredientsTableView.reloadData()
+        })
     }
     
     @IBAction func visitProfilClicked(_ sender: Any) {

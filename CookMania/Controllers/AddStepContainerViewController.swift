@@ -9,7 +9,7 @@
 import UIKit
 import Gallery
 
-class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, GalleryControllerDelegate {
+class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GalleryControllerDelegate {
     
     let descriptionPlaceHolder = "Description..."
     
@@ -78,7 +78,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         if editingStyle == .delete {
             step!.ingredients!.remove(at: indexPath.row)
             tableView.reloadData()
-            //tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -88,9 +87,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         
         step = Step()
         step?.ingredients = [Ingredient(), Ingredient(), Ingredient()]
-        
-        descText.text = descriptionPlaceHolder
-        descText.textColor = UIColor.lightGray
     }
     
     @IBAction func selectImage(_ sender: Any) {
@@ -142,6 +138,17 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
                 showAlert(title: "Ingredient Quantity Missing", message: "Make sure to add all ingredient quantities.")
                 return false
             }
+            var first = true
+            for ing in step!.ingredients!{
+                if ing.name! == ingredient.name!{
+                    if first{
+                        first = false
+                    }else{
+                        showAlert(title: "Ingredient repeated", message: "Make sure to bundle the same ingredients together.")
+                        return false
+                    }
+                }
+            }
             if let _ = ingredient.unit {
                 if ingredient.unit == "N/A"{
                     ingredient.unit = ""
@@ -179,6 +186,7 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
             dest.images = images
         }else if segue.identifier == "toRecipeDetails"{
             let dest = segue.destination as! RecipeDetailsViewController
+            dest.shouldFinish = false
             dest.recipe = (sender as! Recipe)
         }
     }
@@ -209,20 +217,6 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         alert.addAction(action)
         
         self.present(alert,animated: true,completion: nil)
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = descriptionPlaceHolder
-            textView.textColor = UIColor.lightGray
-        }
     }
     
     func textViewDidChange(_ textView: UITextView) {

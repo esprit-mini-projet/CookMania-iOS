@@ -14,6 +14,7 @@ import Firebase
 import UserNotifications
 import SwiftKeychainWrapper
 import IQKeyboardManagerSwift
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
+    
+    let reachability = Reachability()!
+    var noConnectionAlert: UIAlertController?
 
     func setUser(user: User) -> Bool {
         if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
@@ -67,6 +71,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         FirebaseApp.configure()
+        
+        noConnectionAlert = UIAlertController(title: "Application can't work offline!", message: "", preferredStyle: .alert)
+        
+        reachability.whenReachable = { reachability in
+            self.noConnectionAlert?.dismiss(animated: true, completion: {
+                print(self.window?.rootViewController?.presentedViewController)
+                if self.window?.rootViewController?.presentedViewController == nil{
+                    let signinViewController = (self.window?.rootViewController as! SignInViewController)
+                    signinViewController.checkForLogin()
+                }
+            })
+        }
+        reachability.whenUnreachable = { _ in
+            DispatchQueue.main.async {
+                if let currentViewController = self.window?.rootViewController?.presentedViewController {
+                    currentViewController.present(self.noConnectionAlert!, animated: true, completion: nil)
+                }else{
+                    self.window?.rootViewController?.present(self.noConnectionAlert!, animated: true, completion: nil)
+                }
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
         return true
     }
     
@@ -187,8 +219,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    static func getDeviceToken() -> String {
-        return InstanceID.instanceID().token()!
+    static func getDeviceToken(callback: @escaping (_ token: String) -> ()){
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+                callback("")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+                callback(result.token)
+            }
+        }
     }
 
 }

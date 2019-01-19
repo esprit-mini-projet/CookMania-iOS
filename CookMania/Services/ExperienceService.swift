@@ -25,20 +25,24 @@ class ExperienceService: NSObject {
     }
     
     func getRecipeExperience(recipeID: Int, completionHandler: @escaping (_ experience: [Experience]) -> ()){
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "recipe/"+String(recipeID))).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 let experiences: [Experience] = Mapper<Experience>().mapArray(JSONString: response.result.value!)!
                 completionHandler(experiences)
+                Loader.getInstance().stopLoader()
                 break
             case .failure(let error):
                 print(error)
+                Loader.getInstance().stopLoader()
                 break
             }
         })
     }
     
     func addRecipeExperience(experience: Experience, image: UIImage, recipeId: Int, ownerId: String, completionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "send.png", mimeType: "image/jpg")
             multipartFormData.append((experience.user?.id)!.data(using: .utf8)!, withName: "user_id", mimeType: "text/plain")
@@ -50,21 +54,26 @@ class ExperienceService: NSObject {
             switch result {
             case .success( _, _, _):
                     completionHandler()
+                    Loader.getInstance().stopLoader()
                 case .failure(let encodingError):
                     print("",encodingError.localizedDescription)
+                    Loader.getInstance().stopLoader()
                     break
             }
         }
     }
     
     func removeExperience(userId: String, recipeId: Int, sucessCompletionHandler: @escaping () -> (), errorCompletionHandler: @escaping () -> ()) {
+        Loader.getInstance().startLoader()
         Alamofire.request(ServiceUtils.buildURL(route: ROUTE, postfix: "remove/"+userId+"/"+String(recipeId)), method: .delete).responseString(completionHandler: { (response: DataResponse<String>) in
             switch response.result {
             case .success:
                 sucessCompletionHandler()
+                Loader.getInstance().stopLoader()
                 break
             case .failure( _):
                 errorCompletionHandler()
+                Loader.getInstance().stopLoader()
                 break
             }
         })
