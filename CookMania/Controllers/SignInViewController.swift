@@ -58,6 +58,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 //self.logoutAll()
                 //Facebook User is already connected
                 if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
+                    print("Not Null")
                     self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
                 }else if AccessToken.current != nil {
                     self.fetchProfileFB(withAccessToken: AccessToken.current!)

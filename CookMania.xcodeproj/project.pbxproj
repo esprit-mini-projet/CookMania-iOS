@@ -65,6 +65,7 @@
 		C39665A721B00A8000C73AE5 /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */; };
 		C3995DDD21964CE800179246 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3995DDC21964CE800179246 /* CommunityViewController.swift */; };
 		C3A23CE821EAA10A002C8140 /* OthersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */; };
+		C3AAA58821F3B7CC00609903 /* OfflineShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAA58721F3B7CC00609903 /* OfflineShoppingListViewController.swift */; };
 		C3BB062921C2AA2A00516BB7 /* MainTabLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */; };
 		C3C6187B21A23D39006908F4 /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */; };
 		C3D62FDC21EE80C2009D4B77 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D62FDB21EE80C2009D4B77 /* Loader.swift */; };
@@ -138,6 +139,7 @@
 		C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 		C3995DDC21964CE800179246 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfileViewController.swift; sourceTree = "<group>"; };
+		C3AAA58721F3B7CC00609903 /* OfflineShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineShoppingListViewController.swift; sourceTree = "<group>"; };
 		C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabLayoutViewController.swift; sourceTree = "<group>"; };
 		C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
 		C3D62FDB21EE80C2009D4B77 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				C31E1F5621D037C400786771 /* UserFormViewController.swift */,
 				C31E1F5821D0524200786771 /* FormTableViewController.swift */,
 				C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */,
+				C3AAA58721F3B7CC00609903 /* OfflineShoppingListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				262543AD21935E55003601A4 /* SearchViewController.swift in Sources */,
 				C34BE80121ADE3B900D050EF /* FollowingViewController.swift in Sources */,
 				C31E1F5921D0524200786771 /* FormTableViewController.swift in Sources */,
+				C3AAA58821F3B7CC00609903 /* OfflineShoppingListViewController.swift in Sources */,
 				C36AC737219E0CF30070CDE8 /* ExperienceService.swift in Sources */,
 				C31E1F5521D0145000786771 /* MenuItem.swift in Sources */,
 				C3A23CE821EAA10A002C8140 /* OthersProfileViewController.swift in Sources */,

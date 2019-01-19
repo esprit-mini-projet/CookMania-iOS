@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreStore
+import SwiftKeychainWrapper
 
 class ShopRecipeDao: NSObject{
     private static var instance: ShopRecipeDao?
@@ -24,12 +25,12 @@ class ShopRecipeDao: NSObject{
     }
     
     public func getRecipes() -> [ShopRecipe] {
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         return CoreStore.fetchAll(From<ShopRecipe>().where(format: "userId == %@", userId!))!
     }
     
     public func add(recipe: Recipe, completionHandler: @escaping (Bool) -> ()){
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         CoreStore.perform(asynchronous: { (transaction) -> Void in
             var r: ShopRecipe
             if let rec = transaction.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId!)){
@@ -64,7 +65,7 @@ class ShopRecipeDao: NSObject{
     }
     
     public func delete(recipeId: Int, completionHandler: @escaping () -> ()){
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         CoreStore.perform(
             asynchronous: { (transaction) -> Int? in
                 transaction.deleteAll(
@@ -78,7 +79,7 @@ class ShopRecipeDao: NSObject{
     }
     
     public func deleteAll(completionHandler: @escaping () -> ()){
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         CoreStore.perform(
             asynchronous: { (transaction) -> Int? in
                 transaction.deleteAll(
