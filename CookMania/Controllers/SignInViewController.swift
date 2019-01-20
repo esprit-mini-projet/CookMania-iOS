@@ -38,6 +38,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     override func viewDidLoad() {
         super.viewDidLoad()
         //logout()
+        Loader.getInstance().startLoader()
         UIApplication.shared.statusBarStyle = .lightContent
         GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
@@ -48,6 +49,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initGoogleButton()
         
         checkForLogin()
+        Loader.getInstance().stopLoader()
     }
     
     func checkForLogin() {

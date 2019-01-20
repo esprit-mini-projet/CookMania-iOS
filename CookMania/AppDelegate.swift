@@ -92,6 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("XXX", KeychainWrapper.standard.string(forKey: "cookmania_user_id"))
                 if currentViewController != nil && KeychainWrapper.standard.string(forKey: "cookmania_user_id") == nil{
                     currentViewController!.present(self.noConnectionAlert!, animated: true, completion: nil)
+                }else if currentViewController != nil {
+                    currentViewController!.present(controller, animated: true, completion: nil)
                 }else{
                     self.window?.rootViewController?.present(controller, animated: true, completion: nil)
                 }
