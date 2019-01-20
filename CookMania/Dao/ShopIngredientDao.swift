@@ -7,6 +7,7 @@
 //
 import Foundation
 import CoreStore
+import SwiftKeychainWrapper
 
 class ShopIngredientDao: NSObject{
     private static var instance: ShopIngredientDao?
@@ -23,12 +24,12 @@ class ShopIngredientDao: NSObject{
     }
     
     public func getIngredients() -> [ShopIngredient] {
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         return CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId!))!
     }
     
     public func getIngredients(for recipe: Recipe) -> [Ingredient] {
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         let result = CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId!))!
         var ingredients = [Ingredient]()
         for ing in result{
@@ -45,7 +46,7 @@ class ShopIngredientDao: NSObject{
     }
     
     public func add(ingredient: Ingredient, recipe: Recipe, completionHandler: @escaping (Bool) -> ()){
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         CoreStore.perform(asynchronous: { (transaction) -> Void in
             let ing: ShopIngredient = transaction.create(Into<ShopIngredient>())
             ing.name = ingredient.name
@@ -75,7 +76,7 @@ class ShopIngredientDao: NSObject{
     }
     
     public func delete(ingredientId: Int, completionHandler: @escaping () -> ()){
-        let userId = (UIApplication.shared.delegate as! AppDelegate).user?.id
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
         let ing = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d AND userId == %@", ingredientId, userId!))
         let recipe = ing!.recipe
         let count = recipe!.ingredients?.count

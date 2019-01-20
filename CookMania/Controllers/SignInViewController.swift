@@ -38,6 +38,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     override func viewDidLoad() {
         super.viewDidLoad()
         //logout()
+        Loader.getInstance().startLoader()
         UIApplication.shared.statusBarStyle = .lightContent
         GIDSignIn.sharedInstance().clientID = CLIEND_ID
         GIDSignIn.sharedInstance().delegate = self
@@ -48,6 +49,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         initGoogleButton()
         
         checkForLogin()
+        Loader.getInstance().stopLoader()
     }
     
     func checkForLogin() {
@@ -58,6 +60,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 //self.logoutAll()
                 //Facebook User is already connected
                 if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
+                    print("Not Null")
                     self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
                 }else if AccessToken.current != nil {
                     self.fetchProfileFB(withAccessToken: AccessToken.current!)

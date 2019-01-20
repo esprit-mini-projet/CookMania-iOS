@@ -15,13 +15,14 @@ import UserNotifications
 import SwiftKeychainWrapper
 import IQKeyboardManagerSwift
 import Reachability
+import CoreStore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://192.168.43.90:3000"
+    public static let SERVER_DOMAIN = "http://192.168.1.8:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
@@ -30,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var noConnectionAlert: UIAlertController?
 
     func setUser(user: User) -> Bool {
-        if KeychainWrapper.standard.integer(forKey: "cookmania_user_id") != nil{
+        if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
             KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
             KeychainWrapper.standard.removeObject(forKey: "cookmania_user_email")
             KeychainWrapper.standard.removeObject(forKey: "cookmania_user_password")
@@ -40,6 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         return false
+    }
+    
+    func initializeCoreStore(){
+        let stack = DataStack(xcodeModelName: "CookMania")
+        CoreStore.defaultStack = stack
+        do {
+            try CoreStore.addStorageAndWait()
+        }
+        catch {
+            print("error adding storage to CoreStore")
+        }
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -71,12 +83,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         FirebaseApp.configure()
+        initializeCoreStore()
         
         noConnectionAlert = UIAlertController(title: "Application can't work offline!", message: "", preferredStyle: .alert)
         
+        let controller: UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "offlineShoppingListViewController")
+        
         reachability.whenReachable = { reachability in
-            self.noConnectionAlert?.dismiss(animated: true, completion: {
-                print(self.window?.rootViewController?.presentedViewController)
+            //controller.dismiss(animated: true, completion: nil)
+            var viewToDismiss: UIViewController
+            if self.window?.rootViewController?.presentedViewController != nil && self.window?.rootViewController?.presentedViewController == self.noConnectionAlert{
+                viewToDismiss = self.noConnectionAlert!
+            }else if self.window?.rootViewController?.presentedViewController != nil {
+                viewToDismiss = controller
+            }else {
+                return
+            }
+            viewToDismiss.dismiss(animated: true, completion: {
                 if self.window?.rootViewController?.presentedViewController == nil{
                     let signinViewController = (self.window?.rootViewController as! SignInViewController)
                     signinViewController.checkForLogin()
@@ -85,10 +108,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         reachability.whenUnreachable = { _ in
             DispatchQueue.main.async {
-                if let currentViewController = self.window?.rootViewController?.presentedViewController {
-                    currentViewController.present(self.noConnectionAlert!, animated: true, completion: nil)
-                }else{
+                let currentViewController = self.window?.rootViewController?.presentedViewController
+                if currentViewController == nil && KeychainWrapper.standard.string(forKey: "cookmania_user_id") == nil{
                     self.window?.rootViewController?.present(self.noConnectionAlert!, animated: true, completion: nil)
+                }else if currentViewController != nil {
+                    currentViewController!.present(controller, animated: true, completion: nil)
+                }else{
+                    self.window?.rootViewController?.present(controller, animated: true, completion: nil)
                 }
             }
         }
