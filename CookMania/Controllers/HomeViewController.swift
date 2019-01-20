@@ -265,7 +265,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeCoreStore()
         addTapActionToSuggestions()
         //testShoppinglist()
         addLogoToNavigationVar()
@@ -291,17 +290,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewWillAppear(_ animated: Bool) {
         fetchRecipes()
-    }
-    
-    func initializeCoreStore(){
-        let stack = DataStack(xcodeModelName: "CookMania")
-        CoreStore.defaultStack = stack
-        do {
-            try CoreStore.addStorageAndWait()
-        }
-        catch {
-            print("error adding storage to CoreStore")
-        }
     }
     
     func addTapActionToSuggestions(){
