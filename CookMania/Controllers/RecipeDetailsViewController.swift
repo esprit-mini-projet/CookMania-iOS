@@ -13,64 +13,9 @@ import AlamofireImage
 import CoreData
 import ISPageControl
 import EasyTipView
+import SwiftKeychainWrapper
 
 class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, EasyTipViewDelegate {
-    
-    class LocalIngredient: NSObject {
-        var id: Int
-        var name: String
-        var quantity: Float
-        var unit: String
-        
-        init(id: Int, name: String, quantity: Float, unit: String) {
-            self.id = id
-            self.name = name
-            self.quantity = quantity
-            self.unit = unit
-        }
-    }
-    
-    class LocalStep: NSObject {
-        var name: String
-        var desc: String
-        var time: Int
-        var imageUrl: String
-        var ingredients: [LocalIngredient]
-        
-        init(name: String, desc: String, time: Int,imageUrl: String, ingredients: [LocalIngredient]) {
-            self.name = name
-            self.desc = desc
-            self.time = time
-            self.imageUrl = imageUrl
-            self.ingredients = ingredients
-        }
-    }
-    
-    class LocalRecipe: NSObject {
-        var id: Int
-        var name: String
-        var rating: Float
-        var imageUrl: String
-        var time: Int
-        var calories: Int
-        var servings: Int
-        var steps: [LocalStep]
-        var ingredients: [LocalIngredient]
-        var desc: String
-        
-        init(id: Int, name: String, desc: String, rating: Float, imageUrl: String, time: Int, calories: Int, servings: Int, steps: [LocalStep], ingredients: [LocalIngredient]){
-            self.id = id
-            self.name = name
-            self.desc = desc
-            self.rating = rating
-            self.imageUrl = imageUrl
-            self.time = time
-            self.calories = calories
-            self.servings = servings
-            self.steps = steps
-            self.ingredients = ingredients
-        }
-    }
     
     @IBOutlet weak var recipeCoverIV: UIImageView!
     @IBOutlet weak var recipeNameLabel: UILabel!
@@ -108,6 +53,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var addIngredientsButton: UIButton!
     @IBOutlet weak var removeIngredientsButton: UIButton!
     @IBOutlet weak var rateThisRecipeLabel: UILabel!
+    
+    static let SEEN_RECIPE_HINTS_KEY = "recipe_hints"
+    static let SEEN_TIMER_HINT_KEY = "timer_hint"
     
     var experiences = [Experience]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -175,6 +123,8 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     private var firsIngredientRowView: UIView?
     private var firstTimerCircleView: UIView?
     
+    private var hintsView: [EasyTipView] = []
+    
     override func viewDidAppear(_ animated: Bool) {
         tapDetected()
         RecipeService.getInstance().getSimilarRecipies(recipe: recipe!, successCompletionHandler: { recipes in
@@ -182,33 +132,69 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             self.similarRecipesCollectionView.reloadData()
         })
         loadExperiences()
-        tipCounter+=1
-        EasyTipView.show(forView: self.addIngredientsButton,
-                         text: "Click this button to add/remove all recipe ingredients to/from the shopping list. Tap to see next Tip.",
-                         delegate: self)
+        startTips()
+    }
+    
+    func startTips() {
+        if !(KeychainWrapper.standard.bool(forKey: RecipeDetailsViewController.SEEN_RECIPE_HINTS_KEY) ?? false){
+            let offset = self.addIngredientsButton!.frame.origin.y - self.scrollView.bounds.size.height + (self.addIngredientsButton?.frame.size.height)!
+            UIView.animate(withDuration: 0.3, animations: {
+                if offset > 0 {
+                    self.scrollView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+                }
+            }) { ( finished) in
+                self.hintsView.append(EasyTipView(text: "Click this button to add/remove all recipe ingredients to/from the shopping list. Tap to see next Tip.", preferences: EasyTipView.globalPreferences, delegate: self))
+                self.hintsView[self.hintsView.count-1].show(forView: self.addIngredientsButton)
+                self.tipCounter+=1
+            }
+        }else if !(KeychainWrapper.standard.bool(forKey: RecipeDetailsViewController.SEEN_TIMER_HINT_KEY) ?? false) {
+            showTimerHint()
+        }
     }
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         switch tipCounter {
         case 1:
-            EasyTipView.show(forView: self.firsIngredientRowView!,
-                             text: "Or swipe here to add/remove a specific ingredient to/from shopping list.",
-                             delegate: self)
-            tipCounter+=1
+            let offset = self.firsIngredientRowView!.convert(CGPoint(x: 0, y: self.firsIngredientRowView!.frame.origin.y), to: self.view).y - self.scrollView.bounds.size.height + (self.firsIngredientRowView?.frame.size.height)!
+            UIView.animate(withDuration: 0.3, animations: {
+                if offset > 0 {
+                    self.scrollView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+                }
+            }) { ( finished) in
+                self.hintsView.append(EasyTipView(text: "Or swipe here to add/remove a specific ingredient to/from shopping list.", preferences: EasyTipView.globalPreferences, delegate: self))
+                self.hintsView[self.hintsView.count-1].show(forView: self.firsIngredientRowView!)
+                KeychainWrapper.standard.set(true, forKey: RecipeDetailsViewController.SEEN_RECIPE_HINTS_KEY)
+                self.tipCounter+=1
+            }
             break
         case 2:
-            if(firstTimerCircleView != nil) {
-                let origin = firstTimerCircleView!.superview
-                let childStartPoint = firstTimerCircleView!.frame.origin.y + firstTimerCircleView!.frame.size.height + 50
-                scrollView.scrollRectToVisible(CGRect(x:0, y:childStartPoint,width: 1,height: scrollView.frame.height), animated: true)
-                EasyTipView.show(forView: self.firstTimerCircleView!,
-                                 text: "You can also tap here, to activate the timer. Tap to dismiss.",
-                                 delegate: self)
-                tipCounter+=1
-            }
+            showTimerHint()
             break
         default:
             return
+        }
+    }
+    
+    func showTimerHint() {
+        if(firstTimerCircleView != nil) {
+            let offset = self.firstTimerCircleView!.convert(CGPoint(x: 0, y: self.firstTimerCircleView!.frame.origin.y), to: self.view).y - self.scrollView.bounds.size.height + (self.firstTimerCircleView?.frame.size.height)!
+            UIView.animate(withDuration: 0.3, animations: {
+                if offset > 0 {
+                    self.scrollView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+                }
+            }) { ( finished) in
+                self.hintsView.append(EasyTipView(text: "Tap here to activate the timer.", preferences: EasyTipView.globalPreferences, delegate: self))
+                self.hintsView[self.hintsView.count-1].show(forView: self.firstTimerCircleView!)
+                KeychainWrapper.standard.set(true, forKey: RecipeDetailsViewController.SEEN_RECIPE_HINTS_KEY)
+                self.tipCounter=3
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tipCounter=3
+        for hint in hintsView {
+            hint.dismiss()
         }
     }
     
@@ -406,7 +392,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             if step.time != 0 {
                 UIUtils.addRoudedDottedBorder(view: borderView!, color: UIColor.init(red: 221, green: 81, blue: 68))
                 timeLabel.setTitle(String((step.time)!)+"''", for: .normal)
-                if(indexPath.row == 0){
+                if(self.firstTimerCircleView == nil){
                     firstTimerCircleView = borderView
                 }
             }
