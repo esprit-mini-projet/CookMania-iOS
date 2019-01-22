@@ -12,8 +12,9 @@ import Alamofire
 import AlamofireImage
 import CoreData
 import ISPageControl
+import EasyTipView
 
-class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, EasyTipViewDelegate {
     
     class LocalIngredient: NSObject {
         var id: Int
@@ -170,6 +171,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
+    private var tipCounter  = 0
+    private var firsIngredientRowView: UIView?
+    private var firstTimerCircleView: UIView?
+    
     override func viewDidAppear(_ animated: Bool) {
         tapDetected()
         RecipeService.getInstance().getSimilarRecipies(recipe: recipe!, successCompletionHandler: { recipes in
@@ -177,6 +182,34 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             self.similarRecipesCollectionView.reloadData()
         })
         loadExperiences()
+        tipCounter+=1
+        EasyTipView.show(forView: self.addIngredientsButton,
+                         text: "Click this button to add/remove all recipe ingredients to/from the shopping list. Tap to see next Tip.",
+                         delegate: self)
+    }
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        switch tipCounter {
+        case 1:
+            EasyTipView.show(forView: self.firsIngredientRowView!,
+                             text: "Or swipe here to add/remove a specific ingredient to/from shopping list.",
+                             delegate: self)
+            tipCounter+=1
+            break
+        case 2:
+            if(firstTimerCircleView != nil) {
+                let origin = firstTimerCircleView!.superview
+                let childStartPoint = firstTimerCircleView!.frame.origin.y + firstTimerCircleView!.frame.size.height + 50
+                scrollView.scrollRectToVisible(CGRect(x:0, y:childStartPoint,width: 1,height: scrollView.frame.height), animated: true)
+                EasyTipView.show(forView: self.firstTimerCircleView!,
+                                 text: "You can also tap here, to activate the timer. Tap to dismiss.",
+                                 delegate: self)
+                tipCounter+=1
+            }
+            break
+        default:
+            return
+        }
     }
     
     func loadExperiences() {
@@ -373,6 +406,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             if step.time != 0 {
                 UIUtils.addRoudedDottedBorder(view: borderView!, color: UIColor.init(red: 221, green: 81, blue: 68))
                 timeLabel.setTitle(String((step.time)!)+"''", for: .normal)
+                if(indexPath.row == 0){
+                    firstTimerCircleView = borderView
+                }
             }
             
             descriptionTextView.text = step.description
@@ -392,6 +428,10 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let margin = contentView!.frame.width * 0.15
             let nameLabel = contentView?.viewWithTag(2) as! UILabel
             let quantityLabel = contentView?.viewWithTag(3) as! UILabel
+            
+            if(indexPath.row == 0) {
+                firsIngredientRowView = contentView
+            }
             
             /*contentView!.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: margin))*/
             

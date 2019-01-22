@@ -27,4 +27,5 @@ target 'CookMania' do
   pod 'IQKeyboardManagerSwift'
   pod 'NVActivityIndicatorView'
   pod 'ReachabilitySwift'
+  pod 'EasyTipView'
 end
