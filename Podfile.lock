@@ -10,6 +10,7 @@ PODS:
   - Bolts/Tasks (1.9.0)
   - CoreStore (5.3.1)
   - Cosmos (17.0.0)
+  - EasyTipView (2.0.1)
   - FacebookCore (0.5.0):
     - Bolts (~> 1.9)
     - FBSDKCoreKit (~> 4.37)
@@ -121,6 +122,7 @@ DEPENDENCIES:
   - AlamofireImage
   - CoreStore (~> 5.0)
   - Cosmos (~> 17.0)
+  - EasyTipView
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -146,6 +148,7 @@ SPEC REPOS:
     - Bolts
     - CoreStore
     - Cosmos
+    - EasyTipView
     - FacebookCore
     - FacebookLogin
     - FacebookShare
@@ -191,6 +194,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CoreStore: 89d0c8e7a9d76d0c533018b4850245c973f4ecbd
   Cosmos: 309e489f21ffc91a1eeecfebef7f817cd2fcfba6
+  EasyTipView: 1515544456d6e943240012e9be5d25d1bb766603
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
   FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
@@ -221,6 +225,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TTRangeSlider: 78188bea83f6471a06f75adbc88da5e990baeafe
 
-PODFILE CHECKSUM: e985014baf250dd6952cb3476b43504f75430ae6
+PODFILE CHECKSUM: 4f41c3d99f5c6bcd51fa3cd3793bc4daf355ff6e
 
 COCOAPODS: 1.5.3

@@ -16,13 +16,14 @@ import SwiftKeychainWrapper
 import IQKeyboardManagerSwift
 import Reachability
 import CoreStore
+import EasyTipView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:User?
-    public static let SERVER_DOMAIN = "http://192.168.1.8:3000"
+    public static let SERVER_DOMAIN = "http://192.168.1.9:3000"
     let GOOGLE_UID_PREFIX = "g_"
     let FACEBOOK_UID_PREFIX = "f_"
     let gcmMessageIDKey = "gcm.message_id"
@@ -124,6 +125,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("Unable to start notifier")
         }
+        
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        preferences.drawing.backgroundColor = UIColor(red: 33, green: 108, blue: 250)
+        preferences.drawing.foregroundColor = UIColor.white
+        preferences.drawing.textAlignment = NSTextAlignment.center
+        preferences.drawing.arrowPosition = .top
+        
+        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
+        preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
+        preferences.animating.showInitialAlpha = 0
+        preferences.animating.showDuration = 0.5
+        preferences.animating.dismissDuration = 0.5
+        
+        EasyTipView.globalPreferences = preferences
         
         return true
     }
