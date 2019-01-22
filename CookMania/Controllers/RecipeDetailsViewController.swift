@@ -185,7 +185,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             }) { ( finished) in
                 self.hintsView.append(EasyTipView(text: "Tap here to activate the timer.", preferences: EasyTipView.globalPreferences, delegate: self))
                 self.hintsView[self.hintsView.count-1].show(forView: self.firstTimerCircleView!)
-                KeychainWrapper.standard.set(true, forKey: RecipeDetailsViewController.SEEN_RECIPE_HINTS_KEY)
+                KeychainWrapper.standard.set(true, forKey: RecipeDetailsViewController.SEEN_TIMER_HINT_KEY)
                 self.tipCounter=3
             }
         }
