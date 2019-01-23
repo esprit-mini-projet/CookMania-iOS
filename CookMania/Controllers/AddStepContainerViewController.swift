@@ -8,9 +8,12 @@
 
 import UIKit
 import Gallery
+import EasyTipView
+import SwiftKeychainWrapper
 
-class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GalleryControllerDelegate {
+class AddStepContainerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GalleryControllerDelegate, EasyTipViewDelegate {
     
+    let SEEN_SWIPE_HINT_KEY = "ingredient_swipe_hint"
     let descriptionPlaceHolder = "Description..."
     
     @IBOutlet weak var imageView: UIImageView!
@@ -23,6 +26,10 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
     var step: Step?
     var images: [UIImage?]?
     var imageChanged = false
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        KeychainWrapper.standard.set(true, forKey: SEEN_SWIPE_HINT_KEY)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return step!.ingredients!.count
@@ -87,6 +94,15 @@ class AddStepContainerViewController: UIViewController, UITableViewDataSource, U
         
         step = Step()
         step?.ingredients = [Ingredient(), Ingredient(), Ingredient()]
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !step!.ingredients!.isEmpty{
+            if !(KeychainWrapper.standard.bool(forKey: SEEN_SWIPE_HINT_KEY) ?? false){
+                let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                EasyTipView(text: "You can swipe left to remove an ingredient. Tap to dismiss.", preferences: EasyTipView.globalPreferences, delegate: self).show(forView: cell!, withinSuperview: tableView)
+            }
+        }
     }
     
     @IBAction func selectImage(_ sender: Any) {

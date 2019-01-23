@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import EasyTipView
+import SwiftKeychainWrapper
 
-class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, EasyTipViewDelegate {
+    
+    let SEEN_SWIPE_HINT_KEY = "swipe_hint"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     
     var cells = [Any]()
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        KeychainWrapper.standard.set(true, forKey: SEEN_SWIPE_HINT_KEY)
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -126,6 +134,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         }else{
             self.tableView.isHidden = false
             self.emptyLabel.isHidden = true
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !cells.isEmpty{
+            if !(KeychainWrapper.standard.bool(forKey: SEEN_SWIPE_HINT_KEY) ?? false){
+                let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                EasyTipView(text: "You can swipe left to remove an element. Tap to dismiss.", preferences: EasyTipView.globalPreferences, delegate: self).show(forView: cell!, withinSuperview: tableView)
+            }
         }
     }
     
