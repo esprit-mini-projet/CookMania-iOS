@@ -57,8 +57,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 //Temp func call
                 //self.logoutAll()
                 //Facebook User is already connected
-                if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{
-                    print("Not Null")
+                if KeychainWrapper.standard.string(forKey: "cookmania_user_email") != nil{
                     self.SignIn(email: KeychainWrapper.standard.string(forKey: "cookmania_user_email")!, password: KeychainWrapper.standard.string(forKey: "cookmania_user_password")!)
                 }else if AccessToken.current != nil {
                     self.fetchProfileFB(withAccessToken: AccessToken.current!)
@@ -109,6 +108,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     func continueToHome() {
         performSegue(withIdentifier: "toHome", sender: self)
+        return
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,8 +147,11 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     func checkSocialUserExistance(user: User) {
         UserService.getInstance().checkUserSocial(user: user, completionHandler: { user in
             self.appDelegate?.user = user
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // change 2 to desired number of seconds
-                self.continueToHome()
+            print("in check user existance")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // change 2 to desired number of seconds
+                if KeychainWrapper.standard.set(user.id!, forKey: "cookmania_user_id") {
+                    self.continueToHome()
+                }
             }
         })
     }
@@ -159,7 +162,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             switch loginResult {
             case .failed( _):
                 UIUtils.showErrorAlert(title: "Sorry", message: "An error has occured while trying to log you in, please try again.", viewController: self)
-                print(loginResult)
+                print("error here: ", loginResult)
                 break
             case .cancelled:
                 break

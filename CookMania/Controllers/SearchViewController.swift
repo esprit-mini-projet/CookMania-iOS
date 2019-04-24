@@ -95,7 +95,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func searchValueChanged(_ sender: UITextField) {
-        print("search value:", sender.text)
+        print("search value:", sender.text!)
         filter.name = sender.text ?? ""
         performSearch()
     }

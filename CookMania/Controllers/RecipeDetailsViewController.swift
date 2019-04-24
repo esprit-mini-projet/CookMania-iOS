@@ -411,7 +411,6 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let ingredient = ingredients[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell")
             let contentView = cell?.viewWithTag(0)
-            let margin = contentView!.frame.width * 0.15
             let nameLabel = contentView?.viewWithTag(2) as! UILabel
             let quantityLabel = contentView?.viewWithTag(3) as! UILabel
             

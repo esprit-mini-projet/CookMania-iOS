@@ -37,7 +37,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             let content = cell?.viewWithTag(0)
             let imageView = content?.viewWithTag(1) as! UIImageView
             let nameLabel = content?.viewWithTag(2) as! UILabel
-            imageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!)
+            print("Shop Image", recipe.imageUrl!)
+            UIUtils.downloadImage(url: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!) {(image, error) in
+                if error == nil {
+                    DispatchQueue.main.async {
+                        imageView.image = image
+                    }
+                }
+            }
+            //imageView.af_setImage(withURL: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!)
             nameLabel.text = recipe.name
             return cell!
         }else{

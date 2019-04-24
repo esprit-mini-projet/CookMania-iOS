@@ -391,7 +391,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     @IBAction func morePopular(_ sender: Any) {
-        performSegue(withIdentifier: "toRecipeList", sender: Constants.URL.topRatedRecipes)
+        performSegue(withIdentifier: "toRecipeList", sender: "Top Rated")
+    }
+    
+    @IBAction func moreHealthy(_ sender: Any) {
+        performSegue(withIdentifier: "toRecipeList", sender: "Healthy")
+    }
+    
+    @IBAction func moreCheap(_ sender: Any) {
+        performSegue(withIdentifier: "toRecipeList", sender: "Cheap")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -405,7 +413,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         switch segue.identifier {
         case "toRecipeList":
             let destinationController = segue.destination as! RecipeListViewController
-            destinationController.urlEndPoint = sender as? String
+            destinationController.label = sender as? String
             break
         case "toRecipeDetails":
             let destinationController = segue.destination as! RecipeDetailsViewController

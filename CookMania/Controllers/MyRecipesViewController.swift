@@ -36,8 +36,8 @@ class MyRecipesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myRecipeCell")
         let contentView = cell?.viewWithTag(0)
-        let shadowView = contentView?.viewWithTag(1) as! UIView
-        let cardView = contentView?.viewWithTag(2) as! UIView
+        let shadowView = (contentView?.viewWithTag(1))!
+        let cardView = (contentView?.viewWithTag(2))!
         let recipeCoverImageView = cardView.viewWithTag(3) as! UIImageView
         let recipeNameLabel = cardView.viewWithTag(4) as! UILabel
         let recipeDateLabel = cardView.viewWithTag(5) as! UILabel

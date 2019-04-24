@@ -47,4 +47,42 @@ final class UIUtils: NSObject {
         
         view.layer.addSublayer(layer);
     }
+    
+    public static func downloadImage(url: URL, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = "\(documentPath)"+url.lastPathComponent
+        print("File Path", documentPath)
+        print("File Path", (URL(string: filePath)?.path)!)
+        let fileUrl = (URL(string: filePath)?.path)!
+        if FileManager.default.fileExists(atPath: fileUrl) {
+            print("Exists")
+            if let contetnsOfFielPath = UIImage(contentsOfFile: fileUrl) {
+                completion(contetnsOfFielPath, nil)
+            }
+        }else {
+            print("doesn't")
+            UIUtils.downloadData(url: url) { data, response, error in
+                if let error = error {
+                    completion(nil, error)
+                } else if let data = data, let image = UIImage(data: data) {
+                    do {
+                        if let pngImageData = image.pngData() {
+                            try pngImageData.write(to: URL(string: filePath)!, options: .atomic)
+                        }
+                        completion(image, nil)
+                    } catch {
+                        completion(nil, NSError(domain: url.absoluteString, code: 500, userInfo: nil))
+                    }
+                } else {
+                    completion(nil, NSError(domain: url.absoluteString, code: 400, userInfo: nil))
+                }
+            }
+        }
+    }
+    
+    fileprivate static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession(configuration: .ephemeral).dataTask(with: URLRequest(url: url)) { data, response, error in
+            completion(data, response, error)
+            }.resume()
+    }
 }

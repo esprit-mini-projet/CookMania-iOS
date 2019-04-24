@@ -24,13 +24,13 @@ class ShopIngredientDao: NSObject{
     }
     
     public func getIngredients() -> [ShopIngredient] {
-        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
-        return CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId!))!
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")!
+        return CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId))!
     }
     
     public func getIngredients(for recipe: Recipe) -> [Ingredient] {
-        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
-        let result = CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId!))!
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")!
+        let result = CoreStore.fetchAll(From<ShopIngredient>().where(format: "userId == %@", userId))!
         var ingredients = [Ingredient]()
         for ing in result{
             if Int(String(ing.recipe!.id))! == recipe.id{
@@ -46,7 +46,7 @@ class ShopIngredientDao: NSObject{
     }
     
     public func add(ingredient: Ingredient, recipe: Recipe, completionHandler: @escaping (Bool) -> ()){
-        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")!
         CoreStore.perform(asynchronous: { (transaction) -> Void in
             let ing: ShopIngredient = transaction.create(Into<ShopIngredient>())
             ing.name = ingredient.name
@@ -55,7 +55,7 @@ class ShopIngredientDao: NSObject{
             ing.unit = ingredient.unit
             ing.userId = userId
             
-            if let r = transaction.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId!)){
+            if let r = transaction.fetchOne(From<ShopRecipe>().where(format: "id == %d AND userId == %@", recipe.id!, userId)){
                 r.addToIngredients(ing)
             }else{
                 let r: ShopRecipe = transaction.create(Into<ShopRecipe>())
@@ -64,6 +64,9 @@ class ShopIngredientDao: NSObject{
                 r.imageUrl = recipe.imageUrl
                 r.userId = userId
                 r.addToIngredients(ing)
+                UIUtils.downloadImage(url: URL(string: Constants.URL.imagesFolder + recipe.imageUrl!)!) { (image, error) in
+                    print("Error", error as Any)
+                }
             }
         }) { (result) in
             switch result{
@@ -76,22 +79,22 @@ class ShopIngredientDao: NSObject{
     }
     
     public func delete(ingredientId: Int, completionHandler: @escaping () -> ()){
-        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")
-        let ing = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d AND userId == %@", ingredientId, userId!))
+        let userId = KeychainWrapper.standard.string(forKey: "cookmania_user_id")!
+        let ing = CoreStore.fetchOne(From<ShopIngredient>().where(format: "id == %d AND userId == %@", ingredientId, userId))
         let recipe = ing!.recipe
         let count = recipe!.ingredients?.count
         CoreStore.perform(
             asynchronous: { (transaction) -> Void in
                 transaction.delete(ing)
-            },
-                completion: { _ in
-                    if count == 1{
-                        ShopRecipeDao.getInstance().delete(recipeId: Int(String(recipe!.id))!, completionHandler: {
-                            completionHandler()
-                        })
-                    }else{
+        },
+            completion: { _ in
+                if count == 1{
+                    ShopRecipeDao.getInstance().delete(recipeId: Int(String(recipe!.id))!, completionHandler: {
                         completionHandler()
-                    }
+                    })
+                }else{
+                    completionHandler()
+                }
             }
         )
     }

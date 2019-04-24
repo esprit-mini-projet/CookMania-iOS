@@ -228,18 +228,21 @@
 			isa = PBXGroup;
 			children = (
 				C39665A621B00A8000C73AE5 /* AddExperienceViewController.swift */,
-				26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */,
 				C32B1C7E2194E10400153DC9 /* AddRecipeContainerViewController.swift */,
-				26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */,
+				26925D6A21BAEFF600773AB3 /* AddRecipeViewController.swift */,
 				2689B75A21AF4E86007BBC54 /* AddStepContainerViewController.swift */,
+				26925D6821BAE1CF00773AB3 /* AddStepViewController.swift */,
 				C32B1C842194EA0E00153DC9 /* BlitzViewController.swift */,
 				C3995DDC21964CE800179246 /* CommunityViewController.swift */,
 				26101085218FC37B00E8344F /* FavoritesViewController.swift */,
 				C3FE11ED21A35231007D5F16 /* FollowersViewController.swift */,
 				C34BE80021ADE3B900D050EF /* FollowingViewController.swift */,
+				C31E1F5821D0524200786771 /* FormTableViewController.swift */,
 				2608CED2218D0FD6008A706E /* HomeViewController.swift */,
 				C3BB062821C2AA2A00516BB7 /* MainTabLayoutViewController.swift */,
 				C3C6187A21A23D39006908F4 /* MyRecipesViewController.swift */,
+				C3AAA58721F3B7CC00609903 /* OfflineShoppingListViewController.swift */,
+				C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */,
 				262543AE21935E6C003601A4 /* ProfileViewController.swift */,
 				C32B1C7C2194DF2600153DC9 /* RecipeDetailsViewController.swift */,
 				26101083218FAE0B00E8344F /* RecipeListViewController.swift */,
@@ -251,9 +254,6 @@
 				C32B1C7A2194DE7800153DC9 /* SignUpViewController.swift */,
 				C3EED56C21CDAF33006C2FC3 /* TimerViewController.swift */,
 				C31E1F5621D037C400786771 /* UserFormViewController.swift */,
-				C31E1F5821D0524200786771 /* FormTableViewController.swift */,
-				C3A23CE721EAA10A002C8140 /* OthersProfileViewController.swift */,
-				C3AAA58721F3B7CC00609903 /* OfflineShoppingListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -364,6 +364,9 @@
 						CreatedOnToolsVersion = 10.0;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 							com.apple.Push = {

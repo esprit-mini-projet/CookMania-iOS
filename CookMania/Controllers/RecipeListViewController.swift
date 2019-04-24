@@ -12,7 +12,7 @@ import ObjectMapper
 
 class RecipeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var urlEndPoint: String? = nil
+    var label: String? = nil
     var recipeList = [Recipe]()
     
     @IBOutlet weak var recipeTableView: UITableView!
@@ -53,13 +53,24 @@ class RecipeListViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = self.label!
         fetchData()
     }
     
     func fetchData(){
-        Alamofire.request(urlEndPoint!).responseString(completionHandler: { (response: DataResponse<String>) in
-            self.recipeList = Mapper<Recipe>().mapArray(JSONString: response.result.value!)!
-            self.recipeTableView.reloadData()
-        })
+        Loader.getInstance().startLoader()
+        if label == "Top Rated" {
+            RecipeService.getInstance().getTopRecipes { (recipes: [Recipe]) in
+                self.recipeList = recipes
+                self.recipeTableView.reloadData()
+                Loader.getInstance().stopLoader()
+            }
+        } else {
+            RecipeService.getInstance().getRecipesByLabel(label: label!) { (recipes: [Recipe]) in
+                self.recipeList = recipes
+                self.recipeTableView.reloadData()
+                Loader.getInstance().stopLoader()
+            }
+        }
     }
 }
