@@ -25,8 +25,8 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     var notification: NotificationWrapper?
     
     func logout(){
-        let loginManager = LoginManager()
-        loginManager.logOut()
+        appDelegate?.fbLoginManager.logOut()
+        appDelegate?._fbLoginManager = nil
         GIDSignIn.sharedInstance()?.signOut()
         
         KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")
@@ -157,8 +157,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     }
     
     @IBAction func facebookLogin(_ sender: Any) {
-        let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { loginResult in
+        appDelegate?.fbLoginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { loginResult in
             switch loginResult {
             case .failed( _):
                 UIUtils.showErrorAlert(title: "Sorry", message: "An error has occured while trying to log you in, please try again.", viewController: self)

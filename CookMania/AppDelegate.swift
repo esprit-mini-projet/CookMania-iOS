@@ -17,6 +17,7 @@ import IQKeyboardManagerSwift
 import Reachability
 import CoreStore
 import EasyTipView
+import FacebookLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let reachability = Reachability()!
     var noConnectionAlert: UIAlertController?
+    
+    var _fbLoginManager: LoginManager?
+    
+    var fbLoginManager: LoginManager {
+        get {
+            if _fbLoginManager == nil {
+                _fbLoginManager = LoginManager()
+            }
+            return _fbLoginManager!
+        }
+    }
 
     func setUser(user: User) -> Bool {
         if KeychainWrapper.standard.string(forKey: "cookmania_user_id") != nil{

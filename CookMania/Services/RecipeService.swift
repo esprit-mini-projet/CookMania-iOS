@@ -300,8 +300,8 @@ public class RecipeService: NSObject{
                 for dict in array {
                     let d = dict as! Dictionary<String, Any>
                     labels.append([
-                        d["category"],
-                        d["labels"]
+                        d["category"] as Any,
+                        d["labels"] as Any
                     ])
                 }
                 completionHandler(labels)

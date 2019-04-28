@@ -48,8 +48,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.user = nil
                 UserProfile.current = nil
-                let loginManager = LoginManager()
-                loginManager.logOut()
+                appDelegate.fbLoginManager.logOut()
+                appDelegate._fbLoginManager = nil
                 GIDSignIn.sharedInstance()?.signOut()
                 
                 KeychainWrapper.standard.removeObject(forKey: "cookmania_user_id")

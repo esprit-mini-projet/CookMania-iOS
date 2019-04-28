@@ -626,7 +626,7 @@ class RecipeDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
-            print(self.user?.username)
+            print(self.user?.username!)
             (segue.destination as! OthersProfileViewController).user = self.user
         }else if segue.identifier == "toAddExperience" {
             let destination = (segue.destination as! AddExperienceViewController)
